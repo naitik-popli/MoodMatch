@@ -73,8 +73,8 @@ export default function SettingsModal({ onClose }: Props) {
               </SelectTrigger>
               <SelectContent>
                 {cameras.map((camera) => (
-                  <SelectItem key={camera.deviceId} value={camera.deviceId}>
-                    {camera.label || `Camera ${camera.deviceId.slice(0, 8)}...`}
+                  <SelectItem key={camera.deviceId} value={camera.deviceId || "default"}>
+                    {camera.label || `Camera ${camera.deviceId?.slice(0, 8) || "default"}...`}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -91,8 +91,8 @@ export default function SettingsModal({ onClose }: Props) {
               </SelectTrigger>
               <SelectContent>
                 {microphones.map((microphone) => (
-                  <SelectItem key={microphone.deviceId} value={microphone.deviceId}>
-                    {microphone.label || `Microphone ${microphone.deviceId.slice(0, 8)}...`}
+                  <SelectItem key={microphone.deviceId} value={microphone.deviceId || "default"}>
+                    {microphone.label || `Microphone ${microphone.deviceId?.slice(0, 8) || "default"}...`}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -103,7 +103,7 @@ export default function SettingsModal({ onClose }: Props) {
             <Checkbox
               id="notifications"
               checked={notificationsEnabled}
-              onCheckedChange={setNotificationsEnabled}
+              onCheckedChange={(checked) => setNotificationsEnabled(checked === true)}
             />
             <Label
               htmlFor="notifications"
