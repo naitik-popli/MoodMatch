@@ -90,12 +90,11 @@ export class DatabaseStorage implements IStorage {
       .from(moodQueue)
       .where(and(
         eq(moodQueue.mood, mood),
-        // Make sure it's not the same user
-        // Note: We can't use ne() directly, so we'll filter in application logic
+        ne(moodQueue.userId, userId) // Exclude the same user
       ))
       .limit(1);
 
-    if (match && match.userId !== userId) {
+    if (match) {
       // Find their active session
       const [session] = await db
         .select()
