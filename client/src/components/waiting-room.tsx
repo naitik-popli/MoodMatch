@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { useSocket } from "@/hooks/use-socket";
+import { Button } from "../components/ui/button";
+import { useSocket } from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
 
 const MOOD_EMOJIS: Record<Mood, string> = {

@@ -4,6 +4,9 @@ import { Server as SocketIOServer } from "socket.io";
 import { storage } from "./storage";
 import { setupWebSocket } from "./websocket";
 
+import { db, pool } from "./db";
+import { sql } from "drizzle-orm";
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Get mood statistics
   app.get("/api/moods/stats", async (req, res) => {
@@ -52,6 +55,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error ending session:", error);
       res.status(500).json({ error: "Failed to end session" });
+    }
+  });
+
+  // New route to check if database has tables
+  app.get("/api/db/tables", async (req, res) => {
+    try {
+      const tables = await db.select().from(sql`pg_tables`).where(sql`schemaname = 'public'`);
+      const tableNames = tables.map((row: any) => row.tablename);
+      res.json({ tables: tableNames, hasTables: tableNames.length > 0 });
+    } catch (error) {
+      console.error("Error fetching tables:", error);
+      res.status(500).json({ error: "Failed to fetch tables" });
     }
   });
 

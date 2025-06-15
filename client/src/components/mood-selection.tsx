@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import { Video } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import type { Mood } from "@shared/schema";

@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import { 
   Mic, MicOff, Video, VideoOff, Phone, Settings, 
   Flag, Shuffle, Monitor 
 } from "lucide-react";
-import { useWebRTC } from "@/hooks/use-webrtc";
-import { useSocket } from "@/hooks/use-socket";
+import { useWebRTC } from "../hooks/use-webrtc";
+import { useSocket } from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
 
 const MOOD_NAMES: Record<Mood, string> = {

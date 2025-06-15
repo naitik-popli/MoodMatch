@@ -1,13 +1,20 @@
 import { useEffect, useState, useCallback } from "react";
 import { io, Socket } from "socket.io-client";
+import { API_BASE_URL } from "../lib/api";
 
 export function useSocket() {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    // Create socket connection
-    const newSocket = io({
+    // Explicitly set the WebSocket URL to backend URL without /api and with ws protocol
+    const backendUrl = API_BASE_URL.replace("/api", "");
+    // Force ws protocol explicitly, keep the port from backendUrl
+    const wsUrl = backendUrl.replace(/^http/, "ws");
+
+    console.log("Connecting to WebSocket URL:", wsUrl);
+
+    const newSocket = io(wsUrl, {
       transports: ['websocket', 'polling']
     });
 

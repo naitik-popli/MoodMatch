@@ -1,9 +1,7 @@
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import ws from "ws";
+import pg from 'pg';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 import * as schema from "@shared/schema";
-
-neonConfig.webSocketConstructor = ws;
 
 if (!process.env.DATABASE_URL) {
   throw new Error(
@@ -11,5 +9,11 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
+const { Pool } = pg;
+
+// Use pg Pool for local PostgreSQL connection
 export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-export const db = drizzle({ client: pool, schema });
+
+// Use drizzle-orm with postgres-js client for local PostgreSQL
+const sql = postgres(process.env.DATABASE_URL, { max: 1 });
+export const db = drizzle(sql, { schema });

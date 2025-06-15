@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Settings } from "lucide-react";
-import MoodSelection from "@/components/mood-selection";
-import WaitingRoom from "@/components/waiting-room";
-import VideoCall from "@/components/video-call";
-import SettingsModal from "@/components/settings-modal";
-import { useSocket } from "@/hooks/use-socket";
+import MoodSelection from "../components/mood-selection";
+import WaitingRoom from "../components/waiting-room";
+import VideoCall from "../components/video-call";
+import SettingsModal from "../components/settings-modal";
+import { useSocket } from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
+import { API_BASE_URL } from "../lib/api";
 
 export default function MoodChat() {
   const [currentScreen, setCurrentScreen] = useState<'selection' | 'waiting' | 'call'>('selection');
@@ -23,7 +24,7 @@ export default function MoodChat() {
   const handleMoodSelect = async (mood: Mood) => {
     try {
       // Create session
-      const response = await fetch('/api/session/create', {
+      const response = await fetch(`${API_BASE_URL}/session/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mood }),

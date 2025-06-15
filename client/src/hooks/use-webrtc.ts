@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Socket } from "socket.io-client";
-import { createPeerConnection } from "@/lib/webrtc";
+import { createPeerConnection } from "../lib/webrtc";
 
 interface UseWebRTCProps {
   socket: Socket | null;
