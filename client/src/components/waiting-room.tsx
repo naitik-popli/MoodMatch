@@ -38,6 +38,7 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
   useEffect(() => {
     const timer = setInterval(() => {
       setWaitTime(prev => prev + 1);
+  console.log("⏳ WaitingRoom mounted with mood:", mood);
     }, 1000);
 
     return () => clearInterval(timer);

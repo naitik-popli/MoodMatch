@@ -4,12 +4,13 @@ const ICE_SERVERS = [
 ];
 
 export function createPeerConnection(): RTCPeerConnection {
-  const pc = new RTCPeerConnection({
-    iceServers: ICE_SERVERS,
+  return new RTCPeerConnection({
+    iceServers: [
+      { urls: "stun:stun.l.google.com:19302" }, // Public STUN
+    ],
   });
-
-  return pc;
 }
+
 
 export function getMediaConstraints() {
   return {

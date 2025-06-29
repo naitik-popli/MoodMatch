@@ -1,15 +1,20 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
-import { Server as SocketIOServer } from "socket.io";
 import { storage } from "./storage";
-import { setupWebSocket } from "./websocket";
-
-import { db, pool } from "./db";
+import { db } from "./db";
 import { sql } from "drizzle-orm";
 
-export async function registerRoutes(app: Express): Promise<Server> {
+/**
+ * Register all HTTP API routes here.
+ * This should be called before creating the HTTP server.
+ */
+export async function registerRoutes(app: Express): Promise<void> {
+  // Health check
+  app.get("/api/health", (_req, res) => {
+    res.status(200).json({ status: "ok" });
+  });
+
   // Get mood statistics
-  app.get("/api/moods/stats", async (req, res) => {
+  app.get("/api/moods/stats", async (_req, res) => {
     try {
       const stats = await storage.getMoodStats();
       res.json(stats);
@@ -23,22 +28,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/session/create", async (req, res) => {
     try {
       const { mood } = req.body;
-      
+
       if (!mood) {
         return res.status(400).json({ error: "Mood is required" });
       }
 
-      // Create anonymous user for this session
       const anonymousUser = await storage.createAnonymousUser();
       const session = await storage.createChatSession({
         userId: anonymousUser.id,
         mood,
       });
 
-      res.json({ 
-        sessionId: session.id, 
+      res.json({
+        sessionId: session.id,
         userId: anonymousUser.id,
-        mood: session.mood 
+        mood: session.mood,
       });
     } catch (error) {
       console.error("Error creating session:", error);
@@ -58,10 +62,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // New route to check if database has tables
-  app.get("/api/db/tables", async (req, res) => {
+  // Check available tables
+  app.get("/api/db/tables", async (_req, res) => {
     try {
-      const tables = await db.select().from(sql`pg_tables`).where(sql`schemaname = 'public'`);
+      const tables = await db
+        .select()
+        .from(sql`pg_tables`)
+        .where(sql`schemaname = 'public'`);
       const tableNames = tables.map((row: any) => row.tablename);
       res.json({ tables: tableNames, hasTables: tableNames.length > 0 });
     } catch (error) {
@@ -69,18 +76,4 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ error: "Failed to fetch tables" });
     }
   });
-
-  const httpServer = createServer(app);
-  
-  // Setup Socket.IO
-  const io = new SocketIOServer(httpServer, {
-    cors: {
-      origin: "*",
-      methods: ["GET", "POST"]
-    }
-  });
-
-  setupWebSocket(io);
-
-  return httpServer;
 }

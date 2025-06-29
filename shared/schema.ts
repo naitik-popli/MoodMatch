@@ -1,6 +1,8 @@
-import { pgTable, text, serial, integer, boolean, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp, uniqueIndex } from "drizzle-orm/pg-core";  
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { sql } from "drizzle-orm";
+
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -16,16 +18,33 @@ export const chatSessions = pgTable("chat_sessions", {
   partnerId: integer("partner_id"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   endedAt: timestamp("ended_at"),
-});
+}, (table) => ({
+  userActiveIdx: uniqueIndex("user_active_idx").on(table.userId).where(sql`is_active = true`),
+}));
 
 export const moodQueue = pgTable("mood_queue", {
   id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull(),
+  userId: integer("user_id").notNull().unique(), // Added unique constraint
   mood: text("mood").notNull(),
   socketId: text("socket_id").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
-});
+}, (table) => ({
+  userIdIdx: uniqueIndex("user_id_idx").on(table.userId),
+  moodIdx: uniqueIndex("mood_idx").on(table.mood),
+}));
 
+export const connectedUsers = pgTable("connected_users", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().unique(), // Add unique constraint
+  sessionId: integer("session_id").notNull(),
+  mood: text("mood").notNull(),
+  connectedAt: timestamp("connected_at").notNull().defaultNow(),
+  disconnectedAt: timestamp("disconnected_at"),
+}, (table) => ({
+  userIdIdx: uniqueIndex("connected_user_idx").on(table.userId), // Add unique index
+}));
+
+// Zod schemas
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -43,6 +62,7 @@ export const insertMoodQueueSchema = createInsertSchema(moodQueue).pick({
   socketId: true,
 });
 
+// Type exports
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type ChatSession = typeof chatSessions.$inferSelect;

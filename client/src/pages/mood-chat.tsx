@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Settings } from "lucide-react";
 import MoodSelection from "../components/mood-selection";
 import WaitingRoom from "../components/waiting-room";
@@ -7,6 +7,7 @@ import SettingsModal from "../components/settings-modal";
 import { useSocket } from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
 import { API_BASE_URL } from "../lib/api";
+import TestCallConnection from "../components/TestCallConnection";
 
 export default function MoodChat() {
   const [currentScreen, setCurrentScreen] = useState<'selection' | 'waiting' | 'call'>('selection');
@@ -19,57 +20,98 @@ export default function MoodChat() {
     partnerSocketId?: string;
   } | null>(null);
 
-  const { socket, isConnected } = useSocket();
+  const { socket, isConnected } = useSocket(sessionData?.userId);
+  console.log("🔗 Socket connection status:", isConnected);
+
+  const handleMatchFound = (data: { partnerId: number; partnerSocketId: string }) => {
+    console.log("🧩 handleMatchFound called with data:", data);
+
+    setSessionData((prev) => {
+      if (!prev) {
+        console.warn("⚠️ No session to update on match-found");
+        return null;
+      }
+
+      const updated = {
+        ...prev,
+        partnerId: data.partnerId,
+        partnerSocketId: data.partnerSocketId,
+      };
+
+      console.log("📦 Updated sessionData after match:", updated);
+      setCurrentScreen("call");
+      return updated;
+    });
+  };
+
+  useEffect(() => {
+    if (currentScreen === 'call') {
+      console.log("📞 Transitioning to VideoCall:", sessionData);
+    }
+  }, [currentScreen]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleMatch = (data: { partnerId: number; partnerSocketId: string }) => {
+      console.log("✅ Match found on frontend:", data);
+      handleMatchFound(data);
+    };
+
+    socket.on("match-found", handleMatch);
+    return () => {
+      socket.off("match-found", handleMatch);
+    };
+  }, [socket]);
 
   const handleMoodSelect = async (mood: Mood) => {
     try {
-      // Create session
       const response = await fetch(`${API_BASE_URL}/session/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mood }),
       });
-      
+
       if (!response.ok) throw new Error('Failed to create session');
-      
+
       const data = await response.json();
+
+      console.log("🎉 Session created:", data);
+
       setSessionData({
         sessionId: data.sessionId,
         userId: data.userId,
+        partnerId: data.partnerId,
+        partnerSocketId: data.partnerSocketId,
       });
-      
+
       setSelectedMood(mood);
       setCurrentScreen('waiting');
-      
-      // Join mood queue via socket
-      if (socket) {
+
+      if (socket && data.userId && data.sessionId) {
+        console.log("📤 Emitting join-mood-queue");
         socket.emit('join-mood-queue', {
           userId: data.userId,
           mood,
           sessionId: data.sessionId,
         });
+      } else {
+        console.warn("⚠️ Cannot emit join-mood-queue — socket or session info missing");
       }
     } catch (error) {
-      console.error('Error selecting mood:', error);
+      console.error('❌ Error selecting mood:', error);
     }
   };
 
-  const handleMatchFound = (data: { partnerId: number; partnerSocketId: string }) => {
-    setSessionData(prev => prev ? {
-      ...prev,
-      partnerId: data.partnerId,
-      partnerSocketId: data.partnerSocketId,
-    } : null);
-    setCurrentScreen('call');
-  };
-
   const handleCallEnd = () => {
+    console.log("📞 Call ended");
     setCurrentScreen('selection');
     setSelectedMood(null);
     setSessionData(null);
   };
 
   const handleCancelWaiting = () => {
+    console.log("🚫 Cancelled waiting");
     if (socket && sessionData) {
       socket.emit('leave-mood-queue');
     }
@@ -77,6 +119,12 @@ export default function MoodChat() {
     setSelectedMood(null);
     setSessionData(null);
   };
+
+  console.log("📺 Render check:", {
+    currentScreen,
+    selectedMood,
+    sessionData,
+  });
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -112,7 +160,7 @@ export default function MoodChat() {
       {currentScreen === 'selection' && (
         <MoodSelection onMoodSelect={handleMoodSelect} />
       )}
-      
+
       {currentScreen === 'waiting' && selectedMood && (
         <WaitingRoom
           mood={selectedMood}
@@ -120,7 +168,7 @@ export default function MoodChat() {
           onMatchFound={handleMatchFound}
         />
       )}
-      
+
       {currentScreen === 'call' && selectedMood && sessionData && (
         <VideoCall
           mood={selectedMood}
@@ -133,6 +181,9 @@ export default function MoodChat() {
       {showSettings && (
         <SettingsModal onClose={() => setShowSettings(false)} />
       )}
+
+      {/* Test Call Connection Component */}
+      <TestCallConnection />
     </div>
   );
 }

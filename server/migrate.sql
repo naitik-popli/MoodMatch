@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS connected_users (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  session_id INTEGER NOT NULL,
+  mood VARCHAR(50) NOT NULL,
+  connected_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  disconnected_at TIMESTAMP NULL
+);

@@ -17,3 +17,5 @@ export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 // Use drizzle-orm with postgres-js client for local PostgreSQL
 const sql = postgres(process.env.DATABASE_URL, { max: 1 });
 export const db = drizzle(sql, { schema });
+
+export const moodQueue = schema.moodQueue;

@@ -1,13 +1,19 @@
 import express, { type Request, Response, NextFunction } from "express";
 import cors from "cors";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { createServer } from "http";
+import { Server as SocketIOServer } from "socket.io";
+import { setupWebSocket } from "./websocket";
 
 const app = express();
-app.use(cors());  // Enable CORS for all origins
+const PORT = 5000;
+
+// Middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Custom logger middleware
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -31,22 +37,50 @@ app.use((req, res, next) => {
         logLine = logLine.slice(0, 79) + "…";
       }
 
-      log(logLine);
+      console.log(logLine);
     }
   });
 
   next();
 });
 
+// Basic health check route
+app.get("/api/health", (_req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 async function startServer() {
   try {
     if (!process.env.DATABASE_URL) {
-      console.error("Error: DATABASE_URL environment variable is not set. Please set it to your Neon database connection string.");
+      console.error("❌ DATABASE_URL environment variable is not set.");
       process.exit(1);
     }
 
-    const server = await registerRoutes(app);
+    // Register all routes
+    await registerRoutes(app);
 
+    // Create the HTTP server *after* routes are mounted
+    const server = createServer(app);
+
+    // Setup Socket.IO
+    const io = new SocketIOServer(server, {
+      cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["my-custom-header"],
+        credentials: true,
+      },
+      allowEIO3: true,
+    });
+
+    setupWebSocket(io);
+
+    // Start server
+    server.listen(PORT, () => {
+      console.log(`🚀 Server is running at http://localhost:${PORT}`);
+    });
+
+    // Global error handler
     app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
       const status = err.status || err.statusCode || 500;
       const message = err.message || "Internal Server Error";
@@ -55,33 +89,20 @@ async function startServer() {
       res.status(status).json({ message });
     });
 
-    if (app.get("env") === "development") {
-      await setupVite(app, server);
-    } else {
-      serveStatic(app);
-    }
-
-    const port = 5000;
-    server.listen({
-      port,
-      host: "0.0.0.0",
-      reusePort: true,
-    }, () => {
-      log(`serving on port ${port}`);
-    });
   } catch (error) {
-    console.error("Error starting server:", error);
+    console.error("🔥 Error starting server:", error);
     process.exit(1);
   }
 }
 
+// Crash guards
 process.on("uncaughtException", (err) => {
-  console.error("Uncaught Exception:", err);
+  console.error("💥 Uncaught Exception:", err);
   process.exit(1);
 });
 
 process.on("unhandledRejection", (err) => {
-  console.error("Unhandled Rejection:", err);
+  console.error("💥 Unhandled Rejection:", err);
 });
 
 startServer();

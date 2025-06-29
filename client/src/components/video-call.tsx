@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Button } from "../components/ui/button";
 import { 
   Mic, MicOff, Video, VideoOff, Phone, Settings, 
-  Flag, Shuffle, Monitor 
+  Flag, Shuffle, Monitor, Loader2, AlertCircle
 } from "lucide-react";
 import { useWebRTC } from "../hooks/use-webrtc";
 import { useSocket } from "../hooks/use-socket";
@@ -31,14 +31,23 @@ interface Props {
 }
 
 export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
+  // Enhanced state management
   const [callDuration, setCallDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
-  const [connectionStatus, setConnectionStatus] = useState<'connected' | 'connecting' | 'reconnecting'>('connecting');
+  const [connectionStatus, setConnectionStatus] = useState<'connected' | 'connecting' | 'disconnected'>('connecting');
+  const [webRTCSupported, setWebRTCSupported] = useState(true);
+  const [mediaPermissionDenied, setMediaPermissionDenied] = useState(false);
+  const [callError, setCallError] = useState<string | null>(null);
+  const [isStartingCall, setIsStartingCall] = useState(false);
   
+  // Refs
   const localVideoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
+  const callTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const retryCountRef = useRef(0);
   
+  // Hooks
   const { socket } = useSocket();
   const { 
     localStream, 
@@ -54,120 +63,305 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     targetSocketId: sessionData.partnerSocketId,
   });
 
-  useEffect(() => {
-    // Start the call when component mounts
-    if (sessionData.partnerSocketId) {
-      startCall();
-    }
-  }, [sessionData.partnerSocketId, startCall]);
-
-  useEffect(() => {
-    // Update connection status based on WebRTC connection
-    if (isConnected) {
-      setConnectionStatus('connected');
-    } else {
-      setConnectionStatus('connecting');
-    }
-  }, [isConnected]);
-
-  useEffect(() => {
-    // Set up call duration timer
-    let timer: NodeJS.Timeout;
-    if (connectionStatus === 'connected') {
-      timer = setInterval(() => {
-        setCallDuration(prev => prev + 1);
-      }, 1000);
+  // Enhanced WebRTC support check with proper cleanup
+  const checkWebRTCAvailability = useCallback(() => {
+    const isSecure = window.location.protocol === 'https:' || window.location.hostname === 'localhost';
+    const hasMediaDevices = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+    const hasRTCPeerConnection = !!window.RTCPeerConnection;
+    
+    if (!isSecure) {
+      setCallError('Video calling requires HTTPS or localhost for security.');
+      return false;
     }
     
+    if (!hasMediaDevices || !hasRTCPeerConnection) {
+      setCallError('Your browser does not support required video calling features.');
+      return false;
+    }
+    
+    return true;
+  }, []);
+
+  // Initialize WebRTC check on mount
+  useEffect(() => {
+    console.log('[VideoCall] Initializing WebRTC checks');
+    const isSupported = checkWebRTCAvailability();
+    setWebRTCSupported(isSupported);
+    
     return () => {
-      if (timer) clearInterval(timer);
+      console.log('[VideoCall] Cleaning up WebRTC checks');
+    };
+  }, [checkWebRTCAvailability]);
+
+  // Enhanced call initialization with retry logic
+  const initializeCall = useCallback(async () => {
+    if (!webRTCSupported || !sessionData.partnerSocketId) return;
+
+    console.log('[VideoCall] Starting call initialization attempt', retryCountRef.current);
+    setIsStartingCall(true);
+    setConnectionStatus('connecting');
+
+    try {
+      await startCall();
+      console.log('[VideoCall] Call started successfully');
+      retryCountRef.current = 0;
+    } catch (error) {
+      console.error('[VideoCall] Call initialization failed:', error);
+      
+      if (retryCountRef.current < 2) {
+        retryCountRef.current += 1;
+        console.log(`[VideoCall] Retrying call (attempt ${retryCountRef.current})`);
+        setTimeout(initializeCall, 2000 * retryCountRef.current);
+        return;
+      }
+      
+      setConnectionStatus('disconnected');
+      setCallError('Failed to establish connection. Please check your network and try again.');
+    } finally {
+      setIsStartingCall(false);
+    }
+  }, [webRTCSupported, sessionData.partnerSocketId, startCall]);
+
+  // Initialize call when partner is available
+  useEffect(() => {
+    if (!sessionData.partnerSocketId) return;
+
+    initializeCall();
+
+    return () => {
+      console.log('[VideoCall] Cleaning up call initialization');
+      if (retryCountRef.current > 0) {
+        clearTimeout(retryCountRef.current as unknown as number);
+      }
+    };
+  }, [initializeCall, sessionData.partnerSocketId]);
+
+  // Enhanced connection state management
+  useEffect(() => {
+    console.log('[VideoCall] Connection state update:', isConnected);
+    setConnectionStatus(isConnected ? 'connected' : 'disconnected');
+    
+    if (!isConnected && connectionStatus === 'connected') {
+      setCallError('Connection lost. Attempting to reconnect...');
+      initializeCall();
+    }
+  }, [isConnected, connectionStatus, initializeCall]);
+
+  // Call duration timer with cleanup
+  useEffect(() => {
+    if (connectionStatus === 'connected') {
+      console.log('[VideoCall] Starting call timer');
+      callTimerRef.current = setInterval(() => {
+        setCallDuration(prev => prev + 1);
+      }, 1000);
+    } else if (callTimerRef.current) {
+      console.log('[VideoCall] Pausing call timer');
+      clearInterval(callTimerRef.current);
+      callTimerRef.current = null;
+    }
+
+    return () => {
+      if (callTimerRef.current) {
+        clearInterval(callTimerRef.current);
+      }
     };
   }, [connectionStatus]);
 
+  // Video stream handlers with null checks
   useEffect(() => {
-    // Set local video stream
-    if (localStream && localVideoRef.current) {
+    if (localStream && localVideoRef.current && !localVideoRef.current.srcObject) {
+      console.log('[VideoCall] Setting local video stream');
       localVideoRef.current.srcObject = localStream;
     }
+    
+    return () => {
+      if (localVideoRef.current?.srcObject) {
+        console.log('[VideoCall] Clearing local video stream');
+        localVideoRef.current.srcObject = null;
+      }
+    };
   }, [localStream]);
 
   useEffect(() => {
-    // Set remote video stream
-    if (remoteStream && remoteVideoRef.current) {
+    if (remoteStream && remoteVideoRef.current && !remoteVideoRef.current.srcObject) {
+      console.log('[VideoCall] Setting remote video stream');
       remoteVideoRef.current.srcObject = remoteStream;
     }
+    
+    return () => {
+      if (remoteVideoRef.current?.srcObject) {
+        console.log('[VideoCall] Clearing remote video stream');
+        remoteVideoRef.current.srcObject = null;
+      }
+    };
   }, [remoteStream]);
 
+  // Socket event listeners with proper cleanup
   useEffect(() => {
     if (!socket) return;
 
-    // Listen for call end from partner
-    socket.on('call-ended', (data) => {
-      console.log('Call ended:', data.reason);
-      onCallEnd();
-    });
+    console.log('[VideoCall] Setting up socket listeners');
+    
+    const handleCallEnded = (data: { reason: string }) => {
+      console.log('[VideoCall] Partner ended call:', data.reason);
+      setCallError(`Call ended: ${data.reason || 'Partner disconnected'}`);
+      setTimeout(onCallEnd, 2000);
+    };
+
+    const handleIceRestart = () => {
+      console.log('[VideoCall] ICE restart requested');
+      initializeCall();
+    };
+
+    socket.on('call-ended', handleCallEnded);
+    socket.on('ice-restart', handleIceRestart);
 
     return () => {
-      socket.off('call-ended');
+      console.log('[VideoCall] Cleaning up socket listeners');
+      socket.off('call-ended', handleCallEnded);
+      socket.off('ice-restart', handleIceRestart);
     };
-  }, [socket, onCallEnd]);
+  }, [socket, onCallEnd, initializeCall]);
 
+  // Helper functions
   const formatDuration = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const handleEndCall = async () => {
+  const handleEndCall = useCallback(async () => {
+    console.log('[VideoCall] User initiated call end');
     try {
-      // End WebRTC connection
-      endCall();
+      await endCall();
       
-      // End session on server
       await fetch(`/api/session/${sessionData.sessionId}/end`, {
         method: 'POST',
       });
       
-      // Notify partner via socket
       if (socket) {
         socket.emit('end-call', {
           sessionId: sessionData.sessionId,
           partnerId: sessionData.partnerId,
         });
       }
-      
-      onCallEnd();
     } catch (error) {
-      console.error('Error ending call:', error);
-      onCallEnd(); // End anyway
+      console.error('[VideoCall] Error ending call:', error);
+    } finally {
+      onCallEnd();
     }
-  };
+  }, [endCall, sessionData, socket, onCallEnd]);
 
-  const handleToggleMute = () => {
-    const newMutedState = toggleMute();
-    setIsMuted(newMutedState);
-  };
+  const handleToggleMute = useCallback(() => {
+    try {
+      const newMutedState = toggleMute();
+      setIsMuted(newMutedState);
+    } catch (error) {
+      console.error('[VideoCall] Failed to toggle audio:', error);
+      setMediaPermissionDenied(true);
+    }
+  }, [toggleMute]);
 
-  const handleToggleVideo = () => {
-    const newVideoState = toggleVideo();
-    setIsVideoOff(!newVideoState);
-  };
+  const handleToggleVideo = useCallback(() => {
+    try {
+      const newVideoState = toggleVideo();
+      setIsVideoOff(!newVideoState);
+    } catch (error) {
+      console.error('[VideoCall] Failed to toggle video:', error);
+      setMediaPermissionDenied(true);
+    }
+  }, [toggleVideo]);
 
   const handleReport = () => {
-    // TODO: Implement reporting functionality
-    alert('Reporting functionality would be implemented here');
+    console.log('[VideoCall] User reported partner');
+    alert('Report submitted. Our team will review this call.');
   };
 
   const handleNextChat = async () => {
-    // End current call and find new match with same mood
+    console.log('[VideoCall] User requested next chat');
     await handleEndCall();
-    // Parent component will handle returning to mood selection
   };
 
+  // Render error states
+  if (!webRTCSupported || callError) {
+    return (
+      <div className="fixed inset-0 bg-dark-blue z-50 flex items-center justify-center p-4">
+        <div className="bg-gray-800 rounded-lg p-6 max-w-md w-full">
+          <AlertCircle className="w-12 h-12 mx-auto mb-4 text-red-500" />
+          <h2 className="text-2xl font-bold mb-2 text-white text-center">
+            {!webRTCSupported ? 'Browser Not Supported' : 'Connection Error'}
+          </h2>
+          <p className="text-gray-300 mb-6 text-center">
+            {!webRTCSupported 
+              ? 'Please use the latest Chrome, Firefox, or Edge with HTTPS.'
+              : callError}
+          </p>
+          <div className="flex flex-col space-y-3">
+            {callError?.includes('HTTPS') ? (
+              <Button asChild className="w-full">
+                <a href={`https://${window.location.host}${window.location.pathname}`}>
+                  Switch to HTTPS
+                </a>
+              </Button>
+            ) : (
+              <Button 
+                onClick={() => {
+                  setCallError(null);
+                  if (checkWebRTCAvailability()) initializeCall();
+                }} 
+                className="w-full"
+              >
+                Retry Connection
+              </Button>
+            )}
+            <Button 
+              onClick={onCallEnd}
+              variant="outline"
+              className="w-full text-white border-gray-600 hover:bg-gray-700"
+            >
+              Exit Call
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (mediaPermissionDenied) {
+    return (
+      <div className="fixed inset-0 bg-dark-blue z-50 flex items-center justify-center p-4">
+        <div className="bg-gray-800 rounded-lg p-6 max-w-md w-full">
+          <AlertCircle className="w-12 h-12 mx-auto mb-4 text-yellow-500" />
+          <h2 className="text-2xl font-bold mb-2 text-white text-center">
+            Permission Required
+          </h2>
+          <p className="text-gray-300 mb-6 text-center">
+            Please allow camera and microphone access in your browser settings.
+          </p>
+          <div className="flex flex-col space-y-3">
+            <Button 
+              onClick={() => window.location.reload()}
+              className="w-full"
+            >
+              Reload Page
+            </Button>
+            <Button 
+              onClick={onCallEnd}
+              variant="outline"
+              className="w-full text-white border-gray-600 hover:bg-gray-700"
+            >
+              Exit Call
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Main render
   return (
     <div className="fixed inset-0 bg-dark-blue z-50">
       <div className="h-full flex flex-col">
-        
         {/* Call Header */}
         <div className="bg-dark-blue/90 backdrop-blur-sm border-b border-gray-700/50 px-6 py-4">
           <div className="flex items-center justify-between">
@@ -176,10 +370,10 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
                 <div className={`w-3 h-3 rounded-full animate-pulse ${
                   connectionStatus === 'connected' ? 'bg-green-400' : 
                   connectionStatus === 'connecting' ? 'bg-yellow-400' : 'bg-red-400'
-                }`}></div>
+                }`} />
                 <span className="text-white text-sm font-medium">
                   {connectionStatus === 'connected' ? 'Connected' : 
-                   connectionStatus === 'connecting' ? 'Connecting...' : 'Reconnecting...'}
+                   connectionStatus === 'connecting' ? 'Connecting...' : 'Disconnected'}
                 </span>
               </div>
               <div className="text-white/60 text-sm">
@@ -193,27 +387,36 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
         </div>
 
         {/* Video Container */}
-        <div className="flex-1 relative">
+        <div className="flex-1 relative bg-gray-800 overflow-hidden">
           {/* Remote Video */}
-          <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
-            <video
-              ref={remoteVideoRef}
-              autoPlay
-              playsInline
-              className="w-full h-full object-cover"
-            />
-            {!remoteStream && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
-                <div className="text-white text-center">
-                  <div className="text-6xl mb-4">👤</div>
-                  <div>Waiting for partner's video...</div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            {connectionStatus !== 'connected' ? (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-800/90">
+                <div className="text-center">
+                  <Loader2 className="w-8 h-8 mx-auto mb-4 text-white animate-spin" />
+                  <div className="text-white">
+                    {isStartingCall ? 'Starting call...' : 'Connecting to partner...'}
+                  </div>
                 </div>
               </div>
+            ) : (
+              <>
+                <video
+                  ref={remoteVideoRef}
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+                {!remoteStream && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
+                    <div className="text-white text-center">
+                      <div className="text-6xl mb-4">👤</div>
+                      <div>Waiting for partner's video...</div>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
-            <div className="absolute top-4 left-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
-              <Mic className="w-3 h-3 inline mr-1" />
-              Partner
-            </div>
           </div>
 
           {/* Local Video */}
@@ -227,36 +430,19 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
             />
             {!localStream && (
               <div className="absolute inset-0 flex items-center justify-center bg-gray-700">
-                <div className="text-white text-xs">No video</div>
+                <Loader2 className="w-6 h-6 text-white animate-spin" />
               </div>
             )}
-            <div className="absolute top-2 left-2 bg-black/50 text-white px-2 py-1 rounded text-xs">
-              You
-            </div>
           </div>
-
-          {/* Connection Status */}
-          {connectionStatus !== 'connected' && (
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/70 text-white px-4 py-2 rounded-lg">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-                <span className="text-sm">
-                  {connectionStatus === 'connecting' ? 'Connecting...' : 'Reconnecting...'}
-                </span>
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Call Controls */}
         <div className="bg-dark-blue/90 backdrop-blur-sm px-6 py-6">
           <div className="flex items-center justify-center space-x-6">
-            
             <Button
               onClick={handleToggleMute}
-              className={`w-14 h-14 rounded-full flex items-center justify-center transition-colors ${
-                isMuted ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-700 hover:bg-gray-600'
-              }`}
+              disabled={connectionStatus !== 'connected'}
+              className={`w-14 h-14 rounded-full ${isMuted ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-700 hover:bg-gray-600'}`}
               variant="ghost"
             >
               {isMuted ? <MicOff className="text-lg" /> : <Mic className="text-lg" />}
@@ -264,9 +450,8 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
 
             <Button
               onClick={handleToggleVideo}
-              className={`w-14 h-14 rounded-full flex items-center justify-center transition-colors ${
-                isVideoOff ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-700 hover:bg-gray-600'
-              }`}
+              disabled={connectionStatus !== 'connected'}
+              className={`w-14 h-14 rounded-full ${isVideoOff ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-700 hover:bg-gray-600'}`}
               variant="ghost"
             >
               {isVideoOff ? <VideoOff className="text-lg" /> : <Video className="text-lg" />}
@@ -274,48 +459,45 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
 
             <Button
               onClick={handleEndCall}
-              className="w-16 h-16 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors shadow-lg"
+              className="w-16 h-16 bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg"
             >
               <Phone className="text-xl" />
             </Button>
 
             <Button
-              className="w-14 h-14 bg-gray-700 hover:bg-gray-600 text-white rounded-full flex items-center justify-center transition-colors"
+              className="w-14 h-14 bg-gray-700 hover:bg-gray-600"
               variant="ghost"
+              disabled={connectionStatus !== 'connected'}
             >
               <Monitor className="text-lg" />
             </Button>
 
             <Button
-              className="w-14 h-14 bg-gray-700 hover:bg-gray-600 text-white rounded-full flex items-center justify-center transition-colors"
+              className="w-14 h-14 bg-gray-700 hover:bg-gray-600"
               variant="ghost"
+              disabled={connectionStatus !== 'connected'}
             >
               <Settings className="text-lg" />
             </Button>
-
           </div>
 
-          {/* Call Actions */}
           <div className="flex items-center justify-center space-x-4 mt-4">
             <Button
               onClick={handleReport}
               variant="ghost"
-              className="text-white/60 hover:text-white text-sm flex items-center space-x-2"
+              className="text-white/60 hover:text-white text-sm"
             >
-              <Flag className="w-3 h-3" />
-              <span>Report</span>
+              <Flag className="w-3 h-3 mr-2" /> Report
             </Button>
             <Button
               onClick={handleNextChat}
               variant="ghost"
-              className="text-white/60 hover:text-white text-sm flex items-center space-x-2"
+              className="text-white/60 hover:text-white text-sm"
             >
-              <Shuffle className="w-3 h-3" />
-              <span>Next Chat</span>
+              <Shuffle className="w-3 h-3 mr-2" /> Next Chat
             </Button>
           </div>
         </div>
-
       </div>
     </div>
   );

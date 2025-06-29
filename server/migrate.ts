@@ -1,39 +1,71 @@
-import { Pool } from 'pg';
-import * as fs from 'fs';
-import * as path from 'path';
+import pkg from 'pg';
+const { Pool } = pkg;
+import dotenv from 'dotenv';
 
-async function runMigrations() {
-  const connectionString = process.env.DATABASE_URL;
-  if (!connectionString) {
-    console.error('DATABASE_URL environment variable is not set.');
-    process.exit(1);
-  }
+// Initialize environment variables
+dotenv.config();
 
-  const pool = new Pool({
-    connectionString,
-  });
+// Database configuration
+const pool = new Pool({
+  user: process.env.DB_USER || 'moodmatchuser',
+  host: process.env.DB_HOST || 'localhost',
+  database: process.env.DB_NAME || 'moodmatchdb',
+  password: process.env.DB_PASSWORD || 'moodmatchpass',
+  port: Number(process.env.DB_PORT) || 5432,
+});
 
+async function runMigration() {
+  const client = await pool.connect();
   try {
-    const client = await pool.connect();
+    console.log('🔄 Starting database migration...');
+    
+    await client.query('BEGIN');
 
-    const migrationFilePath = path.resolve(__dirname, '../migrations/0000_gray_nova.sql');
-    const migrationSql = fs.readFileSync(migrationFilePath, 'utf-8');
+    // Create users table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(50) UNIQUE NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `);
 
-    // Split the migration SQL by the statement-breakpoint comment
-    const statements = migrationSql.split('--> statement-breakpoint').map(s => s.trim()).filter(Boolean);
+    // Create connections table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS connections (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        session_id TEXT NOT NULL,
+        mood VARCHAR(50) NOT NULL,
+        status VARCHAR(20) NOT NULL DEFAULT 'active',
+        peer_id TEXT,
+        ice_candidates JSONB,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        CONSTRAINT chk_status CHECK (status IN ('active', 'disconnected', 'matched'))
+      );
+    `);
 
-    for (const statement of statements) {
-      console.log('Running migration statement...');
-      await client.query(statement);
-    }
+    // Create indexes
+    await client.query(`
+      CREATE INDEX IF NOT EXISTS idx_connections_mood_status
+      ON connections(mood, status)
+      WHERE status = 'active';
+    `);
 
-    console.log('Migrations completed successfully.');
-    client.release();
-    process.exit(0);
+    await client.query('COMMIT');
+    console.log('✅ Migration completed successfully');
   } catch (error) {
-    console.error('Error running migrations:', error);
+    await client.query('ROLLBACK');
+    console.error('❌ Migration failed:', error);
     process.exit(1);
+  } finally {
+    client.release();
+    await pool.end();
   }
 }
 
-runMigrations();
+// Modern Node.js top-level await
+await runMigration();

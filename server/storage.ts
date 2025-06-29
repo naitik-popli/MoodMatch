@@ -2,147 +2,251 @@ import {
   users, 
   chatSessions,
   moodQueue,
+  connectedUsers,
   type User, 
   type InsertUser, 
   type ChatSession,
   type InsertChatSession,
   type MoodQueue,
   type InsertMoodQueue,
-  type Mood 
+  type Mood
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, and, ne } from "drizzle-orm";
+import { eq, and, asc } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 
-export interface IStorage {
-  getUser(id: number): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(insertUser: InsertUser): Promise<User>;
-  createAnonymousUser(): Promise<User>;
-  createChatSession(insertSession: InsertChatSession): Promise<ChatSession>;
-  updateChatSessionPartner(sessionId: number, partnerId: number): Promise<void>;
-  endChatSession(sessionId: number): Promise<void>;
-  addToMoodQueue(insertQueue: InsertMoodQueue): Promise<MoodQueue>;
-  findMoodMatch(userId: number, mood: Mood): Promise<(MoodQueue & { sessionId?: number }) | null>;
-  removeFromMoodQueue(userId: number): Promise<void>;
-  getMoodStats(): Promise<Record<Mood, number>>;
-}
 
-export class DatabaseStorage implements IStorage {
-  async getUser(id: number): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user || undefined;
+export type MatchResult = {
+  userA: number;
+  userB: number;
+  sessionId: number;
+};
+
+export class DatabaseStorage {
+  private debugLog(message: string, data?: any) {
+    console.log(`[DEBUG][${new Date().toISOString()}] ${message}`, data || '');
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
-    return user || undefined;
+
+  // User Management
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const [user] = await db
-      .insert(users)
-      .values(insertUser)
-      .returning();
+    const [user] = await db.insert(users).values(insertUser).returning();
     return user;
   }
 
   async createAnonymousUser(): Promise<User> {
     const username = `anonymous_${Date.now()}_${Math.random().toString(36).substring(7)}`;
-    const password = Math.random().toString(36).substring(7);
-    
-    return this.createUser({ username, password });
+    return this.createUser({ 
+      username, 
+      password: Math.random().toString(36).substring(7) 
+    });
   }
 
+  // Session Management
   async createChatSession(insertSession: InsertChatSession): Promise<ChatSession> {
-    const [session] = await db
-      .insert(chatSessions)
-      .values(insertSession)
-      .returning();
+  const [session] = await db.insert(chatSessions)
+    .values({
+      ...insertSession,
+      isActive: true,
+      createdAt: new Date()
+    })
+    .returning();
+  return session;
+}
+
+  async getActiveSession(userId: number): Promise<ChatSession | undefined> {
+    const [session] = await db.select()
+      .from(chatSessions)
+      .where(and(
+        eq(chatSessions.userId, userId),
+        eq(chatSessions.isActive, true)
+      ))
+      .limit(1);
     return session;
   }
 
   async updateChatSessionPartner(sessionId: number, partnerId: number): Promise<void> {
-    await db
-      .update(chatSessions)
+    await db.update(chatSessions)
       .set({ partnerId })
       .where(eq(chatSessions.id, sessionId));
   }
 
   async endChatSession(sessionId: number): Promise<void> {
-    await db
-      .update(chatSessions)
+    await db.update(chatSessions)
       .set({ isActive: false, endedAt: new Date() })
       .where(eq(chatSessions.id, sessionId));
   }
 
+  // Mood Queue Management
   async addToMoodQueue(insertQueue: InsertMoodQueue): Promise<MoodQueue> {
-    const [queue] = await db
-      .insert(moodQueue)
-      .values(insertQueue)
-      .returning();
-    return queue;
-  }
+    try {
+      // First try to update existing record
+      const [updated] = await db.update(moodQueue)
+        .set({
+          socketId: insertQueue.socketId,
+          mood: insertQueue.mood,
+          createdAt: new Date()
+        })
+        .where(eq(moodQueue.userId, insertQueue.userId))
+        .returning();
 
-  async findMoodMatch(userId: number, mood: Mood): Promise<(MoodQueue & { sessionId?: number }) | null> {
-    // Find someone else in the queue with the same mood
-    const [match] = await db
-      .select()
-      .from(moodQueue)
-      .where(and(
-        eq(moodQueue.mood, mood),
-        ne(moodQueue.userId, userId) // Exclude the same user
-      ))
-      .limit(1);
+      if (updated) {
+        this.debugLog(`Updated queue entry for user ${insertQueue.userId}`);
+        return updated;
+      }
 
-    if (match) {
-      // Find their active session
-      const [session] = await db
-        .select()
-        .from(chatSessions)
-        .where(and(
-          eq(chatSessions.userId, match.userId),
-          eq(chatSessions.isActive, true)
-        ))
-        .limit(1);
+      // If no record to update, insert new
+      const [queue] = await db.insert(moodQueue)
+        .values(insertQueue)
+        .returning();
 
-      return {
-        ...match,
-        sessionId: session?.id
-      };
+      this.debugLog(`Created new queue entry for user ${insertQueue.userId}`);
+      return queue;
+    } catch (error) {
+      this.debugLog('Error in addToMoodQueue:', error);
+      throw error;
     }
-
-    return null;
   }
+
 
   async removeFromMoodQueue(userId: number): Promise<void> {
-    await db
-      .delete(moodQueue)
+    this.debugLog(`Removing user ${userId} from queue`);
+    await db.delete(moodQueue)
       .where(eq(moodQueue.userId, userId));
   }
 
-  async getMoodStats(): Promise<Record<Mood, number>> {
-    const stats = await db
-      .select()
-      .from(moodQueue);
+  async cleanupStaleQueueEntries(): Promise<number> {
+    const { rowCount } = await db.delete(moodQueue)
+      .where(sql`created_at < NOW() - INTERVAL '1 hour'`);
+    return rowCount;
+  }
 
-    const moodCounts: Record<Mood, number> = {
-      happy: 0,
-      relaxed: 0,
-      energetic: 0,
-      thoughtful: 0,
-      creative: 0,
-      adventurous: 0,
-      nostalgic: 0,
-      curious: 0,
-    };
+  // Matching Algorithm
+ // Updated storage.ts (critical matching fix)
+async matchAllMoodQueueUsers(): Promise<MatchResult[]> {
+  try {
+    this.debugLog('Starting matching process');
+    
+    // Get all users who have been in queue for at least 1 second
+    const allUsers = await db.select()
+      .from(moodQueue)
+      .where(sql`created_at < NOW() - INTERVAL '1 second'`)
+      .orderBy(asc(moodQueue.createdAt));
 
-    stats.forEach(item => {
-      if (item.mood in moodCounts) {
-        moodCounts[item.mood as Mood]++;
+    this.debugLog(`Found ${allUsers.length} users in queue`, allUsers);
+
+    const matches: MatchResult[] = [];
+    const moodGroups = new Map<Mood, MoodQueue[]>();
+
+    // Group by mood - CRITICAL FIX
+    allUsers.forEach(user => {
+      if (!moodGroups.has(user.mood)) {
+        moodGroups.set(user.mood, []);
       }
+      moodGroups.get(user.mood)!.push(user);
     });
 
+    // Process each mood group separately
+    for (const [mood, users] of moodGroups) {
+      // Only match within the same mood group
+      while (users.length >= 2) {
+        const userA = users.shift()!;
+        const userB = users.shift()!;
+
+        this.debugLog(`Creating match for ${userA.userId} and ${userB.userId} (mood: ${mood})`);
+
+        // Create session pair
+        const [sessionA] = await db.insert(chatSessions)
+          .values({
+            userId: userA.userId,
+            mood,
+            partnerId: userB.userId,
+            isActive: true
+          })
+          .returning();
+
+        await db.insert(chatSessions)
+          .values({
+            userId: userB.userId,
+            mood,
+            partnerId: userA.userId,
+            isActive: true
+          });
+
+        // Remove from queue
+        await this.removeFromMoodQueue(userA.userId);
+        await this.removeFromMoodQueue(userB.userId);
+
+        matches.push({
+          userA: userA.userId,
+          userB: userB.userId,
+          sessionId: sessionA.id
+        });
+      }
+    }
+
+    return matches;
+  } catch (error) {
+    this.debugLog('Matching error:', error);
+    throw error;
+  }
+}
+  // Stats & Monitoring
+  async getMoodStats(): Promise<Record<Mood, number>> {
+    const stats = await db.select().from(moodQueue);
+    const moodCounts = Object.fromEntries(
+      stats.reduce((acc, item) => {
+        acc.set(item.mood, (acc.get(item.mood) || 0) + 1);
+        return acc;
+      }, new Map<Mood, number>())
+    );
     return moodCounts;
+  }
+
+  // Connection Tracking
+ async addConnectedUser(userId: number, sessionId: number, mood: string): Promise<void> {
+  try {
+    // First try to update existing record
+    const updated = await db.update(connectedUsers)
+      .set({ 
+        sessionId,
+        mood,
+        disconnectedAt: null
+      })
+      .where(eq(connectedUsers.userId, userId));
+
+    // If no record was updated, insert new
+    if (updated.rowCount === 0) {
+      await db.insert(connectedUsers)
+        .values({ userId, sessionId, mood });
+    }
+  } catch (error) {
+    console.error('Connection tracking error:', error);
+    // Non-critical error - don't break the match flow
+  }
+}
+
+  async markUserDisconnected(userId: number): Promise<void> {
+    await db.update(connectedUsers)
+      .set({ disconnectedAt: new Date() })
+      .where(eq(connectedUsers.userId, userId));
+  }
+
+  async removeDisconnectedUsersFromMoodQueue(): Promise<void> {
+    const disconnectedUsers = await db.select()
+      .from(connectedUsers)
+      .where(sql`disconnected_at IS NOT NULL`);
+
+    await Promise.all(
+      disconnectedUsers.map(user => 
+        this.removeFromMoodQueue(user.userId)
+      )
+    );
   }
 }
 

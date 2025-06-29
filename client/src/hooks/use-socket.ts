@@ -2,56 +2,121 @@ import { useEffect, useState, useCallback } from "react";
 import { io, Socket } from "socket.io-client";
 import { API_BASE_URL } from "../lib/api";
 
-export function useSocket() {
+export function useSocket(userId?: number) {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    // Explicitly set the WebSocket URL to backend URL without /api and with ws protocol
-    const backendUrl = API_BASE_URL.replace("/api", "");
-    // Force ws protocol explicitly, keep the port from backendUrl
-    const wsUrl = backendUrl.replace(/^http/, "ws");
+    // 1. Construct the WebSocket URL
+    let wsUrl = API_BASE_URL.replace(/^http/, "ws").replace(/\/api\/?$/, "");
 
-    console.log("Connecting to WebSocket URL:", wsUrl);
+    // 🔍 Debug - show what URL we're about to connect to
+    console.log("🌐 Initial API_BASE_URL:", API_BASE_URL);
+    console.log("🔧 Processed wsUrl:", wsUrl);
 
-    const newSocket = io(wsUrl, {
-      transports: ['websocket', 'polling']
+    // 2. Use static IP for dev if needed
+    const finalWsUrl = wsUrl.includes("192.168.")
+      ? wsUrl
+      : "ws://192.168.1.20:5000";
+
+    console.log("🚀 Connecting to socket at:", finalWsUrl);
+
+    // 3. Create socket connection with options
+    const newSocket = io(finalWsUrl, {
+      transports: ["websocket"],
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
+      timeout: 10000,
+      forceNew: true,
+      path: "/socket.io",
+      rejectUnauthorized: false,
+      auth: {
+        userId: userId || "guest", // for debugging who’s connecting
+      },
     });
 
-    newSocket.on('connect', () => {
-      console.log('Socket connected:', newSocket.id);
+    // 4. Connection Events
+    const handleConnect = () => {
+      console.log("✅ Connected to socket:", newSocket.id);
       setIsConnected(true);
-    });
+    };
 
-    newSocket.on('disconnect', () => {
-      console.log('Socket disconnected');
+    const handleDisconnect = (reason: Socket.DisconnectReason) => {
+      console.warn("⚠️ Disconnected from socket:", reason);
       setIsConnected(false);
-    });
+    };
 
-    newSocket.on('connect_error', (error) => {
-      console.error('Socket connection error:', error);
-      setIsConnected(false);
-    });
+    const handleConnectError = (error: any) => {
+      console.error("❌ Connection error:", error.message || error);
+    };
 
+    const handleReconnectAttempt = (attempt: number) => {
+      console.warn(`🔄 Reconnect attempt #${attempt} to ${newSocket.io.uri}`);
+    };
+
+    const handleReconnectFailed = () => {
+      console.error("❌ Reconnection failed. Giving up.");
+    };
+
+    const handleReconnectSuccess = (attempt: number) => {
+      console.log(`✅ Reconnected successfully on attempt #${attempt}`);
+    };
+
+    // 5. Bind all listeners
+    newSocket.on("connect", handleConnect);
+    newSocket.on("disconnect", handleDisconnect);
+    newSocket.on("connect_error", handleConnectError);
+    newSocket.on("reconnect_attempt", handleReconnectAttempt);
+    newSocket.on("reconnect_failed", handleReconnectFailed);
+    newSocket.on("reconnect", handleReconnectSuccess);
+
+    // 6. Save the socket reference
     setSocket(newSocket);
 
+    // 7. Cleanup
     return () => {
-      newSocket.close();
+      console.log("🧹 Cleaning up socket connection");
+      newSocket.off("connect", handleConnect);
+      newSocket.off("disconnect", handleDisconnect);
+      newSocket.off("connect_error", handleConnectError);
+      newSocket.off("reconnect_attempt", handleReconnectAttempt);
+      newSocket.off("reconnect_failed", handleReconnectFailed);
+      newSocket.off("reconnect", handleReconnectSuccess);
+
+      if (newSocket.connected) {
+        newSocket.disconnect();
+        console.log("🛑 Socket disconnected manually");
+      }
     };
-  }, []);
+  }, [userId]);
 
-  const emit = useCallback((event: string, data?: any) => {
-    if (socket && isConnected) {
-      socket.emit(event, data);
-    }
-  }, [socket, isConnected]);
+  // 8. Emit event with debugging
+  const emit = useCallback(
+    (event: string, data?: any) => {
+      if (socket && isConnected) {
+        console.log(`📤 Emitting [${event}] with data:`, data);
+        socket.emit(event, data);
+      } else {
+        console.warn(`⚠️ Tried to emit [${event}] but socket is not connected.`);
+      }
+    },
+    [socket, isConnected]
+  );
 
-  const on = useCallback((event: string, callback: (data: any) => void) => {
-    if (socket) {
-      socket.on(event, callback);
-      return () => socket.off(event, callback);
-    }
-  }, [socket]);
+  // 9. Subscribe to event
+  const on = useCallback(
+    (event: string, callback: (data: any) => void) => {
+      if (socket) {
+        console.log(`👂 Listening for [${event}]`);
+        socket.on(event, callback);
+        return () => {
+          console.log(`🚫 Stopped listening to [${event}]`);
+          socket.off(event, callback);
+        };
+      }
+    },
+    [socket]
+  );
 
   return {
     socket,
