@@ -1,39 +1,26 @@
-const { Pool } = require('pg');
-const fs = require('fs');
-const path = require('path');
+import { exec } from 'child_process';
 
-async function runMigrations() {
-  const connectionString = process.env.DATABASE_URL_TEST;
-  if (!connectionString) {
-    console.error('DATABASE_URL_TEST environment variable is not set.');
-    process.exit(1);
-  }
-
-  const pool = new Pool({
-    connectionString,
+function runMigrations() {
+  return new Promise((resolve, reject) => {
+    exec('npx drizzle-kit push', (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Migration error: ${error.message}`);
+        reject(error);
+        return;
+      }
+      if (stderr) {
+        console.error(`Migration stderr: ${stderr}`);
+      }
+      console.log(`Migration stdout: ${stdout}`);
+      resolve(stdout);
+    });
   });
-
-  try {
-    const client = await pool.connect();
-
-    const migrationFilePath = path.resolve(__dirname, '../migrations/0000_gray_nova.sql');
-    const migrationSql = fs.readFileSync(migrationFilePath, 'utf-8');
-
-    // Split the migration SQL by the statement-breakpoint comment
-    const statements = migrationSql.split('--> statement-breakpoint').map(s => s.trim()).filter(Boolean);
-
-    for (const statement of statements) {
-      console.log('Running migration statement...');
-      await client.query(statement);
-    }
-
-    console.log('Migrations completed successfully.');
-    client.release();
-    process.exit(0);
-  } catch (error) {
-    console.error('Error running migrations:', error);
-    process.exit(1);
-  }
 }
 
-runMigrations();
+runMigrations()
+  .then(() => {
+    console.log('Migrations completed successfully.');
+  })
+  .catch((err) => {
+    console.error('Migration failed:', err);
+  });
