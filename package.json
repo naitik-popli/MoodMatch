@@ -6,7 +6,7 @@
   "scripts": {
     "dev:server": "tsx server/index.ts",
     "dev:client": "vite --config client/vite.config.ts --port 3000",
-    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev":  "npm run dev:client",
     "build:client": "vite build --config client/vite.config.ts",
     "build": "npm run build:client && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "start": "NODE_ENV=production node dist/index.js",
