@@ -51,8 +51,8 @@ app.get("/api/health", (_req, res) => {
 
 async function startServer() {
   try {
-    if (!process.env.DATABASE_URL) {
-      console.error("❌ DATABASE_URL environment variable is not set.");
+    if (!process.env.DATABASE_URL_TEST) {
+      console.error("❌ DATABASE_URL_TEST environment variable is not set.");
       process.exit(1);
     }
 
