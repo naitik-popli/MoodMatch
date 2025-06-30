@@ -28,54 +28,59 @@ export function setupWebSocket(io: SocketIOServer) {
   logToFile("WebSocket server starting");
 
   // Matching algorithm
-  const matchUsers = async () => {
-    try {
-      if (DEBUG_MODE) console.log("[MATCH] Starting matching cycle");
-      
-      // Get all users in queue grouped by mood
-      const queue = await db.select()
-        .from(moodQueue)
-        .orderBy(moodQueue.createdAt);
+ const matchUsers = async () => {
+  try {
+    if (DEBUG_MODE) console.log("[MATCH] Starting matching cycle");
+    
+    // Get all users in queue grouped by mood
+    const queue = await db.select()
+      .from(moodQueue)
+      .orderBy(moodQueue.createdAt);
 
-      const moodGroups = new Map<Mood, typeof queue>();
-      
-      for (const user of queue) {
-        if (!moodGroups.has(user.mood)) {
-          moodGroups.set(user.mood, []);
-        }
-        moodGroups.get(user.mood)!.push(user);
+    const moodGroups = new Map<Mood, typeof queue>();
+    
+    for (const user of queue) {
+      if (!moodGroups.has(user.mood)) {
+        moodGroups.set(user.mood, []);
       }
+      moodGroups.get(user.mood)!.push(user);
+    }
 
-      // Process each mood group
-      for (const [mood, users] of moodGroups) {
-        if (users.length < 2) continue;
+    // Process each mood group
+    for (const [mood, users] of moodGroups) {
+      // Need at least 2 users to match
+      while (users.length >= 2) {
+        const userA = users.shift()!;
+        const userB = users.shift()!;
 
-        // Match users in pairs
-        while (users.length >= 2) {
-          const userA = users.shift()!;
-          const userB = users.shift()!;
+        // Create chat session
+        const sessionId = await storage.createChatSession({
+          userAId: userA.userId,
+          userBId: userB.userId,
+          mood
+        });
 
-          // Create chat session
-          const sessionId = await storage.createChatSession({
-            userAId: userA.userId,
-            userBId: userB.userId,
-            mood
-          });
+        // Notify both users
+        await notifyMatchedPair(io, userA.userId, userB.userId, sessionId);
+        
+        // Remove from queue
+        await Promise.all([
+          db.delete(moodQueue)
+            .where(eq(moodQueue.userId, userA.userId)),
+          db.delete(moodQueue)
+            .where(eq(moodQueue.userId, userB.userId))
+        ]);
 
-          // Notify both users
-          await notifyMatchedPair(io, userA.userId, userB.userId, sessionId);
-          
-          // Remove from queue
-          await Promise.all([
-            storage.removeFromMoodQueue(userA.userId),
-            storage.removeFromMoodQueue(userB.userId)
-          ]);
-
-          if (DEBUG_MODE) {
-            console.log(`[MATCH] Paired users ${userA.userId} and ${userB.userId} for mood ${mood}`);
-          }
+        if (DEBUG_MODE) {
+          console.log(`[MATCH] Paired users ${userA.userId} and ${userB.userId} for mood ${mood}`);
         }
       }
+    }
+
+  } catch (error) {
+    console.error("[MATCH] Error in matching cycle:", error);
+  }
+};
 
       // Cleanup stale queue entries
       await db.delete(moodQueue)
@@ -106,40 +111,47 @@ export function setupWebSocket(io: SocketIOServer) {
     });
 
     // Join queue with enhanced validation
-    socket.on("join-mood-queue", async (data: { userId: number; mood: Mood }) => {
-      try {
-        if (!data?.userId || !data?.mood) {
-          throw new Error("Missing required fields");
-        }
+    // In your join-mood-queue handler
+socket.on("join-mood-queue", async (data: { userId: number; mood: Mood }) => {
+  try {
+    if (!data?.userId || !data?.mood) {
+      throw new Error("Missing required fields");
+    }
 
-        console.log(`[QUEUE ${data.userId}] Joining queue for ${data.mood}`);
-        
-        // Remove from any existing queue first
-        await storage.removeFromMoodQueue(data.userId);
-        
-        // Add to queue
-        await storage.addToMoodQueue({
+    console.log(`[QUEUE ${data.userId}] Joining queue for ${data.mood}`);
+    
+    // Use upsert approach instead of remove-then-add
+    await db.transaction(async (tx) => {
+      // First remove any existing entry for this user
+      await tx.delete(moodQueue)
+        .where(eq(moodQueue.userId, data.userId));
+      
+      // Then add new entry
+      await tx.insert(moodQueue)
+        .values({
           userId: data.userId,
           mood: data.mood,
-          socketId: socket.id
+          socketId: socket.id,
+          createdAt: new Date()
         });
-
-        socket.emit("queue-status", { 
-          status: "waiting", 
-          mood: data.mood,
-          position: await getQueuePosition(data.userId)
-        });
-
-        // Trigger immediate matching attempt
-        await matchUsers();
-
-      } catch (error) {
-        console.error(`[QUEUE] Error for user ${data.userId}:`, error);
-        socket.emit("queue-error", { 
-          message: error instanceof Error ? error.message : "Queue join failed"
-        });
-      }
     });
+
+    socket.emit("queue-status", { 
+      status: "waiting", 
+      mood: data.mood,
+      position: await getQueuePosition(data.userId)
+    });
+
+    // Trigger immediate matching attempt
+    await matchUsers();
+
+  } catch (error) {
+    console.error(`[QUEUE] Error for user ${data.userId}:`, error);
+    socket.emit("queue-error", { 
+      message: error instanceof Error ? error.message : "Queue join failed"
+    });
+  }
+});
 
     // Disconnect handler
     socket.on("disconnect", async () => {
