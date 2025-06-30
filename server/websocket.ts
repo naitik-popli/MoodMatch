@@ -82,7 +82,7 @@ export function setupWebSocket(io: SocketIOServer) {
         .where(
           and(
             eq(moodQueue.createdAt, new Date(Date.now() - MAX_QUEUE_TIME))
-        );
+        )      );
 
     } catch (error) {
       console.error("[MATCH] Error in matching cycle:", error);
