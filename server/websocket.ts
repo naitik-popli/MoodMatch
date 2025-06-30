@@ -1,3 +1,4 @@
+// websocket.ts
 import { Server as SocketIOServer, Socket } from "socket.io";
 import { storage } from "./storage";
 import { db } from "./db";
@@ -13,203 +14,161 @@ interface SocketData {
   partnerId?: number;
 }
 
-// Improved debugging setup
+// Configuration
 const DEBUG_MODE = process.env.DEBUG_MODE === "true";
-const MATCH_INTERVAL = parseInt(process.env.MATCH_INTERVAL || "5000");
-const MAX_MATCH_ATTEMPTS = 3;
+const MATCH_INTERVAL = 5000; // 5 seconds
+const MAX_QUEUE_TIME = 300000; // 5 minutes
 
-// Enhanced data structures
+// Data structures
 const userSocketMap = new Map<number, string>();
-const activeMatchOperations = new Set<number>();
-const connectionAttempts = new Map<string, number>();
+const activeSessions = new Set<number>();
 
 export function setupWebSocket(io: SocketIOServer) {
-  console.log("[WS] Initializing WebSocket server with debug:", DEBUG_MODE);
+  console.log("[WS] Initializing WebSocket server");
   logToFile("WebSocket server starting");
 
-  // Robust matching interval with cleanup
-  const matchingInterval = setInterval(async () => {
+  // Matching algorithm
+  const matchUsers = async () => {
     try {
       if (DEBUG_MODE) console.log("[MATCH] Starting matching cycle");
       
-      if (activeMatchOperations.size > 0) {
-        if (DEBUG_MODE) console.log("[MATCH] Skipping - existing operations running");
-        return;
-      }
+      // Get all users in queue grouped by mood
+      const queue = await db.select()
+        .from(moodQueue)
+        .orderBy(moodQueue.createdAt);
 
-      const matches = await storage.matchAllMoodQueueUsers();
+      const moodGroups = new Map<Mood, typeof queue>();
       
-      if (matches.length > 0 && DEBUG_MODE) {
-        console.log(`[MATCH] Found ${matches.length} matches`);
+      for (const user of queue) {
+        if (!moodGroups.has(user.mood)) {
+          moodGroups.set(user.mood, []);
+        }
+        moodGroups.get(user.mood)!.push(user);
       }
 
-      await Promise.all(matches.map(async match => {
-        activeMatchOperations.add(match.userA);
-        activeMatchOperations.add(match.userB);
-        
-        try {
-          await notifyMatchedPair(io, match.userA, match.userB, match.sessionId);
-        } finally {
-          activeMatchOperations.delete(match.userA);
-          activeMatchOperations.delete(match.userB);
+      // Process each mood group
+      for (const [mood, users] of moodGroups) {
+        if (users.length < 2) continue;
+
+        // Match users in pairs
+        while (users.length >= 2) {
+          const userA = users.shift()!;
+          const userB = users.shift()!;
+
+          // Create chat session
+          const sessionId = await storage.createChatSession({
+            userAId: userA.userId,
+            userBId: userB.userId,
+            mood
+          });
+
+          // Notify both users
+          await notifyMatchedPair(io, userA.userId, userB.userId, sessionId);
+          
+          // Remove from queue
+          await Promise.all([
+            storage.removeFromMoodQueue(userA.userId),
+            storage.removeFromMoodQueue(userB.userId)
+          ]);
+
+          if (DEBUG_MODE) {
+            console.log(`[MATCH] Paired users ${userA.userId} and ${userB.userId} for mood ${mood}`);
+          }
         }
-      }));
+      }
+
+      // Cleanup stale queue entries
+      await db.delete(moodQueue)
+        .where(
+          and(
+            eq(moodQueue.createdAt, new Date(Date.now() - MAX_QUEUE_TIME))
+        );
+
     } catch (error) {
       console.error("[MATCH] Error in matching cycle:", error);
       logToFile(`Matching error: ${error instanceof Error ? error.stack : error}`);
     }
-  }, MATCH_INTERVAL);
+  };
+
+  // Start matching interval
+  const matchingInterval = setInterval(matchUsers, MATCH_INTERVAL);
 
   io.on("connection", async (socket: Socket<{}, {}, {}, SocketData>) => {
     const connId = socket.id.slice(0, 6);
     console.log(`[CONN ${connId}] New connection`);
-    logToFile(`New connection: ${socket.id}`);
 
-    // Enhanced socket ID management
+    // Update socket mapping
     socket.on("update-socket-id", (data: { userId: number }) => {
-      if (!data?.userId) {
-        console.warn(`[CONN ${connId}] Missing userId in update-socket-id`);
-        return;
-      }
-
-      const attempts = connectionAttempts.get(socket.id) || 0;
-      if (attempts > MAX_MATCH_ATTEMPTS) {
-        console.warn(`[CONN ${connId}] Too many attempts for user ${data.userId}`);
-        socket.disconnect();
-        return;
-      }
-
-      connectionAttempts.set(socket.id, attempts + 1);
+      if (!data?.userId) return;
+      
       userSocketMap.set(data.userId, socket.id);
       socket.data.userId = data.userId;
     });
 
-    // Robust queue joining
-    socket.on("join-mood-queue", async (data: { userId: number; mood: Mood; sessionId?: number }) => {
+    // Join queue with enhanced validation
+    socket.on("join-mood-queue", async (data: { userId: number; mood: Mood }) => {
       try {
         if (!data?.userId || !data?.mood) {
           throw new Error("Missing required fields");
         }
 
-        console.log(`[QUEUE ${data.userId}] Join request for ${data.mood}`);
+        console.log(`[QUEUE ${data.userId}] Joining queue for ${data.mood}`);
         
+        // Remove from any existing queue first
+        await storage.removeFromMoodQueue(data.userId);
+        
+        // Add to queue
         await storage.addToMoodQueue({
           userId: data.userId,
           mood: data.mood,
           socketId: socket.id
         });
 
-        if (DEBUG_MODE) {
-          const queue = await db.select().from(moodQueue);
-          console.log(`[QUEUE] Current state:`, queue);
-        }
+        socket.emit("queue-status", { 
+          status: "waiting", 
+          mood: data.mood,
+          position: await getQueuePosition(data.userId)
+        });
 
-        socket.emit("queue-status", { status: "waiting", mood: data.mood });
+        // Trigger immediate matching attempt
+        await matchUsers();
+
       } catch (error) {
-        console.error(`[QUEUE] Join error:`, error);
-        socket.emit("error", { 
-          code: "QUEUE_JOIN_FAILED",
+        console.error(`[QUEUE] Error for user ${data.userId}:`, error);
+        socket.emit("queue-error", { 
           message: error instanceof Error ? error.message : "Queue join failed"
         });
       }
     });
 
-    // Improved disconnect handling
+    // Disconnect handler
     socket.on("disconnect", async () => {
-      console.log(`[CONN ${connId}] Disconnecting`);
+      if (!socket.data?.userId) return;
       
-      try {
-        if (socket.data?.userId) {
-          const { userId, partnerId, sessionId } = socket.data;
-          userSocketMap.delete(userId);
+      const userId = socket.data.userId;
+      console.log(`[DISCONNECT ${userId}] Handling disconnect`);
 
-          // Only remove from queue if not in active session
-          const [activeSession] = await db.select()
-            .from(chatSessions)
-            .where(and(
-              eq(chatSessions.userId, userId),
-              eq(chatSessions.isActive, true)
-            ))
-            .limit(1);
-
-          if (!activeSession) {
-            await storage.removeFromMoodQueue(userId);
-          }
-
-          // Notify partner if exists
-          if (partnerId && sessionId) {
-            const partnerSocketId = userSocketMap.get(partnerId);
-            if (partnerSocketId) {
-              io.to(partnerSocketId).emit("partner-disconnected", { sessionId });
-            }
-          }
-        }
-      } catch (error) {
-        console.error(`[CONN ${connId}] Disconnect error:`, error);
-      }
-    });
-
-    // WebRTC handlers with validation
-    const createWebRTCHandler = (type: string) => (data: any) => {
-      if (!data?.targetSocketId) {
-        console.warn(`[WEBRTC ${connId}] Missing targetSocketId for ${type}`);
-        return;
-      }
-
-      const targetSocket = io.sockets.sockets.get(data.targetSocketId);
-      if (!targetSocket) {
-        console.warn(`[WEBRTC ${connId}] Target socket not found`);
-        return;
-      }
-
-      targetSocket.emit(type, {
-        fromSocketId: socket.id,
-        ...data,
-      });
-    };
-
-    socket.on("webrtc-offer", createWebRTCHandler("webrtc-offer"));
-    socket.on("webrtc-answer", createWebRTCHandler("webrtc-answer"));
-    socket.on("webrtc-ice-candidate", createWebRTCHandler("webrtc-ice-candidate"));
-
-    // Session management
-    socket.on("end-call", async (data: { sessionId: number }) => {
-      if (!data?.sessionId) {
-        console.warn(`[CALL ${connId}] Missing sessionId`);
-        return;
-      }
-
-      try {
-        await storage.endChatSession(data.sessionId);
-        
-        if (socket.data?.partnerId) {
-          const partnerSocketId = userSocketMap.get(socket.data.partnerId);
-          if (partnerSocketId) {
-            io.to(partnerSocketId).emit("call-ended", {
-              sessionId: data.sessionId,
-              reason: "partner-ended"
-            });
-          }
-        }
-
-        socket.emit("call-ended", {
-          sessionId: data.sessionId,
-          reason: "user-ended"
-        });
-      } catch (error) {
-        console.error(`[CALL ${connId}] Error ending session:`, error);
+      // Only remove from queue if not in active session
+      if (!activeSessions.has(userId)) {
+        await storage.removeFromMoodQueue(userId);
       }
     });
   });
 
-  // Cleanup handler
-  const cleanup = () => {
+  // Cleanup on shutdown
+  process.on('SIGTERM', () => {
     clearInterval(matchingInterval);
-    console.log("[WS] Cleaned up WebSocket server");
-  };
+    console.log("[WS] Cleaned up matching interval");
+  });
+}
 
-  process.on('SIGTERM', cleanup);
-  process.on('SIGINT', cleanup);
+// Helper to get queue position
+async function getQueuePosition(userId: number): Promise<number> {
+  const queue = await db.select()
+    .from(moodQueue)
+    .orderBy(moodQueue.createdAt);
+  
+  return queue.findIndex(u => u.userId === userId) + 1;
 }
 
 // Enhanced matching notification
@@ -223,47 +182,31 @@ async function notifyMatchedPair(io: SocketIOServer, userA: number, userB: numbe
   }
 
   try {
-    const [socketAInstance, socketBInstance] = [
-      io.sockets.sockets.get(socketA),
-      io.sockets.sockets.get(socketB)
-    ];
+    // Update active sessions
+    activeSessions.add(userA);
+    activeSessions.add(userB);
 
-    if (socketAInstance) {
-      socketAInstance.data = {
-        ...socketAInstance.data,
-        partnerId: userB,
-        sessionId
-      };
-    }
-
-    if (socketBInstance) {
-      socketBInstance.data = {
-        ...socketBInstance.data,
-        partnerId: userA,
-        sessionId
-      };
-    }
-
+    // Notify both users
     io.to(socketA).emit("match-found", {
       partnerId: userB,
-      partnerSocketId: socketB,
       sessionId,
+      timestamp: new Date().toISOString()
     });
 
     io.to(socketB).emit("match-found", {
       partnerId: userA,
-      partnerSocketId: socketA,
-      sessionId,
+      sessionId, 
+      timestamp: new Date().toISOString()
     });
 
-    // Non-blocking session tracking
-    Promise.all([
-      storage.addConnectedUser(userA, sessionId, "matched"),
-      storage.addConnectedUser(userB, sessionId, "matched")
-    ]).catch(error => {
-      console.error('[MATCH] Non-critical tracking error:', error);
-    });
+    console.log(`[MATCH] Successfully notified pair ${userA}/${userB} for session ${sessionId}`);
+
   } catch (error) {
     console.error(`[MATCH] Error notifying pair ${userA}/${userB}:`, error);
+    // Cleanup failed match
+    await Promise.all([
+      storage.removeFromMoodQueue(userA),
+      storage.removeFromMoodQueue(userB)
+    ]);
   }
 }
