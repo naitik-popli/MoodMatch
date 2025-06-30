@@ -5,9 +5,7 @@ const ICE_SERVERS = [
 
 export function createPeerConnection(): RTCPeerConnection {
   return new RTCPeerConnection({
-    iceServers: [
-      { urls: "stun:stun.l.google.com:19302" }, // Public STUN
-    ],
+    iceServers: ICE_SERVERS,
   });
 }
 

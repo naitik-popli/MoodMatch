@@ -139,20 +139,26 @@ socket.on("disconnect", async () => {
     });
 
     // WebRTC handlers
-    const createWebRTCHandler = (type: string) => 
-      (data: { targetSocketId: string; payload: any }) => {
-        if (DEBUG_MODE) console.log(`[WEBRTC ${connId}] ${type} to ${data.targetSocketId.slice(0, 6)}`);
-        
-        const targetSocket = io.sockets.sockets.get(data.targetSocketId);
-        if (!targetSocket) {
-          if (DEBUG_MODE) console.log(`[WEBRTC ${connId}] Target not found`);
+    const createWebRTCHandler = (type: string) =>
+      (data: any) => {
+        const { targetSocketId, ...payload } = data;
+        if (!targetSocketId) {
+          if (DEBUG_MODE) console.log(`[WEBRTC ${connId}] Received ${type} without targetSocketId`);
           return;
         }
 
-        targetSocket.emit(type, {
-          fromSocketId: socket.id,
-          ...data.payload,
-        });
+        if (DEBUG_MODE) console.log(`[WEBRTC ${connId}] Fowarding ${type} to ${targetSocketId.slice(0, 6)}`);
+        
+        const targetSocket = io.sockets.sockets.get(targetSocketId);
+        
+        if (targetSocket) {
+          targetSocket.emit(type, {
+            fromSocketId: socket.id,
+            ...payload,
+          });
+        } else {
+          if (DEBUG_MODE) console.log(`[WEBRTC ${connId}] Target socket ${targetSocketId} not found for ${type}`);
+        }
       };
 
     socket.on("webrtc-offer", createWebRTCHandler("webrtc-offer"));

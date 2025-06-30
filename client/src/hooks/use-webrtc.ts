@@ -44,10 +44,12 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
   useEffect(() => {
     if (!socket || !targetSocketId) return;
 
-    const pc = peerConnectionRef.current;
-    if (!pc) return;
-
     const handleOffer = async (data: any) => {
+      const pc = peerConnectionRef.current;
+      if (!pc) {
+        console.error("Received webrtc-offer but peer connection is not initialized.");
+        return;
+      }
       if (data.fromSocketId === targetSocketId) {
         await pc.setRemoteDescription(data.offer);
         const answer = await pc.createAnswer();
@@ -60,12 +62,22 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
     };
 
     const handleAnswer = async (data: any) => {
+      const pc = peerConnectionRef.current;
+      if (!pc) {
+        console.error("Received webrtc-answer but peer connection is not initialized.");
+        return;
+      }
       if (data.fromSocketId === targetSocketId) {
         await pc.setRemoteDescription(data.answer);
       }
     };
 
     const handleIce = async (data: any) => {
+      const pc = peerConnectionRef.current;
+      if (!pc) {
+        console.error("Received webrtc-ice-candidate but peer connection is not initialized.");
+        return;
+      }
       if (data.fromSocketId === targetSocketId) {
         try {
           await pc.addIceCandidate(data.candidate);
