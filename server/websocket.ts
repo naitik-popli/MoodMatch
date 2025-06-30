@@ -33,14 +33,17 @@ export async function setupWebSocket(io: SocketIOServer) {  // Made async
         .from(moodQueue)
         .orderBy(moodQueue.createdAt);
 
-      const moodGroups = new Map<Mood, typeof queue>();
+const moodGroups = new Map<string, typeof queue>();
       
-      for (const user of queue) {
-        if (!moodGroups.has(user.mood)) {
-          moodGroups.set(user.mood, []);
-        }
-        moodGroups.get(user.mood)!.push(user);
-      }
+for (const user of queue) {
+  if (!moodGroups.has(user.mood)) {
+    moodGroups.set(user.mood, []);
+  }
+  // Type assertion to string to avoid type errors
+  moodGroups.get(user.mood as string)!.push(user);
+}
+
+
 
       for (const [mood, users] of moodGroups) {
         while (users.length >= 2) {
@@ -48,10 +51,11 @@ export async function setupWebSocket(io: SocketIOServer) {  // Made async
           const userB = users.shift()!;
 
           const sessionId = await storage.createChatSession({
-            userAId: userA.userId,
-            userBId: userB.userId,
-            mood
+            userId: userA.userId,
+            mood,
+            partnerId: userB.userId,
           });
+
 
           await notifyMatchedPair(io, userA.userId, userB.userId, sessionId);
           
@@ -71,6 +75,7 @@ export async function setupWebSocket(io: SocketIOServer) {  // Made async
         .where(
           and(
             eq(moodQueue.createdAt, new Date(Date.now() - MAX_QUEUE_TIME))
+          )
         );
 
     } catch (error) {
@@ -90,7 +95,7 @@ export async function setupWebSocket(io: SocketIOServer) {  // Made async
       socket.data.userId = data.userId;
     });
 
-    socket.on("join-mood-queue", async (data: { userId: number; mood: Mood }) => {
+    socket.on("join-mood-queue", async (data: { userId: number; mood: string }) => {
       try {
         if (!data?.userId || !data?.mood) {
           throw new Error("Missing required fields");
@@ -111,7 +116,7 @@ export async function setupWebSocket(io: SocketIOServer) {  // Made async
             });
         });
 
-        socket.emit("queue-status", { 
+        socket.emit("queue-status" as any, { 
           status: "waiting", 
           mood: data.mood,
           position: await getQueuePosition(data.userId)
@@ -121,7 +126,7 @@ export async function setupWebSocket(io: SocketIOServer) {  // Made async
 
       } catch (error) {
         console.error(`[QUEUE] Error:`, error);
-        socket.emit("queue-error", { 
+        socket.emit("queue-error" as any, { 
           message: error instanceof Error ? error.message : "Queue join failed"
         });
       }
