@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
-const WS_URL = "ws://localhost:5000";
+const WS_URL = "wss://moodmatch-61xp.onrender.com";
 
 const TestCallConnection: React.FC = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
