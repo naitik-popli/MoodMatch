@@ -17,7 +17,7 @@ export function useSocket(userId?: number) {
     // 2. Use static IP for dev if needed
     const finalWsUrl = wsUrl.includes("192.168.")
       ? wsUrl
-      : "ws://192.168.1.20:5000";
+      : wsUrl.replace(/^ws:/, "wss:");
 
     console.log("🚀 Connecting to socket at:", finalWsUrl);
 
@@ -51,7 +51,7 @@ export function useSocket(userId?: number) {
     };
 
     const handleReconnectAttempt = (attempt: number) => {
-      console.warn(`🔄 Reconnect attempt #${attempt} to ${newSocket.io.uri}`);
+      console.warn(`🔄 Reconnect attempt #${attempt}`);
     };
 
     const handleReconnectFailed = () => {
