@@ -13,36 +13,50 @@ interface SocketData {
   partnerId?: number;
 }
 
-// Debugging constants
+// Improved debugging setup
 const DEBUG_MODE = process.env.DEBUG_MODE === "true";
-const MATCH_INTERVAL = 5000; // 5 seconds
+const MATCH_INTERVAL = parseInt(process.env.MATCH_INTERVAL || "5000");
+const MAX_MATCH_ATTEMPTS = 3;
 
-const userSocketMap: Map<number, string> = new Map();
+// Enhanced data structures
+const userSocketMap = new Map<number, string>();
 const activeMatchOperations = new Set<number>();
-let matchingInterval: NodeJS.Timeout;
+const connectionAttempts = new Map<string, number>();
 
 export function setupWebSocket(io: SocketIOServer) {
-  console.log("[WS] Initializing WebSocket server");
+  console.log("[WS] Initializing WebSocket server with debug:", DEBUG_MODE);
   logToFile("WebSocket server starting");
 
-  // Start periodic matching
-  matchingInterval = setInterval(async () => {
+  // Robust matching interval with cleanup
+  const matchingInterval = setInterval(async () => {
     try {
-      if (DEBUG_MODE) console.log("[MATCH] Starting periodic matching cycle");
+      if (DEBUG_MODE) console.log("[MATCH] Starting matching cycle");
       
-      const matches = await storage.matchAllMoodQueueUsers();
-      
-      if (DEBUG_MODE) {
-        console.log(`[MATCH] Found ${matches.length} matches this cycle`);
-        console.log("[MATCH] Results:", matches);
+      if (activeMatchOperations.size > 0) {
+        if (DEBUG_MODE) console.log("[MATCH] Skipping - existing operations running");
+        return;
       }
 
-      for (const match of matches) {
-        notifyMatchedPair(io, match.userA, match.userB, match.sessionId);
+      const matches = await storage.matchAllMoodQueueUsers();
+      
+      if (matches.length > 0 && DEBUG_MODE) {
+        console.log(`[MATCH] Found ${matches.length} matches`);
       }
+
+      await Promise.all(matches.map(async match => {
+        activeMatchOperations.add(match.userA);
+        activeMatchOperations.add(match.userB);
+        
+        try {
+          await notifyMatchedPair(io, match.userA, match.userB, match.sessionId);
+        } finally {
+          activeMatchOperations.delete(match.userA);
+          activeMatchOperations.delete(match.userB);
+        }
+      }));
     } catch (error) {
-      console.error("[MATCH] Periodic matching error:", error);
-      logToFile(`Periodic matching error: ${error instanceof Error ? error.message : String(error)}`);
+      console.error("[MATCH] Error in matching cycle:", error);
+      logToFile(`Matching error: ${error instanceof Error ? error.stack : error}`);
     }
   }, MATCH_INTERVAL);
 
@@ -51,211 +65,169 @@ export function setupWebSocket(io: SocketIOServer) {
     console.log(`[CONN ${connId}] New connection`);
     logToFile(`New connection: ${socket.id}`);
 
-    // Socket ID update handler
+    // Enhanced socket ID management
     socket.on("update-socket-id", (data: { userId: number }) => {
       if (!data?.userId) {
-        if (DEBUG_MODE) console.log(`[CONN ${connId}] Missing userId in update-socket-id`);
+        console.warn(`[CONN ${connId}] Missing userId in update-socket-id`);
         return;
       }
 
-      console.log(`[CONN ${connId}] Updating socket ID for user ${data.userId}`);
+      const attempts = connectionAttempts.get(socket.id) || 0;
+      if (attempts > MAX_MATCH_ATTEMPTS) {
+        console.warn(`[CONN ${connId}] Too many attempts for user ${data.userId}`);
+        socket.disconnect();
+        return;
+      }
+
+      connectionAttempts.set(socket.id, attempts + 1);
       userSocketMap.set(data.userId, socket.id);
       socket.data.userId = data.userId;
     });
 
-    // Mood queue join handler
-    // In websocket.ts connection handler:
-socket.on("join-mood-queue", async (data) => {
-  try {
-    const { userId, mood, sessionId } = data;
-    console.log(`[QUEUE ${userId}] Join request for ${mood}`);
-
-    // Add to queue (upsert style)
-    await storage.addToMoodQueue({ 
-      userId, 
-      mood, 
-      socketId: socket.id 
-    });
-
-    // Debug current queue state
-    const queue = await db.select().from(moodQueue);
-    console.log(`[QUEUE] Current state:`, queue);
-
-    // Immediate match attempt
-    const matches = await storage.matchAllMoodQueueUsers();
-    if (matches.length > 0) {
-      console.log(`[QUEUE ${userId}] Found immediate matches`);
-    }
-
-    socket.emit("waiting-for-match", { mood });
-    
-  } catch (error) {
-    console.error(`[QUEUE ${userId}] Join error:`, error);
-    socket.emit("error", { message: "Queue join failed" });
-  }
-});
-
-// Modified disconnect handler:
-socket.on("disconnect", async () => {
-  const { userId } = socket.data || {};
-  if (!userId) return;
-
-  console.log(`[DISCONNECT ${userId}] Handling disconnect`);
-  
-  // Only remove from queue if not matched
-  const [session] = await db.select()
-    .from(chatSessions)
-    .where(and(
-      eq(chatSessions.userId, userId),
-      eq(chatSessions.isActive, true)
-    ))
-    .limit(1);
-
-  if (!session?.partnerId) {
-    console.log(`[DISCONNECT ${userId}] Removing from queue`);
-    await storage.removeFromMoodQueue(userId);
-  } else {
-    console.log(`[DISCONNECT ${userId}] Keeping in active session`);
-  }
-});
-    // Queue leave handler
-    socket.on("leave-mood-queue", async () => {
-      if (!socket.data?.userId) {
-        if (DEBUG_MODE) console.log(`[CONN ${connId}] Leave request with no userId`);
-        return;
-      }
-
-      const userId = socket.data.userId;
-      console.log(`[QUEUE ${userId}] Leaving queue`);
-
+    // Robust queue joining
+    socket.on("join-mood-queue", async (data: { userId: number; mood: Mood; sessionId?: number }) => {
       try {
-        await storage.removeFromMoodQueue(userId);
-        socket.emit("left-queue");
-        logToFile(`User ${userId} left queue`);
-      } catch (error) {
-        console.error(`[QUEUE ${userId}] Leave error:`, error);
-        logToFile(`Leave error for user ${userId}: ${error instanceof Error ? error.message : String(error)}`);
-      }
-    });
-
-    // WebRTC handlers
-    const createWebRTCHandler = (type: string) =>
-      (data: any) => {
-        const { targetSocketId, ...payload } = data;
-        if (!targetSocketId) {
-          if (DEBUG_MODE) console.log(`[WEBRTC ${connId}] Received ${type} without targetSocketId`);
-          return;
+        if (!data?.userId || !data?.mood) {
+          throw new Error("Missing required fields");
         }
 
-        if (DEBUG_MODE) console.log(`[WEBRTC ${connId}] Fowarding ${type} to ${targetSocketId.slice(0, 6)}`);
+        console.log(`[QUEUE ${data.userId}] Join request for ${data.mood}`);
         
-        const targetSocket = io.sockets.sockets.get(targetSocketId);
-        
-        if (targetSocket) {
-          targetSocket.emit(type, {
-            fromSocketId: socket.id,
-            ...payload,
-          });
-        } else {
-          if (DEBUG_MODE) console.log(`[WEBRTC ${connId}] Target socket ${targetSocketId} not found for ${type}`);
-        }
-      };
-
-    socket.on("webrtc-offer", createWebRTCHandler("webrtc-offer"));
-    socket.on("webrtc-answer", createWebRTCHandler("webrtc-answer"));
-    socket.on("webrtc-ice-candidate", createWebRTCHandler("webrtc-ice-candidate"));
-
-    // Call termination handler
-    socket.on("end-call", async (data: { sessionId: number }) => {
-      if (!data.sessionId) {
-        console.log(`[CALL ${connId}] End call with no sessionId`);
-        return;
-      }
-
-      console.log(`[CALL ${connId}] Ending session ${data.sessionId}`);
-      
-      try {
-        await storage.endChatSession(data.sessionId);
-
-        if (socket.data?.partnerId) {
-          const partnerSocketId = userSocketMap.get(socket.data.partnerId);
-          if (partnerSocketId) {
-            io.to(partnerSocketId).emit("call-ended", {
-              reason: "Partner ended call",
-              sessionId: data.sessionId,
-            });
-          }
-        }
-
-        socket.emit("call-ended", {
-          reason: "Call ended successfully",
-          sessionId: data.sessionId,
+        await storage.addToMoodQueue({
+          userId: data.userId,
+          mood: data.mood,
+          socketId: socket.id
         });
 
-        logToFile(`Call ended for session ${data.sessionId}`);
+        if (DEBUG_MODE) {
+          const queue = await db.select().from(moodQueue);
+          console.log(`[QUEUE] Current state:`, queue);
+        }
+
+        socket.emit("queue-status", { status: "waiting", mood: data.mood });
       } catch (error) {
-        console.error(`[CALL ${connId}] End error:`, error);
-        logToFile(`Call end error: ${error instanceof Error ? error.message : String(error)}`);
+        console.error(`[QUEUE] Join error:`, error);
+        socket.emit("error", { 
+          code: "QUEUE_JOIN_FAILED",
+          message: error instanceof Error ? error.message : "Queue join failed"
+        });
       }
     });
 
-    // Disconnect handler
+    // Improved disconnect handling
     socket.on("disconnect", async () => {
       console.log(`[CONN ${connId}] Disconnecting`);
-      logToFile(`Client disconnected: ${socket.id}`);
-
+      
       try {
         if (socket.data?.userId) {
           const { userId, partnerId, sessionId } = socket.data;
           userSocketMap.delete(userId);
 
-          // Clean up queue and sessions
-          await Promise.all([
-            storage.removeFromMoodQueue(userId),
-            sessionId ? storage.endChatSession(sessionId) : Promise.resolve(),
-          ]);
+          // Only remove from queue if not in active session
+          const [activeSession] = await db.select()
+            .from(chatSessions)
+            .where(and(
+              eq(chatSessions.userId, userId),
+              eq(chatSessions.isActive, true)
+            ))
+            .limit(1);
 
-          // Notify partner if connected
-          if (partnerId) {
+          if (!activeSession) {
+            await storage.removeFromMoodQueue(userId);
+          }
+
+          // Notify partner if exists
+          if (partnerId && sessionId) {
             const partnerSocketId = userSocketMap.get(partnerId);
             if (partnerSocketId) {
-              io.to(partnerSocketId).emit("call-ended", {
-                reason: "Partner disconnected",
-                sessionId: sessionId,
-              });
+              io.to(partnerSocketId).emit("partner-disconnected", { sessionId });
             }
           }
         }
       } catch (error) {
         console.error(`[CONN ${connId}] Disconnect error:`, error);
-        logToFile(`Disconnect error: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    });
+
+    // WebRTC handlers with validation
+    const createWebRTCHandler = (type: string) => (data: any) => {
+      if (!data?.targetSocketId) {
+        console.warn(`[WEBRTC ${connId}] Missing targetSocketId for ${type}`);
+        return;
+      }
+
+      const targetSocket = io.sockets.sockets.get(data.targetSocketId);
+      if (!targetSocket) {
+        console.warn(`[WEBRTC ${connId}] Target socket not found`);
+        return;
+      }
+
+      targetSocket.emit(type, {
+        fromSocketId: socket.id,
+        ...data,
+      });
+    };
+
+    socket.on("webrtc-offer", createWebRTCHandler("webrtc-offer"));
+    socket.on("webrtc-answer", createWebRTCHandler("webrtc-answer"));
+    socket.on("webrtc-ice-candidate", createWebRTCHandler("webrtc-ice-candidate"));
+
+    // Session management
+    socket.on("end-call", async (data: { sessionId: number }) => {
+      if (!data?.sessionId) {
+        console.warn(`[CALL ${connId}] Missing sessionId`);
+        return;
+      }
+
+      try {
+        await storage.endChatSession(data.sessionId);
+        
+        if (socket.data?.partnerId) {
+          const partnerSocketId = userSocketMap.get(socket.data.partnerId);
+          if (partnerSocketId) {
+            io.to(partnerSocketId).emit("call-ended", {
+              sessionId: data.sessionId,
+              reason: "partner-ended"
+            });
+          }
+        }
+
+        socket.emit("call-ended", {
+          sessionId: data.sessionId,
+          reason: "user-ended"
+        });
+      } catch (error) {
+        console.error(`[CALL ${connId}] Error ending session:`, error);
       }
     });
   });
 
-  // Cleanup on server shutdown
-  process.on('SIGTERM', () => {
-    console.log("[WS] Cleaning up WebSocket server");
+  // Cleanup handler
+  const cleanup = () => {
     clearInterval(matchingInterval);
-  });
+    console.log("[WS] Cleaned up WebSocket server");
+  };
+
+  process.on('SIGTERM', cleanup);
+  process.on('SIGINT', cleanup);
 }
 
-// Helper function to notify matched users
-// In the notifyMatchedPair function:
-// Replace the notifyMatchedPair function with this corrected version:
-// In the notifyMatchedPair function:
+// Enhanced matching notification
 async function notifyMatchedPair(io: SocketIOServer, userA: number, userB: number, sessionId: number) {
-  console.log(`[MATCH] Notifying pair ${userA} and ${userB}`);
-  
   const socketA = userSocketMap.get(userA);
   const socketB = userSocketMap.get(userB);
 
-  if (socketA && socketB) {
-    // Get socket instances safely
-    const socketAInstance = io.sockets.sockets.get(socketA);
-    const socketBInstance = io.sockets.sockets.get(socketB);
+  if (!socketA || !socketB) {
+    console.warn(`[MATCH] Missing sockets for pair ${userA}/${userB}`);
+    return;
+  }
 
-    // Update socket data if instances exist
+  try {
+    const [socketAInstance, socketBInstance] = [
+      io.sockets.sockets.get(socketA),
+      io.sockets.sockets.get(socketB)
+    ];
+
     if (socketAInstance) {
       socketAInstance.data = {
         ...socketAInstance.data,
@@ -263,6 +235,7 @@ async function notifyMatchedPair(io: SocketIOServer, userA: number, userB: numbe
         sessionId
       };
     }
+
     if (socketBInstance) {
       socketBInstance.data = {
         ...socketBInstance.data,
@@ -271,7 +244,6 @@ async function notifyMatchedPair(io: SocketIOServer, userA: number, userB: numbe
       };
     }
 
-    // Send notifications
     io.to(socketA).emit("match-found", {
       partnerId: userB,
       partnerSocketId: socketB,
@@ -284,14 +256,14 @@ async function notifyMatchedPair(io: SocketIOServer, userA: number, userB: numbe
       sessionId,
     });
 
-    // Track connections (non-blocking)
-    try {
-      await Promise.all([
-        storage.addConnectedUser(userA, sessionId, "matched"),
-        storage.addConnectedUser(userB, sessionId, "matched")
-      ]);
-    } catch (error) {
-      console.error('[MATCH] Non-critical connection tracking error:', error);
-    }
+    // Non-blocking session tracking
+    Promise.all([
+      storage.addConnectedUser(userA, sessionId, "matched"),
+      storage.addConnectedUser(userB, sessionId, "matched")
+    ]).catch(error => {
+      console.error('[MATCH] Non-critical tracking error:', error);
+    });
+  } catch (error) {
+    console.error(`[MATCH] Error notifying pair ${userA}/${userB}:`, error);
   }
 }
