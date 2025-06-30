@@ -7,103 +7,117 @@ import { Server as SocketIOServer } from "socket.io";
 import { setupWebSocket } from "./websocket";
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000; // Changed to use environment variable
 
-// Middleware
-app.use(cors());
+// 1. Enhanced CORS Configuration
+const allowedOrigins = [
+  'https://mood-match-two.vercel.app',
+  'http://localhost:3000'
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Handle preflight requests
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Custom logger middleware
+// 2. Improved Logger Middleware
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined = undefined;
+  let responseBody: any;
 
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
+  const originalJson = res.json;
+  res.json = function(body) {
+    responseBody = body;
+    return originalJson.call(this, body);
   };
 
   res.on("finish", () => {
     const duration = Date.now() - start;
-    if (path.startsWith("/api") || path.startsWith("/socket.io")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-      }
-
-      if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "…";
-      }
-
-      console.log(logLine);
+    console.log(`${req.method} ${path} ${res.statusCode} ${duration}ms`);
+    if (responseBody) {
+      console.debug('Response:', JSON.stringify(responseBody, null, 2));
     }
   });
 
   next();
 });
 
-// Basic health check route
+// Health Check Route
 app.get("/api/health", (_req, res) => {
-  res.status(200).json({ status: "ok" });
+  res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
 async function startServer() {
   try {
     if (!process.env.DATABASE_URL_TEST) {
-      console.error("❌ DATABASE_URL_TEST environment variable is not set.");
-      process.exit(1);
+      throw new Error("DATABASE_URL_TEST environment variable is not set");
     }
 
-    // Register all routes
+    // Register Routes
     await registerRoutes(app);
 
-    // Create the HTTP server *after* routes are mounted
+    // HTTP Server
     const server = createServer(app);
 
-    // Setup Socket.IO
+    // 3. Secure Socket.IO Configuration
     const io = new SocketIOServer(server, {
       cors: {
-        origin: "*",
+        origin: allowedOrigins,
         methods: ["GET", "POST"],
-        allowedHeaders: ["my-custom-header"],
-        credentials: true,
+        allowedHeaders: ["Authorization"],
+        credentials: true
       },
       allowEIO3: true,
+      connectionStateRecovery: {
+        maxDisconnectionDuration: 2 * 60 * 1000, // 2 minutes
+        skipMiddlewares: true
+      }
     });
 
     setupWebSocket(io);
 
-    // Start server
-    server.listen(PORT, () => {
-      console.log(`🚀 Server is running at http://localhost:${PORT}`);
+    // Error Handling Middleware (moved after route registration)
+    app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+      console.error(`[${req.method}] ${req.path} Error:`, err);
+      res.status(err.status || 500).json({
+        error: err.message || 'Internal Server Error'
+      });
     });
 
-    // Global error handler
-    app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-      const status = err.status || err.statusCode || 500;
-      const message = err.message || "Internal Server Error";
-
-      console.error("Error handling request:", err);
-      res.status(status).json({ message });
+    server.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`🛡️  CORS allowed for: ${allowedOrigins.join(', ')}`);
     });
 
   } catch (error) {
-    console.error("🔥 Error starting server:", error);
+    console.error("🔥 Failed to start server:", error);
     process.exit(1);
   }
 }
 
-// Crash guards
+// Process Handlers
 process.on("uncaughtException", (err) => {
   console.error("💥 Uncaught Exception:", err);
-  process.exit(1);
+  // Consider implementing graceful shutdown here
 });
 
-process.on("unhandledRejection", (err) => {
-  console.error("💥 Unhandled Rejection:", err);
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("💥 Unhandled Rejection at:", promise, "reason:", reason);
 });
 
 startServer();
