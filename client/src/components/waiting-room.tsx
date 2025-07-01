@@ -36,20 +36,19 @@ interface Props {
 export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
   const [waitTime, setWaitTime] = useState(0);
   const [userId, setUserId] = useState<number | null>(null);
-  const { socket } = useSocket();
+  const { socket } = useSocket(userId ?? undefined);
 
-  // Grab userId from localStorage on mount
+  // Load userId from localStorage
   useEffect(() => {
-    const storedUserId = localStorage.getItem("userId");
-    if (storedUserId) {
-      setUserId(Number(storedUserId));
-      console.log("🔑 Loaded userId from localStorage:", storedUserId);
+    const stored = localStorage.getItem("userId");
+    if (stored) {
+      setUserId(Number(stored));
     } else {
       console.warn("⚠️ userId not found in localStorage");
     }
   }, []);
 
-  // Wait timer
+  // Timer for UI
   useEffect(() => {
     const timer = setInterval(() => {
       setWaitTime((prev) => prev + 1);
@@ -57,40 +56,36 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
 
     console.log("⏳ WaitingRoom mounted with mood:", mood);
     return () => clearInterval(timer);
-  }, []);
+  }, [mood]);
 
-  // Socket: bind userId and join mood queue
+  // 🔌 SOCKET: bind + queue + listeners
   useEffect(() => {
     if (!socket) {
       console.warn("[WaitingRoom] Missing socket");
       return;
     }
 
-    if (!userId) {
-      console.warn("[WaitingRoom] userId not yet available");
+    if (!userId || !mood) {
+      console.warn("[WaitingRoom] Missing userId or mood");
       return;
     }
 
-    // Step 1: Bind userId to socket
+    console.log("📮 Sending 'update-socket-id' with userId:", userId);
     socket.emit("update-socket-id", { userId });
-    console.log("[WaitingRoom] Emitted update-socket-id:", userId);
 
-    // Step 2: Join mood queue after short delay
     const joinTimeout = setTimeout(() => {
+      console.log("📤 Emitting 'join-mood-queue' with:", { userId, mood });
       socket.emit("join-mood-queue", { userId, mood });
-      console.log("[WaitingRoom] Emitted join-mood-queue:", { userId, mood });
     }, 300);
 
-    // Step 3: Listen for socket events
     socket.on("match-found", onMatchFound);
-    socket.on("waiting-for-match", () => {
-      console.log("[WaitingRoom] Received waiting-for-match");
-    });
+    socket.on("waiting-for-match", () =>
+      console.log("[WaitingRoom] Still waiting...")
+    );
 
-    // Cleanup
     return () => {
       clearTimeout(joinTimeout);
-      socket.off("match-found");
+      socket.off("match-found", onMatchFound);
       socket.off("waiting-for-match");
       console.log("[WaitingRoom] Cleaned up socket listeners");
     };
@@ -103,7 +98,6 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
     return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
-  // Estimated wait logic
   const getEstimatedWait = () => {
     if (waitTime < 30) return "~30 seconds";
     if (waitTime < 60) return "~1 minute";
