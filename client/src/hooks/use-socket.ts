@@ -37,9 +37,18 @@ export function useSocket(userId?: number) {
 
     // 4. Connection Events
     const handleConnect = () => {
-      console.log("✅ Connected to socket:", newSocket.id);
-      setIsConnected(true);
-    };
+  console.log("✅ Connected to socket:", newSocket.id);
+  setIsConnected(true);
+
+  // ⬅️ Send userId to server to register this socket
+  if (userId) {
+    console.log(`📮 Sending "update-socket-id" with userId: ${userId}`);
+    newSocket.emit("update-socket-id", { userId });
+  } else {
+    console.warn("⚠️ No userId available to send with 'update-socket-id'");
+  }
+};
+
 
     const handleDisconnect = (reason: Socket.DisconnectReason) => {
       console.warn("⚠️ Disconnected from socket:", reason);
