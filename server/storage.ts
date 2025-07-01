@@ -48,7 +48,22 @@ export class DatabaseStorage {
   }
 
   // Session Management
-  async createChatSession(insertSession: InsertChatSession): Promise<ChatSession> {
+ async createChatSession(insertSession: InsertChatSession): Promise<ChatSession> {
+  // Check if the user already has an active session
+  const [existingSession] = await db.select()
+    .from(chatSessions)
+    .where(and(
+      eq(chatSessions.userId, insertSession.userId),
+      eq(chatSessions.isActive, true)
+    ))
+    .limit(1);
+
+  if (existingSession) {
+    this.debugLog(`User ${insertSession.userId} already has an active session`, existingSession);
+    return existingSession;
+  }
+
+  // Otherwise create a new session
   const [session] = await db.insert(chatSessions)
     .values({
       ...insertSession,
@@ -56,8 +71,10 @@ export class DatabaseStorage {
       createdAt: new Date()
     })
     .returning();
+
   return session;
 }
+
 
   async getActiveSession(userId: number): Promise<ChatSession | undefined> {
     const [session] = await db.select()

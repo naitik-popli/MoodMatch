@@ -59,6 +59,10 @@ app.use((req, res, next) => {
 
   next();
 });
+app.get("/", (req, res) => {
+  res.send("MoodMatch backend is running 🚀");
+});
+
 
 // Health Check Route
 app.get("/api/health", (_req, res) => {

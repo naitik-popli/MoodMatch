@@ -2,6 +2,9 @@ import pg from 'pg';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import * as schema from "@shared/schema";
+import { Pool } from 'pg';
+
+
 
 if (!process.env.DATABASE_URL_TEST) {
   throw new Error(
