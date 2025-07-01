@@ -36,6 +36,7 @@ export class DatabaseStorage {
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const [user] = await db.insert(users).values(insertUser).returning();
+    
     return user;
   }
 
@@ -176,12 +177,13 @@ async matchAllMoodQueueUsers(): Promise<MatchResult[]> {
         const userB = users.shift()!;
 
         this.debugLog(`Creating match for ${userA.userId} and ${userB.userId} (mood: ${mood})`);
-
+        
         // Create session pair
        const sessionA = await this.createChatSession({
   userId: userA.userId,
   mood,
   partnerId: userB.userId
+  
 });
 
 await this.createChatSession({

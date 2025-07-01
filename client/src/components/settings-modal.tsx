@@ -16,24 +16,25 @@ export default function SettingsModal({ onClose }: Props) {
   const [selectedMicrophone, setSelectedMicrophone] = useState<string>("");
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+
+  // Get devices on mount
   useEffect(() => {
-    // Get available media devices
     const getDevices = async () => {
       try {
         const devices = await navigator.mediaDevices.enumerateDevices();
-        
         const videoDevices = devices.filter(device => device.kind === 'videoinput');
         const audioDevices = devices.filter(device => device.kind === 'audioinput');
-        
+
         setCameras(videoDevices);
         setMicrophones(audioDevices);
-        
-        // Set default selections if devices are available
+
         if (videoDevices.length > 0 && !selectedCamera) {
           setSelectedCamera(videoDevices[0].deviceId);
         }
         if (audioDevices.length > 0 && !selectedMicrophone) {
-          setSelectedMicrophone(audioDevices[0].deviceId);  
+          setSelectedMicrophone(audioDevices[0].deviceId);
         }
       } catch (error) {
         console.error('Error getting media devices:', error);
@@ -41,16 +42,47 @@ export default function SettingsModal({ onClose }: Props) {
     };
 
     getDevices();
-  }, [selectedCamera, selectedMicrophone]);
+  }, []);
+
+  // When selected camera changes, update video stream
+  useEffect(() => {
+    const startPreview = async () => {
+      if (!selectedCamera || !videoRef.current) return;
+
+      // Stop previous stream if exists
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+      }
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { deviceId: selectedCamera },
+          audio: false,
+        });
+
+        streamRef.current = stream;
+        videoRef.current.srcObject = stream;
+      } catch (error) {
+        console.error("Error accessing camera:", error);
+      }
+    };
+
+    startPreview();
+
+    return () => {
+      // Cleanup on unmount
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, [selectedCamera]);
 
   const handleSave = () => {
-    // Save settings to localStorage or send to server
     const settings = {
       camera: selectedCamera,
       microphone: selectedMicrophone,
       notifications: notificationsEnabled,
     };
-    
     localStorage.setItem('moodchat-settings', JSON.stringify(settings));
     onClose();
   };
@@ -61,8 +93,20 @@ export default function SettingsModal({ onClose }: Props) {
         <DialogHeader>
           <DialogTitle>Settings</DialogTitle>
         </DialogHeader>
-        
+
         <div className="space-y-6">
+          {/* Video Preview */}
+          <div className="w-full aspect-video bg-black rounded-lg overflow-hidden">
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Camera selection */}
           <div>
             <Label htmlFor="camera" className="text-sm font-medium text-gray-700 mb-2 block">
               Camera
@@ -73,17 +117,18 @@ export default function SettingsModal({ onClose }: Props) {
               </SelectTrigger>
               <SelectContent>
                 {cameras.map((camera) => (
-                  <SelectItem key={camera.deviceId} value={camera.deviceId || "default"}>
-                    {camera.label || `Camera ${camera.deviceId?.slice(0, 8) || "default"}...`}
+                  <SelectItem key={camera.deviceId} value={camera.deviceId}>
+                    {camera.label || `Camera ${camera.deviceId.slice(0, 8)}...`}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
 
+          {/* Microphone selection */}
           <div>
             <Label htmlFor="microphone" className="text-sm font-medium text-gray-700 mb-2 block">
-              Microphone  
+              Microphone
             </Label>
             <Select value={selectedMicrophone} onValueChange={setSelectedMicrophone}>
               <SelectTrigger>
@@ -91,14 +136,15 @@ export default function SettingsModal({ onClose }: Props) {
               </SelectTrigger>
               <SelectContent>
                 {microphones.map((microphone) => (
-                  <SelectItem key={microphone.deviceId} value={microphone.deviceId || "default"}>
-                    {microphone.label || `Microphone ${microphone.deviceId?.slice(0, 8) || "default"}...`}
+                  <SelectItem key={microphone.deviceId} value={microphone.deviceId}>
+                    {microphone.label || `Microphone ${microphone.deviceId.slice(0, 8)}...`}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
 
+          {/* Notifications toggle */}
           <div className="flex items-center space-x-2">
             <Checkbox
               id="notifications"

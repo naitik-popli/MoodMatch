@@ -18,19 +18,19 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
 
   // Warn if not using HTTPS
   useEffect(() => {
-    if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
-      console.warn('⚠️ WebRTC may not work properly without HTTPS');
+    if (window.location.protocol !== "https:" && window.location.hostname !== "localhost") {
+      console.warn("⚠️ WebRTC may not work properly without HTTPS");
     }
   }, []);
 
-  // Initialize camera/mic
+  // Initialize local camera and mic
   const initializeMedia = useCallback(async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { width: 1280, height: 720 },
         audio: true,
       });
-
+      console.log("🎥 Media stream initialized");
       setLocalStream(stream);
       localStreamRef.current = stream;
       return stream;
@@ -40,47 +40,66 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
     }
   }, []);
 
-  // Set up signaling listeners once
+  // Setup signaling listeners
   useEffect(() => {
-    if (!socket || !targetSocketId) return;
+    if (!socket) {
+      console.warn("⚠️ useWebRTC: Socket is null");
+      return;
+    }
+
+    if (!targetSocketId) {
+      console.warn("⚠️ useWebRTC: targetSocketId is undefined. WebRTC signaling will not work.");
+      return;
+    }
+
+    console.log("📡 Setting up signaling listeners for socket:", socket.id, " -> target:", targetSocketId);
 
     const handleOffer = async (data: any) => {
+      console.log("📩 Received offer from:", data.fromSocketId);
       const pc = peerConnectionRef.current;
       if (!pc) {
-        console.error("Received webrtc-offer but peer connection is not initialized.");
+        console.error("❌ Peer connection not initialized while handling offer.");
         return;
       }
+
       if (data.fromSocketId === targetSocketId) {
         await pc.setRemoteDescription(data.offer);
         const answer = await pc.createAnswer();
         await pc.setLocalDescription(answer);
+
         socket.emit("webrtc-answer", {
           targetSocketId: data.fromSocketId,
           answer,
         });
+        console.log("📤 Sent answer to:", data.fromSocketId);
       }
     };
 
     const handleAnswer = async (data: any) => {
+      console.log("📩 Received answer from:", data.fromSocketId);
       const pc = peerConnectionRef.current;
       if (!pc) {
-        console.error("Received webrtc-answer but peer connection is not initialized.");
+        console.error("❌ Peer connection not initialized while handling answer.");
         return;
       }
+
       if (data.fromSocketId === targetSocketId) {
         await pc.setRemoteDescription(data.answer);
+        console.log("✅ Answer set as remote description");
       }
     };
 
     const handleIce = async (data: any) => {
       const pc = peerConnectionRef.current;
       if (!pc) {
-        console.error("Received webrtc-ice-candidate but peer connection is not initialized.");
+        console.error("❌ Peer connection not initialized while handling ICE.");
         return;
       }
+
       if (data.fromSocketId === targetSocketId) {
         try {
           await pc.addIceCandidate(data.candidate);
+          console.log("🧊 Added ICE candidate from:", data.fromSocketId);
         } catch (err) {
           console.error("❌ Error adding ICE candidate:", err);
         }
@@ -98,41 +117,45 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
     };
   }, [socket, targetSocketId]);
 
-  // Start call
+  // Start the call
   const startCall = useCallback(async () => {
-    if (!socket || !targetSocketId) return;
+    if (!socket || !targetSocketId) {
+      console.warn("⚠️ Cannot start call — socket or targetSocketId missing");
+      return;
+    }
 
     try {
       const stream = await initializeMedia();
-      const pc = createPeerConnection(); // should include STUN
+      const pc = createPeerConnection();
       peerConnectionRef.current = pc;
 
-      // Add tracks to peer connection
+      // Add tracks
       stream.getTracks().forEach((track) => pc.addTrack(track, stream));
 
-      // Handle remote stream
+      // Handle incoming stream
       pc.ontrack = (event) => {
         console.log("📥 Received remote stream");
         setRemoteStream(event.streams[0]);
       };
 
-      // ICE candidate sending
+      // Handle ICE
       pc.onicecandidate = (event) => {
         if (event.candidate) {
           socket.emit("webrtc-ice-candidate", {
             targetSocketId,
             candidate: event.candidate,
           });
+          console.log("📤 Sent ICE candidate to:", targetSocketId);
         }
       };
 
-      // Connection state updates
+      // Track connection state
       pc.onconnectionstatechange = () => {
-        console.log("🔄 Connection state:", pc.connectionState);
+        console.log("🔄 Connection state changed:", pc.connectionState);
         setIsConnected(pc.connectionState === "connected");
       };
 
-      // Initiator logic
+      // Initiator sends offer
       if (isInitiator) {
         const offer = await pc.createOffer();
         await pc.setLocalDescription(offer);
@@ -141,13 +164,14 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
           targetSocketId,
           offer,
         });
+        console.log("📤 Sent offer to:", targetSocketId);
       }
     } catch (error) {
       console.error("❌ Error during startCall:", error);
     }
   }, [socket, targetSocketId, isInitiator, initializeMedia]);
 
-  // End call
+  // End the call and clean up
   const endCall = useCallback(() => {
     if (peerConnectionRef.current) {
       peerConnectionRef.current.close();
@@ -162,9 +186,10 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
     setLocalStream(null);
     setRemoteStream(null);
     setIsConnected(false);
+    console.log("📴 Call ended and cleaned up");
   }, []);
 
-  // Toggle mute
+  // Toggle mic
   const toggleMute = useCallback(() => {
     const audioTrack = localStreamRef.current?.getAudioTracks()[0];
     if (audioTrack) {
@@ -174,7 +199,7 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
     return false;
   }, []);
 
-  // Toggle video
+  // Toggle camera
   const toggleVideo = useCallback(() => {
     const videoTrack = localStreamRef.current?.getVideoTracks()[0];
     if (videoTrack) {
