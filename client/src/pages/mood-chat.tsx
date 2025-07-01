@@ -84,9 +84,10 @@ export default function MoodChat() {
         partnerId: data.partnerId,
         partnerSocketId: data.partnerSocketId,
       });
-
+      localStorage.setItem("userId", String(data.userId));
       setSelectedMood(mood);
       setCurrentScreen('waiting');
+
 
       if (socket && data.userId && data.sessionId) {
         console.log("📤 Emitting join-mood-queue");
@@ -125,6 +126,10 @@ export default function MoodChat() {
     selectedMood,
     sessionData,
   });
+  const userId = localStorage.getItem("userId");
+  if (currentScreen === "waiting" && !userId) {
+  return <div>Loading...</div>; // or redirect back to mood selection
+}
 
   return (
     <div className="min-h-screen bg-gray-50">
