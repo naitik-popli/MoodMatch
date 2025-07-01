@@ -24,14 +24,15 @@ export const chatSessions = pgTable("chat_sessions", {
 
 export const moodQueue = pgTable("mood_queue", {
   id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull().unique(), // Added unique constraint
+  userId: integer("user_id").notNull().unique(),
   mood: text("mood").notNull(),
   socketId: text("socket_id").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 }, (table) => ({
   userIdIdx: uniqueIndex("user_id_idx").on(table.userId),
-  moodIdx: uniqueIndex("mood_idx").on(table.mood),
+  // moodIdx removed ✅
 }));
+
 
 export const connectedUsers = pgTable("connected_users", {
   id: serial("id").primaryKey(),
