@@ -178,22 +178,17 @@ async matchAllMoodQueueUsers(): Promise<MatchResult[]> {
         this.debugLog(`Creating match for ${userA.userId} and ${userB.userId} (mood: ${mood})`);
 
         // Create session pair
-        const [sessionA] = await db.insert(chatSessions)
-          .values({
-            userId: userA.userId,
-            mood,
-            partnerId: userB.userId,
-            isActive: true
-          })
-          .returning();
+       const sessionA = await this.createChatSession({
+  userId: userA.userId,
+  mood,
+  partnerId: userB.userId
+});
 
-        await db.insert(chatSessions)
-          .values({
-            userId: userB.userId,
-            mood,
-            partnerId: userA.userId,
-            isActive: true
-          });
+await this.createChatSession({
+  userId: userB.userId,
+  mood,
+  partnerId: userA.userId
+});
 
         // Remove from queue
         await this.removeFromMoodQueue(userA.userId);
