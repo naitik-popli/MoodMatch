@@ -3,9 +3,10 @@ import { Button } from "../components/ui/button";
 import { useSocket } from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
 
+// Emojis for each mood
 const MOOD_EMOJIS: Record<Mood, string> = {
   happy: "😊",
-  relaxed: "😌", 
+  relaxed: "😌",
   energetic: "⚡",
   thoughtful: "🤔",
   creative: "🎨",
@@ -14,10 +15,11 @@ const MOOD_EMOJIS: Record<Mood, string> = {
   curious: "🔍",
 };
 
+// Mood display names
 const MOOD_NAMES: Record<Mood, string> = {
   happy: "Happy",
   relaxed: "Relaxed",
-  energetic: "Energetic", 
+  energetic: "Energetic",
   thoughtful: "Thoughtful",
   creative: "Creative",
   adventurous: "Adventurous",
@@ -31,39 +33,66 @@ interface Props {
   onMatchFound: (data: { partnerId: number; partnerSocketId: string }) => void;
 }
 
+// Get userId from localStorage
+const USER_ID =
+  typeof window !== "undefined" ? Number(localStorage.getItem("userId")) : 0;
+
 export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
   const [waitTime, setWaitTime] = useState(0);
   const { socket } = useSocket();
 
+  // Timer logic
   useEffect(() => {
     const timer = setInterval(() => {
-      setWaitTime(prev => prev + 1);
-  console.log("⏳ WaitingRoom mounted with mood:", mood);
+      setWaitTime((prev) => prev + 1);
     }, 1000);
+
+    console.log("⏳ WaitingRoom mounted with mood:", mood);
 
     return () => clearInterval(timer);
   }, []);
 
+  // Socket communication: join queue and listen for events
   useEffect(() => {
-    if (!socket) return;
+    if (!socket || !USER_ID) {
+      console.warn("[WaitingRoom] Missing socket or userId");
+      return;
+    }
 
-    socket.on('match-found', onMatchFound);
-    socket.on('waiting-for-match', () => {
-      console.log('Waiting for match...');
+    // Step 1: Bind userId to socket
+    socket.emit("update-socket-id", { userId: USER_ID });
+    console.log("[WaitingRoom] Emitted update-socket-id:", USER_ID);
+
+    // Step 2: Join the mood queue with delay to ensure socket map is updated
+    const joinTimeout = setTimeout(() => {
+      socket.emit("join-mood-queue", { userId: USER_ID, mood });
+      console.log("[WaitingRoom] Emitted join-mood-queue:", {
+        userId: USER_ID,
+        mood,
+      });
+    }, 300);
+
+    // Step 3: Listen for match found
+    socket.on("match-found", onMatchFound);
+    socket.on("waiting-for-match", () => {
+      console.log("[WaitingRoom] Received waiting-for-match");
     });
 
     return () => {
-      socket.off('match-found');
-      socket.off('waiting-for-match');
+      clearTimeout(joinTimeout);
+      socket.off("match-found");
+      socket.off("waiting-for-match");
     };
-  }, [socket, onMatchFound]);
+  }, [socket, mood, onMatchFound]);
 
+  // Format timer into mm:ss
   const formatWaitTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
+  // Estimated wait logic
   const getEstimatedWait = () => {
     if (waitTime < 30) return "~30 seconds";
     if (waitTime < 60) return "~1 minute";
@@ -82,18 +111,27 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
           </div>
           <div className="absolute inset-0 w-32 h-32 mx-auto rounded-full border-4 border-white/30 pulse-ring"></div>
         </div>
-        
+
         <h3 className="text-2xl font-bold mb-4">Finding your mood match...</h3>
         <p className="text-white/80 mb-6">
           We're looking for someone else feeling{" "}
           <span className="font-semibold">{MOOD_NAMES[mood].toLowerCase()}</span>{" "}
           to chat with you.
         </p>
-        
+
         <div className="flex items-center justify-center space-x-2 mb-8">
-          <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
-          <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-          <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+          <div
+            className="w-2 h-2 bg-white rounded-full animate-bounce"
+            style={{ animationDelay: "0s" }}
+          ></div>
+          <div
+            className="w-2 h-2 bg-white rounded-full animate-bounce"
+            style={{ animationDelay: "0.2s" }}
+          ></div>
+          <div
+            className="w-2 h-2 bg-white rounded-full animate-bounce"
+            style={{ animationDelay: "0.4s" }}
+          ></div>
         </div>
 
         <div className="bg-white/10 rounded-lg p-4 mb-6">
@@ -105,7 +143,7 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
         </div>
 
         <Button
-          variant="ghost" 
+          variant="ghost"
           onClick={onCancel}
           className="text-white/80 hover:text-white hover:bg-white/10"
         >
