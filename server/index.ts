@@ -73,21 +73,32 @@ async function ensureSchema() {
   try {
     console.log("🛠️  Verifying database schema...");
     
-    await db.execute(sql`
-      ALTER TABLE mood_queue 
-      DROP CONSTRAINT IF EXISTS mood_idx;
+    // Check if mood_queue table exists
+    const tableExists = await db.execute(sql`
+      SELECT EXISTS (
+        SELECT FROM information_schema.tables 
+        WHERE table_name = 'mood_queue'
+      )
     `);
     
-    await db.execute(sql`
-      ALTER TABLE mood_queue 
-      ADD CONSTRAINT uq_mood_queue_user UNIQUE (user_id);
+    if (!tableExists[0].exists) {
+      throw new Error("mood_queue table does not exist");
+    }
+
+    // Verify table structure
+    const columns = await db.execute(sql`
+      SELECT column_name, data_type 
+      FROM information_schema.columns
+      WHERE table_name = 'mood_queue'
     `);
     
-    await db.execute(sql`
-      CREATE INDEX IF NOT EXISTS idx_mood_queue_mood 
-      ON mood_queue(mood);
-    `);
-    
+    const requiredColumns = ['id', 'user_id', 'mood', 'socket_id', 'created_at'];
+    for (const col of requiredColumns) {
+      if (!columns.some(c => c.column_name === col)) {
+        throw new Error(`Missing column: ${col}`);
+      }
+    }
+
     console.log("✅ Database schema verified");
   } catch (error) {
     console.error("❌ Database schema verification failed:", error);
