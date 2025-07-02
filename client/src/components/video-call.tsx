@@ -89,6 +89,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
 
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        console.log("[VideoCall] Media devices permission granted:", stream.active);
         stream.getTracks().forEach(track => track.stop());
         setMediaPermissionGranted(true);
       } catch (err) {
@@ -261,7 +262,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     console.log('[VideoCall] User requested next chat');
     await handleEndCall();
   };
-
+  
   if (!webRTCSupported || callError) {
     return (
       <div className="fixed inset-0 bg-dark-blue z-50 flex items-center justify-center p-4">
