@@ -32,27 +32,28 @@ export async function setupWebSocket(io: SocketIOServer) {
       const queue = await db.select().from(moodQueue).orderBy(moodQueue.createdAt);
 
       console.log(`[MATCH] Current queue length: ${queue.length}`);
-      const moodGroups = new Map<string, typeof queue>();
+  const moodGroups = new Map<string, typeof queue>();
 
-      for (const user of queue) {
-        if (!moodGroups.has(user.mood)) {
-          moodGroups.set(user.mood, []);
-        }
-        moodGroups.get(user.mood as string)!.push(user);
-      }
+  for (const user of queue) {
+    if (!moodGroups.has(user.mood)) {
+      moodGroups.set(user.mood, []);
+    }
+    // Use Array.prototype.push.apply to avoid TS downlevelIteration error
+    Array.prototype.push.apply(moodGroups.get(user.mood as string)!, [user]);
+  }
 
       for (const [mood, users] of moodGroups) {
         while (users.length >= 2) {
           const userA = users.shift()!;
           const userB = users.shift()!;
 
-          const sessionId = await storage.createChatSession({
+          const session = await storage.createChatSession({
             userId: userA.userId,
             mood,
             partnerId: userB.userId,
           });
 
-          await notifyMatchedPair(io, userA.userId, userB.userId, sessionId);
+          await notifyMatchedPair(io, userA.userId, userB.userId, session.id);
 
           await Promise.all([
             db.delete(moodQueue).where(eq(moodQueue.userId, userA.userId)),
@@ -126,7 +127,7 @@ export async function setupWebSocket(io: SocketIOServer) {
     });
 
     // Forward WebRTC signaling messages
-    socket.on("webrtc-offer", (data) => {
+    socket.on("webrtc-offer", (data: any) => {
       const targetSocket = userSocketMap.get(data.targetSocketId);
       if (targetSocket) {
         io.to(targetSocket).emit("webrtc-offer", {
@@ -137,7 +138,7 @@ export async function setupWebSocket(io: SocketIOServer) {
       }
     });
 
-    socket.on("webrtc-answer", (data) => {
+    socket.on("webrtc-answer", (data: any) => {
       const targetSocket = userSocketMap.get(data.targetSocketId);
       if (targetSocket) {
         io.to(targetSocket).emit("webrtc-answer", {
@@ -148,7 +149,7 @@ export async function setupWebSocket(io: SocketIOServer) {
       }
     });
 
-    socket.on("webrtc-ice-candidate", (data) => {
+    socket.on("webrtc-ice-candidate", (data: any) => {
       const targetSocket = userSocketMap.get(data.targetSocketId);
       if (targetSocket) {
         io.to(targetSocket).emit("webrtc-ice-candidate", {
