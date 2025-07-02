@@ -296,4 +296,3 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
     connectionState // Expose for debugging
   };
 }
-</create_file>
