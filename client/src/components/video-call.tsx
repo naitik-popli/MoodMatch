@@ -8,6 +8,11 @@ import { useWebRTC } from "../hooks/use-webrtc";
 import { useSocket } from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
 
+// Debugging wrapper
+const debug = (context: string) => (...args: any[]) => {
+  console.log(`[DEBUG:${context}]`, ...args);
+};
+
 const MOOD_NAMES: Record<Mood, string> = {
   happy: "Happy",
   relaxed: "Relaxed", 
@@ -31,6 +36,7 @@ interface Props {
 }
 
 export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
+  const log = debug('VideoCall');
   const [callDuration, setCallDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
@@ -40,6 +46,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const [mediaPermissionGranted, setMediaPermissionGranted] = useState(false);
   const [callError, setCallError] = useState<string | null>(null);
   const [isStartingCall, setIsStartingCall] = useState(false);
+  const [streamDebug, setStreamDebug] = useState<any>(null);
 
   const localVideoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
@@ -61,10 +68,16 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     targetSocketId: sessionData.partnerSocketId,
   });
 
+  // Enhanced WebRTC availability check
   const checkWebRTCAvailability = useCallback(() => {
+    log('Checking WebRTC availability');
     const isSecure = window.location.protocol === 'https:' || window.location.hostname === 'localhost';
     const hasMediaDevices = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
     const hasRTCPeerConnection = !!window.RTCPeerConnection;
+
+    log('Security check:', isSecure);
+    log('Media devices available:', hasMediaDevices);
+    log('RTCPeerConnection available:', hasRTCPeerConnection);
 
     if (!isSecure) {
       setCallError('Video calling requires HTTPS or localhost for security.');
@@ -77,46 +90,94 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     }
 
     return true;
-  }, []);
+  }, [log]);
 
+  // Enhanced media permission check
   useEffect(() => {
     const initialize = async () => {
-      console.log('[VideoCall] Initializing WebRTC checks');
+      log('Initializing media checks');
       const isSupported = checkWebRTCAvailability();
       setWebRTCSupported(isSupported);
 
-      if (!isSupported) return;
+      if (!isSupported) {
+        log('WebRTC not supported');
+        return;
+      }
 
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        console.log("[VideoCall] Media devices permission granted:", stream.active);
-        stream.getTracks().forEach(track => track.stop());
+        log('Checking existing permissions');
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const hasAudio = devices.some(d => d.kind === 'audioinput' && d.deviceId);
+        const hasVideo = devices.some(d => d.kind === 'videoinput' && d.deviceId);
+        
+        log('Existing devices:', { hasAudio, hasVideo, devices });
+        
+        if (hasAudio && hasVideo) {
+          log('Permissions already granted');
+          setMediaPermissionGranted(true);
+          return;
+        }
+
+        log('Requesting media permissions');
+        const stream = await navigator.mediaDevices.getUserMedia({ 
+          video: true, 
+          audio: true 
+        });
+        
+        log('Media stream obtained', {
+          videoTracks: stream.getVideoTracks().map(t => t.label),
+          audioTracks: stream.getAudioTracks().map(t => t.label),
+          streamActive: stream.active
+        });
+        
+        // Store debug info
+        setStreamDebug({
+          video: stream.getVideoTracks()[0]?.getSettings(),
+          audio: stream.getAudioTracks()[0]?.getSettings()
+        });
+        
+        // Immediately stop tracks - we just needed permission
+        stream.getTracks().forEach(track => {
+          log(`Stopping track: ${track.kind}`, track);
+          track.stop();
+        });
+        
         setMediaPermissionGranted(true);
       } catch (err) {
-        console.error('[VideoCall] Media permission denied:', err);
+        log('Media permission error:', err);
         setMediaPermissionDenied(true);
+        setCallError('Could not access camera/microphone. Please check permissions.');
       }
     };
 
     initialize();
-  }, [checkWebRTCAvailability]);
+  }, [checkWebRTCAvailability, log]);
 
+  // Enhanced call initialization
   const initializeCall = useCallback(async () => {
-    if (!webRTCSupported || !sessionData.partnerSocketId || !mediaPermissionGranted) return;
+    if (!webRTCSupported || !sessionData.partnerSocketId || !mediaPermissionGranted) {
+      log('Skipping call init - missing requirements', {
+        webRTCSupported,
+        partnerSocketId: sessionData.partnerSocketId,
+        mediaPermissionGranted
+      });
+      return;
+    }
 
-    console.log('[VideoCall] Starting call initialization attempt', retryCountRef.current);
+    log('Starting call initialization attempt', retryCountRef.current);
     setIsStartingCall(true);
     setConnectionStatus('connecting');
 
     try {
+      log('Calling startCall()');
       await startCall();
-      console.log('[VideoCall] Call started successfully');
+      log('Call started successfully');
       retryCountRef.current = 0;
     } catch (error) {
-      console.error('[VideoCall] Call initialization failed:', error);
+      log('Call initialization failed:', error);
       if (retryCountRef.current < 2) {
         retryCountRef.current += 1;
-        console.log(`[VideoCall] Retrying call (attempt ${retryCountRef.current})`);
+        log(`Retrying call (attempt ${retryCountRef.current})`);
         setTimeout(initializeCall, 2000 * retryCountRef.current);
         return;
       }
@@ -125,71 +186,66 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     } finally {
       setIsStartingCall(false);
     }
-  }, [webRTCSupported, sessionData.partnerSocketId, mediaPermissionGranted, startCall]);
+  }, [webRTCSupported, sessionData.partnerSocketId, mediaPermissionGranted, startCall, log]);
 
+  // Enhanced stream attachment effects
   useEffect(() => {
-    if (!sessionData.partnerSocketId) return;
-    initializeCall();
-    return () => {
-      console.log('[VideoCall] Cleaning up call initialization');
-      if (retryCountRef.current > 0) {
-        clearTimeout(retryCountRef.current as unknown as number);
-      }
-    };
-  }, [initializeCall, sessionData.partnerSocketId]);
+    log('Local stream changed', {
+      stream: localStream,
+      tracks: localStream?.getTracks().map(t => ({
+        kind: t.kind,
+        readyState: t.readyState,
+        enabled: t.enabled,
+        muted: t.muted
+      }))
+    });
 
-  useEffect(() => {
-    console.log('[VideoCall] Connection state update:', isConnected);
-    setConnectionStatus(isConnected ? 'connected' : 'disconnected');
-    if (!isConnected && connectionStatus === 'connected') {
-      setCallError('Connection lost. Attempting to reconnect...');
-      initializeCall();
-    }
-  }, [isConnected, connectionStatus, initializeCall]);
-
-  useEffect(() => {
-    if (connectionStatus === 'connected') {
-      console.log('[VideoCall] Starting call timer');
-      callTimerRef.current = setInterval(() => {
-        setCallDuration(prev => prev + 1);
-      }, 1000);
-    } else if (callTimerRef.current) {
-      console.log('[VideoCall] Pausing call timer');
-      clearInterval(callTimerRef.current);
-      callTimerRef.current = null;
-    }
-    return () => {
-      if (callTimerRef.current) {
-        clearInterval(callTimerRef.current);
-      }
-    };
-  }, [connectionStatus]);
-
-  useEffect(() => {
-    if (localStream && localVideoRef.current && !localVideoRef.current.srcObject) {
-      console.log('[VideoCall] Setting local video stream');
+    if (localVideoRef.current && localStream) {
+      log('Attaching local stream to video element');
       localVideoRef.current.srcObject = localStream;
+      
+      // Debugging for video element
+      const checkVideoPlayback = () => {
+        log('Video element state', {
+          readyState: localVideoRef.current?.readyState,
+          videoWidth: localVideoRef.current?.videoWidth,
+          videoHeight: localVideoRef.current?.videoHeight,
+          paused: localVideoRef.current?.paused,
+          error: localVideoRef.current?.error
+        });
+      };
+      
+      localVideoRef.current.onloadedmetadata = checkVideoPlayback;
+      localVideoRef.current.onplaying = checkVideoPlayback;
+      localVideoRef.current.onerror = (e) => {
+        log('Video element error:', e);
+      };
     }
+
     return () => {
       if (localVideoRef.current?.srcObject) {
-        console.log('[VideoCall] Clearing local video stream');
+        log('Cleaning up local video ref');
         localVideoRef.current.srcObject = null;
       }
     };
-  }, [localStream]);
+  }, [localStream, log]);
 
   useEffect(() => {
-    if (remoteStream && remoteVideoRef.current && !remoteVideoRef.current.srcObject) {
-      console.log('[VideoCall] Setting remote video stream');
+    log('Remote stream changed', {
+      stream: remoteStream,
+      tracks: remoteStream?.getTracks().map(t => ({
+        kind: t.kind,
+        readyState: t.readyState,
+        enabled: t.enabled,
+        muted: t.muted
+      }))
+    });
+
+    if (remoteVideoRef.current && remoteStream) {
+      log('Attaching remote stream to video element');
       remoteVideoRef.current.srcObject = remoteStream;
     }
-    return () => {
-      if (remoteVideoRef.current?.srcObject) {
-        console.log('[VideoCall] Clearing remote video stream');
-        remoteVideoRef.current.srcObject = null;
-      }
-    };
-  }, [remoteStream]);
+  }, [remoteStream, log]);
 
   useEffect(() => {
     if (!socket) return;
@@ -266,6 +322,15 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   if (!webRTCSupported || callError) {
     return (
       <div className="fixed inset-0 bg-dark-blue z-50 flex items-center justify-center p-4">
+         <div className="absolute top-4 left-4 bg-black/70 text-white p-2 text-xs z-50 rounded">
+        <div>Local Stream: {localStream?.id || 'None'}</div>
+        <div>Remote Stream: {remoteStream?.id || 'None'}</div>
+        <div>Connection: {connectionStatus}</div>
+        <div>Call Duration: {formatDuration(callDuration)}</div>
+        {streamDebug && (
+          <pre>{JSON.stringify(streamDebug, null, 2)}</pre>
+        )}
+      </div>
         <div className="bg-gray-800 rounded-lg p-6 max-w-md w-full">
           <AlertCircle className="w-12 h-12 mx-auto mb-4 text-red-500" />
           <h2 className="text-2xl font-bold mb-2 text-white text-center">
@@ -332,6 +397,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
             >
               Exit Call
             </Button>
+            
           </div>
         </div>
       </div>

@@ -125,6 +125,40 @@ export async function setupWebSocket(io: SocketIOServer) {
       }
     });
 
+    // Forward WebRTC signaling messages
+    socket.on("webrtc-offer", (data) => {
+      const targetSocket = userSocketMap.get(data.targetSocketId);
+      if (targetSocket) {
+        io.to(targetSocket).emit("webrtc-offer", {
+          fromSocketId: socket.id,
+          offer: data.offer,
+        });
+        console.log(`[SIGNAL] Forwarded webrtc-offer from ${socket.id} to ${targetSocket}`);
+      }
+    });
+
+    socket.on("webrtc-answer", (data) => {
+      const targetSocket = userSocketMap.get(data.targetSocketId);
+      if (targetSocket) {
+        io.to(targetSocket).emit("webrtc-answer", {
+          fromSocketId: socket.id,
+          answer: data.answer,
+        });
+        console.log(`[SIGNAL] Forwarded webrtc-answer from ${socket.id} to ${targetSocket}`);
+      }
+    });
+
+    socket.on("webrtc-ice-candidate", (data) => {
+      const targetSocket = userSocketMap.get(data.targetSocketId);
+      if (targetSocket) {
+        io.to(targetSocket).emit("webrtc-ice-candidate", {
+          fromSocketId: socket.id,
+          candidate: data.candidate,
+        });
+        console.log(`[SIGNAL] Forwarded webrtc-ice-candidate from ${socket.id} to ${targetSocket}`);
+      }
+    });
+
     socket.on("disconnect", async () => {
       const userId = socket.data?.userId;
       console.log(`[DISCONNECT] Socket ${socket.id} disconnected (userId=${userId})`);
