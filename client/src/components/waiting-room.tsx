@@ -70,25 +70,50 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
       return;
     }
 
-    console.log("📮 Sending 'update-socket-id' with userId:", userId);
-    socket.emit("update-socket-id", { userId });
+    // Function to check media devices and request permission
+    const checkMediaDevicesAndJoinQueue = async () => {
+      try {
+        // Check for media devices
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          console.warn("Media devices API not supported in this browser.");
+          return;
+        }
 
-    const joinTimeout = setTimeout(() => {
-      console.log("📤 Emitting 'join-mood-queue' with:", { userId, mood });
-      socket.emit("join-mood-queue", { userId, mood });
-    }, 300);
+        // Request camera and microphone access
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        if (stream) {
+          // Stop all tracks immediately since we only want to check permission
+          stream.getTracks().forEach(track => track.stop());
+        }
 
-    socket.on("match-found", onMatchFound);
-    socket.on("waiting-for-match", () =>
-      console.log("[WaitingRoom] Still waiting...")
-    );
+        // Permission granted, proceed to join queue
+        console.log("📮 Sending 'update-socket-id' with userId:", userId);
+        socket.emit("update-socket-id", { userId });
 
-    return () => {
-      clearTimeout(joinTimeout);
-      socket.off("match-found", onMatchFound);
-      socket.off("waiting-for-match");
-      console.log("[WaitingRoom] Cleaned up socket listeners");
+        const joinTimeout = setTimeout(() => {
+          console.log("📤 Emitting 'join-mood-queue' with:", { userId, mood });
+          socket.emit("join-mood-queue", { userId, mood });
+        }, 300);
+
+        socket.on("match-found", onMatchFound);
+        socket.on("waiting-for-match", () =>
+          console.log("[WaitingRoom] Still waiting...")
+        );
+
+        return () => {
+          clearTimeout(joinTimeout);
+          socket.off("match-found", onMatchFound);
+          socket.off("waiting-for-match");
+          console.log("[WaitingRoom] Cleaned up socket listeners");
+        };
+      } catch (error) {
+        // Permission denied or error
+        alert("Media devices access is required to proceed.");
+        console.error("Media devices access error:", error);
+      }
     };
+
+    checkMediaDevicesAndJoinQueue();
   }, [socket, userId, mood, onMatchFound]);
 
   // Format timer into mm:ss
