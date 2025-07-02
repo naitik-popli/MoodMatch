@@ -108,13 +108,14 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
         };
       } catch (error) {
         // Permission denied or error
-        alert("Media devices access is required to proceed.");
+        setMediaError("Camera and microphone access is required to share your mood.");
         console.error("Media devices access error:", error);
       }
     };
 
     checkMediaDevicesAndJoinQueue();
   }, [socket, userId, mood, onMatchFound]);
+
 
   // Format timer into mm:ss
   const formatWaitTime = (seconds: number) => {
