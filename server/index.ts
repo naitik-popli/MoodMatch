@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 
 // Enhanced CORS Configuration
 const allowedOrigins = [
-  'https://mood-match-two.vercel.app',
+  'https://mood-match-825vrgvf1-naitiks-projects-caeedbd6.vercel.app',
   'http://localhost:3000'
 ];
 
@@ -28,7 +28,7 @@ app.use(cors({
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'my-custom-header']
 }));
 
 // Handle preflight requests
@@ -130,7 +130,7 @@ async function startServer() {
       cors: {
         origin: allowedOrigins,
         methods: ["GET", "POST"],
-        allowedHeaders: ["Authorization"],
+        allowedHeaders: ["Content-Type", "Authorization", "my-custom-header"],
         credentials: true
       },
       allowEIO3: true,

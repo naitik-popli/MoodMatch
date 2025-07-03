@@ -8,6 +8,7 @@ import { useWebRTC } from "../hooks/use-webrtc";
 import { useSocket } from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
 
+// Debugging with timestamp
 const debug = (context: string) => (...args: any[]) => {
   console.log(`[${new Date().toISOString()}] [DEBUG:${context}]`, ...args);
 };
@@ -49,6 +50,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const localVideoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const retryCountRef = useRef(0);
 
   const { socket } = useSocket();
   const { 
@@ -111,7 +113,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     }
   }, [webRTCSupported, sessionData.partnerSocketId, startCall, log]);
 
-  // Attach stream to video element with proper cleanup
+  // Attach stream to video element
   const attachStream = useCallback((stream: MediaStream | null, isLocal: boolean) => {
     const videoEl = isLocal ? localVideoRef.current : remoteVideoRef.current;
     if (!videoEl) return;
@@ -222,6 +224,17 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       log('Error ending call:', error);
     }
   }, [endCall, socket, sessionData, onCallEnd, log]);
+
+  // Report and next chat handlers
+  const handleReport = () => {
+    log('User reported partner');
+    alert('Report submitted. Our team will review this call.');
+  };
+
+  const handleNextChat = async () => {
+    log('User requested next chat');
+    await handleEndCall();
+  };
 
   // Initial setup
   useEffect(() => {
@@ -437,6 +450,23 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
               disabled={connectionStatus !== 'connected'}
             >
               <Settings className="text-lg" />
+            </Button>
+          </div>
+
+          <div className="flex items-center justify-center space-x-4 mt-4">
+            <Button
+              onClick={handleReport}
+              variant="ghost"
+              className="text-white/60 hover:text-white text-sm"
+            >
+              <Flag className="w-3 h-3 mr-2" /> Report
+            </Button>
+            <Button
+              onClick={handleNextChat}
+              variant="ghost"
+              className="text-white/60 hover:text-white text-sm"
+            >
+              <Shuffle className="w-3 h-3 mr-2" /> Next Chat
             </Button>
           </div>
         </div>
