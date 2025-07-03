@@ -110,12 +110,24 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
     return pc;
   }, [socket, targetSocketId, log]);
 
+  useEffect(() => {
+  if (socket) {
+    console.log("🧠 Local socket ID:", socket.id);
+  }
+}, [socket]);
+
   // Enhanced signaling handlers
   useEffect(() => {
-    if (!socket) {
-      log('Socket not available');
-      return;
-    }
+  if (!socket) {
+    console.warn("[WEBRTC:useWebRTC] Socket not available");
+    return;
+  }
+
+  if (!targetSocketId) {
+    console.warn("[WEBRTC:useWebRTC] Target socket ID is undefined");
+    return;
+  }
+
 
     const handleOffer = async (data: any) => {
       log('Received offer from:', data.fromSocketId);
@@ -176,9 +188,9 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
   // Enhanced call start
   const startCall = useCallback(async () => {
     if (!socket || !targetSocketId) {
-      log('Cannot start call - missing socket or target ID');
-      return;
-    }
+  console.warn("[WEBRTC:useWebRTC] Cannot start call — socket or targetSocketId missing");
+  return;
+}
 
     try {
       const stream = await initializeMedia();

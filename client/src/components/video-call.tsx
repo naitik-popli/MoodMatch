@@ -257,6 +257,23 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       }
     };
   }, []);
+  useEffect(() => {
+  if (
+    webRTCSupported &&
+    mediaPermissionGranted &&
+    sessionData.partnerSocketId &&
+    socket
+  ) {
+    initializeCall();
+  } else {
+    log('Waiting for socket, media permissions, or partnerSocketId', {
+      socketReady: !!socket,
+      mediaPermissionGranted,
+      partnerSocketId: sessionData.partnerSocketId,
+    });
+  }
+}, [webRTCSupported, mediaPermissionGranted, sessionData.partnerSocketId, socket]);
+
 
   // Error states
   if (!webRTCSupported || callError) {
