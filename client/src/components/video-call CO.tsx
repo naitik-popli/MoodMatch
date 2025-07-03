@@ -67,8 +67,8 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     targetSocketId: sessionData.partnerSocketId,
   });
 
-  // 1. Enhanced WebRTC availability check
-  const checkWebRTCAvailability = useCallback(() => {
+  // Enhanced WebRTC availability check
+ const checkWebRTCAvailability = useCallback(() => {
     const isSecure = window.location.protocol === 'https:' || window.location.hostname === 'localhost';
     const hasMediaDevices = !!(navigator.mediaDevices?.getUserMedia);
     const hasRTCPeerConnection = !!window.RTCPeerConnection;
@@ -86,7 +86,6 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     return true;
   }, []);
 
-  // 2. Improved media initialization
   const initializeMedia = useCallback(async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -105,8 +104,69 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     }
   }, [log]);
 
-  // 3. Enhanced call initialization
-  const initializeCall = useCallback(async () => {
+  // Enhanced media permission check
+  useEffect(() => {
+    const initialize = async () => {
+      log('Initializing media checks');
+      const isSupported = checkWebRTCAvailability();
+      setWebRTCSupported(isSupported);
+
+      if (!isSupported) {
+        log('WebRTC not supported');
+        return;
+      }
+
+      try {
+        log('Checking existing permissions');
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const hasAudio = devices.some(d => d.kind === 'audioinput' && d.deviceId);
+        const hasVideo = devices.some(d => d.kind === 'videoinput' && d.deviceId);
+        
+        log('Existing devices:', { hasAudio, hasVideo, devices });
+        
+        if (hasAudio && hasVideo) {
+          log('Permissions already granted');
+          setMediaPermissionGranted(true);
+          return;
+        }
+
+        log('Requesting media permissions');
+        const stream = await navigator.mediaDevices.getUserMedia({ 
+          video: true, 
+          audio: true 
+        });
+        
+        log('Media stream obtained', {
+          videoTracks: stream.getVideoTracks().map(t => t.label),
+          audioTracks: stream.getAudioTracks().map(t => t.label),
+          streamActive: stream.active
+        });
+        
+        // Store debug info
+        setStreamDebug({
+          video: stream.getVideoTracks()[0]?.getSettings(),
+          audio: stream.getAudioTracks()[0]?.getSettings()
+        });
+        
+        // Immediately stop tracks - we just needed permission
+        stream.getTracks().forEach(track => {
+          log(`Stopping track: ${track.kind}`, track);
+          track.stop();
+        });
+        
+        setMediaPermissionGranted(true);
+      } catch (err) {
+        log('Media permission error:', err);
+        setMediaPermissionDenied(true);
+        setCallError('Could not access camera/microphone. Please check permissions.');
+      }
+    };
+
+    initialize();
+  }, [checkWebRTCAvailability, log]);
+
+  // Enhanced call initialization
+   const initializeCall = useCallback(async () => {
     if (!webRTCSupported || !sessionData.partnerSocketId) return;
 
     log('Starting call initialization');
@@ -125,8 +185,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     }
   }, [webRTCSupported, sessionData.partnerSocketId, startCall, log]);
 
-  // 4. Proper stream attachment with autoplay handling
-  const attachStream = useCallback((stream: MediaStream | null, isLocal: boolean) => {
+   const attachStream = useCallback((stream: MediaStream | null, isLocal: boolean) => {
     const videoEl = isLocal ? localVideoRef.current : remoteVideoRef.current;
     if (!videoEl || !stream) return;
 
@@ -153,8 +212,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     };
   }, [log]);
 
-  // 5. Handle stream changes
-  useEffect(() => {
+   useEffect(() => {
     attachStream(localStream, true);
   }, [localStream, attachStream]);
 
@@ -162,8 +220,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     attachStream(remoteStream, false);
   }, [remoteStream, attachStream]);
 
-  // 6. Click-to-play handler
-  const handleVideoClick = useCallback(async () => {
+ const handleVideoClick = useCallback(async () => {
     if (localVideoRef.current) {
       try {
         await localVideoRef.current.play();
@@ -174,10 +231,10 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     }
   }, [log]);
 
-  if (!webRTCSupported || callError) {
-    return (
-       <div className="fixed inset-0 bg-dark-blue z-50">  
-        <div className="absolute top-4 left-4 bg-black/70 text-white p-2 text-xs z-50 rounded">
+   return (
+    <div className="fixed inset-0 bg-dark-blue z-50">
+      {/* Debug overlay */}
+      <div className="absolute top-4 left-4 bg-black/70 text-white p-2 text-xs z-50 rounded">
         <div>Local: {localStream?.id ? '✅' : '❌'}</div>
         <div>Remote: {remoteStream?.id ? '✅' : '❌'}</div>
         <button 
@@ -190,6 +247,150 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
           Debug Streams
         </button>
       </div>
+
+  // Enhanced stream attachment effects
+  useEffect(() => {
+    log('Local stream changed', {
+      stream: localStream,
+      tracks: localStream?.getTracks().map(t => ({
+        kind: t.kind,
+        readyState: t.readyState,
+        enabled: t.enabled,
+        muted: t.muted
+      }))
+    });
+
+    if (localVideoRef.current && localStream) {
+      log('Attaching local stream to video element');
+      localVideoRef.current.srcObject = localStream;
+      
+      // Debugging for video element
+      const checkVideoPlayback = () => {
+        log('Video element state', {
+          readyState: localVideoRef.current?.readyState,
+          videoWidth: localVideoRef.current?.videoWidth,
+          videoHeight: localVideoRef.current?.videoHeight,
+          paused: localVideoRef.current?.paused,
+          error: localVideoRef.current?.error
+        });
+      };
+      
+      localVideoRef.current.onloadedmetadata = checkVideoPlayback;
+      localVideoRef.current.onplaying = checkVideoPlayback;
+      localVideoRef.current.onerror = (e) => {
+        log('Video element error:', e);
+      };
+    }
+
+    return () => {
+      if (localVideoRef.current?.srcObject) {
+        log('Cleaning up local video ref');
+        localVideoRef.current.srcObject = null;
+      }
+    };
+  }, [localStream, log]);
+
+  useEffect(() => {
+    log('Remote stream changed', {
+      stream: remoteStream,
+      tracks: remoteStream?.getTracks().map(t => ({
+        kind: t.kind,
+        readyState: t.readyState,
+        enabled: t.enabled,
+        muted: t.muted
+      }))
+    });
+
+    if (remoteVideoRef.current && remoteStream) {
+      log('Attaching remote stream to video element');
+      remoteVideoRef.current.srcObject = remoteStream;
+    }
+  }, [remoteStream, log]);
+
+  useEffect(() => {
+    if (!socket) return;
+    console.log('[VideoCall] Setting up socket listeners');
+    const handleCallEnded = (data: { reason: string }) => {
+      console.log('[VideoCall] Partner ended call:', data.reason);
+      setCallError(`Call ended: ${data.reason || 'Partner disconnected'}`);
+      setTimeout(onCallEnd, 2000);
+    };
+    const handleIceRestart = () => {
+      console.log('[VideoCall] ICE restart requested');
+      initializeCall();
+    };
+    socket.on('call-ended', handleCallEnded);
+    socket.on('ice-restart', handleIceRestart);
+    return () => {
+      console.log('[VideoCall] Cleaning up socket listeners');
+      socket.off('call-ended', handleCallEnded);
+      socket.off('ice-restart', handleIceRestart);
+    };
+  }, [socket, onCallEnd, initializeCall]);
+
+  const formatDuration = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const handleEndCall = useCallback(async () => {
+    console.log('[VideoCall] User initiated call end');
+    try {
+      await endCall();
+      await fetch(`/api/session/${sessionData.sessionId}/end`, { method: 'POST' });
+      if (socket) {
+        socket.emit('end-call', { sessionId: sessionData.sessionId, partnerId: sessionData.partnerId });
+      }
+    } catch (error) {
+      console.error('[VideoCall] Error ending call:', error);
+    } finally {
+      onCallEnd();
+    }
+  }, [endCall, sessionData, socket, onCallEnd]);
+
+  const handleToggleMute = useCallback(() => {
+    try {
+      const newMutedState = toggleMute();
+      setIsMuted(newMutedState);
+    } catch (error) {
+      console.error('[VideoCall] Failed to toggle audio:', error);
+      setMediaPermissionDenied(true);
+    }
+  }, [toggleMute]);
+
+  const handleToggleVideo = useCallback(() => {
+    try {
+      const newVideoState = toggleVideo();
+      setIsVideoOff(!newVideoState);
+    } catch (error) {
+      console.error('[VideoCall] Failed to toggle video:', error);
+      setMediaPermissionDenied(true);
+    }
+  }, [toggleVideo]);
+
+  const handleReport = () => {
+    console.log('[VideoCall] User reported partner');
+    alert('Report submitted. Our team will review this call.');
+  };
+
+  const handleNextChat = async () => {
+    console.log('[VideoCall] User requested next chat');
+    await handleEndCall();
+  };
+  
+  if (!webRTCSupported || callError) {
+    return (
+      <div className="fixed inset-0 bg-dark-blue z-50 flex items-center justify-center p-4">
+         <div className="absolute top-4 left-4 bg-black/70 text-white p-2 text-xs z-50 rounded">
+        <div>Local Stream: {localStream?.id || 'None'}</div>
+        <div>Remote Stream: {remoteStream?.id || 'None'}</div>
+        <div>Connection: {connectionStatus}</div>
+        <div>Call Duration: {formatDuration(callDuration)}</div>
+        {streamDebug && (
+          <pre>{JSON.stringify(streamDebug, null, 2)}</pre>
+        )}
+      </div>
         <div className="bg-gray-800 rounded-lg p-6 max-w-md w-full">
           <AlertCircle className="w-12 h-12 mx-auto mb-4 text-red-500" />
           <h2 className="text-2xl font-bold mb-2 text-white text-center">
@@ -201,7 +402,6 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
               : callError}
           </p>
           <div className="flex flex-col space-y-3">
-             <div className="bg-dark-blue/90 backdrop-blur-sm border-b border-gray-700/50 px-6 py-4"></div>
             {callError?.includes('HTTPS') ? (
               <Button asChild className="w-full">
                 <a href={`https://${window.location.host}${window.location.pathname}`}>
@@ -226,9 +426,9 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
             >
               Exit Call
             </Button>
-            </div>
           </div>
         </div>
+      </div>
     );
   }
 
@@ -291,48 +491,55 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
           </div>
         </div>
 
-         {/* Main video area */}
+        {/* Video Container */}
         <div className="flex-1 relative bg-gray-800 overflow-hidden">
-          {/* Remote video */}
-          <div className="absolute inset-0">
-            <video
-              ref={remoteVideoRef}
-              autoPlay
-              playsInline
-              className="w-full h-full object-cover bg-black"
-            />
-            {!remoteStream && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
-                <Loader2 className="w-8 h-8 text-white animate-spin" />
+          {/* Remote Video */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            {connectionStatus !== 'connected' ? (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-800/90">
+                <div className="text-center">
+                  <Loader2 className="w-8 h-8 mx-auto mb-4 text-white animate-spin" />
+                  <div className="text-white">
+                    {isStartingCall ? 'Starting call...' : 'Connecting to partner...'}
+                  </div>
+                </div>
               </div>
+            ) : (
+              <>
+                <video
+                  ref={remoteVideoRef}
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+                {!remoteStream && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
+                    <div className="text-white text-center">
+                      <div className="text-6xl mb-4">👤</div>
+                      <div>Waiting for partner's video...</div>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </div>
 
-          {/* Local video */}
-          <div 
-            className={`absolute bottom-6 right-6 w-48 h-36 rounded-xl overflow-hidden shadow-2xl border-2 ${
-              needsUserInteraction ? 'border-yellow-500 animate-pulse' : 'border-white/20'
-            }`}
-            onClick={handleVideoClick}
-          >
+          {/* Local Video */}
+          <div className="absolute bottom-6 right-6 w-48 h-36 bg-gray-700 rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
             <video
               ref={localVideoRef}
               autoPlay
               playsInline
               muted
-              className="w-full h-full object-cover bg-black"
-              style={{ transform: 'rotateY(180deg)' }} // Mirror effect
+              className="w-full h-full object-cover"
             />
-            {needsUserInteraction && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/70">
-                <button className="text-white text-sm bg-blue-500 px-3 py-1 rounded">
-                  Click to Start
-                </button>
+            {!localStream && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-700">
+                <Loader2 className="w-6 h-6 text-white animate-spin" />
               </div>
             )}
           </div>
         </div>
-
 
         {/* Call Controls */}
         <div className="bg-dark-blue/90 backdrop-blur-sm px-6 py-6">
