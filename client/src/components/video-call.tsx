@@ -128,10 +128,13 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       videoEl.playsInline = true;
       videoEl.muted = isLocal;
 
-      videoEl.play().catch(err => {
-        log(`${isLocal ? 'Local' : 'Remote'} video play failed:`, err);
-        if (isLocal) setNeedsUserInteraction(true);
-      });
+      const playPromise = videoEl.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          log(`${isLocal ? 'Local' : 'Remote'} video play failed:`, err);
+          if (isLocal) setNeedsUserInteraction(true);
+        });
+      }
 
       videoEl.onloadedmetadata = () => {
         log(`${isLocal ? 'Local' : 'Remote'} video metadata loaded`);
