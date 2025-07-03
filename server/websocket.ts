@@ -201,12 +201,14 @@ async function notifyMatchedPair(io: SocketIOServer, userA: number, userB: numbe
 
     io.to(socketA).emit("match-found", {
       partnerId: userB,
+      partnerSocketId: socketB,
       sessionId,
       timestamp: new Date().toISOString()
     });
 
     io.to(socketB).emit("match-found", {
       partnerId: userA,
+      partnerSocketId: socketA,
       sessionId,
       timestamp: new Date().toISOString()
     });
