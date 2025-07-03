@@ -43,6 +43,8 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const [connectionStatus, setConnectionStatus] = useState<'connected' | 'connecting' | 'disconnected'>('connecting');
   const [webRTCSupported, setWebRTCSupported] = useState(true);
   const [mediaPermissionDenied, setMediaPermissionDenied] = useState(false);
+  // Added missing state for mediaPermissionGranted
+  const [mediaPermissionGranted, setMediaPermissionGranted] = useState(false);
   const { socket } = useSocket(sessionData.userId);
   const [callError, setCallError] = useState<string | null>(null);
   const [isStartingCall, setIsStartingCall] = useState(false);
@@ -143,6 +145,12 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       videoEl.onplaying = () => {
         log(`${isLocal ? 'Local' : 'Remote'} video playing`);
         setNeedsUserInteraction(false);
+      };
+
+      // Added: listen for pause event to detect interruptions
+      videoEl.onpause = () => {
+        log(`${isLocal ? 'Local' : 'Remote'} video paused`);
+        if (isLocal) setMediaPermissionDenied(true);
       };
     } else {
       videoEl.srcObject = null;
