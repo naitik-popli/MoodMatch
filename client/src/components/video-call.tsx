@@ -239,14 +239,21 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   // Initial setup
   useEffect(() => {
     checkWebRTCAvailability();
-    initializeCall();
+  }, [checkWebRTCAvailability]);
 
+  useEffect(() => {
+    if (socket && socket.connected) {
+      initializeCall();
+    }
+  }, [socket, initializeCall]);
+
+  useEffect(() => {
     return () => {
       if (callTimerRef.current) {
         clearInterval(callTimerRef.current);
       }
     };
-  }, [checkWebRTCAvailability, initializeCall]);
+  }, []);
 
   // Error states
   if (!webRTCSupported || callError) {
