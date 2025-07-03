@@ -43,6 +43,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const [connectionStatus, setConnectionStatus] = useState<'connected' | 'connecting' | 'disconnected'>('connecting');
   const [webRTCSupported, setWebRTCSupported] = useState(true);
   const [mediaPermissionDenied, setMediaPermissionDenied] = useState(false);
+  const { socket } = useSocket(sessionData.userId);
   const [callError, setCallError] = useState<string | null>(null);
   const [isStartingCall, setIsStartingCall] = useState(false);
   const [needsUserInteraction, setNeedsUserInteraction] = useState(false);
@@ -52,7 +53,6 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
   const retryCountRef = useRef(0);
 
-  const { socket } = useSocket();
   const { 
     localStream, 
     remoteStream, 
