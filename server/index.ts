@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 5000;
 // Enhanced CORS Configuration
 const allowedOrigins = [
   'https://mood-match-825vrgvf1-naitiks-projects-caeedbd6.vercel.app',
+  'https://mood-match-two.vercel.app',
   'http://localhost:3000'
 ];
 
@@ -23,6 +24,7 @@ app.use(cors({
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.warn(`Blocked CORS request from origin: ${origin}`);
       callback(new Error('Not allowed by CORS'));
     }
   },
