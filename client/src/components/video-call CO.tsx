@@ -8,9 +8,9 @@ import { useWebRTC } from "../hooks/use-webrtc";
 import { useSocket } from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
 
-// Enhanced debugging with timestamp
+// Debugging wrapper
 const debug = (context: string) => (...args: any[]) => {
-  console.log(`[${new Date().toISOString()}] [DEBUG:${context}]`, ...args);
+  console.log(`[DEBUG:${context}]`, ...args);
 };
 
 const MOOD_NAMES: Record<Mood, string> = {
@@ -43,16 +43,17 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const [connectionStatus, setConnectionStatus] = useState<'connected' | 'connecting' | 'disconnected'>('connecting');
   const [webRTCSupported, setWebRTCSupported] = useState(true);
   const [mediaPermissionDenied, setMediaPermissionDenied] = useState(false);
+  const [mediaPermissionGranted, setMediaPermissionGranted] = useState(false);
   const [callError, setCallError] = useState<string | null>(null);
   const [isStartingCall, setIsStartingCall] = useState(false);
-  const [needsUserInteraction, setNeedsUserInteraction] = useState(false);
+  const [streamDebug, setStreamDebug] = useState<any>(null);
 
   const localVideoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
   const retryCountRef = useRef(0);
 
-  const { socket } = useSocket();
+  const { socket } = useSocket(sessionData.userId);
   const { 
     localStream, 
     remoteStream, 
@@ -68,10 +69,15 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   });
 
   // Enhanced WebRTC availability check
- const checkWebRTCAvailability = useCallback(() => {
+  const checkWebRTCAvailability = useCallback(() => {
+    log('Checking WebRTC availability');
     const isSecure = window.location.protocol === 'https:' || window.location.hostname === 'localhost';
-    const hasMediaDevices = !!(navigator.mediaDevices?.getUserMedia);
+    const hasMediaDevices = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
     const hasRTCPeerConnection = !!window.RTCPeerConnection;
+
+    log('Security check:', isSecure);
+    log('Media devices available:', hasMediaDevices);
+    log('RTCPeerConnection available:', hasRTCPeerConnection);
 
     if (!isSecure) {
       setCallError('Video calling requires HTTPS or localhost for security.');
@@ -84,24 +90,6 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     }
 
     return true;
-  }, []);
-
-  const initializeMedia = useCallback(async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          width: { ideal: 1280 },
-          height: { ideal: 720 },
-          frameRate: { ideal: 30 }
-        },
-        audio: true
-      });
-      return stream;
-    } catch (error) {
-      log('Media access error:', error);
-      setMediaPermissionDenied(true);
-      throw error;
-    }
   }, [log]);
 
   // Enhanced media permission check
@@ -166,87 +154,39 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   }, [checkWebRTCAvailability, log]);
 
   // Enhanced call initialization
-   const initializeCall = useCallback(async () => {
-    if (!webRTCSupported || !sessionData.partnerSocketId) return;
+  const initializeCall = useCallback(async () => {
+    if (!webRTCSupported || !sessionData.partnerSocketId || !mediaPermissionGranted) {
+      log('Skipping call init - missing requirements', {
+        webRTCSupported,
+        partnerSocketId: sessionData.partnerSocketId,
+        mediaPermissionGranted
+      });
+      return;
+    }
 
-    log('Starting call initialization');
+    log('Starting call initialization attempt', retryCountRef.current);
     setIsStartingCall(true);
     setConnectionStatus('connecting');
 
     try {
+      log('Calling startCall()');
       await startCall();
       log('Call started successfully');
+      retryCountRef.current = 0;
     } catch (error) {
       log('Call initialization failed:', error);
+      if (retryCountRef.current < 2) {
+        retryCountRef.current += 1;
+        log(`Retrying call (attempt ${retryCountRef.current})`);
+        setTimeout(initializeCall, 2000 * retryCountRef.current);
+        return;
+      }
       setConnectionStatus('disconnected');
-      setCallError('Failed to establish connection');
+      setCallError('Failed to establish connection. Please check your network and try again.');
     } finally {
       setIsStartingCall(false);
     }
-  }, [webRTCSupported, sessionData.partnerSocketId, startCall, log]);
-
-   const attachStream = useCallback((stream: MediaStream | null, isLocal: boolean) => {
-    const videoEl = isLocal ? localVideoRef.current : remoteVideoRef.current;
-    if (!videoEl || !stream) return;
-
-    videoEl.srcObject = stream;
-    videoEl.playsInline = true;
-    videoEl.muted = isLocal;
-
-    videoEl.play().catch(err => {
-      log(`${isLocal ? 'Local' : 'Remote'} video play failed:`, err);
-      if (isLocal) setNeedsUserInteraction(true);
-    });
-
-    // Debugging handlers
-    videoEl.onloadedmetadata = () => {
-      log(`${isLocal ? 'Local' : 'Remote'} video metadata loaded`, {
-        width: videoEl.videoWidth,
-        height: videoEl.videoHeight
-      });
-    };
-
-    videoEl.onplaying = () => {
-      log(`${isLocal ? 'Local' : 'Remote'} video playing`);
-      setNeedsUserInteraction(false);
-    };
-  }, [log]);
-
-   useEffect(() => {
-    attachStream(localStream, true);
-  }, [localStream, attachStream]);
-
-  useEffect(() => {
-    attachStream(remoteStream, false);
-  }, [remoteStream, attachStream]);
-
- const handleVideoClick = useCallback(async () => {
-    if (localVideoRef.current) {
-      try {
-        await localVideoRef.current.play();
-        log('Manual playback started');
-      } catch (err) {
-        log('Manual playback failed:', err);
-      }
-    }
-  }, [log]);
-
-   return (
-    <div className="fixed inset-0 bg-dark-blue z-50">
-      {/* Debug overlay */}
-      <div className="absolute top-4 left-4 bg-black/70 text-white p-2 text-xs z-50 rounded">
-        <div>Local: {localStream?.id ? '✅' : '❌'}</div>
-        <div>Remote: {remoteStream?.id ? '✅' : '❌'}</div>
-        <button 
-          onClick={() => console.log({
-            localStream: localStream?.getTracks().map(t => t.readyState),
-            remoteStream: remoteStream?.getTracks().map(t => t.readyState)
-          })}
-          className="mt-1 text-blue-300"
-        >
-          Debug Streams
-        </button>
-      </div>
+  }, [webRTCSupported, sessionData.partnerSocketId, mediaPermissionGranted, startCall, log]);
 
   // Enhanced stream attachment effects
   useEffect(() => {
