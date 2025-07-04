@@ -145,6 +145,9 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       videoEl.onplaying = () => {
         log(`${isLocal ? 'Local' : 'Remote'} video playing`);
         setNeedsUserInteraction(false);
+        if (isLocal) {
+          setMediaPermissionGranted(true);
+        }
       };
 
       // Added: listen for pause event to detect interruptions
