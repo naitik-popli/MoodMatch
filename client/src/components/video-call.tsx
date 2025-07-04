@@ -255,6 +255,20 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     checkWebRTCAvailability();
   }, [checkWebRTCAvailability]);
 
+  // Explicitly request media permissions on mount
+  useEffect(() => {
+    const requestMediaPermissions = async () => {
+      try {
+        await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        setMediaPermissionGranted(true);
+      } catch (error) {
+        setMediaPermissionDenied(true);
+      }
+    };
+
+    requestMediaPermissions();
+  }, []);
+
   useEffect(() => {
     if (socket && socket.connected) {
       initializeCall();
