@@ -1,0 +1,34 @@
+tell me why i am unable to see the local stream
+📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
+index-pFBVn2vt.js:363 🔗 Socket connection status: true
+index-pFBVn2vt.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
+index-pFBVn2vt.js:319 🧹 Cleaning up socket connection
+index-pFBVn2vt.js:319 🛑 Socket disconnected
+index-pFBVn2vt.js:319 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-pFBVn2vt.js:319 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-pFBVn2vt.js:319 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+index-pFBVn2vt.js:319 [WEBRTC:useWebRTC] Socket not available
+(anonymous) @ index-pFBVn2vt.js:319
+Il @ index-pFBVn2vt.js:40
+Yr @ index-pFBVn2vt.js:40
+(anonymous) @ index-pFBVn2vt.js:40
+E @ index-pFBVn2vt.js:25
+j @ index-pFBVn2vt.js:25Understand this warning
+index-pFBVn2vt.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'new'}
+index-pFBVn2vt.js:319 [2025-07-04T17:30:45.918Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: false, mediaPermissionGranted: false, partnerSocketId: 'Rl3ehwfYLTQvrs5JAAAT'}
+index-pFBVn2vt.js:363 📞 Transitioning to VideoCall: {sessionId: 236, userId: 120, partnerId: 121, partnerSocketId: 'Rl3ehwfYLTQvrs5JAAAT'}
+index-pFBVn2vt.js:319 [WEBRTC:useWebRTC] Ending call and cleaning up
+index-pFBVn2vt.js:319 🧠 Local socket ID: undefined
+index-pFBVn2vt.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'new'}
+index-pFBVn2vt.js:319 [2025-07-04T17:30:45.930Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: true, mediaPermissionGranted: false, partnerSocketId: 'Rl3ehwfYLTQvrs5JAAAT'}
+index-pFBVn2vt.js:319 [WEBRTC:useWebRTC] Ending call and cleaning up
+index-pFBVn2vt.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'closed'}
+index-pFBVn2vt.js:319 ✅ Connected to socket: 2by7qzvgbOi49rtgAAAZ
+index-pFBVn2vt.js:319 📮 Emitting update-socket-id with userId: 120
+index-pFBVn2vt.js:319 [WEBRTC:useWebRTC] Ending call and cleaning up
+index-pFBVn2vt.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'closed'}
+index-pFBVn2vt.js:319 [2025-07-04T17:30:46.315Z] [DEBUG:VideoCall] Starting call initialization
+index-pFBVn2vt.js:319 [WEBRTC:useWebRTC] Initializing media devices
+index-pFBVn2vt.js:319 [WEBRTC:useWebRTC] Ending call and cleaning up
+index-pFBVn2vt.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'closed'}
+index-pFBVn2vt.js:319 [2025-07-04T17:30:46.332Z] [DEBUG:VideoCall] Starting call initialization

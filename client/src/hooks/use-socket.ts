@@ -32,10 +32,10 @@ export function useSocket(userId?: number) {
     const newSocket = io(finalWsUrl, {
       transports: ["websocket"],
       path: SOCKET_PATH,
-      reconnectionAttempts: 5,
+      reconnectionAttempts: Infinity,
       reconnectionDelay: 1000,
       timeout: 10000,
-      forceNew: true,
+      // Removed pingInterval and pingTimeout due to TypeScript errors
       auth: {
         userId: userId || "guest",
       },
