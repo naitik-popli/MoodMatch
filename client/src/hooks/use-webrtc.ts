@@ -225,10 +225,12 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
         const state = pc.connectionState;
         log('Peer connection state changed:', state);
         if (state === 'failed' || state === 'disconnected' || state === 'closed') {
-          log('Peer connection failed or closed, cleaning up');
-          if (endCall) {
-            endCall();
-          }
+          log('Peer connection failed or closed, cleaning up with delay');
+          setTimeout(() => {
+            if (endCall) {
+              endCall();
+            }
+          }, 3000); // delay cleanup by 3 seconds to avoid premature call end
         }
       };
 
