@@ -128,6 +128,7 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
     return;
   }
 
+  let disconnectTimeout: NodeJS.Timeout | null = null;
 
     const handleOffer = async (data: any) => {
       log('Received offer from:', data.fromSocketId);
@@ -174,14 +175,33 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
       }
     };
 
+    const handleDisconnect = () => {
+      log('Socket disconnected, delaying call cleanup');
+      disconnectTimeout = setTimeout(() => {
+        endCall();
+      }, 5000); // delay cleanup by 5 seconds
+    };
+
+    const handleConnect = () => {
+      log('Socket connected, clearing disconnect timeout');
+      if (disconnectTimeout) {
+        clearTimeout(disconnectTimeout);
+        disconnectTimeout = null;
+      }
+    };
+
     socket.on("webrtc-offer", handleOffer);
     socket.on("webrtc-answer", handleAnswer);
     socket.on("webrtc-ice-candidate", handleIce);
+    socket.on("disconnect", handleDisconnect);
+    socket.on("connect", handleConnect);
 
     return () => {
       socket.off("webrtc-offer", handleOffer);
       socket.off("webrtc-answer", handleAnswer);
       socket.off("webrtc-ice-candidate", handleIce);
+      socket.off("disconnect", handleDisconnect);
+      socket.off("connect", handleConnect);
     };
   }, [socket, targetSocketId, setupPeerConnection, log]);
 
