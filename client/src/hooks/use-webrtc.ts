@@ -118,10 +118,11 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
 
   // Enhanced signaling handlers
   useEffect(() => {
-  if (!socket) {
-    console.warn("[WEBRTC:useWebRTC] Socket not available");
-    return;
-  }
+  if (!socket || socket.disconnected) {
+  log("Socket not ready, postponing signaling setup");
+  return;
+}
+
 
   if (!targetSocketId) {
     console.warn("[WEBRTC:useWebRTC] Target socket ID is undefined");
@@ -180,6 +181,7 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
       log('Socket disconnected, delaying call cleanup');
       if (!callEnded) {
         disconnectTimeout = setTimeout(() => {
+          log("🔴 endCall() triggered — TRACE HANDLEDISCONNECT", new Error().stack);
           endCall();
           callEnded = true;
         }, 10000); // increased delay to 10 seconds
@@ -244,6 +246,7 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
           offer,
         });
       }
+      
 
       // Added: listen for connection state changes to handle failures
 //       pc.onconnectionstatechange = () => {
@@ -293,6 +296,7 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
     setIsConnected(false);
     setConnectionState('closed');
   }, [log]);
+  
 
   // Enhanced media control
   const toggleMute = useCallback(() => {
@@ -306,6 +310,7 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
     log('No audio track to toggle');
     return false;
   }, [log]);
+  
 
   const toggleVideo = useCallback(() => {
     const videoTrack = localStreamRef.current?.getVideoTracks()[0];
@@ -318,6 +323,7 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
     log('No video track to toggle');
     return false;
   }, [log]);
+  
 
   // Debug effect to log state changes
   useEffect(() => {
@@ -328,10 +334,13 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
       connectionState
     });
   }, [localStream, remoteStream, isConnected, connectionState, log]);
+  
 
   // Cleanup on unmount
   useEffect(() => {
     return () => {
+      log("🔴 endCall() triggered — TRACE Useeffect", new Error().stack);
+
       endCall();
     };
   }, [endCall]);

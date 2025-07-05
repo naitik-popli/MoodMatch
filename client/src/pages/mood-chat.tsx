@@ -23,6 +23,7 @@ export default function MoodChat() {
   const { socket, isConnected } = useSocket(sessionData?.userId);
   console.log("🔗 Socket connection status:", isConnected);
 
+  const alreadyMatched = React.useRef(false);
   const handleMatchFound = (data: { partnerId: number; partnerSocketId: string }) => {
     console.log("🧩 handleMatchFound called with data:", data);
 
@@ -31,7 +32,12 @@ export default function MoodChat() {
         console.warn("⚠️ No session to update on match-found");
         return null;
       }
-
+      if (alreadyMatched.current) {
+        console.warn("⚠️ Already matched, ignoring duplicate match-found event");
+        return prev; // Ignore duplicate matches
+        
+      }
+      alreadyMatched.current = true;
       const updated = {
         ...prev,
         partnerId: data.partnerId,

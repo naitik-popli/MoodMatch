@@ -115,6 +115,8 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     }
   }, [webRTCSupported, sessionData.partnerSocketId, startCall, log]);
 
+  
+
   // Attach stream to video element
   const attachStream = useCallback((stream: MediaStream | null, isLocal: boolean) => {
     const videoEl = isLocal ? localVideoRef.current : remoteVideoRef.current;
@@ -168,6 +170,25 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   useEffect(() => {
     attachStream(localStream, true);
   }, [localStream, attachStream]);
+
+  // Start call when socket and partnerSocketId are ready
+  const partnerSocketId = sessionData.partnerSocketId;
+  const callStartedRef = useRef(false);
+  
+  useEffect(() => {
+  if (
+    !callStartedRef.current &&
+    socket &&
+    partnerSocketId &&
+    mediaPermissionGranted // <-- if you're checking this
+  ) {
+    callStartedRef.current = true;
+    startCall().catch(err => {
+      console.error("Error starting call:", err);
+      callStartedRef.current = false;
+    });
+  }
+}, [socket, partnerSocketId, mediaPermissionGranted, startCall]);
 
   useEffect(() => {
     attachStream(remoteStream, false);
