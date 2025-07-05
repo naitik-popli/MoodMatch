@@ -246,17 +246,17 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
       }
 
       // Added: listen for connection state changes to handle failures
-      pc.onconnectionstatechange = () => {
-  const state = pc.connectionState;
-  log('Connection state changed:', state);
-  setConnectionState(state);
-  setIsConnected(state === "connected");
+//       pc.onconnectionstatechange = () => {
+//   const state = pc.connectionState;
+//   log('Connection state changed:', state);
+//   setConnectionState(state);
+//   setIsConnected(state === "connected");
 
-  if (state === "failed") {
-    log('Peer connection failed — cleaning up');
-    endCall();
-  }
-};
+//   if (state === "failed") {
+//     log('Peer connection failed — cleaning up');
+//     endCall();
+//   }
+// };
 
     } catch (error) {
       log('Error during call start:', error);

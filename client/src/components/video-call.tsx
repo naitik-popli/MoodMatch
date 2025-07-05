@@ -385,6 +385,9 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       {/* Debug overlay */}
       <div className="absolute top-4 left-4 bg-black/70 text-white p-2 text-xs z-50 rounded">
         <div>Local: {localStream?.id ? '✅' : '❌'}</div>
+        <div>
+  Local Tracks: {localStream?.getTracks().map(t => `${t.kind}:${t.readyState}`).join(', ') || '—'}
+</div>
         <div>Remote: {remoteStream?.id ? '✅' : '❌'}</div>
         <button 
           onClick={() => console.log({
