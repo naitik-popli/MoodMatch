@@ -62,6 +62,12 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
       throw error;
     }
   }, [log]);
+
+  // Ref to track if media has been initialized
+  // This prevents multiple calls to getUserMedia
+  // which can lead to permission issues or redundant streams
+  // This is a common pattern to ensure media is only initialized once
+  // and can be reused across multiple calls
   const mediaInitializedRef = useRef(false);
 
 const initMedia = async () => {
@@ -282,6 +288,12 @@ const initMedia = async () => {
 
   // Enhanced call end with cleanup
   const endCall = useCallback(() => {
+    if ((endCall as any).called) {
+      log('endCall already called, skipping');
+      return;
+    }
+    (endCall as any).called = true;
+
     log('Ending call and cleaning up');
     
     if (peerConnectionRef.current) {
