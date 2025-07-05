@@ -9,7 +9,7 @@ export function useSocket(userId?: number) {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    if (!userId || socket) return;
+    if (!userId) return;
 
     // 1. Build WebSocket URL
     let wsUrl = API_BASE_URL.replace(/^http/, "ws").replace(/\/api\/?$/, "");
