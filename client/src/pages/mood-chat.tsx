@@ -112,6 +112,7 @@ export default function MoodChat() {
 
   const handleCallEnd = () => {
     console.log("📞 Call ended");
+    alreadyMatched.current = false; // Reset matched state to allow new matches
     setCurrentScreen('selection');
     setSelectedMood(null);
     setSessionData(null);
