@@ -337,13 +337,13 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
   
 
   // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      log("🔴 endCall() triggered — TRACE Useeffect", new Error().stack);
+  // useEffect(() => {
+  //   return () => {
+  //     log("🔴 endCall() triggered — TRACE Useeffect", new Error().stack);
 
-      endCall();
-    };
-  }, [endCall]);
+  //     endCall();
+  //   };
+  // }, [endCall]);
 
   return {
     localStream,
