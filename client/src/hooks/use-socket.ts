@@ -10,11 +10,19 @@ export function useSocket(userId?: number) {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    // Ensure we don't try to connect without userId
-    if (!userId) {
-      console.warn("⚠️ useSocket called without userId");
-      return;
+  if (!userId || socket) return; // 🛑 Don't reconnect if already connected
+
+  const socketInstance = io(wsUrl, { autoConnect: true });
+  setSocket(socketInstance);
+
+  // cleanup
+  return () => {
+    if (socketInstance.connected) {
+      console.log("🧹 Cleaning up socket connection");
+      socketInstance.disconnect();
     }
+  };
+}, [userId, socket]);
 
     // 1. Build WebSocket URL from API_BASE_URL
     let wsUrl = API_BASE_URL.replace(/^http/, "ws").replace(/\/api\/?$/, "");

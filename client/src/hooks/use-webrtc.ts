@@ -62,6 +62,19 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
       throw error;
     }
   }, [log]);
+  const mediaInitializedRef = useRef(false);
+
+const initMedia = async () => {
+  if (mediaInitializedRef.current) {
+    console.warn("🎥 Media already initialized, skipping...");
+    return;
+  }
+  mediaInitializedRef.current = true;
+
+  const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+  setLocalStream(stream);
+};
+
 
   // Enhanced peer connection management
   const setupPeerConnection = useCallback(() => {
