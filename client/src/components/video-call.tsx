@@ -55,43 +55,16 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
   const retryCountRef = useRef(0);
 
-  const [socketReady, setSocketReady] = useState(false);
-
-  useEffect(() => {
-    let retryCount = 0;
-    const maxRetries = 5;
-    const retryInterval = 500; // ms
-
-    const checkSocketReady = () => {
-      if (socket && socket.connected && socket.id) {
-        setSocketReady(true);
-      } else {
-        setSocketReady(false);
-        if (retryCount < maxRetries) {
-          retryCount++;
-          setTimeout(checkSocketReady, retryInterval);
-        }
-      }
-      console.log("Socket check:", { id: socket?.id, connected: socket?.connected, retryCount });
-    };
-
-    checkSocketReady();
-
-    return () => {
-      retryCount = maxRetries; // stop retries on unmount
-    };
-  }, [socket]);
-
-  const {
-    localStream,
-    remoteStream,
+  const { 
+    localStream, 
+    remoteStream, 
     isConnected,
     startCall,
     endCall,
     toggleMute,
-    toggleVideo
+    toggleVideo 
   } = useWebRTC({
-    socket: socketReady ? socket : null,
+    socket,
     isInitiator: sessionData.partnerId ? sessionData.userId < sessionData.partnerId : false,
     targetSocketId: sessionData.partnerSocketId,
   });
@@ -318,17 +291,17 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     webRTCSupported &&
     mediaPermissionGranted &&
     sessionData.partnerSocketId &&
-    socketReady
+    socket
   ) {
     initializeCall();
   } else {
     log('Waiting for socket, media permissions, or partnerSocketId', {
-      socketReady,
+      socketReady: !!socket,
       mediaPermissionGranted,
       partnerSocketId: sessionData.partnerSocketId,
     });
   }
-}, [webRTCSupported, mediaPermissionGranted, sessionData.partnerSocketId, socketReady]);
+}, [webRTCSupported, mediaPermissionGranted, sessionData.partnerSocketId, socket]);
 
 
   // Error states
