@@ -32,6 +32,7 @@ export function useSocket(userId?: number) {
       reconnectionDelay: 1000,
       timeout: 10000,
       auth: { userId: userId || "guest" },
+      // Removed pingInterval and pingTimeout due to TypeScript errors
     });
 
     // Handle successful connection
