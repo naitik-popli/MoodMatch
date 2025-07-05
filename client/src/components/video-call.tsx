@@ -55,16 +55,26 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
   const retryCountRef = useRef(0);
 
-  const { 
-    localStream, 
-    remoteStream, 
+  const [socketReady, setSocketReady] = useState(false);
+
+  useEffect(() => {
+    if (socket && socket.connected && socket.id) {
+      setSocketReady(true);
+    } else {
+      setSocketReady(false);
+    }
+  }, [socket]);
+
+  const {
+    localStream,
+    remoteStream,
     isConnected,
     startCall,
     endCall,
     toggleMute,
-    toggleVideo 
+    toggleVideo
   } = useWebRTC({
-    socket,
+    socket: socketReady ? socket : null,
     isInitiator: sessionData.partnerId ? sessionData.userId < sessionData.partnerId : false,
     targetSocketId: sessionData.partnerSocketId,
   });
@@ -291,17 +301,17 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     webRTCSupported &&
     mediaPermissionGranted &&
     sessionData.partnerSocketId &&
-    socket
+    socketReady
   ) {
     initializeCall();
   } else {
     log('Waiting for socket, media permissions, or partnerSocketId', {
-      socketReady: !!socket,
+      socketReady,
       mediaPermissionGranted,
       partnerSocketId: sessionData.partnerSocketId,
     });
   }
-}, [webRTCSupported, mediaPermissionGranted, sessionData.partnerSocketId, socket]);
+}, [webRTCSupported, mediaPermissionGranted, sessionData.partnerSocketId, socketReady]);
 
 
   // Error states
