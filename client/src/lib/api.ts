@@ -4,6 +4,6 @@
 // lib/api.ts
 export const API_BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "https://moodmatch-61xp.onrender.com/"
+    ? "https://moodmatch-61xp.onrender.com/api"
     : "http://localhost:5000/api"; // or your dev backend
 export const SOCKET_PATH = "/socket.io";
