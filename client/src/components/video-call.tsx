@@ -58,11 +58,28 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const [socketReady, setSocketReady] = useState(false);
 
   useEffect(() => {
-    if (socket && socket.connected && socket.id) {
-      setSocketReady(true);
-    } else {
-      setSocketReady(false);
-    }
+    let retryCount = 0;
+    const maxRetries = 5;
+    const retryInterval = 500; // ms
+
+    const checkSocketReady = () => {
+      if (socket && socket.connected && socket.id) {
+        setSocketReady(true);
+      } else {
+        setSocketReady(false);
+        if (retryCount < maxRetries) {
+          retryCount++;
+          setTimeout(checkSocketReady, retryInterval);
+        }
+      }
+      console.log("Socket check:", { id: socket?.id, connected: socket?.connected, retryCount });
+    };
+
+    checkSocketReady();
+
+    return () => {
+      retryCount = maxRetries; // stop retries on unmount
+    };
   }, [socket]);
 
   const {
