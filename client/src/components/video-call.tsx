@@ -132,20 +132,29 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       videoEl.playsInline = true;
       videoEl.muted = isLocal;
 
-      const playPromise = videoEl.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(err => {
-          log(`${isLocal ? 'Local' : 'Remote'} video play failed:`, err);
-          // if (isLocal) setNeedsUserInteraction(true);
-        });
-      }
+      const playAttempt = () => {
+        const playPromise = videoEl.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(err => {
+            log(`${isLocal ? 'Local' : 'Remote'} video play failed:`, err);
+            if (isLocal) setNeedsUserInteraction(true);
+            // Retry after delay
+            setTimeout(() => {
+              log(`${isLocal ? 'Local' : 'Remote'} video retrying play`);
+              playAttempt();
+            }, 3000);
+          });
+        }
+      };
+
+      playAttempt();
 
       videoEl.onloadedmetadata = () => {
         log(`${isLocal ? 'Local' : 'Remote'} video metadata loaded`);
         videoEl.play().catch((err) => {
-    log(`${isLocal ? 'Local' : 'Remote'} video play failed:`, err);
-    if (isLocal) setNeedsUserInteraction(true);
-  });
+          log(`${isLocal ? 'Local' : 'Remote'} video play failed:`, err);
+          if (isLocal) setNeedsUserInteraction(true);
+        });
       };
 
       videoEl.onplaying = () => {
