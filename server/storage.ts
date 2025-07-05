@@ -60,7 +60,7 @@ export class DatabaseStorage {
     .limit(1);
 
   if (existingSession) {
-    this.debugLog(`User ${insertSession.userId} already has an active session`, existingSession);
+    this.debugLog(`User ${insertSession.userId} already has an active session SO F U C K U`, existingSession);
     return existingSession;
   }
 

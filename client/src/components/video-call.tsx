@@ -134,12 +134,16 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       if (playPromise !== undefined) {
         playPromise.catch(err => {
           log(`${isLocal ? 'Local' : 'Remote'} video play failed:`, err);
-          if (isLocal) setNeedsUserInteraction(true);
+          // if (isLocal) setNeedsUserInteraction(true);
         });
       }
 
       videoEl.onloadedmetadata = () => {
         log(`${isLocal ? 'Local' : 'Remote'} video metadata loaded`);
+        videoEl.play().catch((err) => {
+    log(`${isLocal ? 'Local' : 'Remote'} video play failed:`, err);
+    if (isLocal) setNeedsUserInteraction(true);
+  });
       };
 
       videoEl.onplaying = () => {
@@ -269,11 +273,11 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     requestMediaPermissions();
   }, []);
 
-  useEffect(() => {
-    if (socket && socket.connected) {
-      initializeCall();
-    }
-  }, [socket, initializeCall]);
+  // useEffect(() => {
+  //   if (socket && socket.connected) {
+  //     initializeCall();
+  //   }
+  // }, [socket, initializeCall]);
 
   useEffect(() => {
     return () => {

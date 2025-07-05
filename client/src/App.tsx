@@ -5,11 +5,13 @@ import { Toaster } from "react-hot-toast";
 import { TooltipProvider } from "./components/ui/tooltip";
 import MoodChat from "./pages/mood-chat";
 import NotFound from "./pages/not-found";
+import LocalStreamTest from "./pages/local-stream-test";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={MoodChat} />
+      <Route path="/local-stream-test" component={LocalStreamTest} />
       <Route component={NotFound} />
     </Switch>
   );
