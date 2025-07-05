@@ -2,7 +2,6 @@ import { useEffect, useState, useCallback } from "react";
 import { io, Socket } from "socket.io-client";
 import { API_BASE_URL } from "../lib/api";
 
-// Global socket path
 const SOCKET_PATH = "/socket.io";
 
 export function useSocket(userId?: number) {
@@ -10,50 +9,35 @@ export function useSocket(userId?: number) {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-  if (!userId || socket) return; // 🛑 Don't reconnect if already connected
+    if (!userId || socket) return;
 
-  const socketInstance = io(wsUrl, { autoConnect: true });
-  setSocket(socketInstance);
-
-  // cleanup
-  return () => {
-    if (socketInstance.connected) {
-      console.log("🧹 Cleaning up socket connection");
-      socketInstance.disconnect();
-    }
-  };
-}, [userId, socket]);
-
-    // 1. Build WebSocket URL from API_BASE_URL
+    // 1. Build WebSocket URL
     let wsUrl = API_BASE_URL.replace(/^http/, "ws").replace(/\/api\/?$/, "");
     console.log("🌐 API_BASE_URL:", API_BASE_URL);
     console.log("🔧 Constructed wsUrl:", wsUrl);
 
-    // 2. Enforce wss in production
     const finalWsUrl = wsUrl.startsWith("ws://")
       ? wsUrl.replace(/^ws:/, "wss:")
       : wsUrl;
 
     console.log("🚀 Connecting to socket at:", finalWsUrl);
 
-    // 3. Create socket connection
+    // 2. Create socket
     const newSocket = io(finalWsUrl, {
       transports: ["websocket"],
       path: SOCKET_PATH,
       reconnectionAttempts: Infinity,
       reconnectionDelay: 1000,
       timeout: 10000,
-      // Removed pingInterval and pingTimeout due to TypeScript errors
       auth: {
         userId: userId || "guest",
       },
     });
 
-    // 4. Event handlers
+    // 3. Handlers
     const handleConnect = () => {
       console.log("✅ Connected to socket:", newSocket.id);
       setIsConnected(true);
-
       if (userId) {
         console.log("📮 Emitting update-socket-id with userId:", userId);
         newSocket.emit("update-socket-id", { userId });
@@ -81,7 +65,7 @@ export function useSocket(userId?: number) {
       console.log(`✅ Reconnected successfully on attempt #${attempt}`);
     };
 
-    // 5. Bind listeners
+    // 4. Bind listeners
     newSocket.on("connect", handleConnect);
     newSocket.on("disconnect", handleDisconnect);
     newSocket.on("connect_error", handleConnectError);
@@ -89,12 +73,12 @@ export function useSocket(userId?: number) {
     newSocket.on("reconnect_failed", handleReconnectFailed);
     newSocket.on("reconnect", handleReconnectSuccess);
 
-    // 6. Save the socket
     setSocket(newSocket);
 
-    // 7. Cleanup
+    // 5. Cleanup
     return () => {
       console.log("🧹 Cleaning up socket connection");
+
       newSocket.off("connect", handleConnect);
       newSocket.off("disconnect", handleDisconnect);
       newSocket.off("connect_error", handleConnectError);
@@ -107,9 +91,9 @@ export function useSocket(userId?: number) {
         console.log("🛑 Socket disconnected");
       }
     };
-  }, [userId]);
+  }, [userId, socket]);
 
-  // 8. Emit utility
+  // 6. Emit utility
   const emit = useCallback(
     (event: string, data?: any) => {
       if (socket && isConnected) {
@@ -122,7 +106,7 @@ export function useSocket(userId?: number) {
     [socket, isConnected]
   );
 
-  // 9. On utility
+  // 7. On utility
   const on = useCallback(
     (event: string, callback: (data: any) => void) => {
       if (socket) {
@@ -144,4 +128,5 @@ export function useSocket(userId?: number) {
     on,
   };
 }
+
 export default useSocket;
