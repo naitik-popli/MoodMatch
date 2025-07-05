@@ -166,12 +166,21 @@ export async function setupWebSocket(io: SocketIOServer) {
 
       if (!userId) return;
 
-      if (!activeSessions.has(userId)) {
-        await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
-        console.log(`[DISCONNECT] Removed user ${userId} from queue`);
-      } else {
-        console.log(`[DISCONNECT] User ${userId} is in active session, not removed`);
+      // Remove user from activeSessions if present
+      if (activeSessions.has(userId)) {
+        activeSessions.delete(userId);
+        console.log(`[DISCONNECT] Removed user ${userId} from active sessions`);
       }
+
+      // Remove user from userSocketMap
+      if (userSocketMap.has(userId)) {
+        userSocketMap.delete(userId);
+        console.log(`[DISCONNECT] Removed user ${userId} from socket map`);
+      }
+
+      // Remove user from moodQueue
+      await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
+      console.log(`[DISCONNECT] Removed user ${userId} from queue`);
     });
   });
 
