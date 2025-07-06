@@ -484,7 +484,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
             }`}
             onClick={handleVideoClick}
           >
-            <video
+          <video
               ref={localVideoRef}
               autoPlay
               playsInline
