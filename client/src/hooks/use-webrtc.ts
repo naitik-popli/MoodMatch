@@ -566,6 +566,19 @@ const initMedia = async () => {
       isConnected,
       connectionState
     });
+
+    if (remoteStream) {
+      console.log('Assigning remoteStream to video element');
+      const remoteVideoElement = document.getElementById('remoteVideo') as HTMLVideoElement | null;
+      if (remoteVideoElement) {
+        remoteVideoElement.srcObject = remoteStream;
+        console.log('Remote video srcObject set');
+      } else {
+        console.warn('Remote video element not found');
+      }
+    } else {
+      console.log('No remoteStream available to assign');
+    }
   }, [localStream, remoteStream, isConnected, connectionState, log]);
   
 
