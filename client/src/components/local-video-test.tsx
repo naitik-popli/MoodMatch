@@ -26,7 +26,7 @@ const LocalVideoTest: React.FC<LocalVideoTestProps> = ({ localVideoStream }) => 
           console.error("Error playing local video stream:", error);
           setIsPlaying(false);
         });
-      }, 100);
+      }, 10000);
     }
   }, [localVideoStream]);
 
