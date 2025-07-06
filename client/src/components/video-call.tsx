@@ -132,44 +132,49 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       videoEl.playsInline = true;
       videoEl.muted = isLocal;
 
-      const playAttempt = () => {
-        const playPromise = videoEl.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(err => {
-            log(`${isLocal ? 'Local' : 'Remote'} video play failed:`, err);
-            if (isLocal) setNeedsUserInteraction(true);
-            // Retry after delay
-            setTimeout(() => {
-              log(`${isLocal ? 'Local' : 'Remote'} video retrying play`);
-              playAttempt();
-            }, 3000);
-          });
-        }
-      };
-
-      playAttempt();
-
-      videoEl.onloadedmetadata = () => {
-        log(`${isLocal ? 'Local' : 'Remote'} video metadata loaded`);
-        videoEl.play().catch((err) => {
-          log(`${isLocal ? 'Local' : 'Remote'} video play failed:`, err);
-          if (isLocal) setNeedsUserInteraction(true);
+      if (isLocal) {
+        // For local video, play once without retry or user interaction checks
+        videoEl.play().catch(err => {
+          log('Local video play failed:', err);
         });
-      };
+      } else {
+        // For remote video, keep existing retry logic
+        const playAttempt = () => {
+          const playPromise = videoEl.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(err => {
+              log('Remote video play failed:', err);
+              setNeedsUserInteraction(true);
+              // Retry after delay
+              setTimeout(() => {
+                log('Remote video retrying play');
+                playAttempt();
+              }, 3000);
+            });
+          }
+        };
 
-      videoEl.onplaying = () => {
-        log(`${isLocal ? 'Local' : 'Remote'} video playing`);
-        setNeedsUserInteraction(false);
-        if (isLocal) {
-          setMediaPermissionGranted(true);
-        }
-      };
+        playAttempt();
 
-      // Added: listen for pause event to detect interruptions
-      videoEl.onpause = () => {
-        log(`${isLocal ? 'Local' : 'Remote'} video paused`);
-        if (isLocal) setMediaPermissionDenied(true);
-      };
+        videoEl.onloadedmetadata = () => {
+          log('Remote video metadata loaded');
+          videoEl.play().catch((err) => {
+            log('Remote video play failed:', err);
+            setNeedsUserInteraction(true);
+          });
+        };
+
+        videoEl.onplaying = () => {
+          log('Remote video playing');
+          setNeedsUserInteraction(false);
+        };
+
+        // Added: listen for pause event to detect interruptions
+        videoEl.onpause = () => {
+          log('Remote video paused');
+          setMediaPermissionDenied(true);
+        };
+      }
     } else {
       videoEl.srcObject = null;
     }
