@@ -302,6 +302,12 @@ const initMedia = async () => {
       }
     };
 
+    // Add listener for test-message event to log test messages
+    const handleTestMessage = (data: any) => {
+      log('Received test message:', data);
+    };
+    socket.on("test-message", handleTestMessage);
+
     const handleDisconnect = () => {
       log('Socket disconnected, delaying call cleanup');
       if (!callEnded) {
