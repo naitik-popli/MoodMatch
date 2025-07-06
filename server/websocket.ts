@@ -47,13 +47,19 @@ export async function setupWebSocket(io: SocketIOServer) {
           const userA = users.shift()!;
           const userB = users.shift()!;
 
-          const session = await storage.createChatSession({
+          const sessionA = await storage.createChatSession({
             userId: userA.userId,
             mood,
             partnerId: userB.userId,
           });
 
-          await notifyMatchedPair(io, userA.userId, userB.userId, session.id);
+          const sessionB = await storage.createChatSession({
+            userId: userB.userId,
+            mood,
+            partnerId: userA.userId,
+          });
+
+          await notifyMatchedPair(io, userA.userId, userB.userId, sessionA.id);
 
           await Promise.all([
             db.delete(moodQueue).where(eq(moodQueue.userId, userA.userId)),
