@@ -30,9 +30,9 @@ export function useSocket(userId?: number) {
       path: SOCKET_PATH,
       reconnectionAttempts: Infinity,
       reconnectionDelay: 1000,
-      timeout: 10000,
+      timeout: 30000,
+      // pingInterval and pingTimeout are not valid options for socket.io-client v4+
       auth: { userId: userId || "guest" },
-      // Removed pingInterval and pingTimeout due to TypeScript errors
     });
 
     // Handle successful connection
@@ -53,6 +53,19 @@ export function useSocket(userId?: number) {
     // Handle connection errors
     newSocket.on("connect_error", (error) => {
       console.error("❌ Socket connection error:", error.message || error);
+    });
+
+    // Log reconnection attempts and errors
+    newSocket.on("reconnect_attempt", (attempt) => {
+      console.log(`🔄 Reconnect attempt #${attempt}`);
+    });
+
+    newSocket.on("reconnect_error", (error) => {
+      console.error("❌ Reconnect error:", error);
+    });
+
+    newSocket.on("reconnect_failed", () => {
+      console.error("❌ Reconnect failed");
     });
 
     // Save the socket instance to state
