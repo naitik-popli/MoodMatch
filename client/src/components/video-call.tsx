@@ -183,6 +183,33 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     }
   }, [log]);
 
+  // Attach audio stream to audio element without retry logic
+  const attachAudioStream = useCallback((stream: MediaStream | null) => {
+    const audioEl = document.getElementById('local-audio') as HTMLAudioElement | null;
+    if (!audioEl) return;
+
+    if (audioEl.srcObject !== stream) {
+      if (audioEl.srcObject && audioEl.srcObject !== stream) {
+        (audioEl.srcObject as MediaStream).getTracks().forEach(track => track.stop());
+      }
+
+      if (stream) {
+        audioEl.srcObject = stream;
+        audioEl.muted = true; // mute local audio to avoid echo
+        audioEl.play().catch(err => {
+          log('Local audio play failed:', err);
+        });
+      } else {
+        audioEl.srcObject = null;
+      }
+    }
+  }, [log]);
+
+  // Attach local audio stream on change
+  useEffect(() => {
+    attachAudioStream(localStream);
+  }, [localStream, attachAudioStream]);
+
   // Handle stream changes
   useEffect(() => {
     attachStream(localStream, true);
