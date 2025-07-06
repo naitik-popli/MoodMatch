@@ -17,7 +17,7 @@ const DEBUG_MODE = process.env.DEBUG_MODE === "true";
 const MATCH_INTERVAL = 5000;
 const MAX_QUEUE_TIME = 300000;
 
-const userSocketMap = new Map<number, Set<string>>();
+const userSocketMap = new Map<number, string>();
 const activeSessions = new Set<number>();
 
 export async function setupWebSocket(io: SocketIOServer) {
@@ -83,12 +83,13 @@ export async function setupWebSocket(io: SocketIOServer) {
 
     socket.on("update-socket-id", (data: { userId: number }) => {
       if (!data?.userId) return;
-      let sockets = userSocketMap.get(data.userId);
-      if (!sockets) {
-        sockets = new Set();
-        userSocketMap.set(data.userId, sockets);
+      const existingSocketId = userSocketMap.get(data.userId);
+      if (existingSocketId && existingSocketId !== socket.id) {
+        // Disconnect the old socket if needed (optional)
+        // io.sockets.sockets.get(existingSocketId)?.disconnect(true);
+        console.log(`[SOCKET MAP] Replacing old socket ${existingSocketId} for user ${data.userId}`);
       }
-      sockets.add(socket.id);
+      userSocketMap.set(data.userId, socket.id);
       socket.data.userId = data.userId;
       console.log(`[SOCKET MAP] Bound user ${data.userId} to socket ${socket.id}`);
     });
@@ -178,14 +179,10 @@ export async function setupWebSocket(io: SocketIOServer) {
       }
 
       // Remove socket id from userSocketMap
-      const sockets = userSocketMap.get(userId);
-      if (sockets) {
-        sockets.delete(socket.id);
-        console.log(`[DISCONNECT] Removed socket ${socket.id} from user ${userId} socket map`);
-        if (sockets.size === 0) {
-          userSocketMap.delete(userId);
-          console.log(`[DISCONNECT] Removed user ${userId} from socket map`);
-        }
+      const socketId = userSocketMap.get(userId);
+      if (socketId === socket.id) {
+        userSocketMap.delete(userId);
+        console.log(`[DISCONNECT] Removed user ${userId} from socket map`);
       }
 
       // Remove user from moodQueue
@@ -206,11 +203,11 @@ async function getQueuePosition(userId: number): Promise<number> {
 }
 
 async function notifyMatchedPair(io: SocketIOServer, userA: number, userB: number, sessionId: number) {
-  const socketsA = userSocketMap.get(userA);
-  const socketsB = userSocketMap.get(userB);
+  const socketA = userSocketMap.get(userA);
+  const socketB = userSocketMap.get(userB);
 
-  if (!socketsA || !socketsB) {
-    console.warn(`[MATCH] Missing socket for users: A=${socketsA}, B=${socketsB}`);
+  if (!socketA || !socketB) {
+    console.warn(`[MATCH] Missing socket for users: A=${socketA}, B=${socketB}`);
     return;
   }
 
@@ -218,22 +215,18 @@ async function notifyMatchedPair(io: SocketIOServer, userA: number, userB: numbe
     activeSessions.add(userA);
     activeSessions.add(userB);
 
-    socketsA.forEach(socketId => {
-      io.to(socketId).emit("match-found", {
-        partnerId: userB,
-        partnerSocketId: Array.from(socketsB)[0], // send one socketId of partner
-        sessionId,
-        timestamp: new Date().toISOString()
-      });
+    io.to(socketA).emit("match-found", {
+      partnerId: userB,
+      partnerSocketId: socketB,
+      sessionId,
+      timestamp: new Date().toISOString()
     });
 
-    socketsB.forEach(socketId => {
-      io.to(socketId).emit("match-found", {
-        partnerId: userA,
-        partnerSocketId: Array.from(socketsA)[0], // send one socketId of partner
-        sessionId,
-        timestamp: new Date().toISOString()
-      });
+    io.to(socketB).emit("match-found", {
+      partnerId: userA,
+      partnerSocketId: socketA,
+      sessionId,
+      timestamp: new Date().toISOString()
     });
 
     console.log(`[MATCH] Notified user ${userA} and ${userB} of match (sessionId=${sessionId})`);
