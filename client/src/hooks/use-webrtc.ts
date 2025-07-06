@@ -134,6 +134,7 @@ const initMedia = async () => {
           message: "ICE candidate sent from client",
           candidate: event.candidate,
           timestamp: new Date().toISOString(),
+          targetSocketId, // add targetSocketId for debugging
         });
       }
     };
@@ -157,8 +158,14 @@ const initMedia = async () => {
     if (localStreamRef.current) {
       localStreamRef.current.getTracks().forEach(track => {
         try {
-          pc.addTrack(track, localStreamRef.current!);
-          log(`Added ${track.kind} track to peer connection on setup`);
+          // Check if track already added to avoid InvalidAccessError
+          const senderExists = pc.getSenders().some(sender => sender.track === track);
+          if (!senderExists) {
+            pc.addTrack(track, localStreamRef.current!);
+            log(`Added ${track.kind} track to peer connection on setup`);
+          } else {
+            log(`Skipped adding ${track.kind} track on setup - already added`);
+          }
         } catch (e) {
           log(`Error adding ${track.kind} track on setup:`, e);
         }
@@ -307,6 +314,14 @@ const initMedia = async () => {
       log('Received test message:', data);
     };
     socket.on("test-message", handleTestMessage);
+
+    // Add debug log for socket connection state
+    socket.on("connect", () => {
+      log('Socket connected:', socket.id);
+    });
+    socket.on("disconnect", (reason) => {
+      log('Socket disconnected:', reason);
+    });
 
     const handleDisconnect = () => {
       log('Socket disconnected, delaying call cleanup');
