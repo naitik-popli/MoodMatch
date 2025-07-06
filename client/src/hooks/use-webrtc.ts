@@ -146,6 +146,18 @@ const initMedia = async () => {
       }
     };
 
+    // Add local tracks immediately after creating peer connection
+    if (localStreamRef.current) {
+      localStreamRef.current.getTracks().forEach(track => {
+        try {
+          pc.addTrack(track, localStreamRef.current!);
+          log(`Added ${track.kind} track to peer connection on setup`);
+        } catch (e) {
+          log(`Error adding ${track.kind} track on setup:`, e);
+        }
+      });
+    }
+
     pc.onconnectionstatechange = () => {
       const state = pc.connectionState;
       setConnectionState(state);
