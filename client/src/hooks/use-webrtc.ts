@@ -73,6 +73,13 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
         };
       });
 
+      // Add event listener for stream inactive to log and handle
+      if ('oninactive' in stream) {
+        stream.oninactive = () => {
+          log('Media stream became inactive');
+        };
+      }
+
       return stream;
     } catch (error) {
       log('Media access error:', error);
