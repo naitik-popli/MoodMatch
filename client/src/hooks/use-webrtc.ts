@@ -131,7 +131,7 @@ const initMedia = async () => {
 
         // Send test message along with ICE candidate for debugging
         socket.emit("test-message", {
-          message: "ICE candidate sent N A",
+          message: "ICE candidate sent from client",
           candidate: event.candidate,
           timestamp: new Date().toISOString(),
         });

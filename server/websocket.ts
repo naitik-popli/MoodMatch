@@ -169,6 +169,14 @@ export async function setupWebSocket(io: SocketIOServer) {
           candidate: data.candidate,
         });
         console.log(`[SIGNAL] Forwarded webrtc-ice-candidate from ${socket.id} to ${targetSocket}`);
+
+        // Forward test message for debugging ICE candidate sending
+        io.to(targetSocket).emit("test-message", {
+          message: "ICE candidate forwarded by server",
+          fromSocketId: socket.id,
+          candidate: data.candidate,
+          timestamp: new Date().toISOString(),
+        });
       }
     });
 
