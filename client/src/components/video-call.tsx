@@ -122,61 +122,64 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     const videoEl = isLocal ? localVideoRef.current : remoteVideoRef.current;
     if (!videoEl) return;
 
-    // Clean up previous stream if exists
-    if (videoEl.srcObject) {
-      (videoEl.srcObject as MediaStream).getTracks().forEach(track => track.stop());
-    }
+    // Only update srcObject if stream changed to prevent play interruptions
+    if (videoEl.srcObject !== stream) {
+      // Clean up previous stream if exists and different
+      if (videoEl.srcObject && videoEl.srcObject !== stream) {
+        (videoEl.srcObject as MediaStream).getTracks().forEach(track => track.stop());
+      }
 
-    if (stream) {
-      videoEl.srcObject = stream;
-      videoEl.playsInline = true;
-      videoEl.muted = isLocal;
+      if (stream) {
+        videoEl.srcObject = stream;
+        videoEl.playsInline = true;
+        videoEl.muted = isLocal;
 
-      if (isLocal) {
-        // For local video, play once without retry or user interaction checks
-        videoEl.play().catch(err => {
-          log('Local video play failed:', err);
-        });
-      } else {
-        // For remote video, keep existing retry logic
-        const playAttempt = () => {
-          const playPromise = videoEl.play();
-          if (playPromise !== undefined) {
-            playPromise.catch(err => {
+        if (isLocal) {
+          // For local video, play once without retry or user interaction checks
+          videoEl.play().catch(err => {
+            log('Local video play failed:', err);
+          });
+        } else {
+          // For remote video, keep existing retry logic
+          const playAttempt = () => {
+            const playPromise = videoEl.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(err => {
+                log('Remote video play failed:', err);
+                setNeedsUserInteraction(true);
+                // Retry after delay
+                setTimeout(() => {
+                  log('Remote video retrying play');
+                  playAttempt();
+                }, 3000);
+              });
+            }
+          };
+
+          playAttempt();
+
+          videoEl.onloadedmetadata = () => {
+            log('Remote video metadata loaded');
+            videoEl.play().catch((err) => {
               log('Remote video play failed:', err);
               setNeedsUserInteraction(true);
-              // Retry after delay
-              setTimeout(() => {
-                log('Remote video retrying play');
-                playAttempt();
-              }, 3000);
             });
-          }
-        };
+          };
 
-        playAttempt();
+          videoEl.onplaying = () => {
+            log('Remote video playing');
+            setNeedsUserInteraction(false);
+          };
 
-        videoEl.onloadedmetadata = () => {
-          log('Remote video metadata loaded');
-          videoEl.play().catch((err) => {
-            log('Remote video play failed:', err);
-            setNeedsUserInteraction(true);
-          });
-        };
-
-        videoEl.onplaying = () => {
-          log('Remote video playing');
-          setNeedsUserInteraction(false);
-        };
-
-        // Added: listen for pause event to detect interruptions
-        videoEl.onpause = () => {
-          log('Remote video paused');
-          setMediaPermissionDenied(true);
-        };
+          // Added: listen for pause event to detect interruptions
+          videoEl.onpause = () => {
+            log('Remote video paused');
+            setMediaPermissionDenied(true);
+          };
+        }
+      } else {
+        videoEl.srcObject = null;
       }
-    } else {
-      videoEl.srcObject = null;
     }
   }, [log]);
 
