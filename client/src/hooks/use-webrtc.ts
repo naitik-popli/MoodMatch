@@ -135,12 +135,14 @@ const initMedia = async () => {
       log('Received remote track', event.track);
       if (event.streams && event.streams[0]) {
         const newStream = event.streams[0];
-        remoteStreamRef.current = newStream;
-        setRemoteStream(newStream);
-        log('Set remote stream', {
-          id: newStream.id,
-          tracks: newStream.getTracks().map(t => t.id)
-        });
+        if (remoteStreamRef.current !== newStream) {
+          remoteStreamRef.current = newStream;
+          setRemoteStream(newStream);
+          log('Set remote stream', {
+            id: newStream.id,
+            tracks: newStream.getTracks().map(t => t.id)
+          });
+        }
       }
     };
 
