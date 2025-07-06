@@ -9,6 +9,7 @@ const LocalVideoTest: React.FC<LocalVideoTestProps> = ({ localVideoStream }) => 
 
   useEffect(() => {
     if (localVideoRef.current && localVideoStream) {
+      console.log("LocalVideoTest: attaching local video stream", localVideoStream);
       localVideoRef.current.srcObject = localVideoStream;
       localVideoRef.current.play().catch((error) => {
         console.error("Error playing local video stream:", error);
