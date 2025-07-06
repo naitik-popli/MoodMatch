@@ -401,19 +401,14 @@ const initMedia = async () => {
         });
       }
       
-
-      // Added: listen for connection state changes to handle failures
-//       pc.onconnectionstatechange = () => {
-//   const state = pc.connectionState;
-//   log('Connection state changed:', state);
-//   setConnectionState(state);
-//   setIsConnected(state === "connected");
-
-//   if (state === "failed") {
-//     log('Peer connection failed — cleaning up');
-//     endCall();
-//   }
-// };
+      // Temporarily disable connection state change handler to stop retry logic
+      pc.onconnectionstatechange = () => {
+        const state = pc.connectionState;
+        log('Connection state changed:', state);
+        setConnectionState(state);
+        setIsConnected(state === "connected");
+        // Do not call endCall on failure to stop retry logic temporarily
+      };
 
     } catch (error) {
       log('Error during call start:', error);
