@@ -398,7 +398,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
                 }} 
                 className="w-full"
               >
-                Retry Connection
+                Retry Connectiondis
               </Button>
             )}
             <Button 

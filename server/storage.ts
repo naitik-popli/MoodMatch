@@ -60,8 +60,14 @@ export class DatabaseStorage {
     .limit(1);
 
   if (existingSession) {
-    this.debugLog(`User ${insertSession.userId} already has an active session SO F U C K U`, existingSession);
-    return existingSession;
+    // Update partnerId if different or null
+    if (existingSession.partnerId !== insertSession.partnerId) {
+      await db.update(chatSessions)
+        .set({ partnerId: insertSession.partnerId })
+        .where(eq(chatSessions.id, existingSession.id));
+      this.debugLog(`Updated partnerId for user ${insertSession.userId} in existing session`, { oldPartnerId: existingSession.partnerId, newPartnerId: insertSession.partnerId });
+    }
+    return { ...existingSession, partnerId: insertSession.partnerId };
   }
 
   // Otherwise create a new session
