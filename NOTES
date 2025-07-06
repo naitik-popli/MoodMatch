@@ -1,93 +1,89 @@
-GET / 200 1ms
+==> ///////////////////////////////////////////////////////////
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T15:59:46.907Z
-GET /api/moods/stats 304 3ms
-Response: {}
+[MATCH] Cleaned up stale entries older than 2025-07-06T16:24:54.349Z
+[CONN oJD0X6] New connection [socketId=oJD0X6Y0TY-Fc7yWAAAN]
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T15:59:51.901Z
-[CONN oVkKfM] New connection [socketId=oVkKfMPOvnOu5M7zAAAB]
-[CONN wLFuWA] New connection [socketId=wLFuWApbCtkX_IndAAAE]
+[MATCH] Cleaned up stale entries older than 2025-07-06T16:24:59.351Z
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T15:59:56.901Z
+[MATCH] Cleaned up stale entries older than 2025-07-06T16:25:04.353Z
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:00:01.901Z
-[DISCONNECT] Socket wLFuWApbCtkX_IndAAAE disconnected (userId=undefined)
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:00:06.900Z
-[CONN 53oMnE] New connection [socketId=53oMnENSgjNCeEh-AAAH]
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:00:11.903Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:00:16.907Z
-GET /api/moods/stats 304 3ms
-Response: {}
-POST /api/session/create 200 31ms
+[MATCH] Cleaned up stale entries older than 2025-07-06T16:25:09.357Z
+POST /api/session/create 200 83ms
 Response: {
-  "sessionId": 408,
-  "userId": 292,
+  "sessionId": 410,
+  "userId": 294,
   "mood": "happy"
 }
-[CONN XB14-I] New connection [socketId=XB14-IREWJ_ZIAr4AAAK]
-[SOCKET MAP] Bound user 292 to socket XB14-IREWJ_ZIAr4AAAK
+[CONN K_1-J4] New connection [socketId=K_1-J4k0NQrIG0IJAAAQ]
+[SOCKET MAP] Bound user 294 to socket K_1-J4k0NQrIG0IJAAAQ
+[CONN xs_tTf] New connection [socketId=xs_tTfagj6AzmFZMAAAT]
+[SOCKET MAP] Replacing old socket K_1-J4k0NQrIG0IJAAAQ for user 294
+[SOCKET MAP] Bound user 294 to socket xs_tTfagj6AzmFZMAAAT
+[SOCKET MAP] Bound user 294 to socket xs_tTfagj6AzmFZMAAAT
+[SOCKET MAP] Bound user 294 to socket xs_tTfagj6AzmFZMAAAT
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:00:21.908Z
-[CONN 8YeE91] New connection [socketId=8YeE91fX9iEgVMWkAAAN]
-[SOCKET MAP] Bound user 292 to socket 8YeE91fX9iEgVMWkAAAN
-[SOCKET MAP] Bound user 292 to socket 8YeE91fX9iEgVMWkAAAN
-[SOCKET MAP] Bound user 292 to socket 8YeE91fX9iEgVMWkAAAN
-[QUEUE 292] Attempting to join queue for "happy" with socket 8YeE91fX9iEgVMWkAAAN
-[QUEUE 292] Attempting to join queue for "happy" with socket 8YeE91fX9iEgVMWkAAAN
-[QUEUE 292] Joined queue at position 1 for mood "happy"
-[QUEUE 292] Joined queue at position 1 for mood "happy"
+[QUEUE 294] Attempting to join queue for "happy" with socket xs_tTfagj6AzmFZMAAAT
+[MATCH] Cleaned up stale entries older than 2025-07-06T16:25:14.364Z
+[QUEUE 294] Joined queue at position 1 for mood "happy"
 [MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-06T16:25:14.416Z
+[QUEUE 294] Attempting to join queue for "happy" with socket xs_tTfagj6AzmFZMAAAT
+[QUEUE 294] Joined queue at position 1 for mood "happy"
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:00:23.333Z
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:00:23.334Z
+[MATCH] Cleaned up stale entries older than 2025-07-06T16:25:14.438Z
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:00:26.971Z
-[DISCONNECT] Socket oVkKfMPOvnOu5M7zAAAB disconnected (userId=undefined)
+[MATCH] Cleaned up stale entries older than 2025-07-06T16:25:19.359Z
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:00:31.966Z
-[CONN be-2Qz] New connection [socketId=be-2QzqGngJsFj8QAAAQ]
+[MATCH] Cleaned up stale entries older than 2025-07-06T16:25:24.359Z
+[DISCONNECT] Socket cMdw5D8FDGPyyJOQAAAB disconnected (userId=293)
+[DISCONNECT] Socket 09qoH8WrR6jq4K2JAAAE disconnected (userId=undefined)
+[DISCONNECT] Socket xkaHCoc5UgRClnDTAAAH disconnected (userId=293)
+[DISCONNECT] Removed user 293 from socket map
+[DISCONNECT] Removed user 293 from queue
+[DISCONNECT] Removed user 293 from queue
+[CONN RMMDgY] New connection [socketId=RMMDgYl1zNt6mA58AAAW]
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:00:36.967Z
-POST /api/session/create 200 12ms
+[MATCH] Cleaned up stale entries older than 2025-07-06T16:25:29.359Z
+POST /api/session/create 200 54ms
 Response: {
-  "sessionId": 409,
-  "userId": 293,
+  "sessionId": 411,
+  "userId": 295,
   "mood": "happy"
 }
-[CONN MXrols] New connection [socketId=MXrolsFNx910X82pAAAT]
-[SOCKET MAP] Bound user 293 to socket MXrolsFNx910X82pAAAT
-[CONN tVpwWX] New connection [socketId=tVpwWXl0eMQOXhGaAAAW]
-[SOCKET MAP] Bound user 293 to socket tVpwWXl0eMQOXhGaAAAW
-[SOCKET MAP] Bound user 293 to socket tVpwWXl0eMQOXhGaAAAW
-[SOCKET MAP] Bound user 293 to socket tVpwWXl0eMQOXhGaAAAW
-[QUEUE 293] Attempting to join queue for "happy" with socket tVpwWXl0eMQOXhGaAAAW
-[QUEUE 293] Joined queue at position 2 for mood "happy"
+[CONN Dq3RlK] New connection [socketId=Dq3RlKTz0JMDy0QuAAAZ]
+[SOCKET MAP] Bound user 295 to socket Dq3RlKTz0JMDy0QuAAAZ
+[CONN QJSabq] New connection [socketId=QJSabqFkd98em9sfAAAc]
+[SOCKET MAP] Replacing old socket Dq3RlKTz0JMDy0QuAAAZ for user 295
+[SOCKET MAP] Bound user 295 to socket QJSabqFkd98em9sfAAAc
+[SOCKET MAP] Bound user 295 to socket QJSabqFkd98em9sfAAAc
+[SOCKET MAP] Bound user 295 to socket QJSabqFkd98em9sfAAAc
+[QUEUE 295] Attempting to join queue for "happy" with socket QJSabqFkd98em9sfAAAc
+[QUEUE 295] Joined queue at position 2 for mood "happy"
 [MATCH] Current queue length: 2
-[DEBUG][2025-07-06T16:05:39.752Z] User 292 already has an active session SO F U C K U {
-  id: 408,
-  userId: 292,
+[DEBUG][2025-07-06T16:30:31.192Z] User 294 already has an active session SO F U C K U {
+  id: 410,
+  userId: 294,
   mood: 'happy',
   isActive: true,
   partnerId: null,
-  createdAt: 2025-07-06T16:05:21.285Z,
+  createdAt: 2025-07-06T16:30:12.636Z,
   endedAt: null
 }
-[MATCH] Notified user 292 and 293 of match (sessionId=408)
-[MATCH] Paired users 292 and 293 in mood "happy"
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:00:39.762Z
-[DISCONNECT] Socket 8YeE91fX9iEgVMWkAAAN disconnected (userId=292)
-[DISCONNECT] Removed user 292 from active sessions
-[DISCONNECT] Removed socket 8YeE91fX9iEgVMWkAAAN from user 292 socket map
-[DISCONNECT] Removed user 292 from queue
-[DISCONNECT] Socket tVpwWXl0eMQOXhGaAAAW disconnected (userId=293)
-[DISCONNECT] Removed user 293 from active sessions
-[DISCONNECT] Removed socket tVpwWXl0eMQOXhGaAAAW from user 293 socket map
-[DISCONNECT] Removed user 293 from queue
-[CONN -b3EsJ] New connection [socketId=-b3EsJpTlEu26i-EAAAZ]
-[SOCKET MAP] Bound user 292 to socket -b3EsJpTlEu26i-EAAAZ
-[CONN KDlCDY] New connection [socketId=KDlCDYxSa8ZMlULDAAAc]
-[SOCKET MAP] Bound user 293 to socket KDlCDYxSa8ZMlULDAAAc
+[MATCH] Notified user 294 and 295 of match (sessionId=410)
+[MATCH] Paired users 294 and 295 in mood "happy"
+[MATCH] Cleaned up stale entries older than 2025-07-06T16:25:31.201Z
+[DISCONNECT] Socket xs_tTfagj6AzmFZMAAAT disconnected (userId=294)
+[DISCONNECT] Removed user 294 from active sessions
+[DISCONNECT] Removed user 294 from socket map
+[DISCONNECT] Removed user 294 from queue
+[DISCONNECT] Socket QJSabqFkd98em9sfAAAc disconnected (userId=295)
+[DISCONNECT] Removed user 295 from active sessions
+[DISCONNECT] Removed user 295 from socket map
+[DISCONNECT] Removed user 295 from queue
+[CONN zaE8rX] New connection [socketId=zaE8rXuA8zlzSs9DAAAf]
+[SOCKET MAP] Bound user 294 to socket zaE8rXuA8zlzSs9DAAAf
+[CONN Q6kNuW] New connection [socketId=Q6kNuWRkr6SDF9fHAAAi]
+[SOCKET MAP] Bound user 295 to socket Q6kNuWRkr6SDF9fHAAAi
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-06T16:25:34.361Z
 [MATCH] Current queue length: 0

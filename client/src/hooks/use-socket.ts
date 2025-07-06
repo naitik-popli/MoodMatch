@@ -24,57 +24,52 @@ export function useSocket(userId?: number) {
     console.log("🔧 Constructed wsUrl:", wsUrl);
     console.log("🚀 Connecting to socket at:", finalWsUrl);
 
-    // Create the socket connection
-    const newSocket = io(finalWsUrl, {
-      transports: ["websocket"],
-      path: SOCKET_PATH,
-      reconnectionAttempts: Infinity,
-      reconnectionDelay: 1000,
-      timeout: 30000,
-      // pingInterval and pingTimeout are not valid options for socket.io-client v4+
-      auth: { userId: userId || "guest" },
-    });
+    // Use a global socket instance to keep connection persistent
+    if (!window._globalSocket) {
+      window._globalSocket = io(finalWsUrl, {
+        transports: ["websocket"],
+        path: SOCKET_PATH,
+        reconnectionAttempts: Infinity,
+        reconnectionDelay: 1000,
+        timeout: 30000,
+        auth: { userId: userId || "guest" },
+      });
 
-    // Handle successful connection
-    newSocket.on("connect", () => {
-      console.log("✅ Connected to socket:", newSocket.id);
-      setIsConnected(true);
+      window._globalSocket.on("connect", () => {
+        console.log("✅ Connected to socket:", window._globalSocket.id);
+        setIsConnected(true);
+        window._globalSocket.emit("update-socket-id", { userId });
+      });
 
-      // Send user ID to backend for identification
-      newSocket.emit("update-socket-id", { userId });
-    });
+      window._globalSocket.on("disconnect", (reason) => {
+        console.warn("⚠️ Socket disconnected:", reason);
+        setIsConnected(false);
+      });
 
-    // Handle disconnection
-    newSocket.on("disconnect", (reason) => {
-      console.warn("⚠️ Socket disconnected:", reason);
-      setIsConnected(false);
-    });
+      window._globalSocket.on("connect_error", (error) => {
+        console.error("❌ Socket connection error:", error.message || error);
+      });
 
-    // Handle connection errors
-    newSocket.on("connect_error", (error) => {
-      console.error("❌ Socket connection error:", error.message || error);
-    });
+      window._globalSocket.on("reconnect_attempt", (attempt) => {
+        console.log(`🔄 Reconnect attempt #${attempt}`);
+      });
 
-    // Log reconnection attempts and errors
-    newSocket.on("reconnect_attempt", (attempt) => {
-      console.log(`🔄 Reconnect attempt #${attempt}`);
-    });
+      window._globalSocket.on("reconnect_error", (error) => {
+        console.error("❌ Reconnect error:", error);
+      });
 
-    newSocket.on("reconnect_error", (error) => {
-      console.error("❌ Reconnect error:", error);
-    });
+      window._globalSocket.on("reconnect_failed", () => {
+        console.error("❌ Reconnect failed");
+      });
+    } else {
+      setIsConnected(window._globalSocket.connected);
+    }
 
-    newSocket.on("reconnect_failed", () => {
-      console.error("❌ Reconnect failed");
-    });
+    setSocket(window._globalSocket);
 
-    // Save the socket instance to state
-    setSocket(newSocket);
-
-    // Clean up socket connection on component unmount
+    // Do not disconnect socket on unmount to keep connection persistent
     return () => {
-      console.log("🧹 Cleaning up socket connection");
-      newSocket.disconnect();
+      console.log("🧹 Component unmounted, but socket connection kept alive");
     };
   }, [userId]);
 
