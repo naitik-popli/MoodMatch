@@ -193,7 +193,7 @@ const initMedia = async () => {
 
   // Modify signaling setup effect to wait for socketIdReady and mediaReady
   useEffect(() => {
-    if (!socket || !socketIdReady || !mediaReady || socket.disconnected) {
+    if (!socket || !socketIdReady || !mediaReady) {
       log("Socket or media not ready, postponing signaling setup");
       return;
     }
