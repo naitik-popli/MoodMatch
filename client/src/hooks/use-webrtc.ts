@@ -214,6 +214,19 @@ const initMedia = async () => {
 
       try {
         const pc = peerConnectionRef.current || setupPeerConnection();
+
+        // Add local tracks if not already added
+        if (localStreamRef.current) {
+          localStreamRef.current.getTracks().forEach(track => {
+            try {
+              pc.addTrack(track, localStreamRef.current!);
+              log(`Added ${track.kind} track to peer connection on offer`);
+            } catch (e) {
+              log(`Error adding ${track.kind} track on offer:`, e);
+            }
+          });
+        }
+
         await pc.setRemoteDescription(data.offer);
         log('Set remote description');
 
@@ -235,7 +248,21 @@ const initMedia = async () => {
       if (data.fromSocketId !== targetSocketId || !peerConnectionRef.current) return;
 
       try {
-        await peerConnectionRef.current.setRemoteDescription(data.answer);
+        const pc = peerConnectionRef.current;
+
+        // Add local tracks if not already added
+        if (localStreamRef.current) {
+          localStreamRef.current.getTracks().forEach(track => {
+            try {
+              pc.addTrack(track, localStreamRef.current!);
+              log(`Added ${track.kind} track to peer connection on answer`);
+            } catch (e) {
+              log(`Error adding ${track.kind} track on answer:`, e);
+            }
+          });
+        }
+
+        await pc.setRemoteDescription(data.answer);
         log('Successfully set remote answer');
       } catch (error) {
         log('Error handling answer:', error);
