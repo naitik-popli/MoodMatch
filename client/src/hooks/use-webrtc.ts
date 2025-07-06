@@ -56,6 +56,23 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
 
       setLocalStream(stream);
       localStreamRef.current = stream;
+
+      // Add event listeners for tracks to detect ended or muted state
+      stream.getTracks().forEach(track => {
+        track.onended = () => {
+          log(`Track ended: ${track.kind}`);
+          // Optionally handle track ended (e.g., notify user)
+        };
+        track.onmute = () => {
+          log(`Track muted: ${track.kind}`);
+          // Optionally handle track muted
+        };
+        track.onunmute = () => {
+          log(`Track unmuted: ${track.kind}`);
+          // Optionally handle track unmuted
+        };
+      });
+
       return stream;
     } catch (error) {
       log('Media access error:', error);
