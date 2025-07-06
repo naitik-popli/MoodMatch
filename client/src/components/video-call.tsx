@@ -487,13 +487,13 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
               className="w-full h-full object-cover bg-black"
               style={{ transform: 'rotateY(180deg)' }}
             />
-            {needsUserInteraction && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/70">
-                <button className="text-white text-sm bg-blue-500 px-3 py-1 rounded">
-                  Click to Start
-                </button>
-              </div>
-            )}
+          {false && needsUserInteraction && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/70">
+              <button className="text-white text-sm bg-blue-500 px-3 py-1 rounded">
+                Click to Start
+              </button>
+            </div>
+          )}
           </div>
         </div>
 
