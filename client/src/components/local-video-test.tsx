@@ -1,30 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
+import { useLocalMediaStream } from "../hooks/useLocalMediaStream";
 
 export default function LocalVideoTest() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [error, setError] = useState<string | null>(null);
+  const { localStream, error } = useLocalMediaStream();
 
   useEffect(() => {
-    async function startLocalVideo() {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-          await videoRef.current.play();
-        }
-      } catch (err) {
-        setError("Failed to access local video: " + (err instanceof Error ? err.message : String(err)));
-      }
+    if (videoRef.current && localStream) {
+      videoRef.current.srcObject = localStream;
+      videoRef.current.play().catch(() => {
+        // Ignore play errors
+      });
     }
-    startLocalVideo();
-
-    return () => {
-      if (videoRef.current && videoRef.current.srcObject) {
-        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
-        tracks.forEach(track => track.stop());
-      }
-    };
-  }, []);
+  }, [localStream]);
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", backgroundColor: "#000" }}>
