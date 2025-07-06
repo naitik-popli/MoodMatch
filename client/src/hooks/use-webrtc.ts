@@ -498,8 +498,14 @@ const initMedia = async () => {
       // Add tracks with better error handling
       stream.getTracks().forEach((track) => {
         try {
-          pc.addTrack(track, stream);
-          log(`Added ${track.kind} track to peer connection`);
+          // Check if track already added to avoid InvalidAccessError
+          const senderExists = pc.getSenders().some(sender => sender.track === track);
+          if (!senderExists) {
+            pc.addTrack(track, stream);
+            log(`Added ${track.kind} track to peer connection`);
+          } else {
+            log(`Skipped adding ${track.kind} track - already added`);
+          }
         } catch (error) {
           log(`Error adding ${track.kind} track:`, error);
         }
