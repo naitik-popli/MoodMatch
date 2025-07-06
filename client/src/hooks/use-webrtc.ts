@@ -80,6 +80,15 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
         };
       }
 
+      // Add event listener for track ended to detect if video track ended and log
+      const videoTrack = stream.getVideoTracks()[0];
+      if (videoTrack) {
+        videoTrack.onended = () => {
+          log('Video track ended');
+          // Optionally handle video track ended (e.g., notify user, cleanup)
+        };
+      }
+
       return stream;
     } catch (error) {
       log('Media access error:', error);
