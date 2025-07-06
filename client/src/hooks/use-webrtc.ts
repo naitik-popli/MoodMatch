@@ -154,6 +154,7 @@ const initMedia = async () => {
 
   // Track socket id readiness for signaling setup
   const [socketIdReady, setSocketIdReady] = useState(false);
+  const [mediaReady, setMediaReady] = useState(false);
 
   useEffect(() => {
     if (socket && socket.id) {
@@ -164,10 +165,20 @@ const initMedia = async () => {
     }
   }, [socket, socket?.id]);
 
-  // Modify signaling setup effect to wait for socketIdReady
+  // Track media readiness for signaling setup
   useEffect(() => {
-    if (!socket || !socketIdReady || socket.disconnected) {
-      log("Socket not ready, postponing signaling setup");
+    if (localStream) {
+      setMediaReady(true);
+      console.log("🎥 Media stream ready for signaling:", localStream.id);
+    } else {
+      setMediaReady(false);
+    }
+  }, [localStream]);
+
+  // Modify signaling setup effect to wait for socketIdReady and mediaReady
+  useEffect(() => {
+    if (!socket || !socketIdReady || !mediaReady || socket.disconnected) {
+      log("Socket or media not ready, postponing signaling setup");
       return;
     }
 
