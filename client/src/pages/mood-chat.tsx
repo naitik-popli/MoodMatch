@@ -8,6 +8,7 @@ import { useSocket } from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
 import { API_BASE_URL } from "../lib/api";
 import TestCallConnection from "../components/TestCallConnection";
+import LocalVideoTest from "../components/local-video-test";
 
 export default function MoodChat() {
   const [currentScreen, setCurrentScreen] = useState<'selection' | 'waiting' | 'call'>('selection');
@@ -24,7 +25,7 @@ export default function MoodChat() {
   console.log("🔗 Socket connection status:", isConnected);
 
   const alreadyMatched = React.useRef(false);
-  const handleMatchFound = (data: { partnerId: number; partnerSocketId: string; sessionId: number }) => {
+  const handleMatchFound = (data: { partnerId: number; partnerSocketId: string }) => {
     console.log("🧩 handleMatchFound called with data:", data);
 
     setSessionData((prev) => {
@@ -34,20 +35,13 @@ export default function MoodChat() {
       }
       if (alreadyMatched.current) {
         console.warn("⚠️ Already matched, ignoring duplicate match-found event");
-        // Reset matched state to allow new matches if sessionId differs
-        if (prev.sessionId !== data.sessionId) {
-          console.log("ℹ️ New session detected, resetting matched state");
-          alreadyMatched.current = false;
-        } else {
-          return prev; // Ignore duplicate matches
-        }
+        return prev; // Ignore duplicate matches
       }
       alreadyMatched.current = true;
       const updated = {
         ...prev,
         partnerId: data.partnerId,
         partnerSocketId: data.partnerSocketId,
-        sessionId: data.sessionId,
       };
 
       console.log("📦 Updated sessionData after match:", updated);
@@ -202,6 +196,7 @@ export default function MoodChat() {
 
       {/* Test Call Connection Component */}
       <TestCallConnection />
+      <LocalVideoTest />
     </div>
   );
 }
