@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface LocalVideoTestProps {
   localVideoStream: MediaStream | null;
@@ -6,14 +6,27 @@ interface LocalVideoTestProps {
 
 const LocalVideoTest: React.FC<LocalVideoTestProps> = ({ localVideoStream }) => {
   const localVideoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const playTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (localVideoRef.current && localVideoStream) {
       console.log("LocalVideoTest: attaching local video stream", localVideoStream);
       localVideoRef.current.srcObject = localVideoStream;
-      localVideoRef.current.play().catch((error) => {
-        console.error("Error playing local video stream:", error);
-      });
+
+      if (playTimeoutRef.current) {
+        clearTimeout(playTimeoutRef.current);
+        playTimeoutRef.current = null;
+      }
+
+      playTimeoutRef.current = setTimeout(() => {
+        localVideoRef.current?.play().then(() => {
+          setIsPlaying(true);
+        }).catch((error) => {
+          console.error("Error playing local video stream:", error);
+          setIsPlaying(false);
+        });
+      }, 100);
     }
   }, [localVideoStream]);
 
