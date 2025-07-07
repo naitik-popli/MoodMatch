@@ -1,5 +1,5 @@
 import { Server as SocketIOServer, Socket } from "socket.io";
-import type { ReservedOrUserEventNames, SocketReservedEventsMap } from "socket.io/dist/socket";
+import { MoodQueue } from "@shared/schema";
 
 import { storage } from "./storage";
 import { db } from "./db";
@@ -135,6 +135,30 @@ export async function setupWebSocket(io: SocketIOServer) {
         console.error(`[QUEUE ERROR] ${data?.userId}:`, error);
         socket.emit("queue-error" as any, {
           message: error instanceof Error ? error.message : "Queue join failed"
+        });
+      }
+    });
+
+    // New handler for leave-mood-queue event
+    socket.on("leave-mood-queue", async (data: { userId: number }) => {
+      try {
+        if (!data?.userId) {
+          throw new Error("Missing userId for leave-mood-queue");
+        }
+        console.log(`[QUEUE ${data.userId}] Leaving queue with socket ${socket.id}`);
+
+        await db.delete(moodQueue).where(eq(moodQueue.userId, data.userId));
+
+        socket.emit("queue-status" as any, {
+          status: "left",
+          userId: data.userId,
+        });
+
+        console.log(`[QUEUE ${data.userId}] Left queue successfully`);
+      } catch (error) {
+        console.error(`[QUEUE ERROR] ${data?.userId} on leave-mood-queue:`, error);
+        socket.emit("queue-error" as any, {
+          message: error instanceof Error ? error.message : "Queue leave failed"
         });
       }
     });
