@@ -47,7 +47,17 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
   const initializeMedia = useCallback(async () => {
     log('Initializing media devices');
     try {
-      const stream = await navigator.mediaDevices.getUserMedia(getMediaConstraints());
+      // Define media constraints explicitly here to fix missing getMediaConstraints
+      const constraints = {
+        audio: true,
+        video: {
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+          facingMode: "user"
+        }
+      };
+
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
 
       log('Obtained media stream', {
         id: stream.id,
