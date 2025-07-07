@@ -15,6 +15,25 @@ interface UseWebRTCProps {
 
 export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProps) {
   const log = debug('useWebRTC');
+
+  // Additional global socket event logging
+  useEffect(() => {
+    if (!socket) return;
+
+    const onConnect = () => log('Socket connected:', socket.id);
+    const onDisconnect = (reason: string) => log('Socket disconnected:', reason);
+    const onError = (error: any) => log('Socket error:', error);
+
+    socket.on('connect', onConnect);
+    socket.on('disconnect', onDisconnect);
+    socket.on('error', onError);
+
+    return () => {
+      socket.off('connect', onConnect);
+      socket.off('disconnect', onDisconnect);
+      socket.off('error', onError);
+    };
+  }, [socket]);
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
   const [isConnected, setIsConnected] = useState(false);
