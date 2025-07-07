@@ -47,17 +47,7 @@ export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProp
   const initializeMedia = useCallback(async () => {
     log('Initializing media devices');
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          width: { ideal: 1280 },
-          height: { ideal: 720 },
-          frameRate: { ideal: 30 }
-        },
-        audio: {
-          echoCancellation: true,
-          noiseSuppression: true
-        }
-      });
+      const stream = await navigator.mediaDevices.getUserMedia(getMediaConstraints());
 
       log('Obtained media stream', {
         id: stream.id,
@@ -129,7 +119,7 @@ const initMedia = async () => {
   }
   mediaInitializedRef.current = true;
 
-  const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+  const stream = await navigator.mediaDevices.getUserMedia(getMediaConstraints());
   setLocalStream(stream);
 };
 
@@ -171,8 +161,6 @@ const initMedia = async () => {
             tracks: newStream.getTracks().map(t => t.id)
           });
         }
-      } else {
-        log('Warning: ontrack event has no streams');
       }
     };
 
@@ -220,6 +208,7 @@ const initMedia = async () => {
 
     return pc;
   }, [socket, targetSocketId, log]);
+
 
   useEffect(() => {
     if (socket) {
@@ -275,8 +264,14 @@ const initMedia = async () => {
         if (localStreamRef.current) {
           localStreamRef.current.getTracks().forEach(track => {
             try {
-              pc.addTrack(track, localStreamRef.current!);
-              log(`Added ${track.kind} track to peer connection on offer`);
+              // Check if track already added to avoid InvalidAccessError
+              const senderExists = pc.getSenders().some(sender => sender.track === track);
+              if (!senderExists) {
+                pc.addTrack(track, localStreamRef.current!);
+                log(`Added ${track.kind} track to peer connection on offer`);
+              } else {
+                log(`Skipped adding ${track.kind} track on offer - already added`);
+              }
             } catch (e) {
               log(`Error adding ${track.kind} track on offer:`, e);
             }
@@ -312,8 +307,14 @@ const initMedia = async () => {
         if (localStreamRef.current) {
           localStreamRef.current.getTracks().forEach(track => {
             try {
-              pc.addTrack(track, localStreamRef.current!);
-              log(`Added ${track.kind} track to peer connection on answer`);
+              // Check if track already added to avoid InvalidAccessError
+              const senderExists = pc.getSenders().some(sender => sender.track === track);
+              if (!senderExists) {
+                pc.addTrack(track, localStreamRef.current!);
+                log(`Added ${track.kind} track to peer connection on answer`);
+              } else {
+                log(`Skipped adding ${track.kind} track on answer - already added`);
+              }
             } catch (e) {
               log(`Error adding ${track.kind} track on answer:`, e);
             }
@@ -386,9 +387,9 @@ const initMedia = async () => {
       socket.off("webrtc-ice-candidate", handleIce);
       socket.off("disconnect", handleDisconnect);
       socket.off("connect", handleConnect);
-      socket.off("test-message", handleTestMessage);
     };
   }, [socket, socketIdReady, targetSocketId, setupPeerConnection, log]);
+
 
   // Enhanced signaling handlers
   useEffect(() => {

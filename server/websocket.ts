@@ -165,6 +165,7 @@ export async function setupWebSocket(io: SocketIOServer) {
 
     // Forward WebRTC signaling messages
     socket.on("webrtc-offer", (data: any) => {
+      console.log(`[SIGNAL] Received webrtc-offer from ${socket.id} to forward to ${data.targetSocketId}`, data);
       const targetSocket = userSocketMap.get(data.targetSocketId);
       if (targetSocket) {
         io.to(targetSocket).emit("webrtc-offer", {
@@ -172,10 +173,13 @@ export async function setupWebSocket(io: SocketIOServer) {
           offer: data.offer,
         });
         console.log(`[SIGNAL] Forwarded webrtc-offer from ${socket.id} to ${targetSocket}`);
+      } else {
+        console.warn(`[SIGNAL] Target socket ${data.targetSocketId} not found for webrtc-offer`);
       }
     });
 
     socket.on("webrtc-answer", (data: any) => {
+      console.log(`[SIGNAL] Received webrtc-answer from ${socket.id} to forward to ${data.targetSocketId}`, data);
       const targetSocket = userSocketMap.get(data.targetSocketId);
       if (targetSocket) {
         io.to(targetSocket).emit("webrtc-answer", {
@@ -183,10 +187,13 @@ export async function setupWebSocket(io: SocketIOServer) {
           answer: data.answer,
         });
         console.log(`[SIGNAL] Forwarded webrtc-answer from ${socket.id} to ${targetSocket}`);
+      } else {
+        console.warn(`[SIGNAL] Target socket ${data.targetSocketId} not found for webrtc-answer`);
       }
     });
 
     socket.on("webrtc-ice-candidate", (data: any) => {
+      console.log(`[SIGNAL] Received webrtc-ice-candidate from ${socket.id} to forward to ${data.targetSocketId}`, data);
       const targetSocket = userSocketMap.get(data.targetSocketId);
       if (targetSocket) {
         io.to(targetSocket).emit("webrtc-ice-candidate", {
@@ -202,6 +209,8 @@ export async function setupWebSocket(io: SocketIOServer) {
           candidate: data.candidate,
           timestamp: new Date().toISOString(),
         });
+      } else {
+        console.warn(`[SIGNAL] Target socket ${data.targetSocketId} not found for webrtc-ice-candidate`);
       }
     });
 
