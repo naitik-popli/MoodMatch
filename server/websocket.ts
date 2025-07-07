@@ -1,8 +1,10 @@
 import { Server as SocketIOServer, Socket } from "socket.io";
+import type { ReservedOrUserEventNames, SocketReservedEventsMap } from "socket.io/dist/socket";
+
 import { storage } from "./storage";
 import { db } from "./db";
 import { moodQueue, chatSessions } from "@shared/schema";
-import { eq, and, lt } from "drizzle-orm";
+import { eq, and, lt, or } from "drizzle-orm";
 import { logToFile } from './backend-logs.js';
 import type { Mood } from "@shared/schema";
 
@@ -61,10 +63,9 @@ export async function setupWebSocket(io: SocketIOServer) {
 
           await notifyMatchedPair(io, userA.userId, userB.userId, sessionA.id);
 
-          await Promise.all([
-            db.delete(moodQueue).where(eq(moodQueue.userId, userA.userId)),
-            db.delete(moodQueue).where(eq(moodQueue.userId, userB.userId))
-          ]);
+          await db.delete(moodQueue).where(
+            or(eq(moodQueue.userId, userA.userId), eq(moodQueue.userId, userB.userId))
+          );
 
           console.log(`[MATCH] Paired users ${userA.userId} and ${userB.userId} in mood "${mood}"`);
         }
@@ -83,7 +84,7 @@ export async function setupWebSocket(io: SocketIOServer) {
 
   const matchingInterval = setInterval(matchUsers, MATCH_INTERVAL);
 
-  io.on("connection", async (socket: Socket<{}, {}, {}, SocketData>) => {
+  io.on("connection", async (socket: Socket) => {
     const connId = socket.id.slice(0, 6);
     console.log(`[CONN ${connId}] New connection [socketId=${socket.id}]`);
 
@@ -180,7 +181,7 @@ export async function setupWebSocket(io: SocketIOServer) {
       }
     });
 
-  socket.on("disconnect", async () => {
+    socket.on("disconnect", async () => {
       const userId = socket.data?.userId;
       console.log(`[DISCONNECT] Socket ${socket.id} disconnected (userId=${userId})`);
 

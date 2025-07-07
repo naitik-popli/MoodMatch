@@ -1,64 +1,84 @@
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:55:43.321Z
-[DISCONNECT] Socket IDRs1rOLuh0b_2Z6AAAE disconnected (userId=undefined)
-[DISCONNECT] Socket T1qFGniMY-Cz2QwaAAAB disconnected (userId=303)
-[DISCONNECT] Removed user 303 from socket map
-[DISCONNECT] Removed user 303 from queue
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:47:57.524Z
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:55:48.323Z
-[CONN d1BS7s] New connection [socketId=d1BS7sXiFvsrnZxKAAAK]
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:02.522Z
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:55:53.398Z
-POST /api/session/create 200 103ms
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:07.522Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:12.522Z
+GET /api/moods/stats 304 3ms
+Response: {}
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:17.524Z
+[DISCONNECT] Socket 6hjUmivffZr6BZfbAAAE disconnected (userId=undefined)
+[CONN -6e10C] New connection [socketId=-6e10C5PQNlHa5QvAAAH]
+POST /api/session/create 200 55ms
 Response: {
-  "sessionId": 420,
-  "userId": 304,
+  "sessionId": 444,
+  "userId": 328,
   "mood": "happy"
 }
-[CONN tsrOT0] New connection [socketId=tsrOT0rXR4XAx-EcAAAN]
-[SOCKET MAP] Bound user 304 to socket tsrOT0rXR4XAx-EcAAAN
-[SOCKET MAP] Bound user 304 to socket tsrOT0rXR4XAx-EcAAAN
-[SOCKET MAP] Bound user 304 to socket tsrOT0rXR4XAx-EcAAAN
-[QUEUE 304] Attempting to join queue for "happy" with socket tsrOT0rXR4XAx-EcAAAN
-[QUEUE 304] Joined queue at position 1 for mood "happy"
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:22.523Z
+[CONN z0chlP] New connection [socketId=z0chlPvn2vjmRNRYAAAK]
+[SOCKET MAP] Bound user 328 to socket z0chlPvn2vjmRNRYAAAK
+[SOCKET MAP] Bound user 328 to socket z0chlPvn2vjmRNRYAAAK
+[SOCKET MAP] Bound user 328 to socket z0chlPvn2vjmRNRYAAAK
+[QUEUE 328] Attempting to join queue for "happy" with socket z0chlPvn2vjmRNRYAAAK
+[QUEUE 328] Joined queue at position 1 for mood "happy"
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:55:55.136Z
-[QUEUE 304] Attempting to join queue for "happy" with socket tsrOT0rXR4XAx-EcAAAN
-[QUEUE 304] Joined queue at position 1 for mood "happy"
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:24.038Z
+[QUEUE 328] Attempting to join queue for "happy" with socket z0chlPvn2vjmRNRYAAAK
+[QUEUE 328] Joined queue at position 1 for mood "happy"
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:55:55.271Z
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:24.123Z
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:55:58.324Z
-POST /api/session/create 200 15ms
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:27.526Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:32.524Z
+POST /api/session/create 200 13ms
 Response: {
-  "sessionId": 421,
-  "userId": 305,
+  "sessionId": 445,
+  "userId": 329,
   "mood": "happy"
 }
-[CONN 6ED1aH] New connection [socketId=6ED1aHzxvp5t2gg9AAAQ]
-[SOCKET MAP] Bound user 305 to socket 6ED1aHzxvp5t2gg9AAAQ
-[SOCKET MAP] Bound user 305 to socket 6ED1aHzxvp5t2gg9AAAQ
-[SOCKET MAP] Bound user 305 to socket 6ED1aHzxvp5t2gg9AAAQ
-[QUEUE 305] Attempting to join queue for "happy" with socket 6ED1aHzxvp5t2gg9AAAQ
-[QUEUE 305] Joined queue at position 2 for mood "happy"
+[CONN eSyqro] New connection [socketId=eSyqrocnJuQSKDjVAAAN]
+[SOCKET MAP] Bound user 329 to socket eSyqrocnJuQSKDjVAAAN
+[SOCKET MAP] Bound user 329 to socket eSyqrocnJuQSKDjVAAAN
+[SOCKET MAP] Bound user 329 to socket eSyqrocnJuQSKDjVAAAN
+[QUEUE 329] Attempting to join queue for "happy" with socket eSyqrocnJuQSKDjVAAAN
+[QUEUE 329] Joined queue at position 2 for mood "happy"
 [MATCH] Current queue length: 2
-[QUEUE 305] Attempting to join queue for "happy" with socket 6ED1aHzxvp5t2gg9AAAQ
-[DEBUG][2025-07-06T17:01:02.233Z] Updated partnerId for user 304 in existing session { oldPartnerId: null, newPartnerId: 305 }
-[QUEUE 305] Joined queue at position 2 for mood "happy"
-[DEBUG][2025-07-06T17:01:02.251Z] Updated partnerId for user 305 in existing session { oldPartnerId: null, newPartnerId: 304 }
-[MATCH] Notified user 304 and 305 of match (sessionId=420)
-[MATCH] Current queue length: 2
-[MATCH] Paired users 304 and 305 in mood "happy"
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:56:02.280Z
-[MATCH] Notified user 304 and 305 of match (sessionId=420)
-[MATCH] Paired users 304 and 305 in mood "happy"
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:56:02.295Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:56:03.324Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:56:08.325Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:56:13.329Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-06T16:56:18.334Z
-[MATCH] Current queue length: 0
+[DEBUG][2025-07-07T15:53:34.541Z] Updated partnerId for user 328 in existing session { oldPartnerId: null, newPartnerId: 329 }
+[DEBUG][2025-07-07T15:53:34.556Z] Updated partnerId for user 329 in existing session { oldPartnerId: null, newPartnerId: 328 }
+[MATCH] Notified user 328 and 329 of match (sessionId=444)
+[QUEUE 329] Attempting to join queue for "happy" with socket eSyqrocnJuQSKDjVAAAN
+[MATCH] Paired users 328 and 329 in mood "happy"
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:34.589Z
+[QUEUE 329] Joined queue at position 1 for mood "happy"
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:34.634Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:37.533Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:42.528Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:47.525Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:52.525Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:48:57.526Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:49:02.526Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:49:07.526Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:49:12.526Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:49:17.548Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:49:22.526Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:49:27.525Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-07T15:49:32.525Z
