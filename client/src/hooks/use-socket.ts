@@ -1,81 +1,113 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { io, Socket } from "socket.io-client";
+import { API_BASE_URL } from "../lib/api";
 
-const SOCKET_URL = import.meta.env.VITE_WS_URL || "wss://moodmatch-61xp.onrender.com";
+// Define the path used by both client and server
+const SOCKET_PATH = "/socket.io";
 
-export function useSocket() {
+// Custom hook to manage socket connection
+export function useSocket(userId?: number) {
   const [socket, setSocket] = useState<Socket | null>(null);
-  const [connected, setConnected] = useState(false);
-  const socketRef = useRef<Socket | null>(null);
-  const userIdRef = useRef<number | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    if (!socketRef.current) {
-      const newSocket = io(SOCKET_URL, {
+    // 🛑 Do nothing if no userId
+    if (!userId) return;
+
+    // Build WebSocket URL from API_BASE_URL
+    let wsUrl = API_BASE_URL.replace(/^http/, "ws").replace(/\/api\/?$/, "");
+    const finalWsUrl = wsUrl.startsWith("ws://")
+      ? wsUrl.replace(/^ws:/, "wss:")
+      : wsUrl;
+
+    console.log("🌐 API_BASE_URL:", API_BASE_URL);
+    console.log("🔧 Constructed wsUrl:", wsUrl);
+    console.log("🚀 Connecting to socket at:", finalWsUrl);
+
+    // Use a global socket instance to keep connection persistent
+    if (!window._globalSocket) {
+      window._globalSocket = io(finalWsUrl, {
         transports: ["websocket"],
-        autoConnect: false,
+        path: SOCKET_PATH,
+        reconnectionAttempts: Infinity,
+        reconnectionDelay: 1000,
+        timeout: 30000,
+        auth: { userId: userId || "guest" },
       });
-      socketRef.current = newSocket;
-      setSocket(newSocket);
-    }
 
-    const socket = socketRef.current;
+      window._globalSocket.on("connect", () => {
+        console.log("✅ Connected to socket:", window._globalSocket.id);
+        setIsConnected(true);
+        window._globalSocket.emit("update-socket-id", { userId });
+      });
 
-    const onConnect = () => {
-      setConnected(true);
-      console.log("[SOCKET] Connected:", socket?.id);
-      // Emit update-socket-id event on connect if userId is available
-      if (socket && userIdRef.current) {
-        socket.emit("update-socket-id", { userId: userIdRef.current });
-        console.log(`[SOCKET] Emitted update-socket-id for userId: ${userIdRef.current}`);
-      }
-    };
+      window._globalSocket.on("disconnect", (reason) => {
+        console.warn("⚠️ Socket disconnected:", reason);
+        setIsConnected(false);
+      });
 
-    const onDisconnect = () => {
-      setConnected(false);
-      console.log("[SOCKET] Disconnected");
-    };
+      window._globalSocket.on("connect_error", (error) => {
+        console.error("❌ Socket connection error:", error.message || error);
+      });
 
-    socket.on("connect", onConnect);
-    socket.on("disconnect", onDisconnect);
+      window._globalSocket.on("reconnect_attempt", (attempt) => {
+        console.log(`🔄 Reconnect attempt #${attempt}`);
+      });
 
-    socket.connect();
+      window._globalSocket.on("reconnect_error", (error) => {
+        console.error("❌ Reconnect error:", error);
+      });
 
-    return () => {
-      socket.off("connect", onConnect);
-      socket.off("disconnect", onDisconnect);
-      socket.disconnect();
-    };
-  }, []);
-
-  // Emit event with data
-  const emit = (event: string, data?: any) => {
-    if (socket && connected) {
-      socket.emit(event, data);
-      console.log(`[SOCKET] Emitted event: ${event}`, data);
-      if (event === "update-socket-id" && data?.userId) {
-        userIdRef.current = data.userId;
-      }
+      window._globalSocket.on("reconnect_failed", () => {
+        console.error("❌ Reconnect failed");
+      });
     } else {
-      console.warn(`[SOCKET] Cannot emit, socket not connected: ${event}`);
+      setIsConnected(window._globalSocket.connected);
     }
-  };
 
-  // Listen for event
-  const on = (event: string, callback: (...args: any[]) => void) => {
-    if (socket) {
-      socket.on(event, callback);
-      console.log(`[SOCKET] Listening for event: ${event}`);
-    }
-  };
+    setSocket(window._globalSocket);
 
-  // Remove event listener
-  const off = (event: string, callback: (...args: any[]) => void) => {
-    if (socket) {
-      socket.off(event, callback);
-      console.log(`[SOCKET] Removed listener for event: ${event}`);
-    }
-  };
+    // Do not disconnect socket on unmount to keep connection persistent
+    return () => {
+      console.log("🧹 Component unmounted, but socket connection kept alive");
+    };
+  }, [userId]);
 
-  return { socket, connected, emit, on, off };
+  // Emit events only when connected
+  const emit = useCallback(
+    (event: string, data?: any) => {
+      if (socket && isConnected) {
+        console.log(`📤 Emitting '${event}' with data:`, data);
+        socket.emit(event, data);
+      } else {
+        console.warn(`⚠️ Cannot emit '${event}' — socket not connected`);
+      }
+    },
+    [socket, isConnected]
+  );
+
+  // Listen for socket events
+  const on = useCallback(
+    (event: string, callback: (data: any) => void) => {
+      if (socket) {
+        console.log(`👂 Subscribing to '${event}'`);
+        socket.on(event, callback);
+
+        return () => {
+          console.log(`🚫 Unsubscribing from '${event}'`);
+          socket.off(event, callback);
+        };
+      }
+    },
+    [socket]
+  );
+
+  return {
+    socket,
+    isConnected,
+    emit,
+    on,
+  };
 }
+
+export default useSocket;
