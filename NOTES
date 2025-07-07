@@ -1,116 +1,710 @@
-🔗 Socket connection status: true
-index-11lJ9xUa.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-11lJ9xUa.js:319 🧹 Component unmounted, but socket connection kept alive
-index-11lJ9xUa.js:319 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
-index-11lJ9xUa.js:319 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
-index-11lJ9xUa.js:319 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket or media not ready, postponing signaling setup
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket not ready, postponing signaling setup
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'new'}
-index-11lJ9xUa.js:319 No remoteStream available to assign
-index-11lJ9xUa.js:319 [2025-07-07T16:25:07.155Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: false, mediaPermissionGranted: false, partnerSocketId: '5J44zBJLxdU07jX0AAAW'}
-index-11lJ9xUa.js:363 📞 Transitioning to VideoCall: {sessionId: 451, userId: 335, partnerId: 336, partnerSocketId: '5J44zBJLxdU07jX0AAAW'}
-index-11lJ9xUa.js:319 🧠 Local socket ID: 1aNyG-FlguVjibXwAAAQ
-index-11lJ9xUa.js:319 🧠 Socket ID ready for signaling: 1aNyG-FlguVjibXwAAAQ
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket or media not ready, postponing signaling setup
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'new'}
-index-11lJ9xUa.js:319 No remoteStream available to assign
-index-11lJ9xUa.js:319 [2025-07-07T16:25:07.160Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: true, mediaPermissionGranted: false, partnerSocketId: '5J44zBJLxdU07jX0AAAW'}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket or media not ready, postponing signaling setup
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'new'}
-index-11lJ9xUa.js:319 No remoteStream available to assign
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket or media not ready, postponing signaling setup
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'new'}
-index-11lJ9xUa.js:319 No remoteStream available to assign
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Initializing media devices
-index-11lJ9xUa.js:319 [2025-07-07T16:25:07.972Z] [DEBUG:VideoCall] Starting call initialization
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Initializing media devices
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket or media not ready, postponing signaling setup
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'new'}
-index-11lJ9xUa.js:319 No remoteStream available to assign
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Obtained media stream {id: '5b29cad8-56b9-46b9-bd88-dba10409670c', active: true, videoTracks: Array(1), audioTracks: Array(1)}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Creating new peer connection
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Added audio track to peer connection on setup
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Added video track to peer connection on setup
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Skipped adding audio track - already added
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Skipped adding video track - already added
-index-11lJ9xUa.js:319 🎥 Media stream ready for signaling: 5b29cad8-56b9-46b9-bd88-dba10409670c
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket or media not ready, postponing signaling setup
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: '5b29cad8-56b9-46b9-bd88-dba10409670c', remoteStream: undefined, isConnected: false, connectionState: 'new'}
-index-11lJ9xUa.js:319 No remoteStream available to assign
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Obtained media stream {id: 'f2722af6-a7b1-4f3e-99a4-6436cf75a598', active: true, videoTracks: Array(1), audioTracks: Array(1)}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Creating new peer connection
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Added audio track to peer connection on setup
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Added video track to peer connection on setup
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Skipped adding audio track - already added
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Skipped adding video track - already added
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Signaling state: have-local-offer
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Created and set local offer
-index-11lJ9xUa.js:319 🎥 Media stream ready for signaling: f2722af6-a7b1-4f3e-99a4-6436cf75a598
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Subscribed to test-message event
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: 'f2722af6-a7b1-4f3e-99a4-6436cf75a598', remoteStream: undefined, isConnected: false, connectionState: 'new'}
-index-11lJ9xUa.js:319 No remoteStream available to assign
-index-11lJ9xUa.js:319 [2025-07-07T16:25:08.100Z] [DEBUG:VideoCall] Local video play failed: AbortError: The play() request was interrupted by a new load request. https://goo.gl/LdLk22
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Signaling state: have-local-offer
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Created and set local offer
-index-11lJ9xUa.js:319 [2025-07-07T16:25:08.108Z] [DEBUG:VideoCall] Call started successfully
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Media stream became inactive
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Subscribed to test-message event
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: 'f2722af6-a7b1-4f3e-99a4-6436cf75a598', remoteStream: undefined, isConnected: false, connectionState: 'new'}
-index-11lJ9xUa.js:319 No remoteStream available to assign
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2441472829 1 udp 2122194687 100.92.98.39…eration 0 ufrag sJ9L network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '2441472829', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1202157187 1 udp 2122129151 192.168.1.11…eration 0 ufrag sJ9L network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '1202157187', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3097870385 1 udp 2122265343 fd7a:115c:a1…eration 0 ufrag sJ9L network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '3097870385', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2441472829 1 udp 2122194687 100.92.98.39…eration 0 ufrag sJ9L network-id 1 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '2441472829', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1202157187 1 udp 2122129151 192.168.1.11…eration 0 ufrag sJ9L network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '1202157187', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3097870385 1 udp 2122265343 fd7a:115c:a1…eration 0 ufrag sJ9L network-id 2 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '3097870385', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2464319979 1 udp 2122194687 100.92.98.39…eration 0 ufrag X/O3 network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '2464319979', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1725751115 1 udp 2122129151 192.168.1.11…eration 0 ufrag X/O3 network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '1725751115', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1795169682 1 udp 2122265343 fd7a:115c:a1…eration 0 ufrag X/O3 network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '1795169682', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2464319979 1 udp 2122194687 100.92.98.39…eration 0 ufrag X/O3 network-id 1 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '2464319979', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1725751115 1 udp 2122129151 192.168.1.11…eration 0 ufrag X/O3 network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '1725751115', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1795169682 1 udp 2122265343 fd7a:115c:a1…eration 0 ufrag X/O3 network-id 2 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '1795169682', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1865367465 1 tcp 1518214911 100.92.98.39…eration 0 ufrag sJ9L network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '1865367465', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3104678423 1 tcp 1518149375 192.168.1.11…eration 0 ufrag sJ9L network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '3104678423', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1175393445 1 tcp 1518285567 fd7a:115c:a1…eration 0 ufrag sJ9L network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '1175393445', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1865367465 1 tcp 1518214911 100.92.98.39…eration 0 ufrag sJ9L network-id 1 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '1865367465', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3104678423 1 tcp 1518149375 192.168.1.11…eration 0 ufrag sJ9L network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '3104678423', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1175393445 1 tcp 1518285567 fd7a:115c:a1…eration 0 ufrag sJ9L network-id 2 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '1175393445', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3962399603 1 tcp 1518214911 100.92.98.39…eration 0 ufrag X/O3 network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '3962399603', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:403914195 1 tcp 1518149375 192.168.1.11 …eration 0 ufrag X/O3 network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '403914195', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:365952778 1 tcp 1518285567 fd7a:115c:a1e…eration 0 ufrag X/O3 network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '365952778', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3962399603 1 tcp 1518214911 100.92.98.39…eration 0 ufrag X/O3 network-id 1 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '3962399603', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:403914195 1 tcp 1518149375 192.168.1.11 …eration 0 ufrag X/O3 network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '403914195', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:365952778 1 tcp 1518285567 fd7a:115c:a1e…eration 0 ufrag X/O3 network-id 2 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '365952778', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3907884989 1 udp 1685921535 103.87.58.18…eration 0 ufrag sJ9L network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '3907884989', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3907884989 1 udp 1685921535 103.87.58.18…eration 0 ufrag sJ9L network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '3907884989', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:640069090 1 udp 1685921535 103.87.58.187…eration 0 ufrag X/O3 network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '640069090', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:640069090 1 udp 1685921535 103.87.58.187…eration 0 ufrag X/O3 network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '640069090', component: 'rtp', …}
-index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+2025-07-07T18:31:29.729719923Z GET /api/moods/stats 304 3ms
+2025-07-07T18:31:29.729751504Z Response: {}
+2025-07-07T18:31:32.745586939Z [MATCH] Current queue length: 0
+2025-07-07T18:31:32.748494578Z [MATCH] Cleaned up stale entries older than 2025-07-07T18:26:32.745Z
+2025-07-07T18:31:35.371022047Z POST /api/session/create 200 11ms
+2025-07-07T18:31:35.371053597Z Response: {
+2025-07-07T18:31:35.371059697Z   "sessionId": 469,
+2025-07-07T18:31:35.371063797Z   "userId": 353,
+2025-07-07T18:31:35.371067737Z   "mood": "happy"
+2025-07-07T18:31:35.371072218Z }
+2025-07-07T18:31:35.909614482Z [CONN t2TAgX] New connection [socketId=t2TAgXJaJ7D8CYBWAAAf]
+2025-07-07T18:31:36.096527216Z [SOCKET MAP] Bound user 353 to socket t2TAgXJaJ7D8CYBWAAAf
+2025-07-07T18:31:36.81731487Z [SOCKET MAP] Bound user 353 to socket t2TAgXJaJ7D8CYBWAAAf
+2025-07-07T18:31:36.874564487Z [SOCKET MAP] Bound user 353 to socket t2TAgXJaJ7D8CYBWAAAf
+2025-07-07T18:31:37.303863964Z [QUEUE 353] Attempting to join queue for "happy" with socket t2TAgXJaJ7D8CYBWAAAf
+2025-07-07T18:31:37.303922425Z [QUEUE 353] Attempting to join queue for "happy" with socket t2TAgXJaJ7D8CYBWAAAf
+2025-07-07T18:31:37.340366725Z [QUEUE 353] Joined queue at position 1 for mood "happy"
+2025-07-07T18:31:37.341075909Z [QUEUE 353] Joined queue at position 1 for mood "happy"
+2025-07-07T18:31:37.34312887Z [MATCH] Current queue length: 1
+2025-07-07T18:31:37.34563548Z [MATCH] Current queue length: 1
+2025-07-07T18:31:37.350626991Z [MATCH] Cleaned up stale entries older than 2025-07-07T18:26:37.342Z
+2025-07-07T18:31:37.358371226Z [MATCH] Cleaned up stale entries older than 2025-07-07T18:26:37.345Z
+2025-07-07T18:31:37.746292254Z [MATCH] Current queue length: 1
+2025-07-07T18:31:37.750037449Z [MATCH] Cleaned up stale entries older than 2025-07-07T18:26:37.746Z
+2025-07-07T18:31:39.269957557Z POST /api/session/create 200 13ms
+2025-07-07T18:31:39.269979368Z Response: {
+2025-07-07T18:31:39.269983408Z   "sessionId": 470,
+2025-07-07T18:31:39.269986228Z   "userId": 354,
+2025-07-07T18:31:39.269989268Z   "mood": "happy"
+2025-07-07T18:31:39.269992088Z }
+2025-07-07T18:31:39.968812303Z [CONN nwAMWQ] New connection [socketId=nwAMWQLxg2lRbiVrAAAi]
+2025-07-07T18:31:40.082813306Z [SOCKET MAP] Bound user 354 to socket nwAMWQLxg2lRbiVrAAAi
+2025-07-07T18:31:40.287337541Z [SOCKET MAP] Bound user 354 to socket nwAMWQLxg2lRbiVrAAAi
+2025-07-07T18:31:40.448927557Z [SOCKET MAP] Bound user 354 to socket nwAMWQLxg2lRbiVrAAAi
+2025-07-07T18:31:40.593731247Z [QUEUE 354] Attempting to join queue for "happy" with socket nwAMWQLxg2lRbiVrAAAi
+2025-07-07T18:31:40.605111235Z [QUEUE 354] Joined queue at position 2 for mood "happy"
+2025-07-07T18:31:40.606811029Z [MATCH] Current queue length: 2
+2025-07-07T18:31:40.61332987Z [DEBUG][2025-07-07T18:31:40.613Z] Updated partnerId for user 353 in existing session { oldPartnerId: null, newPartnerId: 354 }
+2025-07-07T18:31:40.61985113Z [DEBUG][2025-07-07T18:31:40.619Z] Updated partnerId for user 354 in existing session { oldPartnerId: null, newPartnerId: 353 }
+2025-07-07T18:31:40.620205557Z [MATCH] Notified user 353 and 354 of match (sessionId=469)
+2025-07-07T18:31:40.652833591Z [MATCH] Paired users 353 and 354 in mood "happy"
+2025-07-07T18:31:40.656140217Z [MATCH] Cleaned up stale entries older than 2025-07-07T18:26:40.652Z
+2025-07-07T18:31:40.758687651Z [QUEUE 354] Leaving queue with socket nwAMWQLxg2lRbiVrAAAi
+2025-07-07T18:31:40.761776443Z [QUEUE 354] Left queue successfully
+2025-07-07T18:31:40.769512807Z [QUEUE 354] Attempting to join queue for "happy" with socket nwAMWQLxg2lRbiVrAAAi
+2025-07-07T18:31:40.781030978Z [QUEUE 354] Joined queue at position 1 for mood "happy"
+2025-07-07T18:31:40.78312577Z [MATCH] Current queue length: 1
+2025-07-07T18:31:40.786679101Z [MATCH] Cleaned up stale entries older than 2025-07-07T18:26:40.783Z
+2025-07-07T18:31:40.812338815Z [QUEUE 353] Leaving queue with socket t2TAgXJaJ7D8CYBWAAAf
+2025-07-07T18:31:40.815160472Z [QUEUE 353] Left queue successfully
+2025-07-07T18:31:41.887291222Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-offer
+2025-07-07T18:31:41.887295322Z [SIGNAL] Received webrtc-offer from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:41.887328333Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:41.887332393Z   offer: {
+2025-07-07T18:31:41.887336523Z     sdp: 'v=0\r\n' +
+2025-07-07T18:31:41.887340683Z       'o=- 4503122600914747224 2 IN IP4 127.0.0.1\r\n' +
+2025-07-07T18:31:41.887357233Z       's=-\r\n' +
+2025-07-07T18:31:41.887359804Z       't=0 0\r\n' +
+2025-07-07T18:31:41.887362374Z       'a=group:BUNDLE 0 1\r\n' +
+2025-07-07T18:31:41.887364504Z       'a=extmap-allow-mixed\r\n' +
+2025-07-07T18:31:41.887366674Z       'a=msid-semantic: WMS 2ff10710-4f26-4498-aedf-b28e510d02de\r\n' +
+2025-07-07T18:31:41.887368934Z       'm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\n' +
+2025-07-07T18:31:41.887371044Z       'c=IN IP4 0.0.0.0\r\n' +
+2025-07-07T18:31:41.887373104Z       'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
+2025-07-07T18:31:41.887375284Z       'a=ice-ufrag:QuIb\r\n' +
+2025-07-07T18:31:41.887377444Z       'a=ice-pwd:/hC5MFVuCAtUt+Bi831GZ5PB\r\n' +
+2025-07-07T18:31:41.887379534Z       'a=ice-options:trickle\r\n' +
+2025-07-07T18:31:41.887382454Z       'a=fingerprint:sha-256 F5:97:07:57:2A:2B:EC:FF:D5:B1:CE:FA:32:C3:46:8C:12:1C:36:C8:E3:76:BB:C6:74:D4:B2:23:14:7A:0D:E1\r\n' +
+2025-07-07T18:31:41.887384514Z       'a=setup:actpass\r\n' +
+2025-07-07T18:31:41.887386594Z       'a=mid:0\r\n' +
+2025-07-07T18:31:41.887388724Z       'a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\n' +
+2025-07-07T18:31:41.887391384Z       'a=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\n' +
+2025-07-07T18:31:41.887396334Z       'a=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\n' +
+2025-07-07T18:31:41.887398574Z       'a=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\n' +
+2025-07-07T18:31:41.887400654Z       'a=sendrecv\r\n' +
+2025-07-07T18:31:41.887402744Z       'a=msid:2ff10710-4f26-4498-aedf-b28e510d02de e218dbfa-0b64-4ee2-b107-84d47cb6bb97\r\n' +
+2025-07-07T18:31:41.887404805Z       'a=rtcp-mux\r\n' +
+2025-07-07T18:31:41.887406885Z       'a=rtcp-rsize\r\n' +
+2025-07-07T18:31:41.887408954Z       'a=rtpmap:111 opus/48000/2\r\n' +
+2025-07-07T18:31:41.887411005Z       'a=rtcp-fb:111 transport-cc\r\n' +
+2025-07-07T18:31:41.887413135Z       'a=fmtp:111 minptime=10;useinbandfec=1\r\n' +
+2025-07-07T18:31:41.887415205Z       'a=rtpmap:63 red/48000/2\r\n' +
+2025-07-07T18:31:41.887417265Z       'a=fmtp:63 111/111\r\n' +
+2025-07-07T18:31:41.887419365Z       'a=rtpmap:9 G722/8000\r\n' +
+2025-07-07T18:31:41.887421405Z       'a=rtpmap:0 PCMU/8000\r\n' +
+2025-07-07T18:31:41.887423445Z       'a=rtpmap:8 PCMA/8000\r\n' +
+2025-07-07T18:31:41.887425505Z       'a=rtpmap:13 CN/8000\r\n' +
+2025-07-07T18:31:41.887427545Z       'a=rtpmap:110 telephone-event/48000\r\n' +
+2025-07-07T18:31:41.887429585Z       'a=rtpmap:126 telephone-event/8000\r\n' +
+2025-07-07T18:31:41.887431615Z       'a=ssrc:3834492228 cname:t8IzFIvE4MRa0Ds3\r\n' +
+2025-07-07T18:31:41.887433745Z       'a=ssrc:3834492228 msid:2ff10710-4f26-4498-aedf-b28e510d02de e218dbfa-0b64-4ee2-b107-84d47cb6bb97\r\n' +
+2025-07-07T18:31:41.887435855Z       'm=video 9 UDP/TLS/RTP/SAVPF 96 97 103 104 107 108 109 114 115 116 117 118 39 40 45 46 98 99 100 101 119 120 49 50 123 124 125\r\n' +
+2025-07-07T18:31:41.887437945Z       'c=IN IP4 0.0.0.0\r\n' +
+2025-07-07T18:31:41.887439995Z       'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
+2025-07-07T18:31:41.887442035Z       'a=ice-ufrag:QuIb\r\n' +
+2025-07-07T18:31:41.887444075Z       'a=ice-pwd:/hC5MFVuCAtUt+Bi831GZ5PB\r\n' +
+2025-07-07T18:31:41.887446115Z       'a=ice-options:trickle\r\n' +
+2025-07-07T18:31:41.887448165Z       'a=fingerprint:sha-256 F5:97:07:57:2A:2B:EC:FF:D5:B1:CE:FA:32:C3:46:8C:12:1C:36:C8:E3:76:BB:C6:74:D4:B2:23:14:7A:0D:E1\r\n' +
+2025-07-07T18:31:41.887450255Z       'a=setup:actpass\r\n' +
+2025-07-07T18:31:41.887452295Z       'a=mid:1\r\n' +
+2025-07-07T18:31:41.887454355Z       'a=extmap:14 urn:ietf:params:rtp-hdrext:toffset\r\n' +
+2025-07-07T18:31:41.887456695Z       'a=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\n' +
+2025-07-07T18:31:41.887462766Z       'a=extmap:13 urn:3gpp:video-orientation\r\n' +
+2025-07-07T18:31:41.887464986Z       'a=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\n' +
+2025-07-07T18:31:41.887467116Z       'a=extmap:5 http://www.webrtc.org/experiments/rtp-hdrext/playout-delay\r\n' +
+2025-07-07T18:31:41.887469226Z       'a=extmap:6 http://www.webrtc.org/experiments/rtp-hdrext/video-content-type\r\n' +
+2025-07-07T18:31:41.887471306Z       'a=extmap:7 http://www.webrtc.org/experiments/rtp-hdrext/video-timing\r\n' +
+2025-07-07T18:31:41.887473446Z       'a=extmap:8 http://www.webrtc.org/experiments/rtp-hdrext/color-space\r\n' +
+2025-07-07T18:31:41.887475506Z       'a=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\n' +
+2025-07-07T18:31:41.887477576Z       'a=extmap:10 urn:ietf:params:rtp-hdrext:sdes:rtp-stream-id\r\n' +
+2025-07-07T18:31:41.887479676Z       'a=extmap:11 urn:ietf:params:rtp-hdrext:sdes:repaired-rtp-stream-id\r\n' +
+2025-07-07T18:31:41.887481726Z       'a=sendrecv\r\n' +
+2025-07-07T18:31:41.887483796Z       'a=msid:2ff10710-4f26-4498-aedf-b28e510d02de 5799740c-9770-4635-9be4-9245e7212bdd\r\n' +
+2025-07-07T18:31:41.887485996Z       'a=rtcp-mux\r\n' +
+2025-07-07T18:31:41.887488096Z       'a=rtcp-rsize\r\n' +
+2025-07-07T18:31:41.887490166Z       'a=rtpmap:96 VP8/90000\r\n' +
+2025-07-07T18:31:41.887492216Z       'a=rtcp-fb:96 goog-remb\r\n' +
+2025-07-07T18:31:41.887494296Z       'a=rtcp-fb:96 transport-cc\r\n' +
+2025-07-07T18:31:41.887496356Z       'a=rtcp-fb:96 ccm fir\r\n' +
+2025-07-07T18:31:41.887498396Z       'a=rtcp-fb:96 nack\r\n' +
+2025-07-07T18:31:41.887500496Z       'a=rtcp-fb:96 nack pli\r\n' +
+2025-07-07T18:31:41.887502556Z       'a=rtpmap:97 rtx/90000\r\n' +
+2025-07-07T18:31:41.887504616Z       'a=fmtp:97 apt=96\r\n' +
+2025-07-07T18:31:41.887508747Z       'a=rtpmap:103 H264/90000\r\n' +
+2025-07-07T18:31:41.887510956Z       'a=rtcp-fb:103 goog-remb\r\n' +
+2025-07-07T18:31:41.887513107Z       'a=rtcp-fb:103 transport-cc\r\n' +
+2025-07-07T18:31:41.887515207Z       'a=rtcp-fb:103 ccm fir\r\n' +
+2025-07-07T18:31:41.887517287Z       'a=rtcp-fb:103 nack\r\n' +
+2025-07-07T18:31:41.887519467Z       'a=rtcp-fb:103 nack pli\r\n' +
+2025-07-07T18:31:41.887521577Z       'a=fmtp:103 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f\r\n' +
+2025-07-07T18:31:41.887532227Z       'a=rtpmap:104 rtx/90000\r\n' +
+2025-07-07T18:31:41.887534777Z       'a=fmtp:104 apt=103\r\n' +
+2025-07-07T18:31:41.887536867Z       'a=rtpmap:107 H264/90000\r\n' +
+2025-07-07T18:31:41.887538917Z       'a=rtcp-fb:107 goog-remb\r\n' +
+2025-07-07T18:31:41.887540977Z       'a=rtcp-fb:107 transport-cc\r\n' +
+2025-07-07T18:31:41.887543157Z       'a=rtcp-fb:107 ccm fir\r\n' +
+2025-07-07T18:31:41.887545237Z       'a=rtcp-fb:107 nack\r\n' +
+2025-07-07T18:31:41.887547297Z       'a=rtcp-fb:107 nack pli\r\n' +
+2025-07-07T18:31:41.887549387Z       'a=fmtp:107 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=42001f\r\n' +
+2025-07-07T18:31:41.887551477Z       'a=rtpmap:108 rtx/90000\r\n' +
+2025-07-07T18:31:41.887553737Z       'a=fmtp:108 apt=107\r\n' +
+2025-07-07T18:31:41.887555777Z       'a=rtpmap:109 H264/90000\r\n' +
+2025-07-07T18:31:41.887557817Z       'a=rtcp-fb:109 goog-remb\r\n' +
+2025-07-07T18:31:41.887559968Z       'a=rtcp-fb:109 transport-cc\r\n' +
+2025-07-07T18:31:41.887562017Z       'a=rtcp-fb:109 ccm fir\r\n' +
+2025-07-07T18:31:41.887564058Z       'a=rtcp-fb:109 nack\r\n' +
+2025-07-07T18:31:41.887566118Z       'a=rtcp-fb:109 nack pli\r\n' +
+2025-07-07T18:31:41.887568228Z       'a=fmtp:109 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f\r\n' +
+2025-07-07T18:31:41.887574308Z       'a=rtpmap:114 rtx/90000\r\n' +
+2025-07-07T18:31:41.887576488Z       'a=fmtp:114 apt=109\r\n' +
+2025-07-07T18:31:41.887578518Z       'a=rtpmap:115 H264/90000\r\n' +
+2025-07-07T18:31:41.887580578Z       'a=rtcp-fb:115 goog-remb\r\n' +
+2025-07-07T18:31:41.887582608Z       'a=rtcp-fb:115 transport-cc\r\n' +
+2025-07-07T18:31:41.887584668Z       'a=rtcp-fb:115 ccm fir\r\n' +
+2025-07-07T18:31:41.887586708Z       'a=rtcp-fb:115 nack\r\n' +
+2025-07-07T18:31:41.887588748Z       'a=rtcp-fb:115 nack pli\r\n' +
+2025-07-07T18:31:41.887590778Z       'a=fmtp:115 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=42e01f\r\n' +
+2025-07-07T18:31:41.887592928Z       'a=rtpmap:116 rtx/90000\r\n' +
+2025-07-07T18:31:41.887594958Z       'a=fmtp:116 apt=115\r\n' +
+2025-07-07T18:31:41.887597368Z       'a=rtpmap:117 H264/90000\r\n' +
+2025-07-07T18:31:41.887599478Z       'a=rtcp-fb:117 goog-remb\r\n' +
+2025-07-07T18:31:41.887601568Z       'a=rtcp-fb:117 transport-cc\r\n' +
+2025-07-07T18:31:41.887603608Z       'a=rtcp-fb:117 ccm fir\r\n' +
+2025-07-07T18:31:41.887605658Z       'a=rtcp-fb:117 nack\r\n' +
+2025-07-07T18:31:41.887607689Z       'a=rtcp-fb:117 nack pli\r\n' +
+2025-07-07T18:31:41.887609778Z       'a=fmtp:117 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=4d001f\r\n' +
+2025-07-07T18:31:41.887611809Z       'a=rtpmap:118 rtx/90000\r\n' +
+2025-07-07T18:31:41.887613949Z       'a=fmtp:118 apt=117\r\n' +
+2025-07-07T18:31:41.887616009Z       'a=rtpmap:39 H264/90000\r\n' +
+2025-07-07T18:31:41.887618049Z       'a=rtcp-fb:39 goog-remb\r\n' +
+2025-07-07T18:31:41.887620089Z       'a=rtcp-fb:39 transport-cc\r\n' +
+2025-07-07T18:31:41.887622109Z       'a=rtcp-fb:39 ccm fir\r\n' +
+2025-07-07T18:31:41.887624209Z       'a=rtcp-fb:39 nack\r\n' +
+2025-07-07T18:31:41.887626229Z       'a=rtcp-fb:39 nack pli\r\n' +
+2025-07-07T18:31:41.887628309Z       'a=fmtp:39 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=4d001f\r\n' +
+2025-07-07T18:31:41.887630389Z       'a=rtpmap:40 rtx/90000\r\n' +
+2025-07-07T18:31:41.887632459Z       'a=fmtp:40 apt=39\r\n' +
+2025-07-07T18:31:41.887634579Z       'a=rtpmap:45 AV1/90000\r\n' +
+2025-07-07T18:31:41.887636619Z       'a=rtcp-fb:45 goog-remb\r\n' +
+2025-07-07T18:31:41.887638699Z       'a=rtcp-fb:45 transport-cc\r\n' +
+2025-07-07T18:31:41.887640789Z       'a=rtcp-fb:45 ccm fir\r\n' +
+2025-07-07T18:31:41.887642839Z       'a=rtcp-fb:45 nack\r\n' +
+2025-07-07T18:31:41.887644889Z       'a=rtcp-fb:45 nack pli\r\n' +
+2025-07-07T18:31:41.887647019Z       'a=fmtp:45 level-idx=5;profile=0;tier=0\r\n' +
+2025-07-07T18:31:41.887649049Z       'a=rtpmap:46 rtx/90000\r\n' +
+2025-07-07T18:31:41.887651079Z       'a=fmtp:46 apt=45\r\n' +
+2025-07-07T18:31:41.887653089Z       'a=rtpmap:98 VP9/90000\r\n' +
+2025-07-07T18:31:41.88765511Z       'a=rtcp-fb:98 goog-remb\r\n' +
+2025-07-07T18:31:41.887657219Z       'a=rtcp-fb:98 transport-cc\r\n' +
+2025-07-07T18:31:41.887659259Z       'a=rtcp-fb:98 ccm fir\r\n' +
+2025-07-07T18:31:41.887661279Z       'a=rtcp-fb:98 nack\r\n' +
+2025-07-07T18:31:41.887663359Z       'a=rtcp-fb:98 nack pli\r\n' +
+2025-07-07T18:31:41.88766541Z       'a=fmtp:98 profile-id=0\r\n' +
+2025-07-07T18:31:41.88766741Z       'a=rtpmap:99 rtx/90000\r\n' +
+2025-07-07T18:31:41.88766945Z       'a=fmtp:99 apt=98\r\n' +
+2025-07-07T18:31:41.8876715Z       'a=rtpmap:100 VP9/90000\r\n' +
+2025-07-07T18:31:41.88767354Z       'a=rtcp-fb:100 goog-remb\r\n' +
+2025-07-07T18:31:41.88767559Z       'a=rtcp-fb:100 transport-cc\r\n' +
+2025-07-07T18:31:41.88767767Z       'a=rtcp-fb:100 ccm fir\r\n' +
+2025-07-07T18:31:41.88768312Z       'a=rtcp-fb:100 nack\r\n' +
+2025-07-07T18:31:41.88768528Z       'a=rtcp-fb:100 nack pli\r\n' +
+2025-07-07T18:31:41.88768733Z       'a=fmtp:100 profile-id=2\r\n' +
+2025-07-07T18:31:41.88768935Z       'a=rtpmap:101 rtx/90000\r\n' +
+2025-07-07T18:31:41.88769139Z       'a=fmtp:101 apt=100\r\n' +
+2025-07-07T18:31:41.88769343Z       'a=rtpmap:119 H264/90000\r\n' +
+2025-07-07T18:31:41.88769544Z       'a=rtcp-fb:119 goog-remb\r\n' +
+2025-07-07T18:31:41.88769746Z       'a=rtcp-fb:119 transport-cc\r\n' +
+2025-07-07T18:31:41.88769952Z       'a=rtcp-fb:119 ccm fir\r\n' +
+2025-07-07T18:31:41.88770157Z       'a=rtcp-fb:119 nack\r\n' +
+2025-07-07T18:31:41.8877036Z       'a=rtcp-fb:119 nack pli\r\n' +
+2025-07-07T18:31:41.88770564Z       'a=fmtp:119 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001f\r\n' +
+2025-07-07T18:31:41.887707691Z       'a=rtpmap:120 rtx/90000\r\n' +
+2025-07-07T18:31:41.88770974Z       'a=fmtp:120 apt=119\r\n' +
+2025-07-07T18:31:41.887711771Z       'a=rtpmap:49 H265/90000\r\n' +
+2025-07-07T18:31:41.887713771Z       'a=rtcp-fb:49 goog-remb\r\n' +
+2025-07-07T18:31:41.887715841Z       'a=rtcp-fb:49 transport-cc\r\n' +
+2025-07-07T18:31:41.887717891Z       'a=rtcp-fb:49 ccm fir\r\n' +
+2025-07-07T18:31:41.887719941Z       'a=rtcp-fb:49 nack\r\n' +
+2025-07-07T18:31:41.887721981Z       'a=rtcp-fb:49 nack pli\r\n' +
+2025-07-07T18:31:41.887724041Z       'a=fmtp:49 level-id=93;profile-id=1;tier-flag=0;tx-mode=SRST\r\n' +
+2025-07-07T18:31:41.887726081Z       'a=rtpmap:50 rtx/90000\r\n' +
+2025-07-07T18:31:41.887728131Z       'a=fmtp:50 apt=49\r\n' +
+2025-07-07T18:31:41.887730191Z       'a=rtpmap:123 red/90000\r\n' +
+2025-07-07T18:31:41.887732301Z       'a=rtpmap:124 rtx/90000\r\n' +
+2025-07-07T18:31:41.887734321Z       'a=fmtp:124 apt=123\r\n' +
+2025-07-07T18:31:41.887736411Z       'a=rtpmap:125 ulpfec/90000\r\n' +
+2025-07-07T18:31:41.887738431Z       'a=ssrc-group:FID 1582711897 1630050814\r\n' +
+2025-07-07T18:31:41.887740481Z       'a=ssrc:1582711897 cname:t8IzFIvE4MRa0Ds3\r\n' +
+2025-07-07T18:31:41.887751571Z       'a=ssrc:1582711897 msid:2ff10710-4f26-4498-aedf-b28e510d02de 5799740c-9770-4635-9be4-9245e7212bdd\r\n' +
+2025-07-07T18:31:41.887753731Z       'a=ssrc:1630050814 cname:t8IzFIvE4MRa0Ds3\r\n' +
+2025-07-07T18:31:41.887755921Z       'a=ssrc:1630050814 msid:2ff10710-4f26-4498-aedf-b28e510d02de 5799740c-9770-4635-9be4-9245e7212bdd\r\n',
+2025-07-07T18:31:41.887758092Z     type: 'offer'
+2025-07-07T18:31:41.887760221Z   }
+2025-07-07T18:31:41.887779412Z }
+2025-07-07T18:31:42.28965685Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.28967754Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.28967971Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.28968569Z   candidate: {
+2025-07-07T18:31:42.28968851Z     candidate: 'candidate:3572276332 1 udp 2122194687 100.92.98.39 57233 typ host generation 0 ufrag QuIb network-id 1 network-cost 50',
+2025-07-07T18:31:42.289691161Z     sdpMid: '0',
+2025-07-07T18:31:42.289694401Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.289697471Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.289700661Z   }
+2025-07-07T18:31:42.289702931Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.289702941Z }
+2025-07-07T18:31:42.289709101Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.289713391Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.289730822Z   candidate: {
+2025-07-07T18:31:42.289734191Z     candidate: 'candidate:47055314 1 udp 2122129151 192.168.1.11 57234 typ host generation 0 ufrag QuIb network-id 3 network-cost 10',
+2025-07-07T18:31:42.289737411Z     sdpMid: '0',
+2025-07-07T18:31:42.289739622Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.289741332Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.289743042Z   }
+2025-07-07T18:31:42.289744772Z }
+2025-07-07T18:31:42.290440866Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.290446546Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.290451106Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.290454626Z   candidate: {
+2025-07-07T18:31:42.290457836Z     candidate: 'candidate:4258051936 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 57235 typ host generation 0 ufrag QuIb network-id 2 network-cost 50',
+2025-07-07T18:31:42.290466666Z     sdpMid: '0',
+2025-07-07T18:31:42.290469686Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.290472466Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.290475076Z   }
+2025-07-07T18:31:42.290477786Z }
+2025-07-07T18:31:42.291103319Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.291111029Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.291118219Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.291120979Z   candidate: {
+2025-07-07T18:31:42.291124459Z     candidate: 'candidate:3572276332 1 udp 2122194687 100.92.98.39 57236 typ host generation 0 ufrag QuIb network-id 1 network-cost 50',
+2025-07-07T18:31:42.291127469Z     sdpMid: '1',
+2025-07-07T18:31:42.291130779Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.291134039Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.29113681Z   }
+2025-07-07T18:31:42.29113945Z }
+2025-07-07T18:31:42.291330003Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.291341694Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.291349394Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.291352774Z   candidate: {
+2025-07-07T18:31:42.291356234Z     candidate: 'candidate:47055314 1 udp 2122129151 192.168.1.11 57237 typ host generation 0 ufrag QuIb network-id 3 network-cost 10',
+2025-07-07T18:31:42.291359204Z     sdpMid: '1',
+2025-07-07T18:31:42.291362124Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.291365354Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.291368064Z   }
+2025-07-07T18:31:42.291370944Z }
+2025-07-07T18:31:42.416809266Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.416833157Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.416834997Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.416836407Z   candidate: {
+2025-07-07T18:31:42.416841477Z     candidate: 'candidate:4258051936 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 57238 typ host generation 0 ufrag QuIb network-id 2 network-cost 50',
+2025-07-07T18:31:42.416844607Z     sdpMid: '1',
+2025-07-07T18:31:42.416854837Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.416857587Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.416859397Z   }
+2025-07-07T18:31:42.416861207Z }
+2025-07-07T18:31:42.417759735Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.417764935Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.417784386Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.417801806Z   candidate: {
+2025-07-07T18:31:42.417804916Z     candidate: 'candidate:709249272 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag QuIb network-id 1 network-cost 50',
+2025-07-07T18:31:42.417807296Z     sdpMid: '0',
+2025-07-07T18:31:42.417809616Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.417812066Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.417814256Z   }
+2025-07-07T18:31:42.417816367Z }
+2025-07-07T18:31:42.417937179Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.417956019Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.417964589Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.41796767Z   candidate: {
+2025-07-07T18:31:42.417970979Z     candidate: 'candidate:4234466630 1 tcp 1518149375 192.168.1.11 9 typ host tcptype active generation 0 ufrag QuIb network-id 3 network-cost 10',
+2025-07-07T18:31:42.417974059Z     sdpMid: '0',
+2025-07-07T18:31:42.41797716Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.41798002Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.41798269Z   }
+2025-07-07T18:31:42.41798532Z }
+2025-07-07T18:31:42.41799993Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.41800206Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.41800385Z   candidate: {
+2025-07-07T18:31:42.41800569Z     candidate: 'candidate:57041908 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag QuIb network-id 2 network-cost 50',
+2025-07-07T18:31:42.41800739Z     sdpMid: '0',
+2025-07-07T18:31:42.41800906Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.41801073Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.41801239Z   }
+2025-07-07T18:31:42.41801429Z }
+2025-07-07T18:31:42.418024371Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.41899371Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.41900971Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.419016551Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.41901982Z   candidate: {
+2025-07-07T18:31:42.419023341Z     candidate: 'candidate:709249272 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag QuIb network-id 1 network-cost 50',
+2025-07-07T18:31:42.419026471Z     sdpMid: '1',
+2025-07-07T18:31:42.419029801Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.419033141Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.419036031Z   }
+2025-07-07T18:31:42.419038841Z }
+2025-07-07T18:31:42.419047921Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.419050051Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.419051781Z   candidate: {
+2025-07-07T18:31:42.419053511Z     candidate: 'candidate:4234466630 1 tcp 1518149375 192.168.1.11 9 typ host tcptype active generation 0 ufrag QuIb network-id 3 network-cost 10',
+2025-07-07T18:31:42.419055721Z     sdpMid: '1',
+2025-07-07T18:31:42.419057421Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.419059071Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.419060792Z   }
+2025-07-07T18:31:42.419062441Z }
+2025-07-07T18:31:42.419069261Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.419460929Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.41946246Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.41948505Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.41948835Z   candidate: {
+2025-07-07T18:31:42.41949141Z     candidate: 'candidate:57041908 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag QuIb network-id 2 network-cost 50',
+2025-07-07T18:31:42.41949422Z     sdpMid: '1',
+2025-07-07T18:31:42.41949692Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.41949968Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.41950237Z   }
+2025-07-07T18:31:42.419505Z }
+2025-07-07T18:31:42.559117246Z [SIGNAL] Received webrtc-offer from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.559121026Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-offer
+2025-07-07T18:31:42.559144847Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.559147477Z   offer: {
+2025-07-07T18:31:42.559149527Z     sdp: 'v=0\r\n' +
+2025-07-07T18:31:42.559151767Z       'o=- 1937910832511702649 2 IN IP4 127.0.0.1\r\n' +
+2025-07-07T18:31:42.559153497Z       's=-\r\n' +
+2025-07-07T18:31:42.559155127Z       't=0 0\r\n' +
+2025-07-07T18:31:42.559157337Z       'a=group:BUNDLE 0 1\r\n' +
+2025-07-07T18:31:42.559158997Z       'a=extmap-allow-mixed\r\n' +
+2025-07-07T18:31:42.559161337Z       'a=msid-semantic: WMS 73dc3f6f-ec3b-41ef-bc4f-187751c3d353\r\n' +
+2025-07-07T18:31:42.559163027Z       'm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\n' +
+2025-07-07T18:31:42.559164697Z       'c=IN IP4 0.0.0.0\r\n' +
+2025-07-07T18:31:42.559166837Z       'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
+2025-07-07T18:31:42.559168527Z       'a=ice-ufrag:Bm/R\r\n' +
+2025-07-07T18:31:42.559170187Z       'a=ice-pwd:y8gnxc9HN+IB1cuwIpnZhAgT\r\n' +
+2025-07-07T18:31:42.559171867Z       'a=ice-options:trickle\r\n' +
+2025-07-07T18:31:42.559174207Z       'a=fingerprint:sha-256 2D:0E:03:A0:F4:3B:85:A5:A8:A1:06:66:6E:0A:E9:AF:57:4C:74:F3:94:76:57:D7:60:2A:CA:20:E3:BE:56:91\r\n' +
+2025-07-07T18:31:42.559175877Z       'a=setup:actpass\r\n' +
+2025-07-07T18:31:42.559177587Z       'a=mid:0\r\n' +
+2025-07-07T18:31:42.559179267Z       'a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\n' +
+2025-07-07T18:31:42.559181147Z       'a=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\n' +
+2025-07-07T18:31:42.559183438Z       'a=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\n' +
+2025-07-07T18:31:42.559185087Z       'a=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\n' +
+2025-07-07T18:31:42.559186798Z       'a=sendrecv\r\n' +
+2025-07-07T18:31:42.559188548Z       'a=msid:73dc3f6f-ec3b-41ef-bc4f-187751c3d353 d2871f8f-fcdd-4a4a-b9e5-81b587d65c39\r\n' +
+2025-07-07T18:31:42.559190208Z       'a=rtcp-mux\r\n' +
+2025-07-07T18:31:42.559192948Z       'a=rtcp-rsize\r\n' +
+2025-07-07T18:31:42.559196068Z       'a=rtpmap:111 opus/48000/2\r\n' +
+2025-07-07T18:31:42.559211298Z       'a=rtcp-fb:111 transport-cc\r\n' +
+2025-07-07T18:31:42.559215008Z       'a=fmtp:111 minptime=10;useinbandfec=1\r\n' +
+2025-07-07T18:31:42.559217278Z       'a=rtpmap:63 red/48000/2\r\n' +
+2025-07-07T18:31:42.559219658Z       'a=fmtp:63 111/111\r\n' +
+2025-07-07T18:31:42.559221418Z       'a=rtpmap:9 G722/8000\r\n' +
+2025-07-07T18:31:42.559223048Z       'a=rtpmap:0 PCMU/8000\r\n' +
+2025-07-07T18:31:42.559224728Z       'a=rtpmap:8 PCMA/8000\r\n' +
+2025-07-07T18:31:42.559226358Z       'a=rtpmap:13 CN/8000\r\n' +
+2025-07-07T18:31:42.559239579Z       'a=rtpmap:110 telephone-event/48000\r\n' +
+2025-07-07T18:31:42.559241449Z       'a=rtpmap:126 telephone-event/8000\r\n' +
+2025-07-07T18:31:42.559243179Z       'a=ssrc:3997751853 cname:HH1rpHKX8vQNSHMR\r\n' +
+2025-07-07T18:31:42.559245389Z       'a=ssrc:3997751853 msid:73dc3f6f-ec3b-41ef-bc4f-187751c3d353 d2871f8f-fcdd-4a4a-b9e5-81b587d65c39\r\n' +
+2025-07-07T18:31:42.559247579Z       'm=video 9 UDP/TLS/RTP/SAVPF 96 97 103 104 107 108 109 114 115 116 117 118 39 40 45 46 98 99 100 101 119 120 49 50 123 124 125\r\n' +
+2025-07-07T18:31:42.559249239Z       'c=IN IP4 0.0.0.0\r\n' +
+2025-07-07T18:31:42.559265359Z       'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
+2025-07-07T18:31:42.559274729Z       'a=ice-ufrag:Bm/R\r\n' +
+2025-07-07T18:31:42.559277789Z       'a=ice-pwd:y8gnxc9HN+IB1cuwIpnZhAgT\r\n' +
+2025-07-07T18:31:42.559280529Z       'a=ice-options:trickle\r\n' +
+2025-07-07T18:31:42.55928386Z       'a=fingerprint:sha-256 2D:0E:03:A0:F4:3B:85:A5:A8:A1:06:66:6E:0A:E9:AF:57:4C:74:F3:94:76:57:D7:60:2A:CA:20:E3:BE:56:91\r\n' +
+2025-07-07T18:31:42.55928664Z       'a=setup:actpass\r\n' +
+2025-07-07T18:31:42.55928928Z       'a=mid:1\r\n' +
+2025-07-07T18:31:42.55929101Z       'a=extmap:14 urn:ietf:params:rtp-hdrext:toffset\r\n' +
+2025-07-07T18:31:42.55929335Z       'a=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\n' +
+2025-07-07T18:31:42.55929536Z       'a=extmap:13 urn:3gpp:video-orientation\r\n' +
+2025-07-07T18:31:42.5592972Z       'a=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\n' +
+2025-07-07T18:31:42.55929894Z       'a=extmap:5 http://www.webrtc.org/experiments/rtp-hdrext/playout-delay\r\n' +
+2025-07-07T18:31:42.55930082Z       'a=extmap:6 http://www.webrtc.org/experiments/rtp-hdrext/video-content-type\r\n' +
+2025-07-07T18:31:42.55930248Z       'a=extmap:7 http://www.webrtc.org/experiments/rtp-hdrext/video-timing\r\n' +
+2025-07-07T18:31:42.55930414Z       'a=extmap:8 http://www.webrtc.org/experiments/rtp-hdrext/color-space\r\n' +
+2025-07-07T18:31:42.55930587Z       'a=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\n' +
+2025-07-07T18:31:42.55930805Z       'a=extmap:10 urn:ietf:params:rtp-hdrext:sdes:rtp-stream-id\r\n' +
+2025-07-07T18:31:42.5593097Z       'a=extmap:11 urn:ietf:params:rtp-hdrext:sdes:repaired-rtp-stream-id\r\n' +
+2025-07-07T18:31:42.55931149Z       'a=sendrecv\r\n' +
+2025-07-07T18:31:42.55931318Z       'a=msid:73dc3f6f-ec3b-41ef-bc4f-187751c3d353 d5e51d49-3217-4584-a036-b3774d8a9656\r\n' +
+2025-07-07T18:31:42.55931488Z       'a=rtcp-mux\r\n' +
+2025-07-07T18:31:42.55931655Z       'a=rtcp-rsize\r\n' +
+2025-07-07T18:31:42.55931824Z       'a=rtpmap:96 VP8/90000\r\n' +
+2025-07-07T18:31:42.5593199Z       'a=rtcp-fb:96 goog-remb\r\n' +
+2025-07-07T18:31:42.55932159Z       'a=rtcp-fb:96 transport-cc\r\n' +
+2025-07-07T18:31:42.55932324Z       'a=rtcp-fb:96 ccm fir\r\n' +
+2025-07-07T18:31:42.55932491Z       'a=rtcp-fb:96 nack\r\n' +
+2025-07-07T18:31:42.55932656Z       'a=rtcp-fb:96 nack pli\r\n' +
+2025-07-07T18:31:42.55932825Z       'a=rtpmap:97 rtx/90000\r\n' +
+2025-07-07T18:31:42.559329921Z       'a=fmtp:97 apt=96\r\n' +
+2025-07-07T18:31:42.559331561Z       'a=rtpmap:103 H264/90000\r\n' +
+2025-07-07T18:31:42.55933323Z       'a=rtcp-fb:103 goog-remb\r\n' +
+2025-07-07T18:31:42.55933489Z       'a=rtcp-fb:103 transport-cc\r\n' +
+2025-07-07T18:31:42.559336541Z       'a=rtcp-fb:103 ccm fir\r\n' +
+2025-07-07T18:31:42.559338281Z       'a=rtcp-fb:103 nack\r\n' +
+2025-07-07T18:31:42.559339941Z       'a=rtcp-fb:103 nack pli\r\n' +
+2025-07-07T18:31:42.559341611Z       'a=fmtp:103 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f\r\n' +
+2025-07-07T18:31:42.559358821Z       'a=rtpmap:104 rtx/90000\r\n' +
+2025-07-07T18:31:42.559361891Z       'a=fmtp:104 apt=103\r\n' +
+2025-07-07T18:31:42.559364731Z       'a=rtpmap:107 H264/90000\r\n' +
+2025-07-07T18:31:42.559367431Z       'a=rtcp-fb:107 goog-remb\r\n' +
+2025-07-07T18:31:42.559370181Z       'a=rtcp-fb:107 transport-cc\r\n' +
+2025-07-07T18:31:42.559372681Z       'a=rtcp-fb:107 ccm fir\r\n' +
+2025-07-07T18:31:42.559374381Z       'a=rtcp-fb:107 nack\r\n' +
+2025-07-07T18:31:42.559376051Z       'a=rtcp-fb:107 nack pli\r\n' +
+2025-07-07T18:31:42.559377731Z       'a=fmtp:107 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=42001f\r\n' +
+2025-07-07T18:31:42.559379382Z       'a=rtpmap:108 rtx/90000\r\n' +
+2025-07-07T18:31:42.559381042Z       'a=fmtp:108 apt=107\r\n' +
+2025-07-07T18:31:42.559382882Z       'a=rtpmap:109 H264/90000\r\n' +
+2025-07-07T18:31:42.559384522Z       'a=rtcp-fb:109 goog-remb\r\n' +
+2025-07-07T18:31:42.559386142Z       'a=rtcp-fb:109 transport-cc\r\n' +
+2025-07-07T18:31:42.559387812Z       'a=rtcp-fb:109 ccm fir\r\n' +
+2025-07-07T18:31:42.559389502Z       'a=rtcp-fb:109 nack\r\n' +
+2025-07-07T18:31:42.559391152Z       'a=rtcp-fb:109 nack pli\r\n' +
+2025-07-07T18:31:42.559392832Z       'a=fmtp:109 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f\r\n' +
+2025-07-07T18:31:42.559394462Z       'a=rtpmap:114 rtx/90000\r\n' +
+2025-07-07T18:31:42.559396082Z       'a=fmtp:114 apt=109\r\n' +
+2025-07-07T18:31:42.559397732Z       'a=rtpmap:115 H264/90000\r\n' +
+2025-07-07T18:31:42.559399382Z       'a=rtcp-fb:115 goog-remb\r\n' +
+2025-07-07T18:31:42.559401042Z       'a=rtcp-fb:115 transport-cc\r\n' +
+2025-07-07T18:31:42.559402712Z       'a=rtcp-fb:115 ccm fir\r\n' +
+2025-07-07T18:31:42.559404362Z       'a=rtcp-fb:115 nack\r\n' +
+2025-07-07T18:31:42.559406012Z       'a=rtcp-fb:115 nack pli\r\n' +
+2025-07-07T18:31:42.559407712Z       'a=fmtp:115 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=42e01f\r\n' +
+2025-07-07T18:31:42.559409402Z       'a=rtpmap:116 rtx/90000\r\n' +
+2025-07-07T18:31:42.559411142Z       'a=fmtp:116 apt=115\r\n' +
+2025-07-07T18:31:42.559412792Z       'a=rtpmap:117 H264/90000\r\n' +
+2025-07-07T18:31:42.559414452Z       'a=rtcp-fb:117 goog-remb\r\n' +
+2025-07-07T18:31:42.559416062Z       'a=rtcp-fb:117 transport-cc\r\n' +
+2025-07-07T18:31:42.559417702Z       'a=rtcp-fb:117 ccm fir\r\n' +
+2025-07-07T18:31:42.559419392Z       'a=rtcp-fb:117 nack\r\n' +
+2025-07-07T18:31:42.559421022Z       'a=rtcp-fb:117 nack pli\r\n' +
+2025-07-07T18:31:42.559422682Z       'a=fmtp:117 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=4d001f\r\n' +
+2025-07-07T18:31:42.559424342Z       'a=rtpmap:118 rtx/90000\r\n' +
+2025-07-07T18:31:42.559425992Z       'a=fmtp:118 apt=117\r\n' +
+2025-07-07T18:31:42.559427662Z       'a=rtpmap:39 H264/90000\r\n' +
+2025-07-07T18:31:42.559429283Z       'a=rtcp-fb:39 goog-remb\r\n' +
+2025-07-07T18:31:42.559430903Z       'a=rtcp-fb:39 transport-cc\r\n' +
+2025-07-07T18:31:42.559432832Z       'a=rtcp-fb:39 ccm fir\r\n' +
+2025-07-07T18:31:42.559435483Z       'a=rtcp-fb:39 nack\r\n' +
+2025-07-07T18:31:42.559438563Z       'a=rtcp-fb:39 nack pli\r\n' +
+2025-07-07T18:31:42.559441413Z       'a=fmtp:39 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=4d001f\r\n' +
+2025-07-07T18:31:42.559444183Z       'a=rtpmap:40 rtx/90000\r\n' +
+2025-07-07T18:31:42.559446813Z       'a=fmtp:40 apt=39\r\n' +
+2025-07-07T18:31:42.559449813Z       'a=rtpmap:45 AV1/90000\r\n' +
+2025-07-07T18:31:42.559452523Z       'a=rtcp-fb:45 goog-remb\r\n' +
+2025-07-07T18:31:42.559455543Z       'a=rtcp-fb:45 transport-cc\r\n' +
+2025-07-07T18:31:42.559461443Z       'a=rtcp-fb:45 ccm fir\r\n' +
+2025-07-07T18:31:42.559463213Z       'a=rtcp-fb:45 nack\r\n' +
+2025-07-07T18:31:42.559464883Z       'a=rtcp-fb:45 nack pli\r\n' +
+2025-07-07T18:31:42.559466733Z       'a=fmtp:45 level-idx=5;profile=0;tier=0\r\n' +
+2025-07-07T18:31:42.559468483Z       'a=rtpmap:46 rtx/90000\r\n' +
+2025-07-07T18:31:42.559470153Z       'a=fmtp:46 apt=45\r\n' +
+2025-07-07T18:31:42.559471863Z       'a=rtpmap:98 VP9/90000\r\n' +
+2025-07-07T18:31:42.559473513Z       'a=rtcp-fb:98 goog-remb\r\n' +
+2025-07-07T18:31:42.559475183Z       'a=rtcp-fb:98 transport-cc\r\n' +
+2025-07-07T18:31:42.559476873Z       'a=rtcp-fb:98 ccm fir\r\n' +
+2025-07-07T18:31:42.559478524Z       'a=rtcp-fb:98 nack\r\n' +
+2025-07-07T18:31:42.559480153Z       'a=rtcp-fb:98 nack pli\r\n' +
+2025-07-07T18:31:42.559481813Z       'a=fmtp:98 profile-id=0\r\n' +
+2025-07-07T18:31:42.559483453Z       'a=rtpmap:99 rtx/90000\r\n' +
+2025-07-07T18:31:42.559485104Z       'a=fmtp:99 apt=98\r\n' +
+2025-07-07T18:31:42.559486753Z       'a=rtpmap:100 VP9/90000\r\n' +
+2025-07-07T18:31:42.559488414Z       'a=rtcp-fb:100 goog-remb\r\n' +
+2025-07-07T18:31:42.559490034Z       'a=rtcp-fb:100 transport-cc\r\n' +
+2025-07-07T18:31:42.559491684Z       'a=rtcp-fb:100 ccm fir\r\n' +
+2025-07-07T18:31:42.559493324Z       'a=rtcp-fb:100 nack\r\n' +
+2025-07-07T18:31:42.559494984Z       'a=rtcp-fb:100 nack pli\r\n' +
+2025-07-07T18:31:42.559496634Z       'a=fmtp:100 profile-id=2\r\n' +
+2025-07-07T18:31:42.559498284Z       'a=rtpmap:101 rtx/90000\r\n' +
+2025-07-07T18:31:42.559500034Z       'a=fmtp:101 apt=100\r\n' +
+2025-07-07T18:31:42.559501684Z       'a=rtpmap:119 H264/90000\r\n' +
+2025-07-07T18:31:42.559503314Z       'a=rtcp-fb:119 goog-remb\r\n' +
+2025-07-07T18:31:42.559505044Z       'a=rtcp-fb:119 transport-cc\r\n' +
+2025-07-07T18:31:42.559506664Z       'a=rtcp-fb:119 ccm fir\r\n' +
+2025-07-07T18:31:42.559508414Z       'a=rtcp-fb:119 nack\r\n' +
+2025-07-07T18:31:42.559510074Z       'a=rtcp-fb:119 nack pli\r\n' +
+2025-07-07T18:31:42.559511744Z       'a=fmtp:119 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001f\r\n' +
+2025-07-07T18:31:42.559513424Z       'a=rtpmap:120 rtx/90000\r\n' +
+2025-07-07T18:31:42.559515054Z       'a=fmtp:120 apt=119\r\n' +
+2025-07-07T18:31:42.559516714Z       'a=rtpmap:49 H265/90000\r\n' +
+2025-07-07T18:31:42.559518984Z       'a=rtcp-fb:49 goog-remb\r\n' +
+2025-07-07T18:31:42.559521924Z       'a=rtcp-fb:49 transport-cc\r\n' +
+2025-07-07T18:31:42.559524874Z       'a=rtcp-fb:49 ccm fir\r\n' +
+2025-07-07T18:31:42.559527534Z       'a=rtcp-fb:49 nack\r\n' +
+2025-07-07T18:31:42.559530234Z       'a=rtcp-fb:49 nack pli\r\n' +
+2025-07-07T18:31:42.559533025Z       'a=fmtp:49 level-id=93;profile-id=1;tier-flag=0;tx-mode=SRST\r\n' +
+2025-07-07T18:31:42.559535634Z       'a=rtpmap:50 rtx/90000\r\n' +
+2025-07-07T18:31:42.559538165Z       'a=fmtp:50 apt=49\r\n' +
+2025-07-07T18:31:42.559540855Z       'a=rtpmap:123 red/90000\r\n' +
+2025-07-07T18:31:42.559543225Z       'a=rtpmap:124 rtx/90000\r\n' +
+2025-07-07T18:31:42.559544945Z       'a=fmtp:124 apt=123\r\n' +
+2025-07-07T18:31:42.559546615Z       'a=rtpmap:125 ulpfec/90000\r\n' +
+2025-07-07T18:31:42.559548295Z       'a=ssrc-group:FID 2158103419 2190587160\r\n' +
+2025-07-07T18:31:42.559549945Z       'a=ssrc:2158103419 cname:HH1rpHKX8vQNSHMR\r\n' +
+2025-07-07T18:31:42.559561055Z       'a=ssrc:2158103419 msid:73dc3f6f-ec3b-41ef-bc4f-187751c3d353 d5e51d49-3217-4584-a036-b3774d8a9656\r\n' +
+2025-07-07T18:31:42.559563025Z       'a=ssrc:2190587160 cname:HH1rpHKX8vQNSHMR\r\n' +
+2025-07-07T18:31:42.559564775Z       'a=ssrc:2190587160 msid:73dc3f6f-ec3b-41ef-bc4f-187751c3d353 d5e51d49-3217-4584-a036-b3774d8a9656\r\n',
+2025-07-07T18:31:42.559570205Z     type: 'offer'
+2025-07-07T18:31:42.559572035Z   }
+2025-07-07T18:31:42.559573805Z }
+2025-07-07T18:31:42.611392593Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.611415904Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.611420064Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.611427124Z   candidate: {
+2025-07-07T18:31:42.611430444Z     candidate: 'candidate:2911166700 1 udp 1685921535 103.87.58.187 57234 typ srflx raddr 192.168.1.11 rport 57234 generation 0 ufrag QuIb network-id 3 network-cost 10',
+2025-07-07T18:31:42.611433284Z     sdpMid: '0',
+2025-07-07T18:31:42.611436564Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.611439804Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.611441804Z   }
+2025-07-07T18:31:42.611444084Z }
+2025-07-07T18:31:42.613976705Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.613991385Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.613994815Z   candidate: {
+2025-07-07T18:31:42.613998505Z     candidate: 'candidate:2911166700 1 udp 1685921535 103.87.58.187 57237 typ srflx raddr 192.168.1.11 rport 57237 generation 0 ufrag QuIb network-id 3 network-cost 10',
+2025-07-07T18:31:42.614001165Z     sdpMid: '1',
+2025-07-07T18:31:42.614004275Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.614007515Z     usernameFragment: 'QuIb'
+2025-07-07T18:31:42.614009856Z   }
+2025-07-07T18:31:42.614012145Z }
+2025-07-07T18:31:42.614015956Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.712813904Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.712833095Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.712868125Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.712872255Z   candidate: {
+2025-07-07T18:31:42.712875635Z     candidate: 'candidate:3946569696 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag Bm/R network-id 1 network-cost 50',
+2025-07-07T18:31:42.712878585Z     sdpMid: '0',
+2025-07-07T18:31:42.712882036Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.712885156Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.712887856Z   }
+2025-07-07T18:31:42.712890206Z }
+2025-07-07T18:31:42.712945777Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.712948027Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.712957747Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.712984787Z   candidate: {
+2025-07-07T18:31:42.712990048Z     candidate: 'candidate:1025065566 1 tcp 1518149375 192.168.1.11 9 typ host tcptype active generation 0 ufrag Bm/R network-id 3 network-cost 10',
+2025-07-07T18:31:42.712993058Z     sdpMid: '0',
+2025-07-07T18:31:42.712996548Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.712999468Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.713001968Z   }
+2025-07-07T18:31:42.713004598Z }
+2025-07-07T18:31:42.713032119Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.713042749Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.713046419Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.713064389Z   candidate: {
+2025-07-07T18:31:42.713068829Z     candidate: 'candidate:3256612076 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag Bm/R network-id 2 network-cost 50',
+2025-07-07T18:31:42.713071539Z     sdpMid: '0',
+2025-07-07T18:31:42.713074899Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.71307828Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.713081Z   }
+2025-07-07T18:31:42.71308356Z }
+2025-07-07T18:31:42.7131039Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.71310728Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.71310753Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.71311039Z   candidate: {
+2025-07-07T18:31:42.71311345Z     candidate: 'candidate:3946569696 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag Bm/R network-id 1 network-cost 50',
+2025-07-07T18:31:42.71311675Z     sdpMid: '1',
+2025-07-07T18:31:42.71312547Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.71312937Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.71313193Z   }
+2025-07-07T18:31:42.71313459Z }
+2025-07-07T18:31:42.713154351Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.713158631Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.713161691Z   candidate: {
+2025-07-07T18:31:42.713163631Z     candidate: 'candidate:1025065566 1 tcp 1518149375 192.168.1.11 9 typ host tcptype active generation 0 ufrag Bm/R network-id 3 network-cost 10',
+2025-07-07T18:31:42.713165381Z     sdpMid: '1',
+2025-07-07T18:31:42.713167251Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.713169031Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.713171441Z   }
+2025-07-07T18:31:42.713174041Z }
+2025-07-07T18:31:42.713175531Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.713466187Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.713471597Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.713489108Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.713491998Z   candidate: {
+2025-07-07T18:31:42.713495358Z     candidate: 'candidate:3256612076 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag Bm/R network-id 2 network-cost 50',
+2025-07-07T18:31:42.713501678Z     sdpMid: '1',
+2025-07-07T18:31:42.713505208Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.713508958Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.713510828Z   }
+2025-07-07T18:31:42.713512558Z }
+2025-07-07T18:31:42.713529789Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.713535339Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.713537879Z   candidate: {
+2025-07-07T18:31:42.713540969Z     candidate: 'candidate:361827188 1 udp 2122194687 100.92.98.39 52357 typ host generation 0 ufrag Bm/R network-id 1 network-cost 50',
+2025-07-07T18:31:42.713543469Z     sdpMid: '0',
+2025-07-07T18:31:42.713545869Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.713548389Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.713550909Z   }
+2025-07-07T18:31:42.713553239Z }
+2025-07-07T18:31:42.71359643Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.713785874Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.713797584Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.713815424Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.713818044Z   candidate: {
+2025-07-07T18:31:42.713836335Z     candidate: 'candidate:3283326666 1 udp 2122129151 192.168.1.11 52358 typ host generation 0 ufrag Bm/R network-id 3 network-cost 10',
+2025-07-07T18:31:42.713840235Z     sdpMid: '0',
+2025-07-07T18:31:42.713842955Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.713845875Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.713848565Z   }
+2025-07-07T18:31:42.713851085Z }
+2025-07-07T18:31:42.714067389Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.714070909Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.714077409Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.71408088Z   candidate: {
+2025-07-07T18:31:42.71408401Z     candidate: 'candidate:1018241144 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 52359 typ host generation 0 ufrag Bm/R network-id 2 network-cost 50',
+2025-07-07T18:31:42.71408699Z     sdpMid: '0',
+2025-07-07T18:31:42.71408987Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.71409265Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.71409534Z   }
+2025-07-07T18:31:42.71409785Z }
+2025-07-07T18:31:42.714208932Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.714212242Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.714218292Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.714221022Z   candidate: {
+2025-07-07T18:31:42.714222182Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.714224983Z     candidate: 'candidate:361827188 1 udp 2122194687 100.92.98.39 52360 typ host generation 0 ufrag Bm/R network-id 1 network-cost 50',
+2025-07-07T18:31:42.714227603Z     sdpMid: '1',
+2025-07-07T18:31:42.714234603Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.714237223Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.714239733Z   }
+2025-07-07T18:31:42.714242443Z }
+2025-07-07T18:31:42.714275664Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.714283074Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.714285644Z   candidate: {
+2025-07-07T18:31:42.714289034Z     candidate: 'candidate:3283326666 1 udp 2122129151 192.168.1.11 52361 typ host generation 0 ufrag Bm/R network-id 3 network-cost 10',
+2025-07-07T18:31:42.714291874Z     sdpMid: '1',
+2025-07-07T18:31:42.714294604Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.714297164Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.714299654Z   }
+2025-07-07T18:31:42.714302074Z }
+2025-07-07T18:31:42.714307764Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.714310424Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.714311224Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.714313354Z   candidate: {
+2025-07-07T18:31:42.714316574Z     candidate: 'candidate:1018241144 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 52362 typ host generation 0 ufrag Bm/R network-id 2 network-cost 50',
+2025-07-07T18:31:42.714319224Z     sdpMid: '1',
+2025-07-07T18:31:42.714321794Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.714324225Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.714326605Z   }
+2025-07-07T18:31:42.714328925Z }
+2025-07-07T18:31:42.7455726Z [MATCH] Current queue length: 1
+2025-07-07T18:31:42.747977908Z [MATCH] Cleaned up stale entries older than 2025-07-07T18:26:42.745Z
+2025-07-07T18:31:42.865499012Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.865507862Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.865527122Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.865530452Z   candidate: {
+2025-07-07T18:31:42.865532962Z     candidate: 'candidate:1828288500 1 udp 1685921535 103.87.58.187 52358 typ srflx raddr 192.168.1.11 rport 52358 generation 0 ufrag Bm/R network-id 3 network-cost 10',
+2025-07-07T18:31:42.865534833Z     sdpMid: '0',
+2025-07-07T18:31:42.865537022Z     sdpMLineIndex: 0,
+2025-07-07T18:31:42.865539502Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.865541203Z   }
+2025-07-07T18:31:42.865542953Z }
+2025-07-07T18:31:42.866646745Z [SIGNAL] Target socket nwAMWQLxg2lRbiVrAAAi not found for webrtc-ice-candidate
+2025-07-07T18:31:42.866649805Z [SIGNAL] Received webrtc-ice-candidate from t2TAgXJaJ7D8CYBWAAAf to forward to nwAMWQLxg2lRbiVrAAAi {
+2025-07-07T18:31:42.866666985Z   targetSocketId: 'nwAMWQLxg2lRbiVrAAAi',
+2025-07-07T18:31:42.866670165Z   candidate: {
+2025-07-07T18:31:42.866673975Z     candidate: 'candidate:1828288500 1 udp 1685921535 103.87.58.187 52361 typ srflx raddr 192.168.1.11 rport 52361 generation 0 ufrag Bm/R network-id 3 network-cost 10',
+2025-07-07T18:31:42.866676745Z     sdpMid: '1',
+2025-07-07T18:31:42.866678816Z     sdpMLineIndex: 1,
+2025-07-07T18:31:42.866681085Z     usernameFragment: 'Bm/R'
+2025-07-07T18:31:42.866682845Z   }
+2025-07-07T18:31:42.866684676Z }
+2025-07-07T18:31:47.746784645Z [MATCH] Current queue length: 1
+2025-07-07T18:31:47.749371357Z [MATCH] Cleaned up stale entries older than 2025-07-07T18:26:47.746Z
+2025-07-07T18:31:52.748288616Z [MATCH] Current queue length: 1
+2025-07-07T18:31:52.750768236Z [MATCH] Cleaned up stale entries older than 2025-07-07T18:26:52.748Z
+2025-07-07T18:31:57.75098124Z [MATCH] Current queue length: 1
+2025-07-07T18:31:57.7534524Z [MATCH] Cleaned up stale entries older than 2025-07-07T18:26:57.750Z
+2025-07-07T18:32:02.752837788Z [MATCH] Current queue length: 1
+2025-07-07T18:32:02.756221026Z [MATCH] Cleaned up stale entries older than 2025-07-07T18:27:02.752Z
+2025-07-07T18:32:07.754532853Z [MATCH] Current queue length: 1
+2025-07-07T18:32:07.756974532Z [MATCH] Cleaned up stale entries older than 2025-07-07T18:27:07.754Z
