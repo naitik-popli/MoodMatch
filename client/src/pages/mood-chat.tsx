@@ -67,14 +67,16 @@ export default function MoodChat() {
 
     const handleMatch = (data: { partnerId: number; partnerSocketId: string }) => {
       console.log("✅ Match found on frontend:", data);
-      handleMatchFound(data);
+      // Provide a default sessionId to satisfy handleMatchFound's expected type
+      handleMatchFound({ ...data, sessionId: sessionData?.sessionId ?? 0 });
     };
 
     socket.on("match-found", handleMatch);
     return () => {
       socket.off("match-found", handleMatch);
     };
-  }, [socket]);
+  }, [socket, sessionData?.sessionId]);
+
 
   const handleMoodSelect = async (mood: Mood) => {
     try {
@@ -184,6 +186,7 @@ export default function MoodChat() {
           mood={selectedMood}
           onCancel={handleCancelWaiting}
           onMatchFound={handleMatchFound}
+          onResetQueueJoin={() => {}}
         />
       )}
 
