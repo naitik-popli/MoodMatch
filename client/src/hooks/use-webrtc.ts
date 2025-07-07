@@ -136,6 +136,7 @@ const initMedia = async () => {
           timestamp: new Date().toISOString(),
           targetSocketId, // add targetSocketId for debugging
         });
+        log('Emitted test-message event with ICE candidate');
       }
     };
 
@@ -177,14 +178,23 @@ const initMedia = async () => {
       setConnectionState(state);
       log('Connection state changed:', state);
       setIsConnected(state === "connected");
+      if (state === "failed" || state === "disconnected") {
+        log('Connection state is failed or disconnected, consider retry or cleanup');
+      }
     };
 
     pc.oniceconnectionstatechange = () => {
       log('ICE connection state:', pc.iceConnectionState);
+      if (pc.iceConnectionState === "failed") {
+        log('ICE connection state failed, check network or signaling');
+      }
     };
 
     pc.onsignalingstatechange = () => {
       log('Signaling state:', pc.signalingState);
+      if (pc.signalingState === "stable") {
+        log('Signaling state is stable');
+      }
     };
 
     return pc;
@@ -314,6 +324,7 @@ const initMedia = async () => {
       log('Received test message:', data);
     };
     socket.on("test-message", handleTestMessage);
+    log('Subscribed to test-message event');
 
     // Add debug log for socket connection state
     socket.on("connect", () => {
