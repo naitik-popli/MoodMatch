@@ -171,6 +171,8 @@ const initMedia = async () => {
             tracks: newStream.getTracks().map(t => t.id)
           });
         }
+      } else {
+        log('Warning: ontrack event has no streams');
       }
     };
 

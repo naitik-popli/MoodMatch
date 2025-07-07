@@ -243,6 +243,8 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       console.error('attachStream is not a function');
       return;
     }
+    // Added log for debugging
+    console.log('Assigning remoteStream to video element', remoteStream);
     attachStream(remoteStream, false);
   }, [remoteStream, attachStream]);
 
