@@ -248,17 +248,16 @@ const initMedia = async () => {
     }
   }, [localStream]);
 
-  // Modify signaling setup effect to wait for socketIdReady and mediaReady
+  // Enhanced signaling setup effect
   useEffect(() => {
-    if (!socket || !socketIdReady || !mediaReady) {
-      log("Socket or media not ready, postponing signaling setup");
+    if (!socket || !socket.connected || !targetSocketId) {
+      log("Socket not ready or missing targetSocketId, postponing signaling setup");
       return;
     }
 
-    if (!targetSocketId) {
-      console.warn("[WEBRTC:useWebRTC] Target socket ID is undefined");
-      return;
-    }
+    // Debug log to verify socket connection
+    console.log("🔌 Socket connection status:", socket.connected);
+    console.log("🎯 Target socket ID:", targetSocketId);
 
     let disconnectTimeout: NodeJS.Timeout | null = null;
     let callEnded = false;
@@ -385,6 +384,7 @@ const initMedia = async () => {
       socket.off("webrtc-ice-candidate", handleIce);
       socket.off("disconnect", handleDisconnect);
       socket.off("connect", handleConnect);
+      socket.off("test-message", handleTestMessage);
     };
   }, [socket, socketIdReady, targetSocketId, setupPeerConnection, log]);
 
