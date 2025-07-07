@@ -235,6 +235,14 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
 }, [socket, partnerSocketId, mediaPermissionGranted, startCall]);
 
   useEffect(() => {
+    if (!remoteStream) {
+      console.warn('No remoteStream available to assign');
+      return;
+    }
+    if (typeof attachStream !== 'function') {
+      console.error('attachStream is not a function');
+      return;
+    }
     attachStream(remoteStream, false);
   }, [remoteStream, attachStream]);
 
