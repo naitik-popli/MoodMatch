@@ -224,7 +224,7 @@ export async function setupWebSocket(io: SocketIOServer) {
         console.log(`[DISCONNECT] Removed user ${userId} from socket map`);
       }
 
-      // Remove user from moodQueue
+      // Remove user from moodQueue regardless of active session status
       await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
       console.log(`[DISCONNECT] Removed user ${userId} from queue`);
     });

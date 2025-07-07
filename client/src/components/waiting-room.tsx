@@ -62,6 +62,16 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
   // 🔌 SOCKET: bind + queue + listeners
   const [hasJoinedQueue, setHasJoinedQueue] = React.useState(false);
 
+  // Function to leave queue
+  const leaveQueue = () => {
+    if (socket && userId && hasJoinedQueue) {
+      console.log(`[WaitingRoom] Emitting leave-mood-queue for user ${userId}`);
+      socket.emit("leave-mood-queue", { userId });
+      setHasJoinedQueue(false);
+      onResetQueueJoin();
+    }
+  };
+
   useEffect(() => {
     if (!socket) {
       console.warn("[WaitingRoom] Missing socket");
@@ -132,6 +142,25 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
     }
   }, [onResetQueueJoin]);
 
+  // Leave queue on unmount or page reload
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      leaveQueue();
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      leaveQueue();
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [socket, userId, hasJoinedQueue]);
+
+  // Handle cancel button click
+  const handleCancel = () => {
+    leaveQueue();
+    onCancel();
+  };
+
   // Format timer into mm:ss
   const formatWaitTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -179,7 +208,7 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
 
         <Button
           variant="ghost"
-          onClick={onCancel}
+          onClick={handleCancel}
           className="text-white/80 hover:text-white hover:bg-white/10"
         >
           Cancel and choose different mood

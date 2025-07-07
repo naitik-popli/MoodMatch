@@ -1,64 +1,116 @@
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:11.540Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:16.601Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:21.533Z
-POST /api/session/create 200 89ms
-Response: {
-  "sessionId": 449,
-  "userId": 333,
-  "mood": "happy"
-}
-[CONN ehjRVl] New connection [socketId=ehjRVlfFFQGA8DNJAAAK]
-[SOCKET MAP] Bound user 333 to socket ehjRVlfFFQGA8DNJAAAK
-[SOCKET MAP] Bound user 333 to socket ehjRVlfFFQGA8DNJAAAK
-[SOCKET MAP] Bound user 333 to socket ehjRVlfFFQGA8DNJAAAK
-[QUEUE 333] Attempting to join queue for "happy" with socket ehjRVlfFFQGA8DNJAAAK
-[QUEUE 333] Attempting to join queue for "happy" with socket ehjRVlfFFQGA8DNJAAAK
-[QUEUE 333] Joined queue at position 1 for mood "happy"
-[QUEUE 333] Joined queue at position 1 for mood "happy"
-[MATCH] Current queue length: 1
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:25.251Z
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:25.252Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:26.534Z
-[DISCONNECT] Socket p3xNX2Oa1xnTJrEOAAAB disconnected (userId=331)
-[DISCONNECT] Removed user 331 from socket map
-[DISCONNECT] Socket v1cHfxqy68WpRuukAAAE disconnected (userId=undefined)
-[DISCONNECT] Removed user 331 from queue
-[CONN BcfjIF] New connection [socketId=BcfjIFKg0kbMcOjrAAAN]
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:31.539Z
-POST /api/session/create 200 27ms
-Response: {
-  "sessionId": 450,
-  "userId": 334,
-  "mood": "happy"
-}
-[CONN BawWgs] New connection [socketId=BawWgsuHg_uiGTBrAAAQ]
-[SOCKET MAP] Bound user 334 to socket BawWgsuHg_uiGTBrAAAQ
-[SOCKET MAP] Bound user 334 to socket BawWgsuHg_uiGTBrAAAQ
-[SOCKET MAP] Bound user 334 to socket BawWgsuHg_uiGTBrAAAQ
-[QUEUE 334] Attempting to join queue for "happy" with socket BawWgsuHg_uiGTBrAAAQ
-[QUEUE 334] Joined queue at position 2 for mood "happy"
-[MATCH] Current queue length: 2
-[DEBUG][2025-07-07T16:08:35.564Z] Updated partnerId for user 333 in existing session { oldPartnerId: null, newPartnerId: 334 }
-[DEBUG][2025-07-07T16:08:35.577Z] Updated partnerId for user 334 in existing session { oldPartnerId: null, newPartnerId: 333 }
-[MATCH] Notified user 333 and 334 of match (sessionId=449)
-[MATCH] Paired users 333 and 334 in mood "happy"
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:35.588Z
-[QUEUE 334] Attempting to join queue for "happy" with socket BawWgsuHg_uiGTBrAAAQ
-[QUEUE 334] Joined queue at position 1 for mood "happy"
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:35.873Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:36.535Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:41.541Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:46.538Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:51.541Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-07T16:03:56.544Z
+🔗 Socket connection status: true
+index-11lJ9xUa.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
+index-11lJ9xUa.js:319 🧹 Component unmounted, but socket connection kept alive
+index-11lJ9xUa.js:319 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-11lJ9xUa.js:319 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-11lJ9xUa.js:319 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket or media not ready, postponing signaling setup
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket not ready, postponing signaling setup
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'new'}
+index-11lJ9xUa.js:319 No remoteStream available to assign
+index-11lJ9xUa.js:319 [2025-07-07T16:25:07.155Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: false, mediaPermissionGranted: false, partnerSocketId: '5J44zBJLxdU07jX0AAAW'}
+index-11lJ9xUa.js:363 📞 Transitioning to VideoCall: {sessionId: 451, userId: 335, partnerId: 336, partnerSocketId: '5J44zBJLxdU07jX0AAAW'}
+index-11lJ9xUa.js:319 🧠 Local socket ID: 1aNyG-FlguVjibXwAAAQ
+index-11lJ9xUa.js:319 🧠 Socket ID ready for signaling: 1aNyG-FlguVjibXwAAAQ
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket or media not ready, postponing signaling setup
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'new'}
+index-11lJ9xUa.js:319 No remoteStream available to assign
+index-11lJ9xUa.js:319 [2025-07-07T16:25:07.160Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: true, mediaPermissionGranted: false, partnerSocketId: '5J44zBJLxdU07jX0AAAW'}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket or media not ready, postponing signaling setup
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'new'}
+index-11lJ9xUa.js:319 No remoteStream available to assign
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket or media not ready, postponing signaling setup
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'new'}
+index-11lJ9xUa.js:319 No remoteStream available to assign
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Initializing media devices
+index-11lJ9xUa.js:319 [2025-07-07T16:25:07.972Z] [DEBUG:VideoCall] Starting call initialization
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Initializing media devices
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket or media not ready, postponing signaling setup
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: undefined, remoteStream: undefined, isConnected: false, connectionState: 'new'}
+index-11lJ9xUa.js:319 No remoteStream available to assign
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Obtained media stream {id: '5b29cad8-56b9-46b9-bd88-dba10409670c', active: true, videoTracks: Array(1), audioTracks: Array(1)}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Creating new peer connection
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Added audio track to peer connection on setup
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Added video track to peer connection on setup
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Skipped adding audio track - already added
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Skipped adding video track - already added
+index-11lJ9xUa.js:319 🎥 Media stream ready for signaling: 5b29cad8-56b9-46b9-bd88-dba10409670c
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Socket or media not ready, postponing signaling setup
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: '5b29cad8-56b9-46b9-bd88-dba10409670c', remoteStream: undefined, isConnected: false, connectionState: 'new'}
+index-11lJ9xUa.js:319 No remoteStream available to assign
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Obtained media stream {id: 'f2722af6-a7b1-4f3e-99a4-6436cf75a598', active: true, videoTracks: Array(1), audioTracks: Array(1)}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Creating new peer connection
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Added audio track to peer connection on setup
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Added video track to peer connection on setup
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Skipped adding audio track - already added
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Skipped adding video track - already added
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Signaling state: have-local-offer
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Created and set local offer
+index-11lJ9xUa.js:319 🎥 Media stream ready for signaling: f2722af6-a7b1-4f3e-99a4-6436cf75a598
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Subscribed to test-message event
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: 'f2722af6-a7b1-4f3e-99a4-6436cf75a598', remoteStream: undefined, isConnected: false, connectionState: 'new'}
+index-11lJ9xUa.js:319 No remoteStream available to assign
+index-11lJ9xUa.js:319 [2025-07-07T16:25:08.100Z] [DEBUG:VideoCall] Local video play failed: AbortError: The play() request was interrupted by a new load request. https://goo.gl/LdLk22
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Signaling state: have-local-offer
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Created and set local offer
+index-11lJ9xUa.js:319 [2025-07-07T16:25:08.108Z] [DEBUG:VideoCall] Call started successfully
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Media stream became inactive
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Subscribed to test-message event
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] State update {localStream: 'f2722af6-a7b1-4f3e-99a4-6436cf75a598', remoteStream: undefined, isConnected: false, connectionState: 'new'}
+index-11lJ9xUa.js:319 No remoteStream available to assign
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2441472829 1 udp 2122194687 100.92.98.39…eration 0 ufrag sJ9L network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '2441472829', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1202157187 1 udp 2122129151 192.168.1.11…eration 0 ufrag sJ9L network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '1202157187', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3097870385 1 udp 2122265343 fd7a:115c:a1…eration 0 ufrag sJ9L network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '3097870385', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2441472829 1 udp 2122194687 100.92.98.39…eration 0 ufrag sJ9L network-id 1 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '2441472829', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1202157187 1 udp 2122129151 192.168.1.11…eration 0 ufrag sJ9L network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '1202157187', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3097870385 1 udp 2122265343 fd7a:115c:a1…eration 0 ufrag sJ9L network-id 2 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '3097870385', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2464319979 1 udp 2122194687 100.92.98.39…eration 0 ufrag X/O3 network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '2464319979', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1725751115 1 udp 2122129151 192.168.1.11…eration 0 ufrag X/O3 network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '1725751115', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1795169682 1 udp 2122265343 fd7a:115c:a1…eration 0 ufrag X/O3 network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '1795169682', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2464319979 1 udp 2122194687 100.92.98.39…eration 0 ufrag X/O3 network-id 1 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '2464319979', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1725751115 1 udp 2122129151 192.168.1.11…eration 0 ufrag X/O3 network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '1725751115', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1795169682 1 udp 2122265343 fd7a:115c:a1…eration 0 ufrag X/O3 network-id 2 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '1795169682', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1865367465 1 tcp 1518214911 100.92.98.39…eration 0 ufrag sJ9L network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '1865367465', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3104678423 1 tcp 1518149375 192.168.1.11…eration 0 ufrag sJ9L network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '3104678423', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1175393445 1 tcp 1518285567 fd7a:115c:a1…eration 0 ufrag sJ9L network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '1175393445', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1865367465 1 tcp 1518214911 100.92.98.39…eration 0 ufrag sJ9L network-id 1 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '1865367465', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3104678423 1 tcp 1518149375 192.168.1.11…eration 0 ufrag sJ9L network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '3104678423', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1175393445 1 tcp 1518285567 fd7a:115c:a1…eration 0 ufrag sJ9L network-id 2 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '1175393445', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3962399603 1 tcp 1518214911 100.92.98.39…eration 0 ufrag X/O3 network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '3962399603', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:403914195 1 tcp 1518149375 192.168.1.11 …eration 0 ufrag X/O3 network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '403914195', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:365952778 1 tcp 1518285567 fd7a:115c:a1e…eration 0 ufrag X/O3 network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '365952778', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3962399603 1 tcp 1518214911 100.92.98.39…eration 0 ufrag X/O3 network-id 1 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '3962399603', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:403914195 1 tcp 1518149375 192.168.1.11 …eration 0 ufrag X/O3 network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '403914195', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:365952778 1 tcp 1518285567 fd7a:115c:a1e…eration 0 ufrag X/O3 network-id 2 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '365952778', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3907884989 1 udp 1685921535 103.87.58.18…eration 0 ufrag sJ9L network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '3907884989', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3907884989 1 udp 1685921535 103.87.58.18…eration 0 ufrag sJ9L network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '3907884989', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:640069090 1 udp 1685921535 103.87.58.187…eration 0 ufrag X/O3 network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '640069090', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:640069090 1 udp 1685921535 103.87.58.187…eration 0 ufrag X/O3 network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '640069090', component: 'rtp', …}
+index-11lJ9xUa.js:319 [WEBRTC:useWebRTC] Emitted test-message event with ICE candidate
