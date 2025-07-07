@@ -59,6 +59,8 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
   }, [mood]);
 
   // 🔌 SOCKET: bind + queue + listeners
+  const [hasJoinedQueue, setHasJoinedQueue] = React.useState(false);
+
   useEffect(() => {
     if (!socket) {
       console.warn("[WaitingRoom] Missing socket");
@@ -67,6 +69,11 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
 
     if (!userId || !mood) {
       console.warn("[WaitingRoom] Missing userId or mood");
+      return;
+    }
+
+    if (hasJoinedQueue) {
+      console.log("[WaitingRoom] Already joined queue, skipping");
       return;
     }
 
@@ -93,6 +100,7 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
         const joinTimeout = setTimeout(() => {
           console.log("📤 Emitting 'join-mood-queue' with:", { userId, mood });
           socket.emit("join-mood-queue", { userId, mood });
+          setHasJoinedQueue(true);
         }, 300);
 
         socket.on("match-found", onMatchFound);
@@ -108,13 +116,12 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
         };
       } catch (error) {
         // Permission denied or error
-        setMediaError("Camera and microphone access is required to share your mood.");
         console.error("Media devices access error:", error);
       }
     };
 
     checkMediaDevicesAndJoinQueue();
-  }, [socket, userId, mood, onMatchFound]);
+  }, [socket, userId, mood, onMatchFound, hasJoinedQueue]);
 
 
   // Format timer into mm:ss
