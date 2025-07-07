@@ -119,6 +119,7 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
           console.log("[WaitingRoom] Still waiting...")
         );
 
+        // Cleanup function for socket listeners and timeout
         return () => {
           clearTimeout(joinTimeout);
           socket.off("match-found", onMatchFound);
@@ -132,6 +133,8 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
     };
 
     checkMediaDevicesAndJoinQueue();
+
+    // No cleanup function returned here because checkMediaDevicesAndJoinQueue is async and returns a Promise
   }, [socket, userId, mood, onMatchFound, hasJoinedQueue]);
 
   // Reset hasJoinedQueue when requested
