@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
-const SOCKET_URL = import.meta.env.VITE_WS_URL || "ws://localhost:3000";
+const SOCKET_URL = import.meta.env.VITE_WS_URL || "wss://moodmatch-61xp.onrender.com";
 
 export function useSocket() {
   const [socket, setSocket] = useState<Socket | null>(null);
