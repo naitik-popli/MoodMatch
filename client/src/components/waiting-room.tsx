@@ -31,9 +31,10 @@ interface Props {
   mood: Mood;
   onCancel: () => void;
   onMatchFound: (data: { partnerId: number; partnerSocketId: string }) => void;
+  onResetQueueJoin: () => void;
 }
 
-export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
+export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueueJoin }: Props) {
   const [waitTime, setWaitTime] = useState(0);
   const [userId, setUserId] = useState<number | null>(null);
   const { socket } = useSocket(userId ?? undefined);
@@ -123,6 +124,13 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound }: Props) {
     checkMediaDevicesAndJoinQueue();
   }, [socket, userId, mood, onMatchFound, hasJoinedQueue]);
 
+  // Reset hasJoinedQueue when requested
+  useEffect(() => {
+    if (onResetQueueJoin) {
+      onResetQueueJoin();
+      setHasJoinedQueue(false);
+    }
+  }, [onResetQueueJoin]);
 
   // Format timer into mm:ss
   const formatWaitTime = (seconds: number) => {
