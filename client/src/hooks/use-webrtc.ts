@@ -132,7 +132,17 @@ const initMedia = async () => {
   }
   mediaInitializedRef.current = true;
 
-  const stream = await navigator.mediaDevices.getUserMedia(getMediaConstraints());
+  // Define media constraints explicitly here to fix missing getMediaConstraints
+  const constraints = {
+    audio: true,
+    video: {
+      width: { ideal: 1280 },
+      height: { ideal: 720 },
+      facingMode: "user"
+    }
+  };
+
+  const stream = await navigator.mediaDevices.getUserMedia(constraints);
   setLocalStream(stream);
 };
 
@@ -253,172 +263,19 @@ const initMedia = async () => {
   }, [localStream]);
 
   // Enhanced signaling setup effect
-  useEffect(() => {
-    if (!socket || !socket.connected || !targetUserId) {
-      log("Socket not ready or missing targetUserId, postponing signaling setup");
+   useEffect(() => {
+    if (!socket || socket.disconnected) {
+      log("Socket not ready, postponing signaling setup");
       return;
     }
 
-    // Debug log to verify socket connection
-    console.log("🔌 Socket connection status:", socket.connected);
-    console.log("🎯 Target user ID:", targetUserId);
+    if (!targetUserId) {
+      console.warn("[WEBRTC:useWebRTC] Target user ID is undefined");
+      return;
+    }
 
     let disconnectTimeout: NodeJS.Timeout | null = null;
     let callEnded = false;
-
-    const handleOffer = async (data: any) => {
-      log('Received offer from:', data.fromSocketId);
-      if (data.fromSocketId !== targetUserId) return;
-
-      try {
-        const pc = peerConnectionRef.current || setupPeerConnection();
-
-        // Add local tracks if not already added
-        if (localStreamRef.current) {
-          localStreamRef.current.getTracks().forEach(track => {
-            try {
-              // Check if track already added to avoid InvalidAccessError
-              const senderExists = pc.getSenders().some(sender => sender.track === track);
-              if (!senderExists) {
-                pc.addTrack(track, localStreamRef.current!);
-                log(`Added ${track.kind} track to peer connection on offer`);
-              } else {
-                log(`Skipped adding ${track.kind} track on offer - already added`);
-              }
-            } catch (e) {
-              log(`Error adding ${track.kind} track on offer:`, e);
-            }
-          });
-        }
-
-        log('Setting remote description for offer');
-        await pc.setRemoteDescription(data.offer);
-        log('Set remote description for offer');
-
-        const answer = await pc.createAnswer();
-        await pc.setLocalDescription(answer);
-        log('Created and set local answer');
-
-        socket.emit("webrtc-answer", {
-          targetUserId: data.fromSocketId,
-          answer,
-        });
-        log('Sent webrtc-answer');
-      } catch (error) {
-        log('Error handling offer:', error);
-      }
-    };
-
-    const handleIce = async (data: any) => {
-      if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
-      
-      try {
-        await peerConnectionRef.current.addIceCandidate(data.candidate);
-        log('Added ICE candidate');
-      } catch (error) {
-        log('Error adding ICE candidate:', error);
-      }
-    };
-
-    const handleAnswer = async (data: any) => {
-      log('Received answer from:', data.fromSocketId);
-      if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
-
-      try {
-        const pc = peerConnectionRef.current;
-
-        // Add local tracks if not already added
-        if (localStreamRef.current) {
-          localStreamRef.current.getTracks().forEach(track => {
-            try {
-              // Check if track already added to avoid InvalidAccessError
-              const senderExists = pc.getSenders().some(sender => sender.track === track);
-              if (!senderExists) {
-                pc.addTrack(track, localStreamRef.current!);
-                log(`Added ${track.kind} track to peer connection on answer`);
-              } else {
-                log(`Skipped adding ${track.kind} track on answer - already added`);
-              }
-            } catch (e) {
-              log(`Error adding ${track.kind} track on answer:`, e);
-            }
-          });
-        }
-
-        log('Setting remote description for answer');
-        await pc.setRemoteDescription(data.answer);
-        log('Successfully set remote answer for answer');
-      } catch (error) {
-        log('Error handling answer:', error);
-      }
-    };
-
-    // Add listener for test-message event to log test messages
-    const handleTestMessage = (data: any) => {
-      log('Received test message:', data);
-    };
-    socket.on("test-message", handleTestMessage);
-    log('Subscribed to test-message event');
-
-    // Add debug log for socket connection state
-    socket.on("connect", () => {
-      log('Socket connected:', socket.id);
-    });
-    socket.on("disconnect", (reason) => {
-      log('Socket disconnected:', reason);
-    });
-
-    const handleDisconnect = () => {
-      log('Socket disconnected, delaying call cleanup');
-      if (!callEnded) {
-        disconnectTimeout = setTimeout(() => {
-          log("🔴 endCall() triggered — TRACE HANDLEDISCONNECT", new Error().stack);
-          endCall();
-          callEnded = true;
-        }, 10000); // increased delay to 10 seconds
-      }
-    };
-
-    const handleConnect = () => {
-      log('Socket connected, clearing disconnect timeout');
-      if (disconnectTimeout) {
-        clearTimeout(disconnectTimeout);
-        disconnectTimeout = null;
-      }
-      callEnded = false;
-    };
-
-    socket.on("webrtc-offer", handleOffer);
-    socket.on("webrtc-answer", handleAnswer);
-    socket.on("webrtc-ice-candidate", handleIce);
-    socket.on("disconnect", handleDisconnect);
-    socket.on("connect", handleConnect);
-
-    return () => {
-      socket.off("webrtc-offer", handleOffer);
-      socket.off("webrtc-answer", handleAnswer);
-      socket.off("webrtc-ice-candidate", handleIce);
-      socket.off("disconnect", handleDisconnect);
-      socket.off("connect", handleConnect);
-    };
-  }, [socket, socketIdReady, targetUserId, setupPeerConnection, log]);
-
-
-  // Enhanced signaling handlers
-  useEffect(() => {
-  if (!socket || socket.disconnected) {
-  log("Socket not ready, postponing signaling setup");
-  return;
-}
-
-
-  if (!targetUserId) {
-    console.warn("[WEBRTC:useWebRTC] Target user ID is undefined");
-    return;
-  }
-
-  let disconnectTimeout: NodeJS.Timeout | null = null;
-  let callEnded = false;
 
     const handleOffer = async (data: any) => {
       log('Received offer from:', data.fromSocketId);
@@ -456,6 +313,132 @@ const initMedia = async () => {
         log('Error handling offer:', error);
       }
     };
+
+    const handleAnswer = async (data: any) => {
+      log('Received answer from:', data.fromSocketId);
+      if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
+
+      try {
+        const pc = peerConnectionRef.current;
+
+        // Add local tracks if not already added
+        if (localStreamRef.current) {
+          localStreamRef.current.getTracks().forEach(track => {
+            try {
+              pc.addTrack(track, localStreamRef.current!);
+              log(`Added ${track.kind} track to peer connection on answer`);
+            } catch (e) {
+              log(`Error adding ${track.kind} track on answer:`, e);
+            }
+          });
+        }
+
+        log('Setting remote description for answer');
+        await pc.setRemoteDescription(data.answer);
+        log('Successfully set remote answer for answer');
+      } catch (error) {
+        log('Error handling answer:', error);
+      }
+    };
+
+    const handleIce = async (data: any) => {
+      if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
+      
+      try {
+        await peerConnectionRef.current.addIceCandidate(data.candidate);
+        log('Added ICE candidate');
+      } catch (error) {
+        log('Error adding ICE candidate:', error);
+      }
+    };
+
+    const handleDisconnect = () => {
+      log('Socket disconnected, delaying call cleanup');
+      if (!callEnded) {
+        disconnectTimeout = setTimeout(() => {
+          log("🔴 endCall() triggered — TRACE HANDLEDISCONNECT", new Error().stack);
+          endCall();
+          callEnded = true;
+        }, 10000); // increased delay to 10 seconds
+      }
+    };
+
+    const handleConnect = () => {
+      log('Socket connected, clearing disconnect timeout');
+      if (disconnectTimeout) {
+        clearTimeout(disconnectTimeout);
+        disconnectTimeout = null;
+      }
+      callEnded = false;
+    };
+
+    socket.on("webrtc-offer", handleOffer);
+    socket.on("webrtc-answer", handleAnswer);
+    socket.on("webrtc-ice-candidate", handleIce);
+    socket.on("disconnect", handleDisconnect);
+    socket.on("connect", handleConnect);
+
+    return () => {
+      socket.off("webrtc-offer", handleOffer);
+      socket.off("webrtc-answer", handleAnswer);
+      socket.off("webrtc-ice-candidate", handleIce);
+      socket.off("disconnect", handleDisconnect);
+      socket.off("connect", handleConnect);
+    };
+  }, [socket, targetUserId, setupPeerConnection, log]);
+
+
+  // Enhanced signaling handlers
+  // useEffect(() => {
+  //   if (!socket || socket.disconnected) {
+  //     log("Socket not ready, postponing signaling setup");
+  //     return;
+  //   }
+
+  //   if (!targetUserId) {
+  //     console.warn("[WEBRTC:useWebRTC] Target user ID is undefined");
+  //     return;
+  //   }
+
+  //   let disconnectTimeout: NodeJS.Timeout | null = null;
+  //   let callEnded = false;
+
+  //   const handleOffer = async (data: any) => {
+  //     log('Received offer from:', data.fromSocketId);
+  //     if (data.fromSocketId !== targetUserId) return;
+
+  //     try {
+  //       const pc = peerConnectionRef.current || setupPeerConnection();
+
+  //       // Add local tracks if not already added
+  //       if (localStreamRef.current) {
+  //         localStreamRef.current.getTracks().forEach(track => {
+  //           try {
+  //             pc.addTrack(track, localStreamRef.current!);
+  //             log(`Added ${track.kind} track to peer connection on offer`);
+  //           } catch (e) {
+  //             log(`Error adding ${track.kind} track on offer:`, e);
+  //           }
+  //         });
+  //       }
+
+  //       log('Setting remote description for offer');
+  //       await pc.setRemoteDescription(data.offer);
+  //       log('Set remote description for offer');
+
+  //       const answer = await pc.createAnswer();
+  //       await pc.setLocalDescription(answer);
+  //       log('Created and set local answer');
+
+  //       socket.emit("webrtc-answer", {
+  //         targetUserId: data.fromSocketId,
+  //         answer,
+  //       });
+  //       log('Sent webrtc-answer');
+  //     } catch (error) {
+  //       log('Error handling offer:', error);
+  //     }
+  //   };
 
   //   const handleAnswer = async (data: any) => {
   //     log('Received answer from:', data.fromSocketId);
@@ -664,13 +647,13 @@ const initMedia = async () => {
   
 
   // Cleanup on unmount
-  // useEffect(() => {
-  //   return () => {
-  //     log("🔴 endCall() triggered — TRACE Useeffect", new Error().stack);
+  useEffect(() => {
+    return () => {
+      log("🔴 endCall() triggered — TRACE Useeffect", new Error().stack);
 
-  //     endCall();
-  //   };
-  // }, [endCall]);
+      endCall();
+    };
+  }, [endCall]);
 
   return {
     localStream,

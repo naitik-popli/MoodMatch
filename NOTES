@@ -1,95 +1,26 @@
-✅ Connected to socket: gTbl6sbPj1sDBB0KAAAK
-index-N6vdzfqG.js:363 🔗 Socket connection status: true
-index-N6vdzfqG.js:363 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
-2index-N6vdzfqG.js:319 📮 Sending 'update-socket-id' with userId: 377
-index-N6vdzfqG.js:319 📤 Emitting 'join-mood-queue' with: {userId: 377, mood: 'happy'}
-index-N6vdzfqG.js:319 [WaitingRoom] Already joined queue, skipping
-index-N6vdzfqG.js:319 📤 Emitting 'join-mood-queue' with: {userId: 377, mood: 'happy'}
-index-N6vdzfqG.js:363 ✅ Match found on frontend: {partnerId: 378, partnerSocketId: 'WqRfa45-bnVuWKtaAAAN', sessionId: 493, timestamp: '2025-07-08T18:56:45.341Z'}
-index-N6vdzfqG.js:363 🧩 handleMatchFound called with data: {partnerId: 378, partnerSocketId: 'WqRfa45-bnVuWKtaAAAN', sessionId: 493, timestamp: '2025-07-08T18:56:45.341Z'}
-index-N6vdzfqG.js:363 📦 Updated sessionData after match: {sessionId: 493, userId: 377, partnerId: 378, partnerSocketId: 'WqRfa45-bnVuWKtaAAAN'}
-index-N6vdzfqG.js:363 🧩 handleMatchFound called with data: {partnerId: 378, partnerSocketId: 'WqRfa45-bnVuWKtaAAAN', sessionId: 493, timestamp: '2025-07-08T18:56:45.341Z'}
-index-N6vdzfqG.js:363 🧩 handleMatchFound called with data: {partnerId: 378, partnerSocketId: 'WqRfa45-bnVuWKtaAAAN', sessionId: 493, timestamp: '2025-07-08T18:56:45.341Z'}
-2index-N6vdzfqG.js:363 ⚠️ Already matched, ignoring duplicate match-found event
-(anonymous) @ index-N6vdzfqG.js:363
-_i @ index-N6vdzfqG.js:38
-Ea @ index-N6vdzfqG.js:38
-useState @ index-N6vdzfqG.js:38
-K.useState @ index-N6vdzfqG.js:9
-sN @ index-N6vdzfqG.js:363
-Xu @ index-N6vdzfqG.js:38
-Ec @ index-N6vdzfqG.js:40
-bg @ index-N6vdzfqG.js:40
-Cg @ index-N6vdzfqG.js:40
-e1 @ index-N6vdzfqG.js:40
-pl @ index-N6vdzfqG.js:40
-wg @ index-N6vdzfqG.js:40
-E @ index-N6vdzfqG.js:25
-O @ index-N6vdzfqG.js:25Understand this warning
-index-N6vdzfqG.js:363 🔗 Socket connection status: true
-index-N6vdzfqG.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-2index-N6vdzfqG.js:363 ⚠️ Already matched, ignoring duplicate match-found event
-(anonymous) @ index-N6vdzfqG.js:363
-_i @ index-N6vdzfqG.js:38
-Ea @ index-N6vdzfqG.js:38
-useState @ index-N6vdzfqG.js:38
-K.useState @ index-N6vdzfqG.js:9
-sN @ index-N6vdzfqG.js:363
-Xu @ index-N6vdzfqG.js:38
-Ec @ index-N6vdzfqG.js:40
-bg @ index-N6vdzfqG.js:40
-Cg @ index-N6vdzfqG.js:40
-e1 @ index-N6vdzfqG.js:40
-pl @ index-N6vdzfqG.js:40
-jc @ index-N6vdzfqG.js:40
-wg @ index-N6vdzfqG.js:40
-E @ index-N6vdzfqG.js:25
-O @ index-N6vdzfqG.js:25Understand this warning
-index-N6vdzfqG.js:363 🔗 Socket connection status: true
-index-N6vdzfqG.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-N6vdzfqG.js:40 ReferenceError: targetSocketId is not defined
-    at i2 (index-N6vdzfqG.js:319:54061)
-    at a2 (index-N6vdzfqG.js:319:61696)
-    at Xu (index-N6vdzfqG.js:38:16998)
-    at bg (index-N6vdzfqG.js:40:43963)
-    at Cg (index-N6vdzfqG.js:40:39727)
-    at e1 (index-N6vdzfqG.js:40:39655)
-    at pl (index-N6vdzfqG.js:40:39508)
-    at jc (index-N6vdzfqG.js:40:35875)
-    at wg (index-N6vdzfqG.js:40:34826)
-    at E (index-N6vdzfqG.js:25:1562)
-Cc @ index-N6vdzfqG.js:40
-i.componentDidCatch.n.callback @ index-N6vdzfqG.js:40
-Mf @ index-N6vdzfqG.js:38
-Xf @ index-N6vdzfqG.js:40
-vg @ index-N6vdzfqG.js:40
-Xx @ index-N6vdzfqG.js:40
-n1 @ index-N6vdzfqG.js:40
-ir @ index-N6vdzfqG.js:40
-wg @ index-N6vdzfqG.js:40
-E @ index-N6vdzfqG.js:25
-O @ index-N6vdzfqG.js:25Understand this error
-index-N6vdzfqG.js:363 Uncaught error: ReferenceError: targetSocketId is not defined
-    at i2 (index-N6vdzfqG.js:319:54061)
-    at a2 (index-N6vdzfqG.js:319:61696)
-    at Xu (index-N6vdzfqG.js:38:16998)
-    at bg (index-N6vdzfqG.js:40:43963)
-    at Cg (index-N6vdzfqG.js:40:39727)
-    at e1 (index-N6vdzfqG.js:40:39655)
-    at pl (index-N6vdzfqG.js:40:39508)
-    at jc (index-N6vdzfqG.js:40:35875)
-    at wg (index-N6vdzfqG.js:40:34826)
-    at E (index-N6vdzfqG.js:25:1562) {componentStack: '\n    at a2 (https://mood-match-two.vercel.app/asse…wo.vercel.app/assets/index-N6vdzfqG.js:363:39776)'}
-componentDidCatch @ index-N6vdzfqG.js:363
-i.componentDidCatch.n.callback @ index-N6vdzfqG.js:40
-Mf @ index-N6vdzfqG.js:38
-Xf @ index-N6vdzfqG.js:40
-vg @ index-N6vdzfqG.js:40
-Xx @ index-N6vdzfqG.js:40
-n1 @ index-N6vdzfqG.js:40
-ir @ index-N6vdzfqG.js:40
-wg @ index-N6vdzfqG.js:40
-E @ index-N6vdzfqG.js:25
-O @ index-N6vdzfqG.js:25Understand this error
-2index-N6vdzfqG.js:319 🧹 Component unmounted, but socket connection kept alive
-index-N6vdzfqG.js:319 [WaitingRoom] Emitting leave-mood-queue for user 377
+Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+✓ 1636 modules transformed.
+x Build failed in 2.21s
+error during build:
+[vite:esbuild] Transform failed with 1 error:
+/opt/render/project/src/client/src/hooks/use-webrtc.ts:686:0: ERROR: Expected ")" but found end of file
+file: /opt/render/project/src/client/src/hooks/use-webrtc.ts:686:0
+Expected ")" but found end of file
+684|    };
+685|  }
+686|  
+   |  ^
+    at failureErrorWithLog (/opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:1472:15)
+    at /opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:755:50
+    at responseCallbacks.<computed> (/opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:622:9)
+    at handleIncomingPacket (/opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+    at Socket.readFromStdout (/opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+    at Socket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
+==> Build failed 😞
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
