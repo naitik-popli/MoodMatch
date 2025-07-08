@@ -7,11 +7,14 @@ const debug = (context: string) => (...args: any[]) => {
   console.log(`[WEBRTC:${context}]`, ...args);
 };
 
+
 interface UseWebRTCProps {
   socket: Socket | null;
   isInitiator: boolean;
   targetUserId?: number;
 }
+ 
+
 
 export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps) {
   const log = debug('useWebRTC');
@@ -217,7 +220,7 @@ const initMedia = async () => {
     };
 
     return pc;
-  }, [socket, targetSocketId, log]);
+  }, [socket, targetUserId, log]);
 
 
   useEffect(() => {
@@ -251,21 +254,21 @@ const initMedia = async () => {
 
   // Enhanced signaling setup effect
   useEffect(() => {
-    if (!socket || !socket.connected || !targetSocketId) {
-      log("Socket not ready or missing targetSocketId, postponing signaling setup");
+    if (!socket || !socket.connected || !targetUserId) {
+      log("Socket not ready or missing targetUserId, postponing signaling setup");
       return;
     }
 
     // Debug log to verify socket connection
     console.log("🔌 Socket connection status:", socket.connected);
-    console.log("🎯 Target socket ID:", targetSocketId);
+    console.log("🎯 Target user ID:", targetUserId);
 
     let disconnectTimeout: NodeJS.Timeout | null = null;
     let callEnded = false;
 
     const handleOffer = async (data: any) => {
       log('Received offer from:', data.fromSocketId);
-      if (data.fromSocketId !== targetSocketId) return;
+      if (data.fromSocketId !== targetUserId) return;
 
       try {
         const pc = peerConnectionRef.current || setupPeerConnection();
@@ -319,7 +322,7 @@ const initMedia = async () => {
 
     const handleAnswer = async (data: any) => {
       log('Received answer from:', data.fromSocketId);
-      if (data.fromSocketId !== targetSocketId || !peerConnectionRef.current) return;
+      if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
 
       try {
         const pc = peerConnectionRef.current;
@@ -398,7 +401,7 @@ const initMedia = async () => {
       socket.off("disconnect", handleDisconnect);
       socket.off("connect", handleConnect);
     };
-  }, [socket, socketIdReady, targetSocketId, setupPeerConnection, log]);
+  }, [socket, socketIdReady, targetUserId, setupPeerConnection, log]);
 
 
   // Enhanced signaling handlers
@@ -409,8 +412,8 @@ const initMedia = async () => {
 }
 
 
-  if (!targetSocketId) {
-    console.warn("[WEBRTC:useWebRTC] Target socket ID is undefined");
+  if (!targetUserId) {
+    console.warn("[WEBRTC:useWebRTC] Target user ID is undefined");
     return;
   }
 
@@ -419,7 +422,7 @@ const initMedia = async () => {
 
     const handleOffer = async (data: any) => {
       log('Received offer from:', data.fromSocketId);
-      if (data.fromSocketId !== targetSocketId) return;
+      if (data.fromSocketId !== targetUserId) return;
 
       try {
         const pc = peerConnectionRef.current || setupPeerConnection();
@@ -454,67 +457,67 @@ const initMedia = async () => {
       }
     };
 
-    const handleAnswer = async (data: any) => {
-      log('Received answer from:', data.fromSocketId);
-      if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
+  //   const handleAnswer = async (data: any) => {
+  //     log('Received answer from:', data.fromSocketId);
+  //     if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
 
-      try {
-        const pc = peerConnectionRef.current;
+  //     try {
+  //       const pc = peerConnectionRef.current;
 
-        // Add local tracks if not already added
-        if (localStreamRef.current) {
-          localStreamRef.current.getTracks().forEach(track => {
-            try {
-              pc.addTrack(track, localStreamRef.current!);
-              log(`Added ${track.kind} track to peer connection on answer`);
-            } catch (e) {
-              log(`Error adding ${track.kind} track on answer:`, e);
-            }
-          });
-        }
+  //       // Add local tracks if not already added
+  //       if (localStreamRef.current) {
+  //         localStreamRef.current.getTracks().forEach(track => {
+  //           try {
+  //             pc.addTrack(track, localStreamRef.current!);
+  //             log(`Added ${track.kind} track to peer connection on answer`);
+  //           } catch (e) {
+  //             log(`Error adding ${track.kind} track on answer:`, e);
+  //           }
+  //         });
+  //       }
 
-        log('Setting remote description for answer');
-        await pc.setRemoteDescription(data.answer);
-        log('Successfully set remote answer for answer');
-      } catch (error) {
-        log('Error handling answer:', error);
-      }
-    };
+  //       log('Setting remote description for answer');
+  //       await pc.setRemoteDescription(data.answer);
+  //       log('Successfully set remote answer for answer');
+  //     } catch (error) {
+  //       log('Error handling answer:', error);
+  //     }
+  //   };
 
-    const handleDisconnect = () => {
-      log('Socket disconnected, delaying call cleanup');
-      if (!callEnded) {
-        disconnectTimeout = setTimeout(() => {
-          log("🔴 endCall() triggered — TRACE HANDLEDISCONNECT", new Error().stack);
-          endCall();
-          callEnded = true;
-        }, 10000); // increased delay to 10 seconds
-      }
-    };
+  //   const handleDisconnect = () => {
+  //     log('Socket disconnected, delaying call cleanup');
+  //     if (!callEnded) {
+  //       disconnectTimeout = setTimeout(() => {
+  //         log("🔴 endCall() triggered — TRACE HANDLEDISCONNECT", new Error().stack);
+  //         endCall();
+  //         callEnded = true;
+  //       }, 10000); // increased delay to 10 seconds
+  //     }
+  //   };
 
-    const handleConnect = () => {
-      log('Socket connected, clearing disconnect timeout');
-      if (disconnectTimeout) {
-        clearTimeout(disconnectTimeout);
-        disconnectTimeout = null;
-      }
-      callEnded = false;
-    };
+  //   const handleConnect = () => {
+  //     log('Socket connected, clearing disconnect timeout');
+  //     if (disconnectTimeout) {
+  //       clearTimeout(disconnectTimeout);
+  //       disconnectTimeout = null;
+  //     }
+  //     callEnded = false;
+  //   };
 
-    socket.on("webrtc-offer", handleOffer);
-    socket.on("webrtc-answer", handleAnswer);
-    socket.on("webrtc-ice-candidate", handleIce);
-    socket.on("disconnect", handleDisconnect);
-    socket.on("connect", handleConnect);
+  //   socket.on("webrtc-offer", handleOffer);
+  //   socket.on("webrtc-answer", handleAnswer);
+  //   socket.on("webrtc-ice-candidate", handleIce);
+  //   socket.on("disconnect", handleDisconnect);
+  //   socket.on("connect", handleConnect);
 
-    return () => {
-      socket.off("webrtc-offer", handleOffer);
-      socket.off("webrtc-answer", handleAnswer);
-      socket.off("webrtc-ice-candidate", handleIce);
-      socket.off("disconnect", handleDisconnect);
-      socket.off("connect", handleConnect);
-    };
-  }, [socket, targetSocketId, setupPeerConnection, log]);
+  //   return () => {
+  //     socket.off("webrtc-offer", handleOffer);
+  //     socket.off("webrtc-answer", handleAnswer);
+  //     socket.off("webrtc-ice-candidate", handleIce);
+  //     socket.off("disconnect", handleDisconnect);
+  //     socket.off("connect", handleConnect);
+  //   };
+  // }, [socket, targetUserId, setupPeerConnection, log]);
 
   // Enhanced call start
   const startCall = useCallback(async () => {
