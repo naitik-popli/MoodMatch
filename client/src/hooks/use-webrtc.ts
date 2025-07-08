@@ -10,10 +10,10 @@ const debug = (context: string) => (...args: any[]) => {
 interface UseWebRTCProps {
   socket: Socket | null;
   isInitiator: boolean;
-  targetSocketId?: string;
+  targetUserId?: number;
 }
 
-export function useWebRTC({ socket, isInitiator, targetSocketId }: UseWebRTCProps) {
+export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps) {
   const log = debug('useWebRTC');
 
   // Additional global socket event logging
@@ -141,10 +141,10 @@ const initMedia = async () => {
     peerConnectionRef.current = pc;
 
     pc.onicecandidate = (event) => {
-      if (event.candidate && socket && targetSocketId) {
+      if (event.candidate && socket && targetUserId) {
         log('Sending ICE candidate', event.candidate);
         socket.emit("webrtc-ice-candidate", {
-          targetSocketId,
+          targetUserId,
           candidate: event.candidate,
         });
 
@@ -153,7 +153,7 @@ const initMedia = async () => {
           message: "ICE candidate sent from client",
           candidate: event.candidate,
           timestamp: new Date().toISOString(),
-          targetSocketId, // add targetSocketId for debugging
+          targetUserId, // add targetUserId for debugging
         });
         log('Emitted test-message event with ICE candidate');
       }
@@ -297,12 +297,23 @@ const initMedia = async () => {
         log('Created and set local answer');
 
         socket.emit("webrtc-answer", {
-          targetSocketId: data.fromSocketId,
+          targetUserId: data.fromSocketId,
           answer,
         });
         log('Sent webrtc-answer');
       } catch (error) {
         log('Error handling offer:', error);
+      }
+    };
+
+    const handleIce = async (data: any) => {
+      if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
+      
+      try {
+        await peerConnectionRef.current.addIceCandidate(data.candidate);
+        log('Added ICE candidate');
+      } catch (error) {
+        log('Error adding ICE candidate:', error);
       }
     };
 
@@ -336,17 +347,6 @@ const initMedia = async () => {
         log('Successfully set remote answer for answer');
       } catch (error) {
         log('Error handling answer:', error);
-      }
-    };
-
-    const handleIce = async (data: any) => {
-      if (data.fromSocketId !== targetSocketId || !peerConnectionRef.current) return;
-      
-      try {
-        await peerConnectionRef.current.addIceCandidate(data.candidate);
-        log('Added ICE candidate');
-      } catch (error) {
-        log('Error adding ICE candidate:', error);
       }
     };
 
@@ -445,7 +445,7 @@ const initMedia = async () => {
         log('Created and set local answer');
 
         socket.emit("webrtc-answer", {
-          targetSocketId: data.fromSocketId,
+          targetUserId: data.fromSocketId,
           answer,
         });
         log('Sent webrtc-answer');
@@ -456,7 +456,7 @@ const initMedia = async () => {
 
     const handleAnswer = async (data: any) => {
       log('Received answer from:', data.fromSocketId);
-      if (data.fromSocketId !== targetSocketId || !peerConnectionRef.current) return;
+      if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
 
       try {
         const pc = peerConnectionRef.current;
@@ -478,17 +478,6 @@ const initMedia = async () => {
         log('Successfully set remote answer for answer');
       } catch (error) {
         log('Error handling answer:', error);
-      }
-    };
-
-    const handleIce = async (data: any) => {
-      if (data.fromSocketId !== targetSocketId || !peerConnectionRef.current) return;
-      
-      try {
-        await peerConnectionRef.current.addIceCandidate(data.candidate);
-        log('Added ICE candidate');
-      } catch (error) {
-        log('Error adding ICE candidate:', error);
       }
     };
 
@@ -529,8 +518,8 @@ const initMedia = async () => {
 
   // Enhanced call start
   const startCall = useCallback(async () => {
-    if (!socket || !targetSocketId) {
-  console.warn("[WEBRTC:useWebRTC] Cannot start call — socket or targetSocketId missing");
+      if (!socket || !targetUserId) {
+  console.warn("[WEBRTC:useWebRTC] Cannot start call — socket or targetUserId missing");
   return;
 }
 
@@ -563,7 +552,7 @@ const initMedia = async () => {
         log('Created and set local offer');
 
         socket.emit("webrtc-offer", {
-          targetSocketId,
+          targetUserId,
           offer,
         });
       }
@@ -581,7 +570,7 @@ const initMedia = async () => {
       log('Error during call start:', error);
       throw error;
     }
-  }, [socket, targetSocketId, isInitiator, initializeMedia, setupPeerConnection, log]);
+  }, [socket, targetUserId, isInitiator, initializeMedia, setupPeerConnection, log]);
 
   // Enhanced call end with cleanup
   const endCall = useCallback(() => {
