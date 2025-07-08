@@ -78,6 +78,20 @@ export async function setupWebSocket(io: SocketIOServer) {
   console.log("[WS] Initializing WebSocket server");
   logToFile("WebSocket server starting");
 
+  // Helper function to get partnerId from database for a given userId
+  async function getPartnerIdFromDb(userId: number): Promise<number | null> {
+    try {
+      const activeSession = await storage.getActiveSession(userId);
+      if (activeSession && activeSession.partnerId !== undefined && activeSession.partnerId !== null) {
+        return activeSession.partnerId;
+      }
+      return null;
+    } catch (error) {
+      console.error(`[getPartnerIdFromDb] Error fetching active session for user ${userId}:`, error);
+      return null;
+    }
+  }
+
   // Matching algorithm
   const matchUsers = async () => {
     try {
@@ -86,15 +100,15 @@ export async function setupWebSocket(io: SocketIOServer) {
       const queue = await db.select().from(moodQueue).orderBy(moodQueue.createdAt);
 
       console.log(`[MATCH] Current queue length: ${queue.length}`);
-  const moodGroups = new Map<string, typeof queue>();
+      const moodGroups = new Map<string, typeof queue>();
 
-  for (const user of queue) {
-    if (!moodGroups.has(user.mood)) {
-      moodGroups.set(user.mood, []);
-    }
-    // Use Array.prototype.push.apply to avoid TS downlevelIteration error
-    Array.prototype.push.apply(moodGroups.get(user.mood as string)!, [user]);
-  }
+      for (const user of queue) {
+        if (!moodGroups.has(user.mood)) {
+          moodGroups.set(user.mood, []);
+        }
+        // Use Array.prototype.push.apply to avoid TS downlevelIteration error
+        Array.prototype.push.apply(moodGroups.get(user.mood as string)!, [user]);
+      }
 
       for (const [mood, users] of moodGroups) {
         while (users.length >= 2) {
@@ -152,19 +166,52 @@ export async function setupWebSocket(io: SocketIOServer) {
         // io.sockets.sockets.get(existingSocketId)?.disconnect(true);
         console.log(`[${timestamp}] [SOCKET MAP] Replacing old socket ${existingSocketId} for user ${data.userId}`);
       }
-      // Get partnerId from active session in storage
+      // Get or generate partnerId from database or create new
       let partnerId: number | null = null;
       try {
-        const activeSession = await storage.getActiveSession(data.userId);
-        if (activeSession) {
-          partnerId = activeSession.partnerId ?? null;
+        partnerId = await getPartnerIdFromDb(data.userId);
+        if (partnerId === null) {
+          // No active session, generate new partnerId (e.g., use userId + offset or UUID)
+          partnerId = data.userId + 1000000; // Example: offset userId to create unique partnerId
+          console.log(`[${timestamp}] Generated new partnerId ${partnerId} for user ${data.userId}`);
         }
       } catch (error) {
-        console.error(`[${timestamp}] Error fetching active session for user ${data.userId}:`, error);
+        console.error(`[${timestamp}] Error fetching partnerId for user ${data.userId}:`, error);
+        // Generate fallback partnerId
+        partnerId = data.userId + 1000000;
+        console.log(`[${timestamp}] Fallback generated partnerId ${partnerId} for user ${data.userId}`);
       }
       await setUserSocketMap(data.userId, partnerId, socket.id);
       socket.data.userId = data.userId;
       console.log(`[${timestamp}] [SOCKET MAP] Bound user ${data.userId} to socket ${socket.id} with partnerId ${partnerId}`);
+      console.log(`[${timestamp}] [SOCKET MAP] Current userSocketMap entry: userId=${data.userId}, partnerId=${partnerId}, socketId=${socket.id}`);
+    });
+
+    // Provide socketId to client on request
+    socket.on("get-socket-id", async (data: { userId: number }) => {
+      const timestamp = new Date().toISOString();
+      if (!data?.userId) {
+        console.warn(`[${timestamp}] [SOCKET MAP] get-socket-id called without userId`);
+        socket.emit("socket-id-response", { socketId: null });
+        return;
+      }
+      const socketId = await getUserSocketId(data.userId);
+      console.log(`[${timestamp}] [SOCKET MAP] Provided socketId ${socketId} for user ${data.userId}`);
+      socket.emit("socket-id-response", { socketId });
+    });
+
+    // Handle call end event to clear mapping
+    socket.on("call-ended", async (data: { userId: number }) => {
+      const timestamp = new Date().toISOString();
+      if (!data?.userId) {
+        console.warn(`[${timestamp}] [SOCKET MAP] call-ended called without userId`);
+        return;
+      }
+      const existingSocketId = await getUserSocketId(data.userId);
+      if (existingSocketId === socket.id) {
+        await deleteUserSocketMap(data.userId);
+        console.log(`[${timestamp}] [CALL END] Removed user ${data.userId} from socket map on call end`);
+      }
     });
 
     socket.on("join-mood-queue", async (data: { userId: number; mood: string }) => {
