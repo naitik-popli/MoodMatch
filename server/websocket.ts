@@ -152,9 +152,19 @@ export async function setupWebSocket(io: SocketIOServer) {
         // io.sockets.sockets.get(existingSocketId)?.disconnect(true);
         console.log(`[${timestamp}] [SOCKET MAP] Replacing old socket ${existingSocketId} for user ${data.userId}`);
       }
-      await setUserSocketMap(data.userId, data.partnerId ?? null, socket.id);
+      // Get partnerId from active session in storage
+      let partnerId: number | null = null;
+      try {
+        const activeSession = await storage.getActiveSession(data.userId);
+        if (activeSession) {
+          partnerId = activeSession.partnerId ?? null;
+        }
+      } catch (error) {
+        console.error(`[${timestamp}] Error fetching active session for user ${data.userId}:`, error);
+      }
+      await setUserSocketMap(data.userId, partnerId, socket.id);
       socket.data.userId = data.userId;
-      console.log(`[${timestamp}] [SOCKET MAP] Bound user ${data.userId} to socket ${socket.id}`);
+      console.log(`[${timestamp}] [SOCKET MAP] Bound user ${data.userId} to socket ${socket.id} with partnerId ${partnerId}`);
     });
 
     socket.on("join-mood-queue", async (data: { userId: number; mood: string }) => {

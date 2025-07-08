@@ -1,34 +1,26 @@
-==> Available at your primary URL https://moodmatch-61xp.onrender.com
-==> 
-[DISCONNECT] Socket L2q4XdytYis4ye_XAAAC disconnected (userId=undefined)
-==> ///////////////////////////////////////////////////////////
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:23:54.017Z
-[CONN ny_GC3] New connection [socketId=ny_GC3WhyCUfk5UsAAAH]
-GET / 200 1ms
+[MATCH] Cleaned up stale entries older than 2025-07-08T17:36:15.814Z
+[CONN lkDLLT] New connection [socketId=lkDLLTvTyPjGRWUVAAAB]
+[CONN p7ckj0] New connection [socketId=p7ckj0-G77Ul9xBwAAAE]
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:23:59.016Z
+[MATCH] Cleaned up stale entries older than 2025-07-08T17:36:20.814Z
+GET /api/moods/stats 304 4ms
+Response: {}
+[DISCONNECT] Socket p7ckj0-G77Ul9xBwAAAE disconnected (userId=undefined)
+[CONN Q2dRxj] New connection [socketId=Q2dRxj-ajBPul1ygAAAH]
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:04.016Z
-[DISCONNECT] Socket aHLFl6lPGIW2rWZcAAAE disconnected (userId=undefined)
-[CONN 3Rz3Uy] New connection [socketId=3Rz3UyIjnyIGUpF2AAAK]
+[MATCH] Cleaned up stale entries older than 2025-07-08T17:36:25.814Z
+GET /api/moods/stats 304 3ms
+Response: {}
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:09.017Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:14.017Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:19.019Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:24.020Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:29.021Z
-POST /api/session/create 200 107ms
+[MATCH] Cleaned up stale entries older than 2025-07-08T17:36:30.892Z
+POST /api/session/create 200 119ms
 Response: {
-  "sessionId": 484,
-  "userId": 368,
+  "sessionId": 486,
+  "userId": 370,
   "mood": "happy"
 }
-[CONN MUIsnx] New connection [socketId=MUIsnxPsJWGuXmOGAAAN]
+[CONN U-rRaC] New connection [socketId=U-rRaCWTwwQFST2LAAAK]
 💥 Unhandled Rejection at: Promise {
   <rejected> PostgresError: null value in column "partner_id" of relation "user_socket_map" violates not-null constraint
       at ErrorResponse (file:///opt/render/project/src/node_modules/postgres/src/connection.js:794:26)
@@ -42,7 +34,7 @@ Response: {
     severity_local: 'ERROR',
     severity: 'ERROR',
     code: '23502',
-    detail: 'Failing row contains (1, 368, null, MUIsnxPsJWGuXmOGAAAN).',
+    detail: 'Failing row contains (7, 370, null, U-rRaCWTwwQFST2LAAAK).',
     schema_name: 'public',
     table_name: 'user_socket_map',
     column_name: 'partner_id',
@@ -62,7 +54,7 @@ Response: {
   severity_local: 'ERROR',
   severity: 'ERROR',
   code: '23502',
-  detail: 'Failing row contains (1, 368, null, MUIsnxPsJWGuXmOGAAAN).',
+  detail: 'Failing row contains (7, 370, null, U-rRaCWTwwQFST2LAAAK).',
   schema_name: 'public',
   table_name: 'user_socket_map',
   column_name: 'partner_id',
@@ -83,7 +75,7 @@ Response: {
     severity_local: 'ERROR',
     severity: 'ERROR',
     code: '23502',
-    detail: 'Failing row contains (2, 368, null, MUIsnxPsJWGuXmOGAAAN).',
+    detail: 'Failing row contains (8, 370, null, U-rRaCWTwwQFST2LAAAK).',
     schema_name: 'public',
     table_name: 'user_socket_map',
     column_name: 'partner_id',
@@ -103,7 +95,7 @@ Response: {
   severity_local: 'ERROR',
   severity: 'ERROR',
   code: '23502',
-  detail: 'Failing row contains (2, 368, null, MUIsnxPsJWGuXmOGAAAN).',
+  detail: 'Failing row contains (8, 370, null, U-rRaCWTwwQFST2LAAAK).',
   schema_name: 'public',
   table_name: 'user_socket_map',
   column_name: 'partner_id',
@@ -124,7 +116,7 @@ Response: {
     severity_local: 'ERROR',
     severity: 'ERROR',
     code: '23502',
-    detail: 'Failing row contains (3, 368, null, MUIsnxPsJWGuXmOGAAAN).',
+    detail: 'Failing row contains (9, 370, null, U-rRaCWTwwQFST2LAAAK).',
     schema_name: 'public',
     table_name: 'user_socket_map',
     column_name: 'partner_id',
@@ -144,7 +136,7 @@ Response: {
   severity_local: 'ERROR',
   severity: 'ERROR',
   code: '23502',
-  detail: 'Failing row contains (3, 368, null, MUIsnxPsJWGuXmOGAAAN).',
+  detail: 'Failing row contains (9, 370, null, U-rRaCWTwwQFST2LAAAK).',
   schema_name: 'public',
   table_name: 'user_socket_map',
   column_name: 'partner_id',
@@ -152,185 +144,19 @@ Response: {
   line: '2006',
   routine: 'ExecConstraints'
 }
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:34.029Z
-[QUEUE 368] Attempting to join queue for "happy" with socket MUIsnxPsJWGuXmOGAAAN
-[QUEUE 368] Joined queue at position 1 for mood "happy"
+[QUEUE 370] Attempting to join queue for "happy" with socket U-rRaCWTwwQFST2LAAAK
+[QUEUE 370] Attempting to join queue for "happy" with socket U-rRaCWTwwQFST2LAAAK
+[QUEUE 370] Joined queue at position 1 for mood "happy"
+[QUEUE 370] Joined queue at position 1 for mood "happy"
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:34.264Z
-[QUEUE 368] Attempting to join queue for "happy" with socket MUIsnxPsJWGuXmOGAAAN
-[QUEUE 368] Joined queue at position 1 for mood "happy"
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:35.272Z
-GET /api/moods/stats 200 2ms
-Response: {
-  "happy": 1
-}
+[MATCH] Cleaned up stale entries older than 2025-07-08T17:36:34.277Z
+[MATCH] Cleaned up stale entries older than 2025-07-08T17:36:34.279Z
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:39.020Z
+[MATCH] Cleaned up stale entries older than 2025-07-08T17:36:35.814Z
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:44.020Z
-POST /api/session/create 200 49ms
-Response: {
-  "sessionId": 485,
-  "userId": 369,
-  "mood": "happy"
-}
-[CONN ojdo5W] New connection [socketId=ojdo5WEsKLImpC_0AAAQ]
-💥 Unhandled Rejection at: Promise {
-  <rejected> PostgresError: null value in column "partner_id" of relation "user_socket_map" violates not-null constraint
-      at ErrorResponse (file:///opt/render/project/src/node_modules/postgres/src/connection.js:794:26)
-      at handle (file:///opt/render/project/src/node_modules/postgres/src/connection.js:480:6)
-      at TLSSocket.data (file:///opt/render/project/src/node_modules/postgres/src/connection.js:315:9)
-      at TLSSocket.emit (node:events:518:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TLSWrap.onStreamRead (node:internal/stream_base_commons:189:23) {
-    severity_local: 'ERROR',
-    severity: 'ERROR',
-    code: '23502',
-    detail: 'Failing row contains (4, 369, null, ojdo5WEsKLImpC_0AAAQ).',
-    schema_name: 'public',
-    table_name: 'user_socket_map',
-    column_name: 'partner_id',
-    file: 'execMain.c',
-    line: '2006',
-    routine: 'ExecConstraints'
-  }
-} reason: PostgresError: null value in column "partner_id" of relation "user_socket_map" violates not-null constraint
-    at ErrorResponse (file:///opt/render/project/src/node_modules/postgres/src/connection.js:794:26)
-    at handle (file:///opt/render/project/src/node_modules/postgres/src/connection.js:480:6)
-    at TLSSocket.data (file:///opt/render/project/src/node_modules/postgres/src/connection.js:315:9)
-    at TLSSocket.emit (node:events:518:28)
-    at addChunk (node:internal/streams/readable:561:12)
-    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-    at Readable.push (node:internal/streams/readable:392:5)
-    at TLSWrap.onStreamRead (node:internal/stream_base_commons:189:23) {
-  severity_local: 'ERROR',
-  severity: 'ERROR',
-  code: '23502',
-  detail: 'Failing row contains (4, 369, null, ojdo5WEsKLImpC_0AAAQ).',
-  schema_name: 'public',
-  table_name: 'user_socket_map',
-  column_name: 'partner_id',
-  file: 'execMain.c',
-  line: '2006',
-  routine: 'ExecConstraints'
-}
-💥 Unhandled Rejection at: Promise {
-  <rejected> PostgresError: null value in column "partner_id" of relation "user_socket_map" violates not-null constraint
-      at ErrorResponse (file:///opt/render/project/src/node_modules/postgres/src/connection.js:794:26)
-      at handle (file:///opt/render/project/src/node_modules/postgres/src/connection.js:480:6)
-      at TLSSocket.data (file:///opt/render/project/src/node_modules/postgres/src/connection.js:315:9)
-      at TLSSocket.emit (node:events:518:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TLSWrap.onStreamRead (node:internal/stream_base_commons:189:23) {
-    severity_local: 'ERROR',
-    severity: 'ERROR',
-    code: '23502',
-    detail: 'Failing row contains (5, 369, null, ojdo5WEsKLImpC_0AAAQ).',
-    schema_name: 'public',
-    table_name: 'user_socket_map',
-    column_name: 'partner_id',
-    file: 'execMain.c',
-    line: '2006',
-    routine: 'ExecConstraints'
-  }
-} reason: PostgresError: null value in column "partner_id" of relation "user_socket_map" violates not-null constraint
-    at ErrorResponse (file:///opt/render/project/src/node_modules/postgres/src/connection.js:794:26)
-    at handle (file:///opt/render/project/src/node_modules/postgres/src/connection.js:480:6)
-    at TLSSocket.data (file:///opt/render/project/src/node_modules/postgres/src/connection.js:315:9)
-    at TLSSocket.emit (node:events:518:28)
-    at addChunk (node:internal/streams/readable:561:12)
-    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-    at Readable.push (node:internal/streams/readable:392:5)
-    at TLSWrap.onStreamRead (node:internal/stream_base_commons:189:23) {
-  severity_local: 'ERROR',
-  severity: 'ERROR',
-  code: '23502',
-  detail: 'Failing row contains (5, 369, null, ojdo5WEsKLImpC_0AAAQ).',
-  schema_name: 'public',
-  table_name: 'user_socket_map',
-  column_name: 'partner_id',
-  file: 'execMain.c',
-  line: '2006',
-  routine: 'ExecConstraints'
-}
-💥 Unhandled Rejection at: Promise {
-  <rejected> PostgresError: null value in column "partner_id" of relation "user_socket_map" violates not-null constraint
-      at ErrorResponse (file:///opt/render/project/src/node_modules/postgres/src/connection.js:794:26)
-      at handle (file:///opt/render/project/src/node_modules/postgres/src/connection.js:480:6)
-      at TLSSocket.data (file:///opt/render/project/src/node_modules/postgres/src/connection.js:315:9)
-      at TLSSocket.emit (node:events:518:28)
-      at addChunk (node:internal/streams/readable:561:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-      at Readable.push (node:internal/streams/readable:392:5)
-      at TLSWrap.onStreamRead (node:internal/stream_base_commons:189:23) {
-    severity_local: 'ERROR',
-    severity: 'ERROR',
-    code: '23502',
-    detail: 'Failing row contains (6, 369, null, ojdo5WEsKLImpC_0AAAQ).',
-    schema_name: 'public',
-    table_name: 'user_socket_map',
-    column_name: 'partner_id',
-    file: 'execMain.c',
-    line: '2006',
-    routine: 'ExecConstraints'
-  }
-} reason: PostgresError: null value in column "partner_id" of relation "user_socket_map" violates not-null constraint
-    at ErrorResponse (file:///opt/render/project/src/node_modules/postgres/src/connection.js:794:26)
-    at handle (file:///opt/render/project/src/node_modules/postgres/src/connection.js:480:6)
-    at TLSSocket.data (file:///opt/render/project/src/node_modules/postgres/src/connection.js:315:9)
-    at TLSSocket.emit (node:events:518:28)
-    at addChunk (node:internal/streams/readable:561:12)
-    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-    at Readable.push (node:internal/streams/readable:392:5)
-    at TLSWrap.onStreamRead (node:internal/stream_base_commons:189:23) {
-  severity_local: 'ERROR',
-  severity: 'ERROR',
-  code: '23502',
-  detail: 'Failing row contains (6, 369, null, ojdo5WEsKLImpC_0AAAQ).',
-  schema_name: 'public',
-  table_name: 'user_socket_map',
-  column_name: 'partner_id',
-  file: 'execMain.c',
-  line: '2006',
-  routine: 'ExecConstraints'
-}
-[QUEUE 369] Attempting to join queue for "happy" with socket ojdo5WEsKLImpC_0AAAQ
-[QUEUE 369] Joined queue at position 2 for mood "happy"
-[MATCH] Current queue length: 2
-[DEBUG][2025-07-08T17:29:47.280Z] Updated partnerId for user 368 in existing session { oldPartnerId: null, newPartnerId: 369 }
-[DEBUG][2025-07-08T17:29:47.287Z] Updated partnerId for user 369 in existing session { oldPartnerId: null, newPartnerId: 368 }
-[MATCH] Missing socket for users: A=null, B=null
-[MATCH] Paired users 368 and 369 in mood "happy"
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:47.296Z
-[QUEUE 369] Attempting to join queue for "happy" with socket ojdo5WEsKLImpC_0AAAQ
-[QUEUE 369] Joined queue at position 1 for mood "happy"
+[MATCH] Cleaned up stale entries older than 2025-07-08T17:36:40.816Z
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:47.530Z
+[MATCH] Cleaned up stale entries older than 2025-07-08T17:36:45.818Z
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:49.021Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:54.024Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:24:59.025Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:25:04.023Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:25:09.024Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:25:14.023Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:25:19.031Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:25:24.024Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:25:29.023Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:25:34.023Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T17:25:39.024Z
+[MATCH] Cleaned up stale entries older than 2025-07-08T17:36:50.820Z
