@@ -1,12 +1,12 @@
 import { Server as SocketIOServer, Socket } from "socket.io";
 import { MoodQueue } from "@shared/schema";
-
 import { storage } from "./storage";
 import { db } from "./db";
 import { moodQueue, chatSessions } from "@shared/schema";
 import { and, lt, or, eq } from "drizzle-orm";
 import { logToFile } from './backend-logs.js';
 import type { Mood } from "@shared/schema";
+import { pgTable, serial, varchar, integer } from "drizzle-orm/pg-core";
 
 interface SocketData {
   userId?: number;
@@ -18,10 +18,15 @@ interface SocketData {
 const DEBUG_MODE = process.env.DEBUG_MODE === "true";
 const MATCH_INTERVAL = 5000;
 const MAX_QUEUE_TIME = 300000;
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
-import pg from "pg";
-import { drizzle } from "drizzle-orm/node-postgres";
-import { pgTable, serial, varchar, integer } from "drizzle-orm/pg-core";
+
+
 
 const userSocketMapTable = pgTable("user_socket_map", {
   id: serial("id").primaryKey(),
@@ -30,13 +35,7 @@ const userSocketMapTable = pgTable("user_socket_map", {
   socketId: varchar("socket_id", { length: 255 }).notNull(),
 });
 
-const { Pool } = pg;
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL_TEST,
-});
-
-const userSocketMapDb = drizzle(pool);
+const userSocketMapDb = db;
 
 export async function setUserSocketMap(userId: number, partnerId: number, socketId: string) {
   // Upsert logic: insert or update existing record
