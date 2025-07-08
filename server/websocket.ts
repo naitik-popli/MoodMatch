@@ -89,16 +89,20 @@ export async function setupWebSocket(io: SocketIOServer) {
     console.log(`[CONN ${connId}] New connection [socketId=${socket.id}]`);
 
     socket.on("update-socket-id", (data: { userId: number }) => {
-      if (!data?.userId) return;
+      const timestamp = new Date().toISOString();
+      if (!data?.userId) {
+        console.warn(`[${timestamp}] [SOCKET MAP] update-socket-id called without userId`);
+        return;
+      }
       const existingSocketId = userSocketMap.get(data.userId);
       if (existingSocketId && existingSocketId !== socket.id) {
         // Disconnect the old socket if needed (optional)
         // io.sockets.sockets.get(existingSocketId)?.disconnect(true);
-        console.log(`[SOCKET MAP] Replacing old socket ${existingSocketId} for user ${data.userId}`);
+        console.log(`[${timestamp}] [SOCKET MAP] Replacing old socket ${existingSocketId} for user ${data.userId}`);
       }
       userSocketMap.set(data.userId, socket.id);
       socket.data.userId = data.userId;
-      console.log(`[SOCKET MAP] Bound user ${data.userId} to socket ${socket.id}`);
+      console.log(`[${timestamp}] [SOCKET MAP] Bound user ${data.userId} to socket ${socket.id}`);
     });
 
     socket.on("join-mood-queue", async (data: { userId: number; mood: string }) => {
