@@ -25,13 +25,21 @@ const MAX_QUEUE_TIME = 300000;
 const userSocketMapTable = pgTable("user_socket_map", {
   id: serial("id").primaryKey(),
   userId: integer("user_id").notNull().primaryKey(),
-  partnerId: integer("partner_id").notNull(),
+  partnerId: integer("partner_id"),
   socketId: varchar("socket_id", { length: 255 }).notNull(),
 });
 
 const userSocketMapDb = db;
 
-export async function setUserSocketMap(userId: number, partnerId: number, socketId: string) {
+export async function setUserSocketMap(userId: number, partnerId: number | null, socketId: string) {
+  if (!userId) {
+    throw new Error("userId is required");
+  }
+  if (!socketId) {
+    throw new Error("socketId is required");
+  }
+  // partnerId can be null
+
   // Upsert logic: insert or update existing record
   const existing = await userSocketMapDb
     .select()
@@ -132,7 +140,7 @@ export async function setupWebSocket(io: SocketIOServer) {
     const connId = socket.id.slice(0, 6);
     console.log(`[CONN ${connId}] New connection [socketId=${socket.id}]`);
 
-    socket.on("update-socket-id", async (data: { userId: number; partnerId: number }) => {
+    socket.on("update-socket-id", async (data: { userId: number; partnerId?: number | null }) => {
       const timestamp = new Date().toISOString();
       if (!data?.userId) {
         console.warn(`[${timestamp}] [SOCKET MAP] update-socket-id called without userId`);
@@ -144,7 +152,7 @@ export async function setupWebSocket(io: SocketIOServer) {
         // io.sockets.sockets.get(existingSocketId)?.disconnect(true);
         console.log(`[${timestamp}] [SOCKET MAP] Replacing old socket ${existingSocketId} for user ${data.userId}`);
       }
-      await setUserSocketMap(data.userId, data.partnerId, socket.id);
+      await setUserSocketMap(data.userId, data.partnerId ?? null, socket.id);
       socket.data.userId = data.userId;
       console.log(`[${timestamp}] [SOCKET MAP] Bound user ${data.userId} to socket ${socket.id}`);
     });
