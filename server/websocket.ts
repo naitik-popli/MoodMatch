@@ -4,7 +4,7 @@ import { MoodQueue } from "@shared/schema";
 import { storage } from "./storage";
 import { db } from "./db";
 import { moodQueue, chatSessions } from "@shared/schema";
-import { eq, and, lt, or } from "drizzle-orm";
+import { and, lt, or, eq } from "drizzle-orm";
 import { logToFile } from './backend-logs.js';
 import type { Mood } from "@shared/schema";
 
@@ -19,18 +19,16 @@ const DEBUG_MODE = process.env.DEBUG_MODE === "true";
 const MATCH_INTERVAL = 5000;
 const MAX_QUEUE_TIME = 300000;
 
+import pg from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { pgTable, serial, varchar, integer } from "drizzle-orm/pg-core";
 
 const userSocketMapTable = pgTable("user_socket_map", {
   id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull(),
+  userId: integer("user_id").notNull().primaryKey(),
   partnerId: integer("partner_id").notNull(),
   socketId: varchar("socket_id", { length: 255 }).notNull(),
 });
-
-import pg from "pg";
-import { drizzle } from "drizzle-orm/node-postgres";
 
 const { Pool } = pg;
 
@@ -45,13 +43,13 @@ export async function setUserSocketMap(userId: number, partnerId: number, socket
   const existing = await userSocketMapDb
     .select()
     .from(userSocketMapTable)
-    .where(userSocketMapTable.userId.eq(userId));
+    .where(eq(userSocketMapTable.userId, userId));
 
   if (existing.length > 0) {
     await userSocketMapDb
       .update(userSocketMapTable)
       .set({ partnerId, socketId })
-      .where(userSocketMapTable.userId.eq(userId));
+      .where(eq(userSocketMapTable.userId, userId));
   } else {
     await userSocketMapDb
       .insert(userSocketMapTable)
@@ -63,7 +61,7 @@ export async function getUserSocketId(userId: number) {
   const result = await userSocketMapDb
     .select()
     .from(userSocketMapTable)
-    .where(userSocketMapTable.userId.eq(userId))
+    .where(eq(userSocketMapTable.userId, userId))
     .limit(1);
 
   return result.length > 0 ? result[0].socketId : null;
@@ -72,7 +70,7 @@ export async function getUserSocketId(userId: number) {
 export async function deleteUserSocketMap(userId: number) {
   await userSocketMapDb
     .delete(userSocketMapTable)
-    .where(userSocketMapTable.userId.eq(userId));
+    .where(eq(userSocketMapTable.userId, userId));
 }
 
 export async function setupWebSocket(io: SocketIOServer) {
@@ -280,18 +278,16 @@ export async function setupWebSocket(io: SocketIOServer) {
 
       if (!userId) return;
 
-      // Remove user from activeSessions if present
-      if (activeSessions.has(userId)) {
-        activeSessions.delete(userId);
-        console.log(`[DISCONNECT] Removed user ${userId} from active sessions`);
-      }
+  // Remove user from activeSessions if present
+  // Removed activeSessions usage as it is no longer used
 
-      // Remove socket id from userSocketMap
-      const socketId = userSocketMap.get(userId);
-      if (socketId === socket.id) {
-        userSocketMap.delete(userId);
-        console.log(`[DISCONNECT] Removed user ${userId} from socket map`);
-      }
+  // Remove socket id from userSocketMap
+  // Replaced userSocketMap with DB delete
+  const existingSocketId = await getUserSocketId(userId);
+  if (existingSocketId === socket.id) {
+    await deleteUserSocketMap(userId);
+    console.log(`[DISCONNECT] Removed user ${userId} from socket map`);
+  }
 
       // Remove user from moodQueue regardless of active session status
       await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
@@ -311,8 +307,8 @@ async function getQueuePosition(userId: number): Promise<number> {
 }
 
 async function notifyMatchedPair(io: SocketIOServer, userA: number, userB: number, sessionId: number) {
-  const socketA = userSocketMap.get(userA);
-  const socketB = userSocketMap.get(userB);
+  const socketA = await getUserSocketId(userA);
+  const socketB = await getUserSocketId(userB);
 
   if (!socketA || !socketB) {
     console.warn(`[MATCH] Missing socket for users: A=${socketA}, B=${socketB}`);
@@ -320,8 +316,7 @@ async function notifyMatchedPair(io: SocketIOServer, userA: number, userB: numbe
   }
 
   try {
-    activeSessions.add(userA);
-    activeSessions.add(userB);
+    // Removed activeSessions usage as it is no longer used
 
     io.to(socketA).emit("match-found", {
       partnerId: userB,

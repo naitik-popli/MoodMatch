@@ -1,17 +1,210 @@
-> rest-express@1.0.0 db:push
-> drizzle-kit push:pg
-This command is deprecated, please use updated 'push' command (see https://orm.drizzle.team/kit-docs/upgrade-21#how-to-migrate-to-0210)
-/opt/render/project/src/server/websocket.ts:32
-import { Pool } from "pg";
-         ^
-SyntaxError: The requested module 'pg' does not provide an export named 'Pool'
-    at ModuleJob._instantiate (node:internal/modules/esm/module_job:182:21)
-    at async ModuleJob.run (node:internal/modules/esm/module_job:266:5)
-    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
-    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
-Node.js v22.16.0
-==> Exited with status 1
-==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
-==> Running 'npm run dev:server'
-> rest-express@1.0.0 dev:server
-> npm run db:push && tsx server/index.ts
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:48:28.601Z
+==> 
+==> Available at your primary URL https://moodmatch-61xp.onrender.com
+==> 
+==> ///////////////////////////////////////////////////////////
+GET / 200 1ms
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:48:33.603Z
+GET /api/moods/stats 304 6ms
+Response: {}
+[CONN aW3QbV] New connection [socketId=aW3QbVN6FWYBHmZpAAAC]
+[CONN MLNig2] New connection [socketId=MLNig2G7OMjNV8uvAAAE]
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:48:38.603Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:48:43.603Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:48:48.604Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:48:53.605Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:48:58.608Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:49:03.608Z
+GET /api/moods/stats 304 3ms
+Response: {}
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:49:08.607Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:49:13.609Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:49:18.609Z
+GET /api/moods/stats 200 14ms
+Response: {}
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:49:23.610Z
+POST /api/session/create 200 63ms
+Response: {
+  "sessionId": 482,
+  "userId": 366,
+  "mood": "happy"
+}
+[CONN GwXOGn] New connection [socketId=GwXOGnQLSlPpGZMWAAAH]
+💥 Unhandled Rejection at: Promise {
+  <rejected> TypeError: userSocketMapTable.userId.eq is not a function
+      at getUserSocketId (/opt/render/project/src/server/websocket.ts:66:38)
+      at Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:150:38)
+      at Socket.emit (node:events:518:28)
+      at Socket.emitUntyped (/opt/render/project/src/node_modules/socket.io/dist/typed-events.js:69:22)
+      at /opt/render/project/src/node_modules/socket.io/dist/socket.js:697:39
+      at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+} reason: TypeError: userSocketMapTable.userId.eq is not a function
+    at getUserSocketId (/opt/render/project/src/server/websocket.ts:66:38)
+    at Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:150:38)
+    at Socket.emit (node:events:518:28)
+    at Socket.emitUntyped (/opt/render/project/src/node_modules/socket.io/dist/typed-events.js:69:22)
+    at /opt/render/project/src/node_modules/socket.io/dist/socket.js:697:39
+    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+💥 Unhandled Rejection at: Promise {
+  <rejected> TypeError: userSocketMapTable.userId.eq is not a function
+      at getUserSocketId (/opt/render/project/src/server/websocket.ts:66:38)
+      at Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:150:38)
+      at Socket.emit (node:events:518:28)
+      at Socket.emitUntyped (/opt/render/project/src/node_modules/socket.io/dist/typed-events.js:69:22)
+      at /opt/render/project/src/node_modules/socket.io/dist/socket.js:697:39
+      at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+} reason: TypeError: userSocketMapTable.userId.eq is not a function
+    at getUserSocketId (/opt/render/project/src/server/websocket.ts:66:38)
+    at Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:150:38)
+    at Socket.emit (node:events:518:28)
+    at Socket.emitUntyped (/opt/render/project/src/node_modules/socket.io/dist/typed-events.js:69:22)
+    at /opt/render/project/src/node_modules/socket.io/dist/socket.js:697:39
+    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+💥 Unhandled Rejection at: Promise {
+  <rejected> TypeError: userSocketMapTable.userId.eq is not a function
+      at getUserSocketId (/opt/render/project/src/server/websocket.ts:66:38)
+      at Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:150:38)
+      at Socket.emit (node:events:518:28)
+      at Socket.emitUntyped (/opt/render/project/src/node_modules/socket.io/dist/typed-events.js:69:22)
+      at /opt/render/project/src/node_modules/socket.io/dist/socket.js:697:39
+      at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+} reason: TypeError: userSocketMapTable.userId.eq is not a function
+    at getUserSocketId (/opt/render/project/src/server/websocket.ts:66:38)
+    at Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:150:38)
+    at Socket.emit (node:events:518:28)
+    at Socket.emitUntyped (/opt/render/project/src/node_modules/socket.io/dist/typed-events.js:69:22)
+    at /opt/render/project/src/node_modules/socket.io/dist/socket.js:697:39
+    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+[QUEUE 366] Attempting to join queue for "happy" with socket GwXOGnQLSlPpGZMWAAAH
+[QUEUE 366] Joined queue at position 1 for mood "happy"
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:49:27.065Z
+[QUEUE 366] Attempting to join queue for "happy" with socket GwXOGnQLSlPpGZMWAAAH
+[QUEUE 366] Joined queue at position 1 for mood "happy"
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:49:27.223Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:49:28.610Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:49:33.610Z
+[DISCONNECT] Socket MLNig2G7OMjNV8uvAAAE disconnected (userId=undefined)
+[CONN Yo0ezU] New connection [socketId=Yo0ezUsHbDCNJOz8AAAK]
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T16:49:38.611Z
+POST /api/session/create 200 17ms
+Response: {
+  "sessionId": 483,
+  "userId": 367,
+  "mood": "happy"
+}
+[CONN HNlMym] New connection [socketId=HNlMym-QSBYa_xixAAAN]
+💥 Unhandled Rejection at: Promise {
+  <rejected> TypeError: userSocketMapTable.userId.eq is not a function
+      at getUserSocketId (/opt/render/project/src/server/websocket.ts:66:38)
+      at Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:150:38)
+      at Socket.emit (node:events:518:28)
+      at Socket.emitUntyped (/opt/render/project/src/node_modules/socket.io/dist/typed-events.js:69:22)
+      at /opt/render/project/src/node_modules/socket.io/dist/socket.js:697:39
+      at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+} reason: TypeError: userSocketMapTable.userId.eq is not a function
+    at getUserSocketId (/opt/render/project/src/server/websocket.ts:66:38)
+    at Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:150:38)
+    at Socket.emit (node:events:518:28)
+    at Socket.emitUntyped (/opt/render/project/src/node_modules/socket.io/dist/typed-events.js:69:22)
+    at /opt/render/project/src/node_modules/socket.io/dist/socket.js:697:39
+    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+💥 Unhandled Rejection at: Promise {
+  <rejected> TypeError: userSocketMapTable.userId.eq is not a function
+      at getUserSocketId (/opt/render/project/src/server/websocket.ts:66:38)
+      at Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:150:38)
+      at Socket.emit (node:events:518:28)
+      at Socket.emitUntyped (/opt/render/project/src/node_modules/socket.io/dist/typed-events.js:69:22)
+      at /opt/render/project/src/node_modules/socket.io/dist/socket.js:697:39
+      at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+} reason: TypeError: userSocketMapTable.userId.eq is not a function
+    at getUserSocketId (/opt/render/project/src/server/websocket.ts:66:38)
+    at Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:150:38)
+    at Socket.emit (node:events:518:28)
+    at Socket.emitUntyped (/opt/render/project/src/node_modules/socket.io/dist/typed-events.js:69:22)
+    at /opt/render/project/src/node_modules/socket.io/dist/socket.js:697:39
+    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+💥 Unhandled Rejection at: Promise {
+  <rejected> TypeError: userSocketMapTable.userId.eq is not a function
+      at getUserSocketId (/opt/render/project/src/server/websocket.ts:66:38)
+      at Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:150:38)
+      at Socket.emit (node:events:518:28)
+      at Socket.emitUntyped (/opt/render/project/src/node_modules/socket.io/dist/typed-events.js:69:22)
+      at /opt/render/project/src/node_modules/socket.io/dist/socket.js:697:39
+      at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+} reason: TypeError: userSocketMapTable.userId.eq is not a function
+    at getUserSocketId (/opt/render/project/src/server/websocket.ts:66:38)
+    at Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:150:38)
+    at Socket.emit (node:events:518:28)
+    at Socket.emitUntyped (/opt/render/project/src/node_modules/socket.io/dist/typed-events.js:69:22)
+    at /opt/render/project/src/node_modules/socket.io/dist/socket.js:697:39
+    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)
+[QUEUE 367] Attempting to join queue for "happy" with socket HNlMym-QSBYa_xixAAAN
+[QUEUE 367] Joined queue at position 2 for mood "happy"
+[MATCH] Current queue length: 2
+[DEBUG][2025-07-08T16:54:42.234Z] Updated partnerId for user 366 in existing session { oldPartnerId: null, newPartnerId: 367 }
+[DEBUG][2025-07-08T16:54:42.241Z] Updated partnerId for user 367 in existing session { oldPartnerId: null, newPartnerId: 366 }
+[MATCH] Error: ReferenceError: userSocketMap is not defined
+    at notifyMatchedPair (/opt/render/project/src/server/websocket.ts:314:19)
+    at matchUsers (/opt/render/project/src/server/websocket.ts:117:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:189:9)
+[QUEUE 367] Attempting to join queue for "happy" with socket HNlMym-QSBYa_xixAAAN
+[QUEUE 367] Joined queue at position 2 for mood "happy"
+[MATCH] Current queue length: 2
+[MATCH] Error: ReferenceError: userSocketMap is not defined
+    at notifyMatchedPair (/opt/render/project/src/server/websocket.ts:314:19)
+    at matchUsers (/opt/render/project/src/server/websocket.ts:117:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Socket.<anonymous> (/opt/render/project/src/server/websocket.ts:189:9)
+[MATCH] Current queue length: 2
+[MATCH] Error: ReferenceError: userSocketMap is not defined
+    at notifyMatchedPair (/opt/render/project/src/server/websocket.ts:314:19)
+    at Timeout.matchUsers (/opt/render/project/src/server/websocket.ts:117:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[MATCH] Current queue length: 2
+[MATCH] Error: ReferenceError: userSocketMap is not defined
+    at notifyMatchedPair (/opt/render/project/src/server/websocket.ts:314:19)
+    at Timeout.matchUsers (/opt/render/project/src/server/websocket.ts:117:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[MATCH] Current queue length: 2
+[MATCH] Error: ReferenceError: userSocketMap is not defined
+    at notifyMatchedPair (/opt/render/project/src/server/websocket.ts:314:19)
+    at Timeout.matchUsers (/opt/render/project/src/server/websocket.ts:117:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[MATCH] Current queue length: 2
+[MATCH] Error: ReferenceError: userSocketMap is not defined
+    at notifyMatchedPair (/opt/render/project/src/server/websocket.ts:314:19)
+    at Timeout.matchUsers (/opt/render/project/src/server/websocket.ts:117:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[MATCH] Current queue length: 2
+[MATCH] Error: ReferenceError: userSocketMap is not defined
+    at notifyMatchedPair (/opt/render/project/src/server/websocket.ts:314:19)
+    at Timeout.matchUsers (/opt/render/project/src/server/websocket.ts:117:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[MATCH] Current queue length: 2
+[MATCH] Error: ReferenceError: userSocketMap is not defined
+    at notifyMatchedPair (/opt/render/project/src/server/websocket.ts:314:19)
+    at Timeout.matchUsers (/opt/render/project/src/server/websocket.ts:117:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[MATCH] Current queue length: 2
+[MATCH] Error: ReferenceError: userSocketMap is not defined
+    at notifyMatchedPair (/opt/render/project/src/server/websocket.ts:314:19)
+    at Timeout.matchUsers (/opt/render/project/src/server/websocket.ts:117:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
