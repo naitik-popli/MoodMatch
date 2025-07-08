@@ -1,98 +1,112 @@
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:33:34.409Z
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:42:37.213Z
 GET / 200 1ms
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:33:39.317Z
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:42:42.212Z
+[CONN W_-tc4] New connection [socketId=W_-tc4fs_qPIKZBnAAAB]
+[2025-07-08T15:47:45.735Z] [SOCKET MAP] Bound user 363 to socket W_-tc4fs_qPIKZBnAAAB
+[CONN P7EvCP] New connection [socketId=P7EvCPtsQYhFvl72AAAE]
+[CONN BUW9Qj] New connection [socketId=BUW9QjW9ADAYM84dAAAH]
+[CONN K7IxOt] New connection [socketId=K7IxOtFRCJn8i5r_AAAK]
+[2025-07-08T15:47:46.212Z] [SOCKET MAP] Bound user 362 to socket K7IxOtFRCJn8i5r_AAAK
+[DISCONNECT] Socket BUW9QjW9ADAYM84dAAAH disconnected (userId=undefined)
+[DISCONNECT] Socket W_-tc4fs_qPIKZBnAAAB disconnected (userId=363)
+[DISCONNECT] Removed user 363 from socket map
+[DISCONNECT] Removed user 363 from queue
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:33:44.318Z
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:42:47.210Z
+[CONN 6fqkz0] New connection [socketId=6fqkz07cn5dN5oMtAAAN]
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:33:49.320Z
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:42:52.215Z
+[DISCONNECT] Socket 6fqkz07cn5dN5oMtAAAN disconnected (userId=undefined)
+[CONN bPGPzX] New connection [socketId=bPGPzX3pRxmw-vytAAAQ]
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:33:54.324Z
-[CONN _zrX80] New connection [socketId=_zrX80FFEAGGsAc1AAAB]
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:42:57.215Z
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:33:59.326Z
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:02.216Z
+[DISCONNECT] Socket P7EvCPtsQYhFvl72AAAE disconnected (userId=undefined)
+[DISCONNECT] Socket K7IxOtFRCJn8i5r_AAAK disconnected (userId=362)
+[DISCONNECT] Removed user 362 from socket map
+[DISCONNECT] Removed user 362 from queue
+[CONN po-eIg] New connection [socketId=po-eIgzIuo5KpIzIAAAT]
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:04.323Z
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:07.218Z
 [MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:09.326Z
-POST /api/session/create 200 34ms
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:12.218Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:17.222Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:22.225Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:27.227Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:32.228Z
+POST /api/session/create 200 20ms
 Response: {
-  "sessionId": 478,
-  "userId": 362,
+  "sessionId": 480,
+  "userId": 364,
   "mood": "happy"
 }
-[CONN EyuPfq] New connection [socketId=EyuPfqrkPXvFxp9nAAAE]
-[SOCKET MAP] Bound user 362 to socket EyuPfqrkPXvFxp9nAAAE
-[SOCKET MAP] Bound user 362 to socket EyuPfqrkPXvFxp9nAAAE
-[SOCKET MAP] Bound user 362 to socket EyuPfqrkPXvFxp9nAAAE
-[QUEUE 362] Attempting to join queue for "happy" with socket EyuPfqrkPXvFxp9nAAAE
-[QUEUE 362] Joined queue at position 1 for mood "happy"
+[CONN WTrEfi] New connection [socketId=WTrEfi-kPZWgMcoeAAAW]
+[2025-07-08T15:48:33.190Z] [SOCKET MAP] Bound user 364 to socket WTrEfi-kPZWgMcoeAAAW
+[2025-07-08T15:48:34.323Z] [SOCKET MAP] Bound user 364 to socket WTrEfi-kPZWgMcoeAAAW
+[2025-07-08T15:48:34.372Z] [SOCKET MAP] Bound user 364 to socket WTrEfi-kPZWgMcoeAAAW
+GET /api/moods/stats 304 2ms
+Response: {}
+[QUEUE 364] Attempting to join queue for "happy" with socket WTrEfi-kPZWgMcoeAAAW
+[QUEUE 364] Attempting to join queue for "happy" with socket WTrEfi-kPZWgMcoeAAAW
+[QUEUE 364] Joined queue at position 1 for mood "happy"
+[QUEUE 364] Joined queue at position 1 for mood "happy"
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:13.833Z
-[QUEUE 362] Attempting to join queue for "happy" with socket EyuPfqrkPXvFxp9nAAAE
-[QUEUE 362] Joined queue at position 1 for mood "happy"
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:13.904Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:14.327Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:19.329Z
-[CONN 2Q7cPk] New connection [socketId=2Q7cPkrNs5Q1B9hQAAAH]
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:24.330Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:29.330Z
-POST /api/session/create 200 13ms
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:35.226Z
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:35.227Z
+POST /api/session/create 200 11ms
 Response: {
-  "sessionId": 479,
-  "userId": 363,
+  "sessionId": 481,
+  "userId": 365,
   "mood": "happy"
 }
-[CONN CQZ6cP] New connection [socketId=CQZ6cPszZeta4ykWAAAK]
-[SOCKET MAP] Bound user 363 to socket CQZ6cPszZeta4ykWAAAK
 [MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:34.333Z
-[SOCKET MAP] Bound user 363 to socket CQZ6cPszZeta4ykWAAAK
-[SOCKET MAP] Bound user 363 to socket CQZ6cPszZeta4ykWAAAK
-[QUEUE 363] Attempting to join queue for "happy" with socket CQZ6cPszZeta4ykWAAAK
-[QUEUE 363] Attempting to join queue for "happy" with socket CQZ6cPszZeta4ykWAAAK
-[QUEUE 363] Joined queue at position 2 for mood "happy"
-[QUEUE 363] Joined queue at position 2 for mood "happy"
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:37.228Z
+[CONN 3hZiHk] New connection [socketId=3hZiHkpg20xiNfPXAAAZ]
+[2025-07-08T15:48:37.618Z] [SOCKET MAP] Bound user 365 to socket 3hZiHkpg20xiNfPXAAAZ
+[2025-07-08T15:48:37.678Z] [SOCKET MAP] Bound user 365 to socket 3hZiHkpg20xiNfPXAAAZ
+[2025-07-08T15:48:37.828Z] [SOCKET MAP] Bound user 365 to socket 3hZiHkpg20xiNfPXAAAZ
+[QUEUE 365] Attempting to join queue for "happy" with socket 3hZiHkpg20xiNfPXAAAZ
+[QUEUE 365] Joined queue at position 2 for mood "happy"
 [MATCH] Current queue length: 2
-[MATCH] Current queue length: 2
-[DEBUG][2025-07-08T15:39:38.264Z] Updated partnerId for user 362 in existing session { oldPartnerId: null, newPartnerId: 363 }
-[DEBUG][2025-07-08T15:39:38.271Z] Updated partnerId for user 362 in existing session { oldPartnerId: null, newPartnerId: 363 }
-[DEBUG][2025-07-08T15:39:38.281Z] Updated partnerId for user 363 in existing session { oldPartnerId: null, newPartnerId: 362 }
-[MATCH] Notified user 362 and 363 of match (sessionId=478)
-[DEBUG][2025-07-08T15:39:38.332Z] Updated partnerId for user 363 in existing session { oldPartnerId: null, newPartnerId: 362 }
-[MATCH] Notified user 362 and 363 of match (sessionId=478)
-[MATCH] Paired users 362 and 363 in mood "happy"
-[MATCH] Paired users 362 and 363 in mood "happy"
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:38.342Z
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:38.347Z
-[QUEUE 363] Leaving queue with socket CQZ6cPszZeta4ykWAAAK
-[QUEUE 362] Leaving queue with socket EyuPfqrkPXvFxp9nAAAE
-[QUEUE 363] Left queue successfully
-[QUEUE 362] Left queue successfully
-[2025-07-08T15:39:39.170Z] [SIGNAL] Received webrtc-offer from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-[2025-07-08T15:39:39.170Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-offer
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
+[DEBUG][2025-07-08T15:48:38.000Z] Updated partnerId for user 364 in existing session { oldPartnerId: null, newPartnerId: 365 }
+[DEBUG][2025-07-08T15:48:38.006Z] Updated partnerId for user 365 in existing session { oldPartnerId: null, newPartnerId: 364 }
+[MATCH] Notified user 364 and 365 of match (sessionId=480)
+[MATCH] Paired users 364 and 365 in mood "happy"
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:38.011Z
+[QUEUE 364] Leaving queue with socket WTrEfi-kPZWgMcoeAAAW
+[QUEUE 364] Left queue successfully
+[QUEUE 365] Leaving queue with socket 3hZiHkpg20xiNfPXAAAZ
+[QUEUE 365] Left queue successfully
+[QUEUE 365] Attempting to join queue for "happy" with socket 3hZiHkpg20xiNfPXAAAZ
+[QUEUE 365] Joined queue at position 1 for mood "happy"
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:38.299Z
+[2025-07-08T15:48:39.013Z] [SIGNAL] Received webrtc-offer from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+[2025-07-08T15:48:39.013Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-offer
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
   offer: {
     sdp: 'v=0\r\n' +
-      'o=- 3511901828909844696 2 IN IP4 127.0.0.1\r\n' +
+      'o=- 3421884115538541166 2 IN IP4 127.0.0.1\r\n' +
       's=-\r\n' +
       't=0 0\r\n' +
       'a=group:BUNDLE 0 1\r\n' +
       'a=extmap-allow-mixed\r\n' +
-      'a=msid-semantic: WMS 4aa422ab-827a-479d-b48f-1aacc9f3a748\r\n' +
+      'a=msid-semantic: WMS 0320514e-3132-4285-9456-ea1271b682ee\r\n' +
       'm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\n' +
       'c=IN IP4 0.0.0.0\r\n' +
       'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
-      'a=ice-ufrag:VYB/\r\n' +
-      'a=ice-pwd:HhIznbdA9NZvp0jaiBfaUtmi\r\n' +
+      'a=ice-ufrag:Hh5z\r\n' +
+      'a=ice-pwd:bRHjg+lVbCngDHz7HKIeOAiv\r\n' +
       'a=ice-options:trickle\r\n' +
-      'a=fingerprint:sha-256 A2:95:98:33:A3:7C:F3:2A:E9:6F:2D:71:4C:6C:36:B4:28:A8:1C:6B:BD:7C:5B:6E:A2:B4:59:56:02:16:6D:16\r\n' +
+      'a=fingerprint:sha-256 E2:43:5B:B5:5A:5D:88:EB:59:4D:2F:8D:57:1E:F4:20:FC:49:56:E5:EA:D0:82:FD:2E:88:90:A3:03:30:67:7A\r\n' +
       'a=setup:actpass\r\n' +
       'a=mid:0\r\n' +
       'a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\n' +
@@ -100,7 +114,7 @@ Response: {
       'a=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\n' +
       'a=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\n' +
       'a=sendrecv\r\n' +
-      'a=msid:4aa422ab-827a-479d-b48f-1aacc9f3a748 06c044af-813c-4b8c-b861-acc0bb134cf1\r\n' +
+      'a=msid:0320514e-3132-4285-9456-ea1271b682ee cfc7151b-3ede-4811-8130-17f538c8e516\r\n' +
       'a=rtcp-mux\r\n' +
       'a=rtcp-rsize\r\n' +
       'a=rtpmap:111 opus/48000/2\r\n' +
@@ -114,15 +128,15 @@ Response: {
       'a=rtpmap:13 CN/8000\r\n' +
       'a=rtpmap:110 telephone-event/48000\r\n' +
       'a=rtpmap:126 telephone-event/8000\r\n' +
-      'a=ssrc:1622726543 cname:JECocnncD8K/9c60\r\n' +
-      'a=ssrc:1622726543 msid:4aa422ab-827a-479d-b48f-1aacc9f3a748 06c044af-813c-4b8c-b861-acc0bb134cf1\r\n' +
-      'm=video 9 UDP/TLS/RTP/SAVPF 96 97 103 104 107 108 109 114 115 116 117 118 39 40 45 46 98 99 100 101 119 120 121\r\n' +
+      'a=ssrc:27102456 cname:0jwJjgvV6iVNU/ML\r\n' +
+      'a=ssrc:27102456 msid:0320514e-3132-4285-9456-ea1271b682ee cfc7151b-3ede-4811-8130-17f538c8e516\r\n' +
+      'm=video 9 UDP/TLS/RTP/SAVPF 96 97 103 104 107 108 109 114 115 116 117 118 39 40 45 46 98 99 100 101 119 120 49 50 123 124 125\r\n' +
       'c=IN IP4 0.0.0.0\r\n' +
       'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
-      'a=ice-ufrag:VYB/\r\n' +
-      'a=ice-pwd:HhIznbdA9NZvp0jaiBfaUtmi\r\n' +
+      'a=ice-ufrag:Hh5z\r\n' +
+      'a=ice-pwd:bRHjg+lVbCngDHz7HKIeOAiv\r\n' +
       'a=ice-options:trickle\r\n' +
-      'a=fingerprint:sha-256 A2:95:98:33:A3:7C:F3:2A:E9:6F:2D:71:4C:6C:36:B4:28:A8:1C:6B:BD:7C:5B:6E:A2:B4:59:56:02:16:6D:16\r\n' +
+      'a=fingerprint:sha-256 E2:43:5B:B5:5A:5D:88:EB:59:4D:2F:8D:57:1E:F4:20:FC:49:56:E5:EA:D0:82:FD:2E:88:90:A3:03:30:67:7A\r\n' +
       'a=setup:actpass\r\n' +
       'a=mid:1\r\n' +
       'a=extmap:14 urn:ietf:params:rtp-hdrext:toffset\r\n' +
@@ -137,7 +151,7 @@ Response: {
       'a=extmap:10 urn:ietf:params:rtp-hdrext:sdes:rtp-stream-id\r\n' +
       'a=extmap:11 urn:ietf:params:rtp-hdrext:sdes:repaired-rtp-stream-id\r\n' +
       'a=sendrecv\r\n' +
-      'a=msid:4aa422ab-827a-479d-b48f-1aacc9f3a748 24f762bb-2095-4b96-9496-8634e3d4b9c4\r\n' +
+      'a=msid:0320514e-3132-4285-9456-ea1271b682ee 7b2745c8-26e9-48f7-b662-d418b988664d\r\n' +
       'a=rtcp-mux\r\n' +
       'a=rtcp-rsize\r\n' +
       'a=rtpmap:96 VP8/90000\r\n' +
@@ -229,178 +243,54 @@ Response: {
       'a=fmtp:100 profile-id=2\r\n' +
       'a=rtpmap:101 rtx/90000\r\n' +
       'a=fmtp:101 apt=100\r\n' +
-      'a=rtpmap:119 red/90000\r\n' +
+      'a=rtpmap:119 H264/90000\r\n' +
+      'a=rtcp-fb:119 goog-remb\r\n' +
+      'a=rtcp-fb:119 transport-cc\r\n' +
+      'a=rtcp-fb:119 ccm fir\r\n' +
+      'a=rtcp-fb:119 nack\r\n' +
+      'a=rtcp-fb:119 nack pli\r\n' +
+      'a=fmtp:119 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001f\r\n' +
       'a=rtpmap:120 rtx/90000\r\n' +
       'a=fmtp:120 apt=119\r\n' +
-      'a=rtpmap:121 ulpfec/90000\r\n' +
-      'a=ssrc-group:FID 1734453403 4015716944\r\n' +
-      'a=ssrc:1734453403 cname:JECocnncD8K/9c60\r\n' +
-      'a=ssrc:1734453403 msid:4aa422ab-827a-479d-b48f-1aacc9f3a748 24f762bb-2095-4b96-9496-8634e3d4b9c4\r\n' +
-      'a=ssrc:4015716944 cname:JECocnncD8K/9c60\r\n' +
-      'a=ssrc:4015716944 msid:4aa422ab-827a-479d-b48f-1aacc9f3a748 24f762bb-2095-4b96-9496-8634e3d4b9c4\r\n',
+      'a=rtpmap:49 H265/90000\r\n' +
+      'a=rtcp-fb:49 goog-remb\r\n' +
+      'a=rtcp-fb:49 transport-cc\r\n' +
+      'a=rtcp-fb:49 ccm fir\r\n' +
+      'a=rtcp-fb:49 nack\r\n' +
+      'a=rtcp-fb:49 nack pli\r\n' +
+      'a=fmtp:49 level-id=93;profile-id=1;tier-flag=0;tx-mode=SRST\r\n' +
+      'a=rtpmap:50 rtx/90000\r\n' +
+      'a=fmtp:50 apt=49\r\n' +
+      'a=rtpmap:123 red/90000\r\n' +
+      'a=rtpmap:124 rtx/90000\r\n' +
+      'a=fmtp:124 apt=123\r\n' +
+      'a=rtpmap:125 ulpfec/90000\r\n' +
+      'a=ssrc-group:FID 3200816005 1516947184\r\n' +
+      'a=ssrc:3200816005 cname:0jwJjgvV6iVNU/ML\r\n' +
+      'a=ssrc:3200816005 msid:0320514e-3132-4285-9456-ea1271b682ee 7b2745c8-26e9-48f7-b662-d418b988664d\r\n' +
+      'a=ssrc:1516947184 cname:0jwJjgvV6iVNU/ML\r\n' +
+      'a=ssrc:1516947184 msid:0320514e-3132-4285-9456-ea1271b682ee 7b2745c8-26e9-48f7-b662-d418b988664d\r\n',
     type: 'offer'
   }
 }
-[2025-07-08T15:39:39.253Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:1817766235 1 udp 2122194687 100.93.64.62 55626 typ host generation 0 ufrag VYB/ network-id 1',
-    sdpMid: '0',
-    sdpMLineIndex: 0,
-    usernameFragment: 'VYB/'
-  }
-}
-[2025-07-08T15:39:39.253Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.256Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.256Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:1284681102 1 udp 2122129151 192.168.1.20 52693 typ host generation 0 ufrag VYB/ network-id 3 network-cost 10',
-    sdpMid: '0',
-    sdpMLineIndex: 0,
-    usernameFragment: 'VYB/'
-  }
-}
-[2025-07-08T15:39:39.257Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.257Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:1596274745 1 udp 2122265343 fd7a:115c:a1e0::a335:403e 53088 typ host generation 0 ufrag VYB/ network-id 2',
-    sdpMid: '0',
-    sdpMLineIndex: 0,
-    usernameFragment: 'VYB/'
-  }
-}
-[2025-07-08T15:39:39.257Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:1817766235 1 udp 2122194687 100.93.64.62 34861 typ host generation 0 ufrag VYB/ network-id 1',
-    sdpMid: '1',
-    sdpMLineIndex: 1,
-    usernameFragment: 'VYB/'
-[2025-07-08T15:39:39.257Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-  }
-}
-[2025-07-08T15:39:39.260Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:1284681102 1 udp 2122129151 192.168.1.20 35756 typ host generation 0 ufrag VYB/ network-id 3 network-cost 10',
-    sdpMid: '1',
-    sdpMLineIndex: 1,
-    usernameFragment: 'VYB/'
-  }
-}
-[2025-07-08T15:39:39.260Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.261Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.261Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:1596274745 1 udp 2122265343 fd7a:115c:a1e0::a335:403e 45786 typ host generation 0 ufrag VYB/ network-id 2',
-    sdpMid: '1',
-    sdpMLineIndex: 1,
-    usernameFragment: 'VYB/'
-  }
-}
-[2025-07-08T15:39:39.297Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-[2025-07-08T15:39:39.297Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:3822603440 1 udp 1685921535 103.87.58.187 52693 typ srflx raddr 192.168.1.20 rport 52693 generation 0 ufrag VYB/ network-id 3 network-cost 10',
-    sdpMid: '0',
-    sdpMLineIndex: 0,
-    usernameFragment: 'VYB/'
-  }
-}
-[2025-07-08T15:39:39.301Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:3822603440 1 udp 1685921535 103.87.58.187 35756 typ srflx raddr 192.168.1.20 rport 35756 generation 0 ufrag VYB/ network-id 3 network-cost 10',
-    sdpMid: '1',
-    sdpMLineIndex: 1,
-    usernameFragment: 'VYB/'
-  }
-}
-[2025-07-08T15:39:39.301Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:39.333Z
-[2025-07-08T15:39:39.409Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:2465349071 1 tcp 1518214911 100.93.64.62 9 typ host tcptype active generation 0 ufrag VYB/ network-id 1',
-    sdpMid: '0',
-    sdpMLineIndex: 0,
-[2025-07-08T15:39:39.409Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-    usernameFragment: 'VYB/'
-  }
-}
-[2025-07-08T15:39:39.426Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:2990045466 1 tcp 1518149375 192.168.1.20 9 typ host tcptype active generation 0 ufrag VYB/ network-id 3 network-cost 10',
-    sdpMid: '0',
-    sdpMLineIndex: 0,
-    usernameFragment: 'VYB/'
-[2025-07-08T15:39:39.426Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-  }
-}
-[2025-07-08T15:39:39.430Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-[2025-07-08T15:39:39.430Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:2710564013 1 tcp 1518285567 fd7a:115c:a1e0::a335:403e 9 typ host tcptype active generation 0 ufrag VYB/ network-id 2',
-    sdpMid: '0',
-    sdpMLineIndex: 0,
-    usernameFragment: 'VYB/'
-  }
-}
-[2025-07-08T15:39:39.434Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.434Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:2465349071 1 tcp 1518214911 100.93.64.62 9 typ host tcptype active generation 0 ufrag VYB/ network-id 1',
-    sdpMid: '1',
-    sdpMLineIndex: 1,
-    usernameFragment: 'VYB/'
-  }
-}
-[2025-07-08T15:39:39.437Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-[2025-07-08T15:39:39.437Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-    candidate: 'candidate:2990045466 1 tcp 1518149375 192.168.1.20 9 typ host tcptype active generation 0 ufrag VYB/ network-id 3 network-cost 10',
-    sdpMid: '1',
-    sdpMLineIndex: 1,
-    usernameFragment: 'VYB/'
-  }
-}
-[2025-07-08T15:39:39.443Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.443Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:2710564013 1 tcp 1518285567 fd7a:115c:a1e0::a335:403e 9 typ host tcptype active generation 0 ufrag VYB/ network-id 2',
-    sdpMid: '1',
-    sdpMLineIndex: 1,
-    usernameFragment: 'VYB/'
-  }
-}
-[2025-07-08T15:39:39.494Z] [SIGNAL] Received webrtc-offer from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
+[2025-07-08T15:48:39.027Z] [SIGNAL] Received webrtc-offer from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
   offer: {
     sdp: 'v=0\r\n' +
-      'o=- 3938128521008439505 2 IN IP4 127.0.0.1\r\n' +
+[2025-07-08T15:48:39.027Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-offer
+      'o=- 6941611516191456032 2 IN IP4 127.0.0.1\r\n' +
       's=-\r\n' +
       't=0 0\r\n' +
       'a=group:BUNDLE 0 1\r\n' +
       'a=extmap-allow-mixed\r\n' +
-      'a=msid-semantic: WMS 5f0bd4c4-dc24-401d-8a41-01494a409df3\r\n' +
+      'a=msid-semantic: WMS fe180d1f-60c5-4d83-ac47-2bcce1cfb38c\r\n' +
       'm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\n' +
       'c=IN IP4 0.0.0.0\r\n' +
       'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
-      'a=ice-ufrag:9HRP\r\n' +
-      'a=ice-pwd:4/kiF+1eAG9dnxZTcOqKAac/\r\n' +
-[2025-07-08T15:39:39.494Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-offer
+      'a=ice-ufrag:Qt13\r\n' +
+      'a=ice-pwd:sLDDT49TRprh3pVgfOOgy180\r\n' +
       'a=ice-options:trickle\r\n' +
-      'a=fingerprint:sha-256 A0:7D:DE:DB:AE:1A:F0:4C:C7:BF:A5:DB:BF:D1:4F:09:CB:98:4A:43:A8:A3:CF:88:7A:3D:84:DF:3B:41:E7:65\r\n' +
+      'a=fingerprint:sha-256 80:4E:10:3D:F7:F9:83:BA:2C:B9:AC:CB:F7:59:3F:24:92:6B:E1:1F:C2:9C:41:94:2C:07:9B:8D:B9:94:64:40\r\n' +
       'a=setup:actpass\r\n' +
       'a=mid:0\r\n' +
       'a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\n' +
@@ -408,7 +298,7 @@ Response: {
       'a=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\n' +
       'a=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\n' +
       'a=sendrecv\r\n' +
-      'a=msid:5f0bd4c4-dc24-401d-8a41-01494a409df3 d3c389d5-72d2-4db1-a5f8-04abe354510e\r\n' +
+      'a=msid:fe180d1f-60c5-4d83-ac47-2bcce1cfb38c 68dfd92c-4f50-4737-9364-dde97f2d7737\r\n' +
       'a=rtcp-mux\r\n' +
       'a=rtcp-rsize\r\n' +
       'a=rtpmap:111 opus/48000/2\r\n' +
@@ -422,15 +312,15 @@ Response: {
       'a=rtpmap:13 CN/8000\r\n' +
       'a=rtpmap:110 telephone-event/48000\r\n' +
       'a=rtpmap:126 telephone-event/8000\r\n' +
-      'a=ssrc:3080264327 cname:hILYX9NIFxcb4hJK\r\n' +
-      'a=ssrc:3080264327 msid:5f0bd4c4-dc24-401d-8a41-01494a409df3 d3c389d5-72d2-4db1-a5f8-04abe354510e\r\n' +
-      'm=video 9 UDP/TLS/RTP/SAVPF 96 97 103 104 107 108 109 114 115 116 117 118 39 40 45 46 98 99 100 101 119 120 121\r\n' +
+      'a=ssrc:4059253257 cname:c3xn9hc9J/199BQn\r\n' +
+      'a=ssrc:4059253257 msid:fe180d1f-60c5-4d83-ac47-2bcce1cfb38c 68dfd92c-4f50-4737-9364-dde97f2d7737\r\n' +
+      'm=video 9 UDP/TLS/RTP/SAVPF 96 97 103 104 107 108 109 114 115 116 117 118 39 40 45 46 98 99 100 101 119 120 49 50 123 124 125\r\n' +
       'c=IN IP4 0.0.0.0\r\n' +
       'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
-      'a=ice-ufrag:9HRP\r\n' +
-      'a=ice-pwd:4/kiF+1eAG9dnxZTcOqKAac/\r\n' +
+      'a=ice-ufrag:Qt13\r\n' +
+      'a=ice-pwd:sLDDT49TRprh3pVgfOOgy180\r\n' +
       'a=ice-options:trickle\r\n' +
-      'a=fingerprint:sha-256 A0:7D:DE:DB:AE:1A:F0:4C:C7:BF:A5:DB:BF:D1:4F:09:CB:98:4A:43:A8:A3:CF:88:7A:3D:84:DF:3B:41:E7:65\r\n' +
+      'a=fingerprint:sha-256 80:4E:10:3D:F7:F9:83:BA:2C:B9:AC:CB:F7:59:3F:24:92:6B:E1:1F:C2:9C:41:94:2C:07:9B:8D:B9:94:64:40\r\n' +
       'a=setup:actpass\r\n' +
       'a=mid:1\r\n' +
       'a=extmap:14 urn:ietf:params:rtp-hdrext:toffset\r\n' +
@@ -445,7 +335,7 @@ Response: {
       'a=extmap:10 urn:ietf:params:rtp-hdrext:sdes:rtp-stream-id\r\n' +
       'a=extmap:11 urn:ietf:params:rtp-hdrext:sdes:repaired-rtp-stream-id\r\n' +
       'a=sendrecv\r\n' +
-      'a=msid:5f0bd4c4-dc24-401d-8a41-01494a409df3 460f40f8-e812-4c7d-93c9-df27a99da07c\r\n' +
+      'a=msid:fe180d1f-60c5-4d83-ac47-2bcce1cfb38c dd15e572-4926-41f7-9851-1acd2756b3ce\r\n' +
       'a=rtcp-mux\r\n' +
       'a=rtcp-rsize\r\n' +
       'a=rtpmap:96 VP8/90000\r\n' +
@@ -537,159 +427,369 @@ Response: {
       'a=fmtp:100 profile-id=2\r\n' +
       'a=rtpmap:101 rtx/90000\r\n' +
       'a=fmtp:101 apt=100\r\n' +
-      'a=rtpmap:119 red/90000\r\n' +
+      'a=rtpmap:119 H264/90000\r\n' +
+      'a=rtcp-fb:119 goog-remb\r\n' +
+      'a=rtcp-fb:119 transport-cc\r\n' +
+      'a=rtcp-fb:119 ccm fir\r\n' +
+      'a=rtcp-fb:119 nack\r\n' +
+      'a=rtcp-fb:119 nack pli\r\n' +
+      'a=fmtp:119 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001f\r\n' +
       'a=rtpmap:120 rtx/90000\r\n' +
       'a=fmtp:120 apt=119\r\n' +
-      'a=rtpmap:121 ulpfec/90000\r\n' +
-      'a=ssrc-group:FID 3137696816 2599065845\r\n' +
-      'a=ssrc:3137696816 cname:hILYX9NIFxcb4hJK\r\n' +
-      'a=ssrc:3137696816 msid:5f0bd4c4-dc24-401d-8a41-01494a409df3 460f40f8-e812-4c7d-93c9-df27a99da07c\r\n' +
-      'a=ssrc:2599065845 cname:hILYX9NIFxcb4hJK\r\n' +
-      'a=ssrc:2599065845 msid:5f0bd4c4-dc24-401d-8a41-01494a409df3 460f40f8-e812-4c7d-93c9-df27a99da07c\r\n',
+      'a=rtpmap:49 H265/90000\r\n' +
+      'a=rtcp-fb:49 goog-remb\r\n' +
+      'a=rtcp-fb:49 transport-cc\r\n' +
+      'a=rtcp-fb:49 ccm fir\r\n' +
+      'a=rtcp-fb:49 nack\r\n' +
+      'a=rtcp-fb:49 nack pli\r\n' +
+      'a=fmtp:49 level-id=93;profile-id=1;tier-flag=0;tx-mode=SRST\r\n' +
+      'a=rtpmap:50 rtx/90000\r\n' +
+      'a=fmtp:50 apt=49\r\n' +
+      'a=rtpmap:123 red/90000\r\n' +
+      'a=rtpmap:124 rtx/90000\r\n' +
+      'a=fmtp:124 apt=123\r\n' +
+      'a=rtpmap:125 ulpfec/90000\r\n' +
+      'a=ssrc-group:FID 3803322288 805948599\r\n' +
+      'a=ssrc:3803322288 cname:c3xn9hc9J/199BQn\r\n' +
+      'a=ssrc:3803322288 msid:fe180d1f-60c5-4d83-ac47-2bcce1cfb38c dd15e572-4926-41f7-9851-1acd2756b3ce\r\n' +
+      'a=ssrc:805948599 cname:c3xn9hc9J/199BQn\r\n' +
+      'a=ssrc:805948599 msid:fe180d1f-60c5-4d83-ac47-2bcce1cfb38c dd15e572-4926-41f7-9851-1acd2756b3ce\r\n',
     type: 'offer'
   }
 }
-[2025-07-08T15:39:39.508Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
+[2025-07-08T15:48:39.213Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
   candidate: {
-    candidate: 'candidate:1004124935 1 udp 2122194687 100.93.64.62 39912 typ host generation 0 ufrag 9HRP network-id 1',
+    candidate: 'candidate:292926358 1 udp 2122194687 100.92.98.39 49742 typ host generation 0 ufrag Hh5z network-id 1 network-cost 50',
+    sdpMid: '0',
+[2025-07-08T15:48:39.213Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+    sdpMLineIndex: 0,
+    usernameFragment: 'Hh5z'
+  }
+}
+[2025-07-08T15:48:39.214Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:3846956342 1 udp 2122129151 192.168.1.11 49743 typ host generation 0 ufrag Hh5z network-id 3 network-cost 10',
     sdpMid: '0',
     sdpMLineIndex: 0,
-    usernameFragment: '9HRP'
+    usernameFragment: 'Hh5z'
   }
 }
-[2025-07-08T15:39:39.508Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.509Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.509Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
+[2025-07-08T15:48:39.214Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.230Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+[2025-07-08T15:48:39.230Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
   candidate: {
-    candidate: 'candidate:454295506 1 udp 2122129151 192.168.1.20 47655 typ host generation 0 ufrag 9HRP network-id 3 network-cost 10',
+    candidate: 'candidate:3902220271 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 49744 typ host generation 0 ufrag Hh5z network-id 2 network-cost 50',
     sdpMid: '0',
     sdpMLineIndex: 0,
-    usernameFragment: '9HRP'
+    usernameFragment: 'Hh5z'
   }
 }
-[2025-07-08T15:39:39.510Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.510Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
+[2025-07-08T15:48:39.230Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
   candidate: {
-    candidate: 'candidate:144992869 1 udp 2122265343 fd7a:115c:a1e0::a335:403e 53691 typ host generation 0 ufrag 9HRP network-id 2',
+    candidate: 'candidate:292926358 1 udp 2122194687 100.92.98.39 49745 typ host generation 0 ufrag Hh5z network-id 1 network-cost 50',
+    sdpMid: '1',
+    sdpMLineIndex: 1,
+[2025-07-08T15:48:39.230Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+    usernameFragment: 'Hh5z'
+  }
+}
+[2025-07-08T15:48:39.382Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+[2025-07-08T15:48:39.382Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+  candidate: {
+    candidate: 'candidate:3846956342 1 udp 2122129151 192.168.1.11 49746 typ host generation 0 ufrag Hh5z network-id 3 network-cost 10',
+    sdpMid: '1',
+    sdpMLineIndex: 1,
+    usernameFragment: 'Hh5z'
+  }
+}
+[2025-07-08T15:48:39.382Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.382Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:1874481422 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag Hh5z network-id 1 network-cost 50',
     sdpMid: '0',
     sdpMLineIndex: 0,
-    usernameFragment: '9HRP'
+    usernameFragment: 'Hh5z'
   }
 }
-[2025-07-08T15:39:39.510Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.510Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
+[2025-07-08T15:48:39.382Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
   candidate: {
-    candidate: 'candidate:1004124935 1 udp 2122194687 100.93.64.62 53481 typ host generation 0 ufrag 9HRP network-id 1',
-    sdpMid: '1',
-    sdpMLineIndex: 1,
-    usernameFragment: '9HRP'
-  }
-}
-[2025-07-08T15:39:39.512Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.512Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:454295506 1 udp 2122129151 192.168.1.20 56998 typ host generation 0 ufrag 9HRP network-id 3 network-cost 10',
-    sdpMid: '1',
-    sdpMLineIndex: 1,
-    usernameFragment: '9HRP'
-  }
-}
-[2025-07-08T15:39:39.515Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-[2025-07-08T15:39:39.515Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:144992869 1 udp 2122265343 fd7a:115c:a1e0::a335:403e 41349 typ host generation 0 ufrag 9HRP network-id 2',
-    sdpMid: '1',
-    sdpMLineIndex: 1,
-    usernameFragment: '9HRP'
-  }
-}
-[2025-07-08T15:39:39.556Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-[2025-07-08T15:39:39.556Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-    candidate: 'candidate:3025739500 1 udp 1685921535 103.87.58.187 47655 typ srflx raddr 192.168.1.20 rport 47655 generation 0 ufrag 9HRP network-id 3 network-cost 10',
+    candidate: 'candidate:2609121198 1 tcp 1518149375 192.168.1.11 9 typ host tcptype active generation 0 ufrag Hh5z network-id 3 network-cost 10',
     sdpMid: '0',
     sdpMLineIndex: 0,
-    usernameFragment: '9HRP'
+    usernameFragment: 'Hh5z'
   }
 }
-[2025-07-08T15:39:39.557Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-[2025-07-08T15:39:39.557Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
+[2025-07-08T15:48:39.382Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.383Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
   candidate: {
-    candidate: 'candidate:3025739500 1 udp 1685921535 103.87.58.187 56998 typ srflx raddr 192.168.1.20 rport 56998 generation 0 ufrag 9HRP network-id 3 network-cost 10',
-    sdpMid: '1',
-    sdpMLineIndex: 1,
-    usernameFragment: '9HRP'
-  }
-}
-[2025-07-08T15:39:39.600Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-[2025-07-08T15:39:39.600Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
-  candidate: {
-    candidate: 'candidate:3312676755 1 tcp 1518214911 100.93.64.62 9 typ host tcptype active generation 0 ufrag 9HRP network-id 1',
+    candidate: 'candidate:2522400119 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag Hh5z network-id 2 network-cost 50',
     sdpMid: '0',
     sdpMLineIndex: 0,
-    usernameFragment: '9HRP'
+    usernameFragment: 'Hh5z'
   }
 }
-[2025-07-08T15:39:39.653Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
+[2025-07-08T15:48:39.383Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.384Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
   candidate: {
-    candidate: 'candidate:3854117702 1 tcp 1518149375 192.168.1.20 9 typ host tcptype active generation 0 ufrag 9HRP network-id 3 network-cost 10',
+[2025-07-08T15:48:39.384Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+    candidate: 'candidate:1874481422 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag Hh5z network-id 1 network-cost 50',
+    sdpMid: '1',
+    sdpMLineIndex: 1,
+    usernameFragment: 'Hh5z'
+  }
+}
+[2025-07-08T15:48:39.386Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:2609121198 1 tcp 1518149375 192.168.1.11 9 typ host tcptype active generation 0 ufrag Hh5z network-id 3 network-cost 10',
+    sdpMid: '1',
+    sdpMLineIndex: 1,
+    usernameFragment: 'Hh5z'
+  }
+}
+[2025-07-08T15:48:39.386Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.387Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:2522400119 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag Hh5z network-id 2 network-cost 50',
+[2025-07-08T15:48:39.387Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+    sdpMid: '1',
+    sdpMLineIndex: 1,
+    usernameFragment: 'Hh5z'
+  }
+}
+[2025-07-08T15:48:39.387Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.387Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:3530085904 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag Qt13 network-id 1 network-cost 50',
     sdpMid: '0',
     sdpMLineIndex: 0,
-    usernameFragment: '9HRP'
+    usernameFragment: 'Qt13'
   }
 }
-[2025-07-08T15:39:39.653Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.669Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
+[2025-07-08T15:48:39.388Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
   candidate: {
-    candidate: 'candidate:4128161521 1 tcp 1518285567 fd7a:115c:a1e0::a335:403e 9 typ host tcptype active generation 0 ufrag 9HRP network-id 2',
+    candidate: 'candidate:643203248 1 tcp 1518149375 192.168.1.11 9 typ host tcptype active generation 0 ufrag Qt13 network-id 3 network-cost 10',
     sdpMid: '0',
     sdpMLineIndex: 0,
-    usernameFragment: '9HRP'
+    usernameFragment: 'Qt13'
+[2025-07-08T15:48:39.388Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
   }
 }
-[2025-07-08T15:39:39.669Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.669Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
+[2025-07-08T15:48:39.393Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
   candidate: {
-    candidate: 'candidate:3312676755 1 tcp 1518214911 100.93.64.62 9 typ host tcptype active generation 0 ufrag 9HRP network-id 1',
+    candidate: 'candidate:730481257 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag Qt13 network-id 2 network-cost 50',
+    sdpMid: '0',
+[2025-07-08T15:48:39.393Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+    sdpMLineIndex: 0,
+    usernameFragment: 'Qt13'
+  }
+}
+[2025-07-08T15:48:39.394Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.394Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:3530085904 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag Qt13 network-id 1 network-cost 50',
     sdpMid: '1',
     sdpMLineIndex: 1,
-    usernameFragment: '9HRP'
+    usernameFragment: 'Qt13'
   }
 }
-[2025-07-08T15:39:39.669Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.669Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[2025-07-08T15:39:39.669Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
+[2025-07-08T15:48:39.394Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.394Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
   candidate: {
-    candidate: 'candidate:3854117702 1 tcp 1518149375 192.168.1.20 9 typ host tcptype active generation 0 ufrag 9HRP network-id 3 network-cost 10',
+    candidate: 'candidate:643203248 1 tcp 1518149375 192.168.1.11 9 typ host tcptype active generation 0 ufrag Qt13 network-id 3 network-cost 10',
     sdpMid: '1',
     sdpMLineIndex: 1,
-    usernameFragment: '9HRP'
+    usernameFragment: 'Qt13'
   }
 }
-[2025-07-08T15:39:39.669Z] [SIGNAL] Received webrtc-ice-candidate from EyuPfqrkPXvFxp9nAAAE to forward to CQZ6cPszZeta4ykWAAAK {
-  targetSocketId: 'CQZ6cPszZeta4ykWAAAK',
+[2025-07-08T15:48:39.395Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.395Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
   candidate: {
-    candidate: 'candidate:4128161521 1 tcp 1518285567 fd7a:115c:a1e0::a335:403e 9 typ host tcptype active generation 0 ufrag 9HRP network-id 2',
+    candidate: 'candidate:730481257 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag Qt13 network-id 2 network-cost 50',
     sdpMid: '1',
     sdpMLineIndex: 1,
-    usernameFragment: '9HRP'
+    usernameFragment: 'Qt13'
   }
 }
-[2025-07-08T15:39:39.669Z] [SIGNAL] Target socket CQZ6cPszZeta4ykWAAAK not found for webrtc-ice-candidate
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:44.335Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-08T15:34:49.337Z
+[2025-07-08T15:48:39.395Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.395Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:3902220271 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 49747 typ host generation 0 ufrag Hh5z network-id 2 network-cost 50',
+    sdpMid: '1',
+    sdpMLineIndex: 1,
+    usernameFragment: 'Hh5z'
+  }
+}
+[2025-07-08T15:48:39.422Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+[2025-07-08T15:48:39.422Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+  candidate: {
+    candidate: 'candidate:2896639112 1 udp 2122194687 100.92.98.39 60354 typ host generation 0 ufrag Qt13 network-id 1 network-cost 50',
+    sdpMid: '0',
+    sdpMLineIndex: 0,
+    usernameFragment: 'Qt13'
+  }
+}
+[2025-07-08T15:48:39.423Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.423Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:1486447144 1 udp 2122129151 192.168.1.11 60355 typ host generation 0 ufrag Qt13 network-id 3 network-cost 10',
+    sdpMid: '0',
+    sdpMLineIndex: 0,
+    usernameFragment: 'Qt13'
+  }
+}
+[2025-07-08T15:48:39.438Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:1430626545 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 60356 typ host generation 0 ufrag Qt13 network-id 2 network-cost 50',
+    sdpMid: '0',
+    sdpMLineIndex: 0,
+    usernameFragment: 'Qt13'
+  }
+}
+[2025-07-08T15:48:39.438Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.438Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.438Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:2896639112 1 udp 2122194687 100.92.98.39 60357 typ host generation 0 ufrag Qt13 network-id 1 network-cost 50',
+    sdpMid: '1',
+    sdpMLineIndex: 1,
+    usernameFragment: 'Qt13'
+  }
+}
+[2025-07-08T15:48:39.440Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:1486447144 1 udp 2122129151 192.168.1.11 60358 typ host generation 0 ufrag Qt13 network-id 3 network-cost 10',
+    sdpMid: '1',
+    sdpMLineIndex: 1,
+    usernameFragment: 'Qt13'
+  }
+}
+[2025-07-08T15:48:39.440Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.454Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:1430626545 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 60359 typ host generation 0 ufrag Qt13 network-id 2 network-cost 50',
+    sdpMid: '1',
+    sdpMLineIndex: 1,
+    usernameFragment: 'Qt13'
+  }
+}
+[2025-07-08T15:48:39.454Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.568Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+[2025-07-08T15:48:39.568Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+    candidate: 'candidate:2779879327 1 udp 1685921535 103.87.58.187 49743 typ srflx raddr 192.168.1.11 rport 49743 generation 0 ufrag Hh5z network-id 3 network-cost 10',
+    sdpMid: '0',
+    sdpMLineIndex: 0,
+    usernameFragment: 'Hh5z'
+  }
+}
+[2025-07-08T15:48:39.581Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.581Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:2779879327 1 udp 1685921535 103.87.58.187 49746 typ srflx raddr 192.168.1.11 rport 49746 generation 0 ufrag Hh5z network-id 3 network-cost 10',
+    sdpMid: '1',
+    sdpMLineIndex: 1,
+    usernameFragment: 'Hh5z'
+  }
+}
+[2025-07-08T15:48:39.657Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.657Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:409145473 1 udp 1685921535 103.87.58.187 60355 typ srflx raddr 192.168.1.11 rport 60355 generation 0 ufrag Qt13 network-id 3 network-cost 10',
+    sdpMid: '0',
+    sdpMLineIndex: 0,
+    usernameFragment: 'Qt13'
+  }
+}
+[2025-07-08T15:48:39.687Z] [SIGNAL] Target socket 3hZiHkpg20xiNfPXAAAZ not found for webrtc-ice-candidate
+[2025-07-08T15:48:39.687Z] [SIGNAL] Received webrtc-ice-candidate from WTrEfi-kPZWgMcoeAAAW to forward to 3hZiHkpg20xiNfPXAAAZ {
+  targetSocketId: '3hZiHkpg20xiNfPXAAAZ',
+  candidate: {
+    candidate: 'candidate:409145473 1 udp 1685921535 103.87.58.187 60358 typ srflx raddr 192.168.1.11 rport 60358 generation 0 ufrag Qt13 network-id 3 network-cost 10',
+    sdpMid: '1',
+    sdpMLineIndex: 1,
+    usernameFragment: 'Qt13'
+  }
+}
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:42.229Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:52.236Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:43:57.237Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:44:02.237Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:44:07.240Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:44:12.247Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:44:17.248Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:44:22.248Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:44:27.251Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:44:32.253Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:44:37.254Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:44:42.257Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:44:47.259Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:44:52.262Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:44:57.266Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:45:02.265Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:45:07.268Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:45:12.270Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:45:17.274Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:45:22.278Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:45:27.279Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:45:32.281Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:45:37.281Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:45:42.287Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:45:47.287Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:45:52.291Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:45:57.293Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-08T15:46:02.293Z

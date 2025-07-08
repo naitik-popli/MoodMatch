@@ -19,8 +19,59 @@ const DEBUG_MODE = process.env.DEBUG_MODE === "true";
 const MATCH_INTERVAL = 5000;
 const MAX_QUEUE_TIME = 300000;
 
-const userSocketMap = new Map<number, string>();
-const activeSessions = new Set<number>();
+import { drizzle } from "drizzle-orm/node-postgres";
+import { pgTable, serial, varchar, integer } from "drizzle-orm/pg-core";
+
+const userSocketMapTable = pgTable("user_socket_map", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull(),
+  partnerId: integer("partner_id").notNull(),
+  socketId: varchar("socket_id", { length: 255 }).notNull(),
+});
+
+import { Pool } from "pg";
+import { drizzle } from "drizzle-orm/node-postgres";
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL_TEST,
+});
+
+const userSocketMapDb = drizzle(pool);
+
+export async function setUserSocketMap(userId: number, partnerId: number, socketId: string) {
+  // Upsert logic: insert or update existing record
+  const existing = await userSocketMapDb
+    .select()
+    .from(userSocketMapTable)
+    .where(userSocketMapTable.userId.eq(userId));
+
+  if (existing.length > 0) {
+    await userSocketMapDb
+      .update(userSocketMapTable)
+      .set({ partnerId, socketId })
+      .where(userSocketMapTable.userId.eq(userId));
+  } else {
+    await userSocketMapDb
+      .insert(userSocketMapTable)
+      .values({ userId, partnerId, socketId });
+  }
+}
+
+export async function getUserSocketId(userId: number) {
+  const result = await userSocketMapDb
+    .select()
+    .from(userSocketMapTable)
+    .where(userSocketMapTable.userId.eq(userId))
+    .limit(1);
+
+  return result.length > 0 ? result[0].socketId : null;
+}
+
+export async function deleteUserSocketMap(userId: number) {
+  await userSocketMapDb
+    .delete(userSocketMapTable)
+    .where(userSocketMapTable.userId.eq(userId));
+}
 
 export async function setupWebSocket(io: SocketIOServer) {
   console.log("[WS] Initializing WebSocket server");
@@ -88,19 +139,19 @@ export async function setupWebSocket(io: SocketIOServer) {
     const connId = socket.id.slice(0, 6);
     console.log(`[CONN ${connId}] New connection [socketId=${socket.id}]`);
 
-    socket.on("update-socket-id", (data: { userId: number }) => {
+    socket.on("update-socket-id", async (data: { userId: number; partnerId: number }) => {
       const timestamp = new Date().toISOString();
       if (!data?.userId) {
         console.warn(`[${timestamp}] [SOCKET MAP] update-socket-id called without userId`);
         return;
       }
-      const existingSocketId = userSocketMap.get(data.userId);
+      const existingSocketId = await getUserSocketId(data.userId);
       if (existingSocketId && existingSocketId !== socket.id) {
         // Disconnect the old socket if needed (optional)
         // io.sockets.sockets.get(existingSocketId)?.disconnect(true);
         console.log(`[${timestamp}] [SOCKET MAP] Replacing old socket ${existingSocketId} for user ${data.userId}`);
       }
-      userSocketMap.set(data.userId, socket.id);
+      await setUserSocketMap(data.userId, data.partnerId, socket.id);
       socket.data.userId = data.userId;
       console.log(`[${timestamp}] [SOCKET MAP] Bound user ${data.userId} to socket ${socket.id}`);
     });
@@ -168,10 +219,10 @@ export async function setupWebSocket(io: SocketIOServer) {
     });
 
     // Forward WebRTC signaling messages with enhanced logging
-    socket.on("webrtc-offer", (data: any) => {
+    socket.on("webrtc-offer", async (data: any) => {
       const timestamp = new Date().toISOString();
       console.log(`[${timestamp}] [SIGNAL] Received webrtc-offer from ${socket.id} to forward to ${data.targetSocketId}`, data);
-      const targetSocket = userSocketMap.get(data.targetSocketId);
+      const targetSocket = await getUserSocketId(data.targetSocketId);
       if (targetSocket) {
         io.to(targetSocket).emit("webrtc-offer", {
           fromSocketId: socket.id,
@@ -183,10 +234,10 @@ export async function setupWebSocket(io: SocketIOServer) {
       }
     });
 
-    socket.on("webrtc-answer", (data: any) => {
+    socket.on("webrtc-answer", async (data: any) => {
       const timestamp = new Date().toISOString();
       console.log(`[${timestamp}] [SIGNAL] Received webrtc-answer from ${socket.id} to forward to ${data.targetSocketId}`, data);
-      const targetSocket = userSocketMap.get(data.targetSocketId);
+      const targetSocket = await getUserSocketId(data.targetSocketId);
       if (targetSocket) {
         io.to(targetSocket).emit("webrtc-answer", {
           fromSocketId: socket.id,
@@ -198,10 +249,10 @@ export async function setupWebSocket(io: SocketIOServer) {
       }
     });
 
-    socket.on("webrtc-ice-candidate", (data: any) => {
+    socket.on("webrtc-ice-candidate", async (data: any) => {
       const timestamp = new Date().toISOString();
       console.log(`[${timestamp}] [SIGNAL] Received webrtc-ice-candidate from ${socket.id} to forward to ${data.targetSocketId}`, data);
-      const targetSocket = userSocketMap.get(data.targetSocketId);
+      const targetSocket = await getUserSocketId(data.targetSocketId);
       if (targetSocket) {
         io.to(targetSocket).emit("webrtc-ice-candidate", {
           fromSocketId: socket.id,
