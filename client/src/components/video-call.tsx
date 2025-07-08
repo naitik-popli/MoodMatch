@@ -66,7 +66,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   } = useWebRTC({
     socket,
     isInitiator: sessionData.partnerId ? sessionData.userId < sessionData.partnerId : false,
-    targetSocketId: sessionData.partnerSocketId,
+    targetUserId: sessionData.partnerId,
   });
 
   // Format call duration
