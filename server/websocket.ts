@@ -29,8 +29,10 @@ const userSocketMapTable = pgTable("user_socket_map", {
   socketId: varchar("socket_id", { length: 255 }).notNull(),
 });
 
-import { Pool } from "pg";
+import pg from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
+
+const { Pool } = pg;
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL_TEST,
