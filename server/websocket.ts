@@ -279,44 +279,44 @@ export async function setupWebSocket(io: SocketIOServer) {
     // Forward WebRTC signaling messages with enhanced logging
     socket.on("webrtc-offer", async (data: any) => {
       const timestamp = new Date().toISOString();
-      console.log(`[${timestamp}] [SIGNAL] Received webrtc-offer from ${socket.id} to forward to ${data.targetSocketId}`, data);
-      const targetSocket = await getUserSocketId(data.targetSocketId);
+      console.log(`[${timestamp}] [SIGNAL] Received webrtc-offer from ${socket.id} to forward to userId ${data.targetUserId}`, data);
+      const targetSocket = await getUserSocketId(data.targetUserId);
       if (targetSocket) {
         io.to(targetSocket).emit("webrtc-offer", {
           fromSocketId: socket.id,
           offer: data.offer,
         });
-        console.log(`[${timestamp}] [SIGNAL] Forwarded webrtc-offer from ${socket.id} to ${targetSocket}`);
+        console.log(`[${timestamp}] [SIGNAL] Forwarded webrtc-offer from ${socket.id} to socketId ${targetSocket}`);
       } else {
-        console.warn(`[${timestamp}] [SIGNAL] Target socket ${data.targetSocketId} not found for webrtc-offer`);
+        console.warn(`[${timestamp}] [SIGNAL] Target userId ${data.targetUserId} not found for webrtc-offer`);
       }
     });
 
     socket.on("webrtc-answer", async (data: any) => {
       const timestamp = new Date().toISOString();
-      console.log(`[${timestamp}] [SIGNAL] Received webrtc-answer from ${socket.id} to forward to ${data.targetSocketId}`, data);
-      const targetSocket = await getUserSocketId(data.targetSocketId);
+      console.log(`[${timestamp}] [SIGNAL] Received webrtc-answer from ${socket.id} to forward to userId ${data.targetUserId}`, data);
+      const targetSocket = await getUserSocketId(data.targetUserId);
       if (targetSocket) {
         io.to(targetSocket).emit("webrtc-answer", {
           fromSocketId: socket.id,
           answer: data.answer,
         });
-        console.log(`[${timestamp}] [SIGNAL] Forwarded webrtc-answer from ${socket.id} to ${targetSocket}`);
+        console.log(`[${timestamp}] [SIGNAL] Forwarded webrtc-answer from ${socket.id} to socketId ${targetSocket}`);
       } else {
-        console.warn(`[${timestamp}] [SIGNAL] Target socket ${data.targetSocketId} not found for webrtc-answer`);
+        console.warn(`[${timestamp}] [SIGNAL] Target userId ${data.targetUserId} not found for webrtc-answer`);
       }
     });
 
     socket.on("webrtc-ice-candidate", async (data: any) => {
       const timestamp = new Date().toISOString();
-      console.log(`[${timestamp}] [SIGNAL] Received webrtc-ice-candidate from ${socket.id} to forward to ${data.targetSocketId}`, data);
-      const targetSocket = await getUserSocketId(data.targetSocketId);
+      console.log(`[${timestamp}] [SIGNAL] Received webrtc-ice-candidate from ${socket.id} to forward to userId ${data.targetUserId}`, data);
+      const targetSocket = await getUserSocketId(data.targetUserId);
       if (targetSocket) {
         io.to(targetSocket).emit("webrtc-ice-candidate", {
           fromSocketId: socket.id,
           candidate: data.candidate,
         });
-        console.log(`[${timestamp}] [SIGNAL] Forwarded webrtc-ice-candidate from ${socket.id} to ${targetSocket}`);
+        console.log(`[${timestamp}] [SIGNAL] Forwarded webrtc-ice-candidate from ${socket.id} to socketId ${targetSocket}`);
 
         // Forward test message for debugging ICE candidate sending
         io.to(targetSocket).emit("test-message", {
@@ -326,7 +326,7 @@ export async function setupWebSocket(io: SocketIOServer) {
           timestamp,
         });
       } else {
-        console.warn(`[${timestamp}] [SIGNAL] Target socket ${data.targetSocketId} not found for webrtc-ice-candidate`);
+        console.warn(`[${timestamp}] [SIGNAL] Target userId ${data.targetUserId} not found for webrtc-ice-candidate`);
       }
     });
 
