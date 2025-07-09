@@ -1,26 +1,203 @@
-Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
-  npx update-browserslist-db@latest
-  Why you should do it regularly: https://github.com/browserslist/update-db#readme
-✓ 1636 modules transformed.
-x Build failed in 2.21s
-error during build:
-[vite:esbuild] Transform failed with 1 error:
-/opt/render/project/src/client/src/hooks/use-webrtc.ts:686:0: ERROR: Expected ")" but found end of file
-file: /opt/render/project/src/client/src/hooks/use-webrtc.ts:686:0
-Expected ")" but found end of file
-684|    };
-685|  }
-686|  
-   |  ^
-    at failureErrorWithLog (/opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:1472:15)
-    at /opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:755:50
-    at responseCallbacks.<computed> (/opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:622:9)
-    at handleIncomingPacket (/opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
-    at Socket.readFromStdout (/opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
-    at Socket.emit (node:events:518:28)
-    at addChunk (node:internal/streams/readable:561:12)
-    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
-    at Readable.push (node:internal/streams/readable:392:5)
-    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
-==> Build failed 😞
-==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+[CONN DZWvS1] New connection [socketId=DZWvS10Rg6Fkx177AAAE]
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:11:21.812Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:11:26.812Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:11:31.816Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:11:36.824Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:11:41.822Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:11:46.822Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:11:51.822Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:11:56.825Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:12:01.828Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:12:06.893Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:12:11.835Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:12:16.835Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:12:21.839Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:12:26.843Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:12:31.847Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:12:36.855Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:12:41.855Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:12:46.858Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:12:51.859Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:12:56.885Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:13:01.876Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:13:06.892Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:13:11.875Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:13:16.875Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:13:21.879Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:13:26.882Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:13:31.887Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:13:36.890Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:13:41.894Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:13:46.894Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:13:51.898Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:13:56.901Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:14:01.905Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:14:06.913Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:14:11.909Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:14:16.909Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:14:21.913Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:14:26.922Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:14:31.922Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:14:36.925Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:14:41.927Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:14:46.928Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:14:51.934Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:14:56.937Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:15:01.945Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:15:06.943Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:15:11.947Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:15:16.947Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:15:21.952Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:15:26.953Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:15:31.956Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:15:36.960Z
+[DISCONNECT] Socket T8nQyT6kl9TMVXBbAAAB disconnected (userId=381)
+[DISCONNECT] Socket DZWvS10Rg6Fkx177AAAE disconnected (userId=undefined)
+[DISCONNECT] Removed user 381 from socket map
+[DISCONNECT] Removed user 381 from queue
+[CONN C1rBQg] New connection [socketId=C1rBQgn-rB9ZeDKwAAAH]
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:15:41.960Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:15:46.961Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:15:51.966Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:15:56.968Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:01.975Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:06.994Z
+GET /api/moods/stats 200 7ms
+Response: {}
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:11.974Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:16.975Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:21.978Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:26.983Z
+[CONN gs3Tx-] New connection [socketId=gs3Tx-q1e2u6_sshAAAK]
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:31.990Z
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:36.987Z
+POST /api/session/create 200 18ms
+Response: {
+  "sessionId": 499,
+  "userId": 383,
+  "mood": "happy"
+}
+[CONN 9-YcCC] New connection [socketId=9-YcCCnkkOnyLMmCAAAN]
+[2025-07-09T15:21:40.398Z] Generated new partnerId 1000383 for user 383
+[2025-07-09T15:21:40.398Z] [SOCKET MAP] Bound user 383 to socket 9-YcCCnkkOnyLMmCAAAN with partnerId 1000383
+[2025-07-09T15:21:40.398Z] [SOCKET MAP] Current userSocketMap entry: userId=383, partnerId=1000383, socketId=9-YcCCnkkOnyLMmCAAAN
+[2025-07-09T15:21:41.306Z] Generated new partnerId 1000383 for user 383
+[2025-07-09T15:21:41.306Z] [SOCKET MAP] Bound user 383 to socket 9-YcCCnkkOnyLMmCAAAN with partnerId 1000383
+[2025-07-09T15:21:41.306Z] [SOCKET MAP] Current userSocketMap entry: userId=383, partnerId=1000383, socketId=9-YcCCnkkOnyLMmCAAAN
+[2025-07-09T15:21:41.378Z] Generated new partnerId 1000383 for user 383
+[2025-07-09T15:21:41.378Z] [SOCKET MAP] Bound user 383 to socket 9-YcCCnkkOnyLMmCAAAN with partnerId 1000383
+[2025-07-09T15:21:41.378Z] [SOCKET MAP] Current userSocketMap entry: userId=383, partnerId=1000383, socketId=9-YcCCnkkOnyLMmCAAAN
+[QUEUE 383] Attempting to join queue for "happy" with socket 9-YcCCnkkOnyLMmCAAAN
+[QUEUE 383] Joined queue at position 1 for mood "happy"
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:41.624Z
+[QUEUE 383] Attempting to join queue for "happy" with socket 9-YcCCnkkOnyLMmCAAAN
+[QUEUE 383] Joined queue at position 1 for mood "happy"
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:41.697Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:41.987Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:46.988Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:51.993Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:16:56.993Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:17:01.998Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:17:07.000Z
+GET /api/moods/stats 200 3ms
+Response: {
+  "happy": 1
+}
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:17:12.001Z
+POST /api/session/create 200 13ms
+Response: {
+  "sessionId": 500,
+  "userId": 384,
+  "mood": "happy"
+}
+[CONN a5qkV-] New connection [socketId=a5qkV-3cZk-unXiRAAAQ]
+[2025-07-09T15:22:14.900Z] Generated new partnerId 1000384 for user 384
+[2025-07-09T15:22:14.900Z] [SOCKET MAP] Bound user 384 to socket a5qkV-3cZk-unXiRAAAQ with partnerId 1000384
+[2025-07-09T15:22:14.900Z] [SOCKET MAP] Current userSocketMap entry: userId=384, partnerId=1000384, socketId=a5qkV-3cZk-unXiRAAAQ
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:17:17.001Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:17:22.002Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:17:27.006Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:17:32.008Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:17:37.012Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:17:42.014Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-09T15:17:47.014Z
