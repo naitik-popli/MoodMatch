@@ -1,91 +1,50 @@
-🔗 Socket connection status: true
-index-DlnMEoo7.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-DlnMEoo7.js:363 🔗 Socket connection status: true
-index-DlnMEoo7.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-DlnMEoo7.js:363 ⚠️ Already matched, ignoring duplicate match-found event
-(anonymous) @ index-DlnMEoo7.js:363
-_i @ index-DlnMEoo7.js:38
-Ea @ index-DlnMEoo7.js:38
-useState @ index-DlnMEoo7.js:38
-q.useState @ index-DlnMEoo7.js:9
-sN @ index-DlnMEoo7.js:363
-Xu @ index-DlnMEoo7.js:38
-Ec @ index-DlnMEoo7.js:40
-bg @ index-DlnMEoo7.js:40
-Cg @ index-DlnMEoo7.js:40
-e1 @ index-DlnMEoo7.js:40
-pl @ index-DlnMEoo7.js:40
-Ic @ index-DlnMEoo7.js:40
-wg @ index-DlnMEoo7.js:40
-E @ index-DlnMEoo7.js:25
-O @ index-DlnMEoo7.js:25Understand this warning
-index-DlnMEoo7.js:363 ℹ️ New session detected, resetting matched state
-index-DlnMEoo7.js:363 📦 Updated sessionData after match: {sessionId: 507, userId: 392, partnerId: 391, partnerSocketId: 'tv6X3Nna8nZMzaAlAAAi'}
-index-DlnMEoo7.js:363 ⚠️ Already matched, ignoring duplicate match-found event
-(anonymous) @ index-DlnMEoo7.js:363
-_i @ index-DlnMEoo7.js:38
-Ea @ index-DlnMEoo7.js:38
-useState @ index-DlnMEoo7.js:38
-q.useState @ index-DlnMEoo7.js:9
-sN @ index-DlnMEoo7.js:363
-Xu @ index-DlnMEoo7.js:38
-Ec @ index-DlnMEoo7.js:40
-bg @ index-DlnMEoo7.js:40
-Cg @ index-DlnMEoo7.js:40
-e1 @ index-DlnMEoo7.js:40
-pl @ index-DlnMEoo7.js:40
-Ic @ index-DlnMEoo7.js:40
-wg @ index-DlnMEoo7.js:40
-E @ index-DlnMEoo7.js:25
-O @ index-DlnMEoo7.js:25Understand this warning
-index-DlnMEoo7.js:363 🔗 Socket connection status: true
-index-DlnMEoo7.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-DlnMEoo7.js:363 🔗 Socket connection status: true
-index-DlnMEoo7.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-DlnMEoo7.js:40 ReferenceError: Cannot access 'E' before initialization
-    at i2 (index-DlnMEoo7.js:319:54545)
-    at a2 (index-DlnMEoo7.js:319:59638)
-    at Xu (index-DlnMEoo7.js:38:16998)
-    at bg (index-DlnMEoo7.js:40:43963)
-    at Cg (index-DlnMEoo7.js:40:39727)
-    at e1 (index-DlnMEoo7.js:40:39655)
-    at pl (index-DlnMEoo7.js:40:39508)
-    at Ic (index-DlnMEoo7.js:40:35875)
-    at wg (index-DlnMEoo7.js:40:34826)
-    at E (index-DlnMEoo7.js:25:1562)
-Cc @ index-DlnMEoo7.js:40
-i.componentDidCatch.n.callback @ index-DlnMEoo7.js:40
-Mf @ index-DlnMEoo7.js:38
-Xf @ index-DlnMEoo7.js:40
-vg @ index-DlnMEoo7.js:40
-Xx @ index-DlnMEoo7.js:40
-n1 @ index-DlnMEoo7.js:40
-ir @ index-DlnMEoo7.js:40
-wg @ index-DlnMEoo7.js:40
-E @ index-DlnMEoo7.js:25
-O @ index-DlnMEoo7.js:25Understand this error
-index-DlnMEoo7.js:363 Uncaught error: ReferenceError: Cannot access 'E' before initialization
-    at i2 (index-DlnMEoo7.js:319:54545)
-    at a2 (index-DlnMEoo7.js:319:59638)
-    at Xu (index-DlnMEoo7.js:38:16998)
-    at bg (index-DlnMEoo7.js:40:43963)
-    at Cg (index-DlnMEoo7.js:40:39727)
-    at e1 (index-DlnMEoo7.js:40:39655)
-    at pl (index-DlnMEoo7.js:40:39508)
-    at Ic (index-DlnMEoo7.js:40:35875)
-    at wg (index-DlnMEoo7.js:40:34826)
-    at E (index-DlnMEoo7.js:25:1562) {componentStack: '\n    at a2 (https://mood-match-two.vercel.app/asse…wo.vercel.app/assets/index-DlnMEoo7.js:363:39776)'}
-componentDidCatch @ index-DlnMEoo7.js:363
-i.componentDidCatch.n.callback @ index-DlnMEoo7.js:40
-Mf @ index-DlnMEoo7.js:38
-Xf @ index-DlnMEoo7.js:40
-vg @ index-DlnMEoo7.js:40
-Xx @ index-DlnMEoo7.js:40
-n1 @ index-DlnMEoo7.js:40
-ir @ index-DlnMEoo7.js:40
-wg @ index-DlnMEoo7.js:40
-E @ index-DlnMEoo7.js:25
-O @ index-DlnMEoo7.js:25Understand this error
-2index-DlnMEoo7.js:319 🧹 Component unmounted, but socket connection kept alive
-index-DlnMEoo7.js:319 [WaitingRoom] Emitting leave-mood-queue for user 392
-index-DlnMEoo7.js:319 📤 Emitting 'join-mood-queue' with: {userId: 392, mood: 'happy'}
+2025-07-09T16:58:39.26978455Z Run `npm audit` for details.
+2025-07-09T16:58:39.440061992Z 
+2025-07-09T16:58:39.440089172Z > rest-express@1.0.0 build
+2025-07-09T16:58:39.440096043Z > npm run build:client && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-07-09T16:58:39.440102143Z 
+2025-07-09T16:58:39.537266546Z 
+2025-07-09T16:58:39.537295176Z > rest-express@1.0.0 build:client
+2025-07-09T16:58:39.537301457Z > vite build --config client/vite.config.ts
+2025-07-09T16:58:39.537306107Z 
+2025-07-09T16:58:39.738568475Z vite v5.4.14 building for production...
+2025-07-09T16:58:39.786299085Z transforming...
+2025-07-09T16:58:40.049605147Z Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+2025-07-09T16:58:40.049624268Z   npx update-browserslist-db@latest
+2025-07-09T16:58:40.049630068Z   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2025-07-09T16:58:42.027694602Z ✓ 1647 modules transformed.
+2025-07-09T16:58:42.028388859Z x Build failed in 2.27s
+2025-07-09T16:58:42.028455541Z error during build:
+2025-07-09T16:58:42.028461111Z [vite:esbuild] Transform failed with 2 errors:
+2025-07-09T16:58:42.028464621Z /opt/render/project/src/client/src/hooks/use-webrtc.ts:323:8: ERROR: The symbol "startCall" has already been declared
+2025-07-09T16:58:42.028467441Z /opt/render/project/src/client/src/hooks/use-webrtc.ts:638:8: ERROR: The symbol "startCall" has already been declared
+2025-07-09T16:58:42.028470831Z file: /opt/render/project/src/client/src/hooks/use-webrtc.ts:323:8
+2025-07-09T16:58:42.028473442Z 
+2025-07-09T16:58:42.028476222Z The symbol "startCall" has already been declared
+2025-07-09T16:58:42.028478922Z 321|  
+2025-07-09T16:58:42.028482092Z 322|    // Enhanced call start
+2025-07-09T16:58:42.028487402Z 323|    const startCall = useCallback(async () => {
+2025-07-09T16:58:42.028490172Z    |          ^
+2025-07-09T16:58:42.028492942Z 324|        if (!socket || !targetUserId) {
+2025-07-09T16:58:42.028496042Z 325|    console.warn("[WEBRTC:useWebRTC] Cannot start call — socket or targetUserId missing");
+2025-07-09T16:58:42.028498592Z 
+2025-07-09T16:58:42.028501922Z The symbol "startCall" has already been declared
+2025-07-09T16:58:42.028506262Z 636|  
+2025-07-09T16:58:42.028523043Z 637|    // Enhanced call start
+2025-07-09T16:58:42.028526043Z 638|    const startCall = useCallback(async () => {
+2025-07-09T16:58:42.028528183Z    |          ^
+2025-07-09T16:58:42.028530603Z 639|        if (!socket || !targetUserId) {
+2025-07-09T16:58:42.028532783Z 640|    console.warn("[WEBRTC:useWebRTC] Cannot start call — socket or targetUserId missing");
+2025-07-09T16:58:42.028534783Z 
+2025-07-09T16:58:42.028537333Z     at failureErrorWithLog (/opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:1472:15)
+2025-07-09T16:58:42.028539473Z     at /opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:755:50
+2025-07-09T16:58:42.028542003Z     at responseCallbacks.<computed> (/opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:622:9)
+2025-07-09T16:58:42.028544123Z     at handleIncomingPacket (/opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+2025-07-09T16:58:42.028546503Z     at Socket.readFromStdout (/opt/render/project/src/node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+2025-07-09T16:58:42.028549173Z     at Socket.emit (node:events:518:28)
+2025-07-09T16:58:42.028551873Z     at addChunk (node:internal/streams/readable:561:12)
+2025-07-09T16:58:42.028554373Z     at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+2025-07-09T16:58:42.028557024Z     at Readable.push (node:internal/streams/readable:392:5)
+2025-07-09T16:58:42.028559553Z     at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
+2025-07-09T16:58:42.141321323Z ==> Build failed 😞
+2025-07-09T16:58:42.141345103Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
