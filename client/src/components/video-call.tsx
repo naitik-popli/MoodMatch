@@ -205,6 +205,8 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     }
   }, [log]);
 
+
+
   // Attach local audio stream on change
   useEffect(() => {
     attachAudioStream(localStream);
@@ -218,6 +220,12 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   // Start call when socket and partnerSocketId are ready
   const partnerSocketId = sessionData.partnerSocketId;
   const callStartedRef = useRef(false);
+
+  useEffect(() => {
+  if (remoteVideoRef.current && remoteStream) {
+    remoteVideoRef.current.srcObject = remoteStream;
+  }
+}, [remoteStream]);
   
   useEffect(() => {
   if (
@@ -268,6 +276,15 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       }
     };
   }, [isConnected]);
+
+  useEffect(() => {
+  if (remoteStream) {
+    console.log(
+      '[VideoCall] Remote stream tracks:',
+      remoteStream.getTracks().map(t => `${t.kind}:${t.readyState}`)
+    );
+  }
+}, [remoteStream]);
 
   // Click-to-play handler
   const handleVideoClick = useCallback(async () => {
@@ -506,7 +523,6 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
           <div className="absolute inset-0">
             <video
               ref={remoteVideoRef}
-              id="remoteVideo" 
               autoPlay
               playsInline
               className="w-full h-full object-cover bg-black"

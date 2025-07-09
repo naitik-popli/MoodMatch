@@ -309,14 +309,14 @@ useEffect(() => {
   }, []);
 
   // Assign remote stream to video element
-  useEffect(() => {
-    if (remoteStream) {
-      const remoteVideoElement = document.getElementById("remoteVideo") as HTMLVideoElement | null;
-      if (remoteVideoElement) {
-        remoteVideoElement.srcObject = remoteStream;
-      }
-    }
-  }, [remoteStream]);
+  // useEffect(() => {
+  //   if (remoteStream) {
+  //     const remoteVideoElement = document.getElementById("remoteVideo") as HTMLVideoElement | null;
+  //     if (remoteVideoElement) {
+  //       remoteVideoElement.srcObject = remoteStream;
+  //     }
+  //   }
+  // }, [remoteStream]);
 
   // Cleanup on unmount
   useEffect(() => endCall, [endCall]);
