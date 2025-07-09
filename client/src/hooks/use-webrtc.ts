@@ -151,30 +151,36 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
     if (!socket || socket.disconnected || !targetUserId) return;
 
     const handleOffer = async (data: any) => {
-      log("Received offer", data);
-      if (data.fromSocketId !== targetUserId) return;
-      try {
-        const pc = setupPeerConnection();
-        if (localStreamRef.current) {
-          localStreamRef.current.getTracks().forEach(track => {
-            if (!pc.getSenders().some(sender => sender.track === track)) {
-              pc.addTrack(track, localStreamRef.current!);
-              log("Added local track (receiver)", track);
-            }
-          });
-        }
-        await pc.setRemoteDescription(data.offer);
-        log("Set remote description with offer");
-        const answer = await pc.createAnswer();
-        await pc.setLocalDescription(answer);
-        log("Created and set local description with answer");
-        socket.emit("webrtc-answer", { targetUserId: data.fromSocketId, answer });
-        log("Sent answer to", data.fromSocketId);
-      } catch (error) {
-        log("Error handling offer:", error);
-      }
-    };
+  log("Received offer", data);
+  if (data.fromSocketId !== targetUserId) return;
+  try {
+    const pc = setupPeerConnection();
+    // Ensure local media is initialized
+    let stream = localStreamRef.current;
+if (!stream) {
+  stream = await initializeMedia();
+  localStreamRef.current = stream;
+  setLocalStream(stream);
+}
 
+    stream.getTracks().forEach(track => {
+      if (!pc.getSenders().some(sender => sender.track === track)) {
+        pc.addTrack(track, stream);
+        log("Added local track (receiver)", track);
+      }
+    });
+
+    await pc.setRemoteDescription(data.offer);
+    log("Set remote description with offer");
+    const answer = await pc.createAnswer();
+    await pc.setLocalDescription(answer);
+    log("Created and set local description with answer");
+    socket.emit("webrtc-answer", { targetUserId: data.fromSocketId, answer });
+    log("Sent answer to", data.fromSocketId);
+  } catch (error) {
+    log("Error handling offer:", error);
+  }
+};
     const handleAnswer = async (data: any) => {
       log("Received answer", data);
       if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
