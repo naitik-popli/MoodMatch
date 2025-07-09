@@ -26,6 +26,11 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
   const startCallCalledRef = useRef(false);
   const mediaInitializedRef = useRef(false);
 
+    // Store peer socket ID for ICE emission
+const peerSocketIdRef = useRef<string | null>(null);
+// Queue for ICE candidates received before remote description is set
+const pendingCandidatesRef = useRef<any[]>([]);
+
   // Only create one peer connection per call
  const setupPeerConnection = useCallback(() => {
   if (peerConnectionRef.current) {
@@ -37,14 +42,16 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
   peerConnectionRef.current = pc;
 
   pc.onicecandidate = (event) => {
-    if (event.candidate && socket) {
-      const peerId = peerSocketIdRef.current || targetUserId;
-      if (peerId) {
-        log("Sending ICE candidate", event.candidate);
-        socket.emit("webrtc-ice-candidate", { targetUserId: peerId, candidate: event.candidate });
+      if (event.candidate && socket) {
+        const peerId = peerSocketIdRef.current || targetUserId;
+        if (peerId) {
+          log("Sending ICE candidate", event.candidate);
+          socket.emit("webrtc-ice-candidate", { targetUserId: peerId, candidate: event.candidate });
+        } else {
+          log("Warning: No peerId for ICE emission");
+        }
       }
-    }
-  };
+    };
 
     pc.ontrack = (event) => {
       log("ontrack fired", event);
@@ -117,6 +124,10 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
       log("Cannot start call — socket or targetUserId missing");
       return;
     }
+    if (peerConnectionRef.current) {
+      peerConnectionRef.current.close();
+      peerConnectionRef.current = null;
+    }
     try {
       const stream = await initializeMedia();
       const pc = setupPeerConnection();
@@ -139,20 +150,17 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
   }, [socket, targetUserId, isInitiator, initializeMedia, setupPeerConnection, log]);
 
   // Auto-start call when ready
-  useEffect(() => {
-    if (mediaReady && socketIdReady && !startCallCalledRef.current) {
-      startCallCalledRef.current = true;
-      startCall().catch(err => {
-        log("Error starting call:", err);
-        startCallCalledRef.current = false;
-      });
-    }
-  }, [mediaReady, socketIdReady, startCall, log]);
+ useEffect(() => {
+  if (mediaReady && socketIdReady && isInitiator && !startCallCalledRef.current) {
+    startCallCalledRef.current = true;
+    startCall().catch(err => {
+      log("Error starting call:", err);
+      startCallCalledRef.current = false;
+    });
+  }
+}, [mediaReady, socketIdReady, startCall, log, isInitiator]);
 
-  // Store peer socket ID for ICE emission
-const peerSocketIdRef = useRef<string | null>(null);
-// Queue for ICE candidates received before remote description is set
-const pendingCandidatesRef = useRef<any[]>([]);
+
 
   // Signaling handlers
   
@@ -183,14 +191,14 @@ useEffect(() => {
       log("Set remote description with offer");
 
       // Add any queued ICE candidates
-      pendingCandidatesRef.current.forEach(async candidate => {
-        try {
-          await pc.addIceCandidate(candidate);
-          log("Added queued ICE candidate");
-        } catch (err) {
-          log("Error adding queued ICE candidate", err);
+       for (const candidate of pendingCandidatesRef.current) {
+          try {
+            await pc.addIceCandidate(candidate);
+            log("Added queued ICE candidate");
+          } catch (err) {
+            log("Error adding queued ICE candidate", err);
+          }
         }
-      });
       pendingCandidatesRef.current = [];
 
       const answer = await pc.createAnswer();
@@ -260,6 +268,8 @@ useEffect(() => {
     setRemoteStream(null);
     setIsConnected(false);
     setConnectionState("closed");
+     mediaInitializedRef.current = false;
+    startCallCalledRef.current = false;
   }, []);
 
   // Mute/unmute audio
