@@ -254,13 +254,23 @@ const initMedia = async () => {
 
   // Track media readiness for signaling setup
   useEffect(() => {
-    if (localStream) {
+    if (localStream && localStream.active) {
       setMediaReady(true);
       console.log("🎥 Media stream ready for signaling:", localStream.id);
     } else {
       setMediaReady(false);
     }
   }, [localStream]);
+  
+  // Guard startCall to only run when mediaReady and socketIdReady
+  useEffect(() => {
+    if (mediaReady && socketIdReady) {
+      console.log("Media and socket ready, starting call");
+      startCall().catch(err => {
+        console.error("Error starting call:", err);
+      });
+    }
+  }, [mediaReady, socketIdReady, startCall]);
 
   // Enhanced signaling setup effect
    useEffect(() => {
