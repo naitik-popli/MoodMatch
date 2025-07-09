@@ -14,6 +14,7 @@ interface UseWebRTCProps {
   targetUserId?: number;
 }
  
+const startCallCalledRef = useRef(false);
 
 
 export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps) {
@@ -262,12 +263,127 @@ const initMedia = async () => {
     }
   }, [localStream]);
   
-  // Guard startCall to only run when mediaReady and socketIdReady
+  // Enhanced call start
+  const startCall = useCallback(async () => {
+      if (!socket || !targetUserId) {
+  console.warn("[WEBRTC:useWebRTC] Cannot start call — socket or targetUserId missing");
+  return;
+}
+
+    try {
+      const stream = await initializeMedia();
+      const pc = setupPeerConnection();
+
+      // Add tracks with better error handling
+      stream.getTracks().forEach((track) => {
+        try {
+          // Check if track already added to avoid InvalidAccessError
+          const senderExists = pc.getSenders().some(sender => sender.track === track);
+          if (!senderExists) {
+            pc.addTrack(track, stream);
+            log(`Added ${track.kind} track to peer connection`);
+          } else {
+            log(`Skipped adding ${track.kind} track - already added`);
+          }
+        } catch (error) {
+          log(`Error adding ${track.kind} track:`, error);
+        }
+      });
+
+      if (isInitiator) {
+        const offer = await pc.createOffer({
+          offerToReceiveAudio: true,
+          offerToReceiveVideo: true
+        });
+        await pc.setLocalDescription(offer);
+        log('Created and set local offer');
+
+        socket.emit("webrtc-offer", {
+          targetUserId,
+          offer,
+        });
+      }
+      
+      // Temporarily disable connection state change handler to stop retry logic
+      pc.onconnectionstatechange = () => {
+        const state = pc.connectionState;
+        log('Connection state changed:', state);
+        setConnectionState(state);
+        setIsConnected(state === "connected");
+        // Do not call endCall on failure to stop retry logic temporarily
+      };
+
+    } catch (error) {
+      log('Error during call start:', error);
+      throw error;
+    }
+  }, [socket, targetUserId, isInitiator, initializeMedia, setupPeerConnection, log]);
+
+  // Enhanced call start
+  const startCall = useCallback(async () => {
+      if (!socket || !targetUserId) {
+  console.warn("[WEBRTC:useWebRTC] Cannot start call — socket or targetUserId missing");
+  return;
+}
+
+    try {
+      const stream = await initializeMedia();
+      const pc = setupPeerConnection();
+
+      // Add tracks with better error handling
+      stream.getTracks().forEach((track) => {
+        try {
+          // Check if track already added to avoid InvalidAccessError
+          const senderExists = pc.getSenders().some(sender => sender.track === track);
+          if (!senderExists) {
+            pc.addTrack(track, stream);
+            log(`Added ${track.kind} track to peer connection`);
+          } else {
+            log(`Skipped adding ${track.kind} track - already added`);
+          }
+        } catch (error) {
+          log(`Error adding ${track.kind} track:`, error);
+        }
+      });
+
+      if (isInitiator) {
+        const offer = await pc.createOffer({
+          offerToReceiveAudio: true,
+          offerToReceiveVideo: true
+        });
+        await pc.setLocalDescription(offer);
+        log('Created and set local offer');
+
+        socket.emit("webrtc-offer", {
+          targetUserId,
+          offer,
+        });
+      }
+      
+      // Temporarily disable connection state change handler to stop retry logic
+      pc.onconnectionstatechange = () => {
+        const state = pc.connectionState;
+        log('Connection state changed:', state);
+        setConnectionState(state);
+        setIsConnected(state === "connected");
+        // Do not call endCall on failure to stop retry logic temporarily
+      };
+
+    } catch (error) {
+      log('Error during call start:', error);
+      throw error;
+    }
+  }, [socket, targetUserId, isInitiator, initializeMedia, setupPeerConnection, log]);
+
+  const startCallCalledRef = useRef(false);
+
   useEffect(() => {
-    if (mediaReady && socketIdReady) {
+    if (mediaReady && socketIdReady && !startCallCalledRef.current) {
+      startCallCalledRef.current = true;
       console.log("Media and socket ready, starting call");
       startCall().catch(err => {
         console.error("Error starting call:", err);
+        startCallCalledRef.current = false;
       });
     }
   }, [mediaReady, socketIdReady, startCall]);
