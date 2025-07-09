@@ -169,10 +169,15 @@ useEffect(() => {
 
   const handleOffer = async (data: any) => {
     log("Received offer", data);
+    
     peerSocketIdRef.current = data.fromSocketId; // Save for ICE emission
     try {
       const pc = setupPeerConnection();
       let stream = localStreamRef.current;
+        if (pc.signalingState !== "stable" && pc.signalingState !== "have-remote-offer") {
+    log("Ignoring offer: PeerConnection not in a state to accept offer", pc.signalingState);
+    return;
+  }
       if (!stream) {
         stream = await initializeMedia();
         localStreamRef.current = stream;
