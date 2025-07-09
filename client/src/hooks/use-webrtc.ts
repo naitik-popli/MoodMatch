@@ -62,12 +62,17 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
     };
 
     pc.ontrack = (event) => {
+      log("ontrack fired", event);
       if (event.streams && event.streams[0]) {
         const newStream = event.streams[0];
+        log("Received remote stream", newStream);
         if (remoteStreamRef.current !== newStream) {
           remoteStreamRef.current = newStream;
           setRemoteStream(newStream);
+          log("Remote stream set", newStream);
         }
+      }else {
+        log("ontrack fired but no streams found", event);
       }
     };
 
@@ -146,6 +151,7 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
     if (!socket || socket.disconnected || !targetUserId) return;
 
     const handleOffer = async (data: any) => {
+      log("Received offer", data);
       if (data.fromSocketId !== targetUserId) return;
       try {
         const pc = peerConnectionRef.current || setupPeerConnection();
@@ -157,27 +163,35 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
           });
         }
         await pc.setRemoteDescription(data.offer);
+        log("Set remote description with offer");
         const answer = await pc.createAnswer();
         await pc.setLocalDescription(answer);
+        log("Created and set local description with answer");
         socket.emit("webrtc-answer", { targetUserId: data.fromSocketId, answer });
+        log("Sent answer to", data.fromSocketId);
+      
       } catch (error) {
         log("Error handling offer:", error);
       }
     };
 
-    const handleAnswer = async (data: any) => {
+       const handleAnswer = async (data: any) => {
+      log("Received answer", data);
       if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
       try {
         await peerConnectionRef.current.setRemoteDescription(data.answer);
+        log("Set remote description with answer");
       } catch (error) {
         log("Error handling answer:", error);
       }
     };
 
     const handleIce = async (data: any) => {
+      log("Received ICE candidate", data);
       if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
       try {
         await peerConnectionRef.current.addIceCandidate(data.candidate);
+        log("Added ICE candidate");
       } catch (error) {
         log("Error adding ICE candidate:", error);
       }
