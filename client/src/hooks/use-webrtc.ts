@@ -54,20 +54,20 @@ const pendingCandidatesRef = useRef<any[]>([]);
       }
     };
 
-    pc.ontrack = (event) => {
-      log("ontrack fired", event);
-      if (event.streams && event.streams[0]) {
-        const newStream = event.streams[0];
-        log("Received remote stream", newStream);
-        if (remoteStreamRef.current !== newStream) {
-          remoteStreamRef.current = newStream;
-          setRemoteStream(newStream);
-          log("Remote stream set", newStream);
-        }
-      } else {
-        log("ontrack fired but no streams found", event);
-      }
-    };
+    // pc.ontrack = (event) => {
+    //   log("ontrack fired", event);
+    //   if (event.streams && event.streams[0]) {
+    //     const newStream = event.streams[0];
+    //     log("Received remote stream", newStream);
+    //     if (remoteStreamRef.current !== newStream) {
+    //       remoteStreamRef.current = newStream;
+    //       setRemoteStream(newStream);
+    //       log("Remote stream set", newStream);
+    //     }
+    //   } else {
+    //     log("ontrack fired but no streams found", event);
+    //   }
+    // };
     pc.ontrack = (event) => {
   log("[WEBRTC] ontrack fired", event);
   if (event.streams && event.streams[0]) {
@@ -179,32 +179,28 @@ const pendingCandidatesRef = useRef<any[]>([]);
 useEffect(() => {
   if (!socket || socket.disconnected || !targetUserId) return;
 
-  const handleOffer = async (data: any) => {
-    log("Received offer", data);
-    
-    peerSocketIdRef.current = data.fromSocketId; // Save for ICE emission
-    try {
-      const pc = setupPeerConnection();
-      let stream = localStreamRef.current;
-        if (pc.signalingState !== "stable" && pc.signalingState !== "have-remote-offer") {
-    log("Ignoring offer: PeerConnection not in a state to accept offer", pc.signalingState);
-    return;
-  }
-   if (!stream) {
-  throw new Error("Local media stream is not available");
-}
-stream.getTracks().forEach(track => {
-  if (!pc.getSenders().some(sender => sender.track === track)) {
-    pc.addTrack(track, stream);
-    log("Added local track (initiator/receiver)", track);
-  }
-});
-}
+ const handleOffer = async (data: any) => {
+  log("Received offer", data);
+  peerSocketIdRef.current = data.fromSocketId; // Save for ICE emission
+  try {
+    const pc = setupPeerConnection();
+    let stream = localStreamRef.current;
+    if (pc.signalingState !== "stable" && pc.signalingState !== "have-remote-offer") {
+      log("Ignoring offer: PeerConnection not in a state to accept offer", pc.signalingState);
+      return;
+    }
+    if (!stream) {
+      throw new Error("Local media stream is not available");
+    }
+    stream.getTracks().forEach(track => {
+      if (!pc.getSenders().some(sender => sender.track === track)) {
+        pc.addTrack(track, stream);
+        log("Added local track (initiator/receiver)", track);
+      }
+    });
 
-
-    
-      await pc.setRemoteDescription(data.offer);
-      log("Set remote description with offer");
+    await pc.setRemoteDescription(data.offer);
+    log("Set remote description with offer");
 
       // Add any queued ICE candidates
        for (const candidate of pendingCandidatesRef.current) {
