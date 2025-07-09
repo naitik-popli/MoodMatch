@@ -27,21 +27,24 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
   const mediaInitializedRef = useRef(false);
 
   // Only create one peer connection per call
-  const setupPeerConnection = useCallback(() => {
-    if (peerConnectionRef.current) {
-      log("Peer connection already exists, reusing it.");
-      return peerConnectionRef.current;
-    }
-    log("Creating new peer connection");
-    const pc = createPeerConnection();
-    peerConnectionRef.current = pc;
+ const setupPeerConnection = useCallback(() => {
+  if (peerConnectionRef.current) {
+    log("Peer connection already exists, reusing it.");
+    return peerConnectionRef.current;
+  }
+  log("Creating new peer connection");
+  const pc = createPeerConnection();
+  peerConnectionRef.current = pc;
 
-    pc.onicecandidate = (event) => {
-      if (event.candidate && socket && targetUserId) {
+  pc.onicecandidate = (event) => {
+    if (event.candidate && socket) {
+      const peerId = peerSocketIdRef.current || targetUserId;
+      if (peerId) {
         log("Sending ICE candidate", event.candidate);
-        socket.emit("webrtc-ice-candidate", { targetUserId, candidate: event.candidate });
+        socket.emit("webrtc-ice-candidate", { targetUserId: peerId, candidate: event.candidate });
       }
-    };
+    }
+  };
 
     pc.ontrack = (event) => {
       log("ontrack fired", event);
@@ -146,73 +149,99 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
     }
   }, [mediaReady, socketIdReady, startCall, log]);
 
+  // Store peer socket ID for ICE emission
+const peerSocketIdRef = useRef<string | null>(null);
+// Queue for ICE candidates received before remote description is set
+const pendingCandidatesRef = useRef<any[]>([]);
+
   // Signaling handlers
-  useEffect(() => {
-    if (!socket || socket.disconnected || !targetUserId) return;
+  
+useEffect(() => {
+  if (!socket || socket.disconnected || !targetUserId) return;
 
-    const handleOffer = async (data: any) => {
-  log("Received offer", data);
-  if (data.fromSocketId !== targetUserId) return;
-  try {
-    const pc = setupPeerConnection();
-    // Ensure local media is initialized
-    let stream = localStreamRef.current;
-if (!stream) {
-  stream = await initializeMedia();
-  localStreamRef.current = stream;
-  setLocalStream(stream);
-}
-
-    stream.getTracks().forEach(track => {
-      if (!pc.getSenders().some(sender => sender.track === track)) {
-        pc.addTrack(track, stream);
-        log("Added local track (receiver)", track);
+  const handleOffer = async (data: any) => {
+    log("Received offer", data);
+    peerSocketIdRef.current = data.fromSocketId; // Save for ICE emission
+    try {
+      const pc = setupPeerConnection();
+      let stream = localStreamRef.current;
+      if (!stream) {
+        stream = await initializeMedia();
+        localStreamRef.current = stream;
+        setLocalStream(stream);
       }
-    });
+      stream.getTracks().forEach(track => {
+        if (!pc.getSenders().some(sender => sender.track === track)) {
+          pc.addTrack(track, stream);
+          log("Added local track (receiver)", track);
+        }
+      });
 
-    await pc.setRemoteDescription(data.offer);
-    log("Set remote description with offer");
-    const answer = await pc.createAnswer();
-    await pc.setLocalDescription(answer);
-    log("Created and set local description with answer");
-    socket.emit("webrtc-answer", { targetUserId: data.fromSocketId, answer });
-    log("Sent answer to", data.fromSocketId);
-  } catch (error) {
-    log("Error handling offer:", error);
-  }
-};
+
+    
+      await pc.setRemoteDescription(data.offer);
+      log("Set remote description with offer");
+
+      // Add any queued ICE candidates
+      pendingCandidatesRef.current.forEach(async candidate => {
+        try {
+          await pc.addIceCandidate(candidate);
+          log("Added queued ICE candidate");
+        } catch (err) {
+          log("Error adding queued ICE candidate", err);
+        }
+      });
+      pendingCandidatesRef.current = [];
+
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+      log("Created and set local description with answer");
+      socket.emit("webrtc-answer", { targetUserId: data.fromSocketId, answer });
+      log("Sent answer to", data.fromSocketId);
+    } catch (error) {
+      log("Error handling offer:", error);
+    }
+  };
+
     const handleAnswer = async (data: any) => {
-      log("Received answer", data);
-      if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
-      try {
-        await peerConnectionRef.current.setRemoteDescription(data.answer);
-        log("Set remote description with answer");
-      } catch (error) {
-        log("Error handling answer:", error);
-      }
-    };
+    log("Received answer", data);
+    peerSocketIdRef.current = data.fromSocketId;
+    if (!peerConnectionRef.current) return;
+    try {
+      await peerConnectionRef.current.setRemoteDescription(data.answer);
+      log("Set remote description with answer");
+    } catch (error) {
+      log("Error handling answer:", error);
+    }
+  };
 
     const handleIce = async (data: any) => {
-      log("Received ICE candidate", data);
-      if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
+    log("Received ICE candidate", data);
+    if (!peerConnectionRef.current) return;
+    if (peerConnectionRef.current.remoteDescription && peerConnectionRef.current.remoteDescription.type) {
       try {
         await peerConnectionRef.current.addIceCandidate(data.candidate);
         log("Added ICE candidate");
       } catch (error) {
         log("Error adding ICE candidate:", error);
       }
-    };
+    } else {
+      // Queue ICE candidates until remote description is set
+      pendingCandidatesRef.current.push(data.candidate);
+      log("Queued ICE candidate");
+    }
+  };
 
-    socket.on("webrtc-offer", handleOffer);
-    socket.on("webrtc-answer", handleAnswer);
-    socket.on("webrtc-ice-candidate", handleIce);
+  socket.on("webrtc-offer", handleOffer);
+  socket.on("webrtc-answer", handleAnswer);
+  socket.on("webrtc-ice-candidate", handleIce);
 
-    return () => {
-      socket.off("webrtc-offer", handleOffer);
-      socket.off("webrtc-answer", handleAnswer);
-      socket.off("webrtc-ice-candidate", handleIce);
-    };
-  }, [socket, targetUserId, setupPeerConnection, log]);
+  return () => {
+    socket.off("webrtc-offer", handleOffer);
+    socket.off("webrtc-answer", handleAnswer);
+    socket.off("webrtc-ice-candidate", handleIce);
+  };
+}, [socket, targetUserId, setupPeerConnection, log, initializeMedia]);
 
   // End call and cleanup
   const endCall = useCallback(() => {
