@@ -26,30 +26,12 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
   const startCallCalledRef = useRef(false);
   const mediaInitializedRef = useRef(false);
 
-  // Initialize media devices
-  const initializeMedia = useCallback(async () => {
-    if (mediaInitializedRef.current) {
-      log("Media already initialized, skipping...");
-      return localStreamRef.current;
-    }
-    mediaInitializedRef.current = true;
-    try {
-      const constraints = {
-        audio: true,
-        video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" }
-      };
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      setLocalStream(stream);
-      localStreamRef.current = stream;
-      return stream;
-    } catch (error) {
-      log("Media access error:", error);
-      throw error;
-    }
-  }, [log]);
-
-  // Setup peer connection
+  // Only create one peer connection per call
   const setupPeerConnection = useCallback(() => {
+    if (peerConnectionRef.current) {
+      log("Peer connection already exists, reusing it.");
+      return peerConnectionRef.current;
+    }
     log("Creating new peer connection");
     const pc = createPeerConnection();
     peerConnectionRef.current = pc;
@@ -71,18 +53,10 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
           setRemoteStream(newStream);
           log("Remote stream set", newStream);
         }
-      }else {
+      } else {
         log("ontrack fired but no streams found", event);
       }
     };
-
-    if (localStreamRef.current) {
-      localStreamRef.current.getTracks().forEach(track => {
-        if (!pc.getSenders().some(sender => sender.track === track)) {
-          pc.addTrack(track, localStreamRef.current!);
-        }
-      });
-    }
 
     pc.onconnectionstatechange = () => {
       const state = pc.connectionState;
@@ -101,6 +75,29 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
     return pc;
   }, [socket, targetUserId, log]);
 
+  // Initialize media devices
+  const initializeMedia = useCallback(async () => {
+    if (mediaInitializedRef.current) {
+      log("Media already initialized, skipping...");
+      return localStreamRef.current;
+    }
+    mediaInitializedRef.current = true;
+    try {
+      const constraints = {
+        audio: true,
+        video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" }
+      };
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      setLocalStream(stream);
+      localStreamRef.current = stream;
+      log("Local media stream initialized", stream);
+      return stream;
+    } catch (error) {
+      log("Media access error:", error);
+      throw error;
+    }
+  }, [log]);
+
   // Track socket id readiness
   useEffect(() => {
     setSocketIdReady(!!(socket && socket.id));
@@ -111,7 +108,7 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
     setMediaReady(!!(localStream && localStream.active));
   }, [localStream]);
 
-  // Start call
+  // Start call (initiator)
   const startCall = useCallback(async () => {
     if (!socket || !targetUserId) {
       log("Cannot start call — socket or targetUserId missing");
@@ -123,12 +120,15 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
       stream?.getTracks().forEach(track => {
         if (!pc.getSenders().some(sender => sender.track === track)) {
           pc.addTrack(track, stream);
+          log("Added local track (initiator)", track);
         }
       });
       if (isInitiator) {
         const offer = await pc.createOffer({ offerToReceiveAudio: true, offerToReceiveVideo: true });
         await pc.setLocalDescription(offer);
+        log("Created and set local description with offer");
         socket.emit("webrtc-offer", { targetUserId, offer });
+        log("Sent offer to", targetUserId);
       }
     } catch (error) {
       log("Error during call start:", error);
@@ -154,11 +154,12 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
       log("Received offer", data);
       if (data.fromSocketId !== targetUserId) return;
       try {
-        const pc = peerConnectionRef.current || setupPeerConnection();
+        const pc = setupPeerConnection();
         if (localStreamRef.current) {
           localStreamRef.current.getTracks().forEach(track => {
             if (!pc.getSenders().some(sender => sender.track === track)) {
               pc.addTrack(track, localStreamRef.current!);
+              log("Added local track (receiver)", track);
             }
           });
         }
@@ -169,13 +170,12 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
         log("Created and set local description with answer");
         socket.emit("webrtc-answer", { targetUserId: data.fromSocketId, answer });
         log("Sent answer to", data.fromSocketId);
-      
       } catch (error) {
         log("Error handling offer:", error);
       }
     };
 
-       const handleAnswer = async (data: any) => {
+    const handleAnswer = async (data: any) => {
       log("Received answer", data);
       if (data.fromSocketId !== targetUserId || !peerConnectionRef.current) return;
       try {
