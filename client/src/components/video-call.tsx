@@ -506,6 +506,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
           <div className="absolute inset-0">
             <video
               ref={remoteVideoRef}
+              id="remoteVideo" 
               autoPlay
               playsInline
               className="w-full h-full object-cover bg-black"

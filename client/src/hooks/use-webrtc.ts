@@ -67,7 +67,18 @@ const pendingCandidatesRef = useRef<any[]>([]);
         log("ontrack fired but no streams found", event);
       }
     };
-
+    pc.ontrack = (event) => {
+  log("[WEBRTC] ontrack fired", event);
+  if (event.streams && event.streams[0]) {
+    const newStream = event.streams[0];
+    log("[WEBRTC] Received remote stream", newStream);
+    remoteStreamRef.current = newStream;
+    setRemoteStream(newStream);
+    log("[WEBRTC] Remote stream set", newStream);
+  } else {
+    log("[WEBRTC] ontrack fired but no streams found", event);
+  }
+};
     pc.onconnectionstatechange = () => {
       const state = pc.connectionState;
       setConnectionState(state);
