@@ -1,227 +1,103 @@
 USER A LOGS_______
-🔗 Socket connection status: true
-index-BBihJlrA.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-BBihJlrA.js:363 🔗 Socket connection status: true
-index-BBihJlrA.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-BBihJlrA.js:363 ✅ Match found on frontend: {partnerId: 409, partnerSocketId: 'fdqOKJGqej-xxr-_AABA', sessionId: 525, timestamp: '2025-07-09T19:10:54.974Z'}
-index-BBihJlrA.js:363 🧩 handleMatchFound called with data: {partnerId: 409, partnerSocketId: 'fdqOKJGqej-xxr-_AABA', sessionId: 526, timestamp: '2025-07-09T19:10:54.974Z'}
-index-BBihJlrA.js:363 🧩 handleMatchFound called with data: {partnerId: 409, partnerSocketId: 'fdqOKJGqej-xxr-_AABA', sessionId: 525, timestamp: '2025-07-09T19:10:54.974Z'}
-index-BBihJlrA.js:363 🧩 handleMatchFound called with data: {partnerId: 409, partnerSocketId: 'fdqOKJGqej-xxr-_AABA', sessionId: 525, timestamp: '2025-07-09T19:10:54.974Z'}
-index-BBihJlrA.js:319 🧹 Component unmounted, but socket connection kept alive
-index-BBihJlrA.js:319 [WaitingRoom] Emitting leave-mood-queue for user 410
-index-BBihJlrA.js:319 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
-index-BBihJlrA.js:319 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
-index-BBihJlrA.js:319 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
-index-BBihJlrA.js:319 No remoteStream available to assign
-(anonymous) @ index-BBihJlrA.js:319
-Ml @ index-BBihJlrA.js:40
-Zr @ index-BBihJlrA.js:40
-(anonymous) @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:319 [2025-07-09T19:10:53.693Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: false, mediaPermissionGranted: false, partnerSocketId: 'fdqOKJGqej-xxr-_AABA'}
-index-BBihJlrA.js:363 📞 Transitioning to VideoCall: {sessionId: 525, userId: 410, partnerId: 409, partnerSocketId: 'fdqOKJGqej-xxr-_AABA'}
-index-BBihJlrA.js:363 ⚠️ Already matched, ignoring duplicate match-found event
-(anonymous) @ index-BBihJlrA.js:363
-_i @ index-BBihJlrA.js:38
-Ea @ index-BBihJlrA.js:38
-useState @ index-BBihJlrA.js:38
-K.useState @ index-BBihJlrA.js:9
-iN @ index-BBihJlrA.js:363
-Xu @ index-BBihJlrA.js:38
-Ec @ index-BBihJlrA.js:40
-bg @ index-BBihJlrA.js:40
-Cg @ index-BBihJlrA.js:40
-e1 @ index-BBihJlrA.js:40
-pl @ index-BBihJlrA.js:40
-wg @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:363 ℹ️ New session detected, resetting matched state
-index-BBihJlrA.js:363 📦 Updated sessionData after match: {sessionId: 526, userId: 410, partnerId: 409, partnerSocketId: 'fdqOKJGqej-xxr-_AABA'}
-index-BBihJlrA.js:363 ⚠️ Already matched, ignoring duplicate match-found event
-(anonymous) @ index-BBihJlrA.js:363
-_i @ index-BBihJlrA.js:38
-Ea @ index-BBihJlrA.js:38
-useState @ index-BBihJlrA.js:38
-K.useState @ index-BBihJlrA.js:9
-iN @ index-BBihJlrA.js:363
-Xu @ index-BBihJlrA.js:38
-Ec @ index-BBihJlrA.js:40
-bg @ index-BBihJlrA.js:40
-Cg @ index-BBihJlrA.js:40
-e1 @ index-BBihJlrA.js:40
-pl @ index-BBihJlrA.js:40
-wg @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:363 ℹ️ New session detected, resetting matched state
-index-BBihJlrA.js:363 📦 Updated sessionData after match: {sessionId: 525, userId: 410, partnerId: 409, partnerSocketId: 'fdqOKJGqej-xxr-_AABA'}
-index-BBihJlrA.js:363 ⚠️ Already matched, ignoring duplicate match-found event
-(anonymous) @ index-BBihJlrA.js:363
-_i @ index-BBihJlrA.js:38
-Ea @ index-BBihJlrA.js:38
-useState @ index-BBihJlrA.js:38
-K.useState @ index-BBihJlrA.js:9
-iN @ index-BBihJlrA.js:363
-Xu @ index-BBihJlrA.js:38
-Ec @ index-BBihJlrA.js:40
-bg @ index-BBihJlrA.js:40
-Cg @ index-BBihJlrA.js:40
-e1 @ index-BBihJlrA.js:40
-pl @ index-BBihJlrA.js:40
-wg @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:363 🔗 Socket connection status: true
-index-BBihJlrA.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-BBihJlrA.js:363 🔗 Socket connection status: true
-index-BBihJlrA.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-BBihJlrA.js:319 No remoteStream available to assign
-(anonymous) @ index-BBihJlrA.js:319
-Ml @ index-BBihJlrA.js:40
-Zr @ index-BBihJlrA.js:40
-(anonymous) @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:319 [2025-07-09T19:10:53.862Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: true, mediaPermissionGranted: false, partnerSocketId: 'fdqOKJGqej-xxr-_AABA'}
-index-BBihJlrA.js:319 No remoteStream available to assign
-(anonymous) @ index-BBihJlrA.js:319
-Ml @ index-BBihJlrA.js:40
-Zr @ index-BBihJlrA.js:40
-(anonymous) @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:319 [WEBRTC] Received offer {fromSocketId: 'fdqOKJGqej-xxr-_AABA', offer: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Creating new peer connection
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Media already initialized, skipping...
-index-BBihJlrA.js:319 No remoteStream available to assign
-(anonymous) @ index-BBihJlrA.js:319
-Ml @ index-BBihJlrA.js:40
-Zr @ index-BBihJlrA.js:40
-(anonymous) @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:319 [2025-07-09T19:10:54.516Z] [DEBUG:VideoCall] Starting call initialization
-index-BBihJlrA.js:319 [WEBRTC] Media already initialized, skipping...
-index-BBihJlrA.js:319 [WEBRTC] Creating new peer connection
-index-BBihJlrA.js:319 [WEBRTC] Peer connection already exists, reusing it.
-index-BBihJlrA.js:319 [2025-07-09T19:10:54.528Z] [DEBUG:VideoCall] Call started successfully
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Local media stream initialized MediaStream {id: '2f68e4ef-3443-407c-a9d3-8c43d95b92fb', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-BBihJlrA.js:319 [WEBRTC] Error handling offer: InvalidStateError: Failed to execute 'addTrack' on 'RTCPeerConnection': The RTCPeerConnection's signalingState is 'closed'.
-    at index-BBihJlrA.js:319:54274
-    at Array.forEach (<anonymous>)
-    at fv.T (index-BBihJlrA.js:319:54222)
-2index-BBihJlrA.js:319 No remoteStream available to assign
-(anonymous) @ index-BBihJlrA.js:319
-Ml @ index-BBihJlrA.js:40
-Zr @ index-BBihJlrA.js:40
-(anonymous) @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received offer {fromSocketId: 'fdqOKJGqej-xxr-_AABA', offer: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Peer connection already exists, reusing it.
-index-BBihJlrA.js:319 [WEBRTC] Added local track (receiver) MediaStreamTrack {kind: 'audio', id: 'bb35104c-10fd-4eb5-b237-7cab828876d1', label: 'Default - Microphone (2- High Definition Audio Device)', enabled: true, muted: false, …}
-index-BBihJlrA.js:319 [WEBRTC] Added local track (receiver) MediaStreamTrack {kind: 'video', id: '4733f1bf-4068-4179-9d89-0c38e3ce1051', label: 'HP Wide Vision HD (04f2:b56d)', enabled: true, muted: false, …}
-index-BBihJlrA.js:319 [WEBRTC] Signaling state: have-remote-offer
-index-BBihJlrA.js:319 [WEBRTC] [WEBRTC] ontrack fired RTCTrackEvent {isTrusted: true, receiver: RTCRtpReceiver, track: MediaStreamTrack, streams: Array(1), transceiver: RTCRtpTransceiver, …}
-index-BBihJlrA.js:319 [WEBRTC] [WEBRTC] Received remote stream MediaStream {id: '1950d61a-8656-4a59-9231-fb9424de896d', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-BBihJlrA.js:319 [WEBRTC] [WEBRTC] Remote stream set MediaStream {id: '1950d61a-8656-4a59-9231-fb9424de896d', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-BBihJlrA.js:319 [WEBRTC] [WEBRTC] ontrack fired RTCTrackEvent {isTrusted: true, receiver: RTCRtpReceiver, track: MediaStreamTrack, streams: Array(1), transceiver: RTCRtpTransceiver, …}
-index-BBihJlrA.js:319 [WEBRTC] [WEBRTC] Received remote stream MediaStream {id: '1950d61a-8656-4a59-9231-fb9424de896d', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-BBihJlrA.js:319 [WEBRTC] [WEBRTC] Remote stream set MediaStream {id: '1950d61a-8656-4a59-9231-fb9424de896d', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-BBihJlrA.js:319 [WEBRTC] Set remote description with offer
-index-BBihJlrA.js:319 Assigning remoteStream to video element MediaStream {id: '1950d61a-8656-4a59-9231-fb9424de896d', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-2index-BBihJlrA.js:319 [WEBRTC] Added queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Added queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Added ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Added queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-6index-BBihJlrA.js:319 [WEBRTC] Added ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Added queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Added ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Added queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Added ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Added queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Added ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Added queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Added ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Added queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Added ICE candidate
-8index-BBihJlrA.js:319 [WEBRTC] Added queued ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Added ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Signaling state: stable
-index-BBihJlrA.js:319 [WEBRTC] Created and set local description with answer
-index-BBihJlrA.js:319 [WEBRTC] Sent answer to fdqOKJGqej-xxr-_AABA
-2index-BBihJlrA.js:319 [WEBRTC] Added ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-3index-BBihJlrA.js:319 [WEBRTC] Added ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'fdqOKJGqej-xxr-_AABA', candidate: {…}}
-index-BBihJlrA.js:319 [WEBRTC] ICE connection state: checking
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1806176430 1 udp 2122194687 100.92.98.39…eration 0 ufrag GXw2 network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '1806176430', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2169233848 1 udp 2122129151 192.168.1.11…eration 0 ufrag GXw2 network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '2169233848', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Added ICE candidate
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:820184626 1 udp 2122265343 fd7a:115c:a1e…eration 0 ufrag GXw2 network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '820184626', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Added ICE candidate
-index-BBihJlrA.js:319 Assigning remoteStream to video element MediaStream {id: '1950d61a-8656-4a59-9231-fb9424de896d', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2754752082 1 udp 1685921535 103.87.58.18…eration 0 ufrag GXw2 network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '2754752082', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:355874211 1 tcp 1518214911 100.92.98.39 …eration 0 ufrag GXw2 network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '355874211', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:4292199605 1 tcp 1518149375 192.168.1.11…eration 0 ufrag GXw2 network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '4292199605', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1316823871 1 tcp 1518285567 fd7a:115c:a1…eration 0 ufrag GXw2 network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '1316823871', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] ICE connection state: disconnected
-index-BBihJlrA.js:319 Assigning remoteStream to video element MediaStream {id: '1950d61a-8656-4a59-9231-fb9424de896d', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-
+ Socket connection status: true
+index-BvfJk6cK.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
+index-BvfJk6cK.js:319 🧹 Component unmounted, but socket connection kept alive
+index-BvfJk6cK.js:319 [WaitingRoom] Emitting leave-mood-queue for user 411
+index-BvfJk6cK.js:319 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-BvfJk6cK.js:319 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-BvfJk6cK.js:319 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+index-BvfJk6cK.js:319 No remoteStream available to assign
+(anonymous) @ index-BvfJk6cK.js:319
+Ml @ index-BvfJk6cK.js:40
+Zr @ index-BvfJk6cK.js:40
+(anonymous) @ index-BvfJk6cK.js:40
+E @ index-BvfJk6cK.js:25
+M @ index-BvfJk6cK.js:25Understand this warning
+index-BvfJk6cK.js:319 [2025-07-09T19:22:05.846Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: false, mediaPermissionGranted: false, partnerSocketId: 'cCJP6m6_rrmWSBUtAABY'}
+index-BvfJk6cK.js:363 📞 Transitioning to VideoCall: {sessionId: 527, userId: 411, partnerId: 412, partnerSocketId: 'cCJP6m6_rrmWSBUtAABY'}
+index-BvfJk6cK.js:319 No remoteStream available to assign
+(anonymous) @ index-BvfJk6cK.js:319
+Ml @ index-BvfJk6cK.js:40
+Zr @ index-BvfJk6cK.js:40
+(anonymous) @ index-BvfJk6cK.js:40
+E @ index-BvfJk6cK.js:25
+M @ index-BvfJk6cK.js:25Understand this warning
+index-BvfJk6cK.js:319 [2025-07-09T19:22:05.851Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: true, mediaPermissionGranted: false, partnerSocketId: 'cCJP6m6_rrmWSBUtAABY'}
+2index-BvfJk6cK.js:319 No remoteStream available to assign
+(anonymous) @ index-BvfJk6cK.js:319
+Ml @ index-BvfJk6cK.js:40
+Zr @ index-BvfJk6cK.js:40
+(anonymous) @ index-BvfJk6cK.js:40
+E @ index-BvfJk6cK.js:25
+M @ index-BvfJk6cK.js:25Understand this warning
+index-BvfJk6cK.js:319 [2025-07-09T19:22:06.432Z] [DEBUG:VideoCall] Starting call initialization
+index-BvfJk6cK.js:319 [WEBRTC] Media already initialized, skipping...
+index-BvfJk6cK.js:319 No remoteStream available to assign
+(anonymous) @ index-BvfJk6cK.js:319
+Ml @ index-BvfJk6cK.js:40
+Zr @ index-BvfJk6cK.js:40
+(anonymous) @ index-BvfJk6cK.js:40
+E @ index-BvfJk6cK.js:25
+M @ index-BvfJk6cK.js:25Understand this warning
+index-BvfJk6cK.js:319 [WEBRTC] Creating new peer connection
+index-BvfJk6cK.js:319 [WEBRTC] Signaling state: have-local-offer
+index-BvfJk6cK.js:319 [WEBRTC] Created and set local description with offer
+index-BvfJk6cK.js:319 [WEBRTC] Sent offer to 412
+index-BvfJk6cK.js:319 [2025-07-09T19:22:06.481Z] [DEBUG:VideoCall] Call started successfully
+index-BvfJk6cK.js:319 No remoteStream available to assign
+(anonymous) @ index-BvfJk6cK.js:319
+Ml @ index-BvfJk6cK.js:40
+Zr @ index-BvfJk6cK.js:40
+(anonymous) @ index-BvfJk6cK.js:40
+E @ index-BvfJk6cK.js:25
+M @ index-BvfJk6cK.js:25Understand this warning
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3063506971 1 udp 2122194687 100.92.98.39…eration 0 ufrag ww4j network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '3063506971', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1118256827 1 udp 2122129151 192.168.1.11…eration 0 ufrag ww4j network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '1118256827', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1333525602 1 udp 2122265343 fd7a:115c:a1…eration 0 ufrag ww4j network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '1333525602', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3063506971 1 udp 2122194687 100.92.98.39…eration 0 ufrag ww4j network-id 1 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '3063506971', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1118256827 1 udp 2122129151 192.168.1.11…eration 0 ufrag ww4j network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '1118256827', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Local media stream initialized MediaStream {id: '09f93f01-d71e-4228-a2e3-a69dde7960da', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-BvfJk6cK.js:319 [WEBRTC] Peer connection already exists, reusing it.
+index-BvfJk6cK.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'audio', id: '2ad27fc2-2332-47ad-af14-eb2d3b8399a0', label: 'Default - Microphone (2- High Definition Audio Device)', enabled: true, muted: false, …}
+index-BvfJk6cK.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'video', id: '335d27b6-37a6-4842-80ff-d0d22850d8e6', label: 'HP Wide Vision HD (04f2:b56d)', enabled: true, muted: false, …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1333525602 1 udp 2122265343 fd7a:115c:a1…eration 0 ufrag ww4j network-id 2 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '1333525602', component: 'rtp', …}
+index-BvfJk6cK.js:319 No remoteStream available to assign
+(anonymous) @ index-BvfJk6cK.js:319
+Ml @ index-BvfJk6cK.js:40
+Zr @ index-BvfJk6cK.js:40
+(anonymous) @ index-BvfJk6cK.js:40
+E @ index-BvfJk6cK.js:25
+M @ index-BvfJk6cK.js:25Understand this warning
+index-BvfJk6cK.js:319 [WEBRTC] Media already initialized, skipping...
+index-BvfJk6cK.js:319 No remoteStream available to assign
+(anonymous) @ index-BvfJk6cK.js:319
+Ml @ index-BvfJk6cK.js:40
+Zr @ index-BvfJk6cK.js:40
+(anonymous) @ index-BvfJk6cK.js:40
+E @ index-BvfJk6cK.js:25
+M @ index-BvfJk6cK.js:25Understand this warning
+index-BvfJk6cK.js:319 [WEBRTC] Creating new peer connection
+index-BvfJk6cK.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'audio', id: '2ad27fc2-2332-47ad-af14-eb2d3b8399a0', label: 'Default - Microphone (2- High Definition Audio Device)', enabled: true, muted: false, …}
+index-BvfJk6cK.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'video', id: '335d27b6-37a6-4842-80ff-d0d22850d8e6', label: 'HP Wide Vision HD (04f2:b56d)', enabled: true, muted: false, …}
+index-BvfJk6cK.js:319 [WEBRTC] Signaling state: have-local-offer
+index-BvfJk6cK.js:319 [WEBRTC] Created and set local description with offer
+index-BvfJk6cK.js:319 [WEBRTC] Sent offer to 412
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:342932390 1 udp 2122194688 100.92.98.39 …eration 0 ufrag fvW+ network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '342932390', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3260163608 1 udp 2122129152 192.168.1.11…eration 0 ufrag fvW+ network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '3260163608', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1028690090 1 udp 2122265344 fd7a:115c:a1…eration 0 ufrag fvW+ network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '1028690090', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:342932390 1 udp 2122194688 100.92.98.39 …eration 0 ufrag fvW+ network-id 1 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '342932390', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3260163608 1 udp 2122129152 192.168.1.11…eration 0 ufrag fvW+ network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '3260163608', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1028690090 1 udp 2122265343 fd7a:115c:a1…eration 0 ufrag fvW+ network-id 2 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '1028690090', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1830340390 1 udp 1685921535 103.87.58.18…eration 0 ufrag fvW+ network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '1830340390', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1830340390 1 udp 1685921535 103.87.58.18…eration 0 ufrag fvW+ network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '1830340390', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3940183858 1 tcp 1518214911 100.92.98.39…eration 0 ufrag fvW+ network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '3940183858', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1022947980 1 tcp 1518149375 192.168.1.11…eration 0 ufrag fvW+ network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '1022947980', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3287958590 1 tcp 1518285567 fd7a:115c:a1…eration 0 ufrag fvW+ network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '3287958590', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3940183858 1 tcp 1518214911 100.92.98.39…eration 0 ufrag fvW+ network-id 1 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '3940183858', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1022947980 1 tcp 1518149375 192.168.1.11…eration 0 ufrag fvW+ network-id 3 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '1022947980', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3287958590 1 tcp 1518285567 fd7a:115c:a1…eration 0 ufrag fvW+ network-id 2 network-cost 50', sdpMid: '1', sdpMLineIndex: 1, foundation: '3287958590', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] ICE connection state: checking
+index-BvfJk6cK.js:319 No remoteStream available to assign
 
 
 
@@ -230,138 +106,124 @@ index-BBihJlrA.js:319 Assigning remoteStream to video element MediaStream {id: 
 
 USER B LOGS_______
 🔗 Socket connection status: true
-index-BBihJlrA.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-BBihJlrA.js:363 ✅ Match found on frontend: {partnerId: 410, partnerSocketId: 'XyTN6nhoDi5x4FeFAABM', sessionId: 525, timestamp: '2025-07-09T19:10:54.974Z'}
-index-BBihJlrA.js:363 🧩 handleMatchFound called with data: {partnerId: 410, partnerSocketId: 'XyTN6nhoDi5x4FeFAABM', sessionId: 525, timestamp: '2025-07-09T19:10:54.974Z'}
-index-BBihJlrA.js:363 🧩 handleMatchFound called with data: {partnerId: 410, partnerSocketId: 'XyTN6nhoDi5x4FeFAABM', sessionId: 525, timestamp: '2025-07-09T19:10:54.974Z'}
-index-BBihJlrA.js:363 🧩 handleMatchFound called with data: {partnerId: 410, partnerSocketId: 'XyTN6nhoDi5x4FeFAABM', sessionId: 525, timestamp: '2025-07-09T19:10:54.974Z'}
-index-BBihJlrA.js:319 🧹 Component unmounted, but socket connection kept alive
-index-BBihJlrA.js:319 [WaitingRoom] Emitting leave-mood-queue for user 409
-index-BBihJlrA.js:319 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
-index-BBihJlrA.js:319 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
-index-BBihJlrA.js:319 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
-index-BBihJlrA.js:319 No remoteStream available to assign
-(anonymous) @ index-BBihJlrA.js:319
-Ml @ index-BBihJlrA.js:40
-Zr @ index-BBihJlrA.js:40
-(anonymous) @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:319 [2025-07-09T19:10:55.157Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: false, mediaPermissionGranted: false, partnerSocketId: 'XyTN6nhoDi5x4FeFAABM'}
-index-BBihJlrA.js:363 📞 Transitioning to VideoCall: {sessionId: 525, userId: 409, partnerId: 410, partnerSocketId: 'XyTN6nhoDi5x4FeFAABM'}
-3index-BBihJlrA.js:363 ⚠️ Already matched, ignoring duplicate match-found event
-(anonymous) @ index-BBihJlrA.js:363
-_i @ index-BBihJlrA.js:38
-Ea @ index-BBihJlrA.js:38
-useState @ index-BBihJlrA.js:38
-K.useState @ index-BBihJlrA.js:9
-iN @ index-BBihJlrA.js:363
-Xu @ index-BBihJlrA.js:38
-Ec @ index-BBihJlrA.js:40
-bg @ index-BBihJlrA.js:40
-Cg @ index-BBihJlrA.js:40
-e1 @ index-BBihJlrA.js:40
-pl @ index-BBihJlrA.js:40
-wg @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:363 🔗 Socket connection status: true
-index-BBihJlrA.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-BBihJlrA.js:319 No remoteStream available to assign
-(anonymous) @ index-BBihJlrA.js:319
-Ml @ index-BBihJlrA.js:40
-Zr @ index-BBihJlrA.js:40
-(anonymous) @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:319 [2025-07-09T19:10:55.178Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: true, mediaPermissionGranted: false, partnerSocketId: 'XyTN6nhoDi5x4FeFAABM'}
-2index-BBihJlrA.js:319 No remoteStream available to assign
-(anonymous) @ index-BBihJlrA.js:319
-Ml @ index-BBihJlrA.js:40
-Zr @ index-BBihJlrA.js:40
-(anonymous) @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:319 [2025-07-09T19:10:55.662Z] [DEBUG:VideoCall] Starting call initialization
-index-BBihJlrA.js:319 [WEBRTC] Media already initialized, skipping...
-index-BBihJlrA.js:319 [WEBRTC] Creating new peer connection
-index-BBihJlrA.js:319 No remoteStream available to assign
-(anonymous) @ index-BBihJlrA.js:319
-Ml @ index-BBihJlrA.js:40
-Zr @ index-BBihJlrA.js:40
-(anonymous) @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:319 [WEBRTC] Signaling state: have-local-offer
-index-BBihJlrA.js:319 [WEBRTC] Created and set local description with offer
-index-BBihJlrA.js:319 [WEBRTC] Sent offer to 410
-index-BBihJlrA.js:319 [2025-07-09T19:10:55.737Z] [DEBUG:VideoCall] Call started successfully
-index-BBihJlrA.js:319 No remoteStream available to assign
-(anonymous) @ index-BBihJlrA.js:319
-Ml @ index-BBihJlrA.js:40
-Zr @ index-BBihJlrA.js:40
-(anonymous) @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:653481728 1 udp 2122194687 192.168.1.22 …475 typ host generation 0 ufrag BxVD network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '653481728', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1856299676 1 udp 2122129151 100.93.64.62…594 typ host generation 0 ufrag BxVD network-id 2', sdpMid: '0', sdpMLineIndex: 0, foundation: '1856299676', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3412428009 1 udp 2122063615 192.168.1.20…eration 0 ufrag BxVD network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '3412428009', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:275277297 1 udp 2122265343 fd7a:115c:a1e…531 typ host generation 0 ufrag BxVD network-id 3', sdpMid: '0', sdpMLineIndex: 0, foundation: '275277297', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:653481728 1 udp 2122194687 192.168.1.22 …440 typ host generation 0 ufrag BxVD network-id 1', sdpMid: '1', sdpMLineIndex: 1, foundation: '653481728', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1856299676 1 udp 2122129151 100.93.64.62…013 typ host generation 0 ufrag BxVD network-id 2', sdpMid: '1', sdpMLineIndex: 1, foundation: '1856299676', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3412428009 1 udp 2122063615 192.168.1.20…eration 0 ufrag BxVD network-id 4 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '3412428009', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:275277297 1 udp 2122265343 fd7a:115c:a1e…756 typ host generation 0 ufrag BxVD network-id 3', sdpMid: '1', sdpMLineIndex: 1, foundation: '275277297', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Local media stream initialized MediaStream {id: '1950d61a-8656-4a59-9231-fb9424de896d', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-BBihJlrA.js:319 [WEBRTC] Peer connection already exists, reusing it.
-index-BBihJlrA.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'audio', id: '3d59db2e-b0cc-4831-b6a5-800a66602222', label: 'Default', enabled: true, muted: false, …}
-index-BBihJlrA.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'video', id: '4309b721-9a21-412d-9d41-2b1fda0b96a9', label: 'Droidcam', enabled: true, muted: false, …}
-index-BBihJlrA.js:319 No remoteStream available to assign
-(anonymous) @ index-BBihJlrA.js:319
-Ml @ index-BBihJlrA.js:40
-Zr @ index-BBihJlrA.js:40
-(anonymous) @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1480373656 1 tcp 1518214911 192.168.1.22…ptype active generation 0 ufrag BxVD network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '1480373656', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:275447812 1 tcp 1518149375 100.93.64.62 …ptype active generation 0 ufrag BxVD network-id 2', sdpMid: '0', sdpMLineIndex: 0, foundation: '275447812', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3047843441 1 tcp 1518083839 192.168.1.20…eration 0 ufrag BxVD network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '3047843441', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1856472937 1 tcp 1518285567 fd7a:115c:a1…ptype active generation 0 ufrag BxVD network-id 3', sdpMid: '0', sdpMLineIndex: 0, foundation: '1856472937', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1480373656 1 tcp 1518214911 192.168.1.22…ptype active generation 0 ufrag BxVD network-id 1', sdpMid: '1', sdpMLineIndex: 1, foundation: '1480373656', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:275447812 1 tcp 1518149375 100.93.64.62 …ptype active generation 0 ufrag BxVD network-id 2', sdpMid: '1', sdpMLineIndex: 1, foundation: '275447812', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3047843441 1 tcp 1518083839 192.168.1.20…eration 0 ufrag BxVD network-id 4 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '3047843441', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1856472937 1 tcp 1518285567 fd7a:115c:a1…ptype active generation 0 ufrag BxVD network-id 3', sdpMid: '1', sdpMLineIndex: 1, foundation: '1856472937', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1711875497 1 udp 1685987071 103.87.58.18… rport 54475 generation 0 ufrag BxVD network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '1711875497', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Media already initialized, skipping...
-index-BBihJlrA.js:319 No remoteStream available to assign
-(anonymous) @ index-BBihJlrA.js:319
-Ml @ index-BBihJlrA.js:40
-Zr @ index-BBihJlrA.js:40
-(anonymous) @ index-BBihJlrA.js:40
-E @ index-BBihJlrA.js:25
-M @ index-BBihJlrA.js:25Understand this warning
-index-BBihJlrA.js:319 [WEBRTC] Creating new peer connection
-index-BBihJlrA.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'audio', id: '3d59db2e-b0cc-4831-b6a5-800a66602222', label: 'Default', enabled: true, muted: false, …}
-index-BBihJlrA.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'video', id: '4309b721-9a21-412d-9d41-2b1fda0b96a9', label: 'Droidcam', enabled: true, muted: false, …}
-index-BBihJlrA.js:319 [WEBRTC] Signaling state: have-local-offer
-index-BBihJlrA.js:319 [WEBRTC] Created and set local description with offer
-index-BBihJlrA.js:319 [WEBRTC] Sent offer to 410
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2556646991 1 udp 2122194687 192.168.1.22…034 typ host generation 0 ufrag Iubg network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '2556646991', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3493127123 1 udp 2122129151 100.93.64.62…980 typ host generation 0 ufrag Iubg network-id 2', sdpMid: '0', sdpMLineIndex: 0, foundation: '3493127123', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1979024806 1 udp 2122063615 192.168.1.20…eration 0 ufrag Iubg network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '1979024806', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2935514302 1 udp 2122265343 fd7a:115c:a1…487 typ host generation 0 ufrag Iubg network-id 3', sdpMid: '0', sdpMLineIndex: 0, foundation: '2935514302', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2556646991 1 udp 2122194687 192.168.1.22…158 typ host generation 0 ufrag Iubg network-id 1', sdpMid: '1', sdpMLineIndex: 1, foundation: '2556646991', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3493127123 1 udp 2122129151 100.93.64.62…226 typ host generation 0 ufrag Iubg network-id 2', sdpMid: '1', sdpMLineIndex: 1, foundation: '3493127123', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1979024806 1 udp 2122063615 192.168.1.20…eration 0 ufrag Iubg network-id 4 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '1979024806', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2935514302 1 udp 2122265343 fd7a:115c:a1…884 typ host generation 0 ufrag Iubg network-id 3', sdpMid: '1', sdpMLineIndex: 1, foundation: '2935514302', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3870078167 1 tcp 1518214911 192.168.1.22…ptype active generation 0 ufrag Iubg network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '3870078167', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2935685451 1 tcp 1518149375 100.93.64.62…ptype active generation 0 ufrag Iubg network-id 2', sdpMid: '0', sdpMLineIndex: 0, foundation: '2935685451', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:188376894 1 tcp 1518083839 192.168.1.20 …eration 0 ufrag Iubg network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '188376894', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3493299750 1 tcp 1518285567 fd7a:115c:a1…ptype active generation 0 ufrag Iubg network-id 3', sdpMid: '0', sdpMLineIndex: 0, foundation: '3493299750', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3870078167 1 tcp 1518214911 192.168.1.22…ptype active generation 0 ufrag Iubg network-id 1', sdpMid: '1', sdpMLineIndex: 1, foundation: '3870078167', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2935685451 1 tcp 1518149375 100.93.64.62…ptype active generation 0 ufrag Iubg network-id 2', sdpMid: '1', sdpMLineIndex: 1, foundation: '2935685451', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:188376894 1 tcp 1518083839 192.168.1.20 …eration 0 ufrag Iubg network-id 4 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '188376894', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3493299750 1 tcp 1518285567 fd7a:115c:a1…ptype active generation 0 ufrag Iubg network-id 3', sdpMid: '1', sdpMLineIndex: 1, foundation: '3493299750', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3633915110 1 udp 1685987071 103.87.58.18… rport 52034 generation 0 ufrag Iubg network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '3633915110', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:890238735 1 udp 1685855999 103.87.58.187…eration 0 ufrag Iubg network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '890238735', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3633915110 1 udp 1685987071 103.87.58.18… rport 56158 generation 0 ufrag Iubg network-id 1', sdpMid: '1', sdpMLineIndex: 1, foundation: '3633915110', component: 'rtp', …}
-index-BBihJlrA.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:890238735 1 udp 1685855999 103.87.58.187…eration 0 ufrag Iubg network-id 4 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '890238735', component: 'rtp', …}
+index-BvfJk6cK.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
+index-BvfJk6cK.js:363 🔗 Socket connection status: true
+index-BvfJk6cK.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
+index-BvfJk6cK.js:319 🧹 Component unmounted, but socket connection kept alive
+index-BvfJk6cK.js:319 [WaitingRoom] Emitting leave-mood-queue for user 412
+index-BvfJk6cK.js:319 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-BvfJk6cK.js:319 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-BvfJk6cK.js:319 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+index-BvfJk6cK.js:319 No remoteStream available to assign
+(anonymous) @ index-BvfJk6cK.js:319
+Ml @ index-BvfJk6cK.js:40
+Zr @ index-BvfJk6cK.js:40
+(anonymous) @ index-BvfJk6cK.js:40
+E @ index-BvfJk6cK.js:25
+M @ index-BvfJk6cK.js:25Understand this warning
+index-BvfJk6cK.js:319 [2025-07-09T19:22:07.313Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: false, mediaPermissionGranted: false, partnerSocketId: '4jd2rtlZhktw77COAABV'}
+index-BvfJk6cK.js:363 📞 Transitioning to VideoCall: {sessionId: 527, userId: 412, partnerId: 411, partnerSocketId: '4jd2rtlZhktw77COAABV'}
+index-BvfJk6cK.js:319 No remoteStream available to assign
+(anonymous) @ index-BvfJk6cK.js:319
+Ml @ index-BvfJk6cK.js:40
+Zr @ index-BvfJk6cK.js:40
+(anonymous) @ index-BvfJk6cK.js:40
+E @ index-BvfJk6cK.js:25
+M @ index-BvfJk6cK.js:25Understand this warning
+index-BvfJk6cK.js:319 [2025-07-09T19:22:07.342Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: true, mediaPermissionGranted: false, partnerSocketId: '4jd2rtlZhktw77COAABV'}
+2index-BvfJk6cK.js:319 No remoteStream available to assign
+(anonymous) @ index-BvfJk6cK.js:319
+Ml @ index-BvfJk6cK.js:40
+Zr @ index-BvfJk6cK.js:40
+(anonymous) @ index-BvfJk6cK.js:40
+E @ index-BvfJk6cK.js:25
+M @ index-BvfJk6cK.js:25Understand this warning
+index-BvfJk6cK.js:319 [2025-07-09T19:22:07.512Z] [DEBUG:VideoCall] Starting call initialization
+index-BvfJk6cK.js:319 [WEBRTC] Media already initialized, skipping...
+index-BvfJk6cK.js:319 [WEBRTC] Creating new peer connection
+index-BvfJk6cK.js:319 [2025-07-09T19:22:07.533Z] [DEBUG:VideoCall] Call started successfully
+index-BvfJk6cK.js:319 [WEBRTC] Local media stream initialized MediaStream {id: 'e82df80d-e079-435d-b636-b3193a1f1fe9', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-BvfJk6cK.js:319 [WEBRTC] Peer connection already exists, reusing it.
+index-BvfJk6cK.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'audio', id: '5ab751b9-469d-493c-8d21-c3aa0977a5af', label: 'Default', enabled: true, muted: false, …}
+index-BvfJk6cK.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'video', id: 'd41b5daa-9960-41ce-94cc-5d2b51dcc7d6', label: 'Droidcam', enabled: true, muted: false, …}
+2index-BvfJk6cK.js:319 No remoteStream available to assign
+(anonymous) @ index-BvfJk6cK.js:319
+Ml @ index-BvfJk6cK.js:40
+Zr @ index-BvfJk6cK.js:40
+(anonymous) @ index-BvfJk6cK.js:40
+E @ index-BvfJk6cK.js:25
+M @ index-BvfJk6cK.js:25Understand this warning
+index-BvfJk6cK.js:319 [WEBRTC] Received offer {fromSocketId: '4jd2rtlZhktw77COAABV', offer: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Peer connection already exists, reusing it.
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Queued ICE candidate
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Queued ICE candidate
+index-BvfJk6cK.js:319 [WEBRTC] Signaling state: have-remote-offer
+index-BvfJk6cK.js:319 [WEBRTC] Set remote description with offer
+2index-BvfJk6cK.js:319 [WEBRTC] Added queued ICE candidate
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Signaling state: stable
+index-BvfJk6cK.js:319 [WEBRTC] Created and set local description with answer
+index-BvfJk6cK.js:319 [WEBRTC] Sent answer to 4jd2rtlZhktw77COAABV
+index-BvfJk6cK.js:319 [WEBRTC] Added ICE candidate
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Received offer {fromSocketId: '4jd2rtlZhktw77COAABV', offer: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Peer connection already exists, reusing it.
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+2index-BvfJk6cK.js:319 [WEBRTC] Added ICE candidate
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Added ICE candidate
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] ICE connection state: checking
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2747755343 1 udp 2122194687 192.168.1.22…013 typ host generation 0 ufrag CXhg network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '2747755343', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1513546645 1 udp 2122129151 100.93.64.62…196 typ host generation 0 ufrag CXhg network-id 2', sdpMid: '0', sdpMLineIndex: 0, foundation: '1513546645', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Signaling state: have-remote-offer
+index-BvfJk6cK.js:319 [WEBRTC] [WEBRTC] ontrack fired RTCTrackEvent {isTrusted: true, receiver: RTCRtpReceiver, track: MediaStreamTrack, streams: Array(1), transceiver: RTCRtpTransceiver, …}
+index-BvfJk6cK.js:319 [WEBRTC] [WEBRTC] Received remote stream MediaStream {id: '09f93f01-d71e-4228-a2e3-a69dde7960da', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-BvfJk6cK.js:319 [WEBRTC] [WEBRTC] Remote stream set MediaStream {id: '09f93f01-d71e-4228-a2e3-a69dde7960da', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-BvfJk6cK.js:319 [WEBRTC] [WEBRTC] ontrack fired RTCTrackEvent {isTrusted: true, receiver: RTCRtpReceiver, track: MediaStreamTrack, streams: Array(1), transceiver: RTCRtpTransceiver, …}
+index-BvfJk6cK.js:319 [WEBRTC] [WEBRTC] Received remote stream MediaStream {id: '09f93f01-d71e-4228-a2e3-a69dde7960da', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-BvfJk6cK.js:319 [WEBRTC] [WEBRTC] Remote stream set MediaStream {id: '09f93f01-d71e-4228-a2e3-a69dde7960da', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-BvfJk6cK.js:319 [WEBRTC] Set remote description with offer
+index-BvfJk6cK.js:319 [WEBRTC] Added ICE candidate
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2063378240 1 udp 2122063615 192.168.1.20…eration 0 ufrag CXhg network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '2063378240', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1766535927 1 udp 2122265343 fd7a:115c:a1…294 typ host generation 0 ufrag CXhg network-id 3', sdpMid: '0', sdpMLineIndex: 0, foundation: '1766535927', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1567473627 1 tcp 1518214911 192.168.1.22…ptype active generation 0 ufrag CXhg network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '1567473627', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2761701121 1 tcp 1518149375 100.93.64.62…ptype active generation 0 ufrag CXhg network-id 2', sdpMid: '0', sdpMLineIndex: 0, foundation: '2761701121', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2220258260 1 tcp 1518083839 192.168.1.20…eration 0 ufrag CXhg network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '2220258260', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2548164195 1 tcp 1518285567 fd7a:115c:a1…ptype active generation 0 ufrag CXhg network-id 3', sdpMid: '0', sdpMLineIndex: 0, foundation: '2548164195', component: 'rtp', …}
+5index-BvfJk6cK.js:319 [WEBRTC] Added ICE candidate
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Added ICE candidate
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Added ICE candidate
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 [WEBRTC] Received ICE candidate {fromSocketId: '4jd2rtlZhktw77COAABV', candidate: {…}}
+index-BvfJk6cK.js:319 Assigning remoteStream to video element MediaStream {id: '09f93f01-d71e-4228-a2e3-a69dde7960da', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-BvfJk6cK.js:319 [VideoCall] Remote stream tracks: (2) ['audio:live', 'video:live']
+6index-BvfJk6cK.js:319 [WEBRTC] Added ICE candidate
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:210602609 1 udp 1685987071 103.87.58.187… rport 35013 generation 0 ufrag CXhg network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '210602609', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Signaling state: stable
+index-BvfJk6cK.js:319 [WEBRTC] Created and set local description with answer
+index-BvfJk6cK.js:319 [WEBRTC] Sent answer to 4jd2rtlZhktw77COAABV
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2747755343 1 udp 2122194687 192.168.1.22…934 typ host generation 1 ufrag Yrfu network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '2747755343', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1513546645 1 udp 2122129151 100.93.64.62…760 typ host generation 1 ufrag Yrfu network-id 2', sdpMid: '0', sdpMLineIndex: 0, foundation: '1513546645', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2063378240 1 udp 2122063615 192.168.1.20…eration 1 ufrag Yrfu network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '2063378240', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1766535927 1 udp 2122265343 fd7a:115c:a1…139 typ host generation 1 ufrag Yrfu network-id 3', sdpMid: '0', sdpMLineIndex: 0, foundation: '1766535927', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:210602609 1 udp 1685987071 103.87.58.187… rport 35934 generation 1 ufrag Yrfu network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '210602609', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3585492606 1 udp 1685855999 103.87.58.18…eration 1 ufrag Yrfu network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '3585492606', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1567473627 1 tcp 1518214911 192.168.1.22…ptype active generation 1 ufrag Yrfu network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '1567473627', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2761701121 1 tcp 1518149375 100.93.64.62…ptype active generation 1 ufrag Yrfu network-id 2', sdpMid: '0', sdpMLineIndex: 0, foundation: '2761701121', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2220258260 1 tcp 1518083839 192.168.1.20…eration 1 ufrag Yrfu network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '2220258260', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2548164195 1 tcp 1518285567 fd7a:115c:a1…ptype active generation 1 ufrag Yrfu network-id 3', sdpMid: '0', sdpMLineIndex: 0, foundation: '2548164195', component: 'rtp', …}
+index-BvfJk6cK.js:319 [WEBRTC] ICE connection state: connected

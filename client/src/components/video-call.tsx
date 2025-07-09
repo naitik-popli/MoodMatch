@@ -242,19 +242,19 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   }
 }, [socket, partnerSocketId, mediaPermissionGranted, startCall]);
 
-  useEffect(() => {
-    if (!remoteStream) {
-      console.warn('No remoteStream available to assign');
-      return;
-    }
-    if (typeof attachStream !== 'function') {
-      console.error('attachStream is not a function');
-      return;
-    }
-    // Added log for debugging
-    console.log('Assigning remoteStream to video element', remoteStream);
-    attachStream(remoteStream, false);
-  }, [remoteStream, attachStream]);
+  // useEffect(() => {
+  //   if (!remoteStream) {
+  //     console.warn('No remoteStream available to assign');
+  //     return;
+  //   }
+  //   if (typeof attachStream !== 'function') {
+  //     console.error('attachStream is not a function');
+  //     return;
+  //   }
+  //   // Added log for debugging
+  //   console.log('Assigning remoteStream to video element', remoteStream);
+  //   attachStream(remoteStream, false);
+  // }, [remoteStream, attachStream]);
 
   // Handle connection state changes
   useEffect(() => {

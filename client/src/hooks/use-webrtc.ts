@@ -25,6 +25,7 @@ export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps)
   const remoteStreamRef = useRef<MediaStream | null>(null);
   const startCallCalledRef = useRef(false);
   const mediaInitializedRef = useRef(false);
+  
 
     // Store peer socket ID for ICE emission
 const peerSocketIdRef = useRef<string | null>(null);
@@ -189,17 +190,16 @@ useEffect(() => {
     log("Ignoring offer: PeerConnection not in a state to accept offer", pc.signalingState);
     return;
   }
-      if (!stream) {
-        stream = await initializeMedia();
-        localStreamRef.current = stream;
-        setLocalStream(stream);
-      }
-      stream.getTracks().forEach(track => {
-        if (!pc.getSenders().some(sender => sender.track === track)) {
-          pc.addTrack(track, stream);
-          log("Added local track (receiver)", track);
-        }
-      });
+   if (!stream) {
+  throw new Error("Local media stream is not available");
+}
+stream.getTracks().forEach(track => {
+  if (!pc.getSenders().some(sender => sender.track === track)) {
+    pc.addTrack(track, stream);
+    log("Added local track (initiator/receiver)", track);
+  }
+});
+}
 
 
     
