@@ -526,57 +526,45 @@ const remoteVideoActive = remoteVideoTrack && remoteVideoTrack.readyState === "l
           </div>
         </div>
 
-        {/* Main video area */}
-
-        
-        <div className="flex-1 relative bg-gray-800 overflow-hidden">
-          {/* Remote video */}
-          <div className="absolute inset-0">
-            <video
-              ref={remoteVideoRef}
-              autoPlay
-              playsInline
-              className="w-full h-full object-cover bg-black"
-              onClick={() => remoteVideoRef.current?.play()}
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-800 z-10">
-  {!remoteVideoActive && (
-    <span className="text-white text-lg">
-      Waiting for remote video...
-    </span>
+       <div className="flex-1 relative bg-gray-800 overflow-hidden">
+  {/* Remote video */}
+  <video
+    ref={remoteVideoRef}
+    autoPlay
+    playsInline
+    className="absolute inset-0 w-full h-full object-cover bg-black"
+    onClick={() => remoteVideoRef.current?.play()}
+  />
+  {!remoteStream && (
+    <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
+      <Loader2 className="w-8 h-8 text-white animate-spin" />
+    </div>
   )}
-</div>
-            {!remoteStream && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
-                <Loader2 className="w-8 h-8 text-white animate-spin" />
-              </div>
-            )}
-          </div>
 
-          {/* Local video */}
-          <div 
-            className={`absolute bottom-6 right-6 w-48 h-36 rounded-xl overflow-hidden shadow-2xl border-2 ${
-              needsUserInteraction ? 'border-yellow-500 animate-pulse' : 'border-white/20'
-            }`}
-            onClick={handleVideoClick}
-          >
-          <video
-              ref={localVideoRef}
-              autoPlay
-              playsInline
-              muted
-              className="w-full h-full object-cover bg-black"
-              style={{ transform: 'rotateY(180deg)' }}
-            />
-          {false && needsUserInteraction && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/70">
-              <button className="text-white text-sm bg-blue-500 px-3 py-1 rounded">
-                Click to Start
-              </button>
-            </div>
-          )}
-          </div>
-        </div>
+  {/* Local video overlay */}
+  <div 
+    className={`absolute bottom-6 right-6 w-48 h-36 rounded-xl overflow-hidden shadow-2xl border-2 ${
+      needsUserInteraction ? 'border-yellow-500 animate-pulse' : 'border-white/20'
+    }`}
+    onClick={handleVideoClick}
+  >
+    <video
+      ref={localVideoRef}
+      autoPlay
+      playsInline
+      muted
+      className="w-full h-full object-cover bg-black"
+      style={{ transform: 'rotateY(180deg)' }}
+    />
+    {false && needsUserInteraction && (
+      <div className="absolute inset-0 flex items-center justify-center bg-black/70">
+        <button className="text-white text-sm bg-blue-500 px-3 py-1 rounded">
+          Click to Start
+        </button>
+      </div>
+    )}
+  </div>
+</div>
 
         {/* Call Controls */}
         <div className="bg-dark-blue/90 backdrop-blur-sm px-6 py-6">
