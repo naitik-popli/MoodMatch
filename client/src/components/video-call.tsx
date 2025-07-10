@@ -8,10 +8,12 @@ import { useWebRTC } from "../hooks/use-webrtc";
 import { useSocket } from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
 
+
 // Debugging with timestamp
 const debug = (context: string) => (...args: any[]) => {
   console.log(`[${new Date().toISOString()}] [DEBUG:${context}]`, ...args);
 };
+const remoteVideoRef = useRef<HTMLVideoElement>(null);
 
 const MOOD_NAMES: Record<Mood, string> = {
   happy: "Happy",
@@ -70,6 +72,10 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
    isInitiator: sessionData.role === "initiator",
   targetUserId: sessionData.partnerId,
   });
+
+  const remoteVideoTrack = remoteStream?.getVideoTracks()[0];
+const remoteVideoActive = remoteVideoTrack && remoteVideoTrack.readyState === "live";
+
 
   // Format call duration
   const formatDuration = (seconds: number) => {
@@ -223,11 +229,11 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const partnerSocketId = sessionData.partnerSocketId;
   const callStartedRef = useRef(false);
 
-  useEffect(() => {
-  if (remoteVideoRef.current && remoteStream) {
-    remoteVideoRef.current.srcObject = remoteStream;
-  }
-}, [remoteStream]);
+//   useEffect(() => {
+//   if (remoteVideoRef.current && remoteStream) {
+//     remoteVideoRef.current.srcObject = remoteStream;
+//   }
+// }, [remoteStream]);
   
   useEffect(() => {
   if (
@@ -437,6 +443,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
             >
               Exit Call
             </Button>
+            <div>Remote Video Track: {remoteVideoActive ? '✅ live' : '❌ not live'}</div>
           </div>
         </div>
       </div>
@@ -520,6 +527,8 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
         </div>
 
         {/* Main video area */}
+
+        
         <div className="flex-1 relative bg-gray-800 overflow-hidden">
           {/* Remote video */}
           <div className="absolute inset-0">
@@ -528,7 +537,15 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
               autoPlay
               playsInline
               className="w-full h-full object-cover bg-black"
+              onClick={() => remoteVideoRef.current?.play()}
             />
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-800 z-10">
+  {!remoteVideoActive && (
+    <span className="text-white text-lg">
+      Waiting for remote video...
+    </span>
+  )}
+</div>
             {!remoteStream && (
               <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
                 <Loader2 className="w-8 h-8 text-white animate-spin" />
