@@ -39,7 +39,7 @@ interface Props {
   onCallEnd: () => void;
 }
 
-export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
+export default function VideoCall({ mood, sessionData, onCallEnd, externalLocalStream  }: Props) {
   const log = debug('VideoCall');
   const [callDuration, setCallDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
@@ -68,9 +68,10 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     toggleMute,
     toggleVideo 
   } = useWebRTC({
-    socket,
-   isInitiator: sessionData.role === "initiator",
-  targetUserId: sessionData.partnerId,
+   socket,
+    isInitiator: sessionData.role === "initiator",
+    targetUserId: sessionData.partnerId,
+    externalLocalStream, 
   });
 
   const remoteVideoTrack = remoteStream?.getVideoTracks()[0];

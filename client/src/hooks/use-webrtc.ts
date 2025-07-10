@@ -6,14 +6,15 @@ interface UseWebRTCProps {
   socket: Socket | null;
   isInitiator: boolean;
   targetUserId?: number;
+  externalLocalStream?: MediaStream | null;
 }
 
-export function useWebRTC({ socket, isInitiator, targetUserId }: UseWebRTCProps) {
+export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStream }: UseWebRTCProps) {
   // Debug utility
   const log = (...args: any[]) => console.log("[WEBRTC]", ...args);
 
   // State and refs
-  const [localStream, setLocalStream] = useState<MediaStream | null>(null);
+  const [localStream, setLocalStream] = useState<MediaStream | null>(externalLocalStream || null);
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
   const [isConnected, setIsConnected] = useState(false);
   const [connectionState, setConnectionState] = useState<string>("new");
@@ -85,12 +86,18 @@ const pendingCandidatesRef = useRef<any[]>([]);
   }, [socket, targetUserId, log]);
 
   // Initialize media devices
-  const initializeMedia = useCallback(async () => {
+ const initializeMedia = useCallback(async () => {
     if (mediaInitializedRef.current) {
       log("Media already initialized, skipping...");
       return localStreamRef.current;
     }
     mediaInitializedRef.current = true;
+    if (externalLocalStream) {
+      setLocalStream(externalLocalStream);
+      localStreamRef.current = externalLocalStream;
+      log("Using external local stream", externalLocalStream);
+      return externalLocalStream;
+    }
     try {
       const constraints = {
         audio: true,
@@ -105,7 +112,7 @@ const pendingCandidatesRef = useRef<any[]>([]);
       log("Media access error:", error);
       throw error;
     }
-  }, [log]);
+  }, [externalLocalStream, log]);
 
   // Track socket id readiness
   useEffect(() => {

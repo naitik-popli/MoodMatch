@@ -1,34 +1,35 @@
 import React, { useEffect, useRef, useState } from "react";
 
-export default function LocalStreamPreview() {
+export default function LocalStreamPreview({ setLocalStream }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [error, setError] = useState<string | null>(null);
 
+ 
   useEffect(() => {
+    let stream: MediaStream | null = null;
     async function getLocalStream() {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        setLocalStream(stream);
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
-          videoRef.current.play().catch((e) => {
-            console.warn("Auto-play prevented:", e);
-          });
         }
       } catch (err) {
-        setError("Failed to access camera and microphone. Please allow permissions.");
-        console.error("Error accessing media devices:", err);
+        setError("Could not access camera/mic: " + (err instanceof Error ? err.message : String(err)));
       }
     }
-
     getLocalStream();
-
     return () => {
-      if (videoRef.current && videoRef.current.srcObject) {
-        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
-        tracks.forEach(track => track.stop());
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
       }
     };
-  }, []);
+  }, [setLocalStream]);
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>;
+  }
+
 
   if (error) {
     return <div className="text-red-500">{error}</div>;
