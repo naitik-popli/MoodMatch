@@ -1,112 +1,98 @@
 USER A LOGS_______
-🔗 Socket connection status: true
-index-CBFnVS9r.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-CBFnVS9r.js:363 🔗 Socket connection status: true
-index-CBFnVS9r.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-CBFnVS9r.js:319 🧹 Component unmounted, but socket connection kept alive
-index-CBFnVS9r.js:319 [WaitingRoom] Emitting leave-mood-queue for user 422
-index-CBFnVS9r.js:319 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
-index-CBFnVS9r.js:319 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
-index-CBFnVS9r.js:319 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
-index-CBFnVS9r.js:319 [2025-07-10T15:24:06.733Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: false, mediaPermissionGranted: false, partnerSocketId: 'sJgZukMHnGnSJF6KAAAQ'}
-index-CBFnVS9r.js:363 📞 Transitioning to VideoCall: {sessionId: 537, userId: 422, partnerId: 421, partnerSocketId: 'sJgZukMHnGnSJF6KAAAQ'}
-index-CBFnVS9r.js:319 [2025-07-10T15:24:06.739Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: true, mediaPermissionGranted: false, partnerSocketId: 'sJgZukMHnGnSJF6KAAAQ'}
-index-CBFnVS9r.js:319 [WEBRTC] Received offer {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', offer: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Creating new peer connection
-index-CBFnVS9r.js:319 [WEBRTC] Error handling offer: Error: Local media stream is not available
-    at fv.T (index-CBFnVS9r.js:319:53965)
-    at Ee.emit (index-CBFnVS9r.js:319:9963)
-    at fv.emitEvent (index-CBFnVS9r.js:319:37920)
-    at fv.onevent (index-CBFnVS9r.js:319:37723)
-    at fv.onpacket (index-CBFnVS9r.js:319:37395)
-    at Ee.emit (index-CBFnVS9r.js:319:9963)
-    at index-CBFnVS9r.js:319:43391
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [2025-07-10T15:24:07.444Z] [DEBUG:VideoCall] Starting call initialization
-index-CBFnVS9r.js:319 [WEBRTC] Media already initialized, skipping...
-index-CBFnVS9r.js:319 [WEBRTC] Creating new peer connection
-index-CBFnVS9r.js:319 [2025-07-10T15:24:07.453Z] [DEBUG:VideoCall] Call started successfully
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Local media stream initialized MediaStream {id: '76a6b914-a369-4806-8a2c-d9ee34ee7d86', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-CBFnVS9r.js:319 [WEBRTC] Peer connection already exists, reusing it.
-index-CBFnVS9r.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'audio', id: '503bdc6d-5d0c-4447-946d-18b9a4d4cafc', label: 'Default - Microphone (2- High Definition Audio Device)', enabled: true, muted: false, …}
-index-CBFnVS9r.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'video', id: 'eefa489f-cf20-4112-a835-2cf8de8d601b', label: 'HP Wide Vision HD (04f2:b56d)', enabled: true, muted: false, …}
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received offer {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', offer: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Peer connection already exists, reusing it.
-index-CBFnVS9r.js:319 [WEBRTC] Signaling state: have-remote-offer
-index-CBFnVS9r.js:319 [WEBRTC] [WEBRTC] ontrack fired RTCTrackEvent {isTrusted: true, receiver: RTCRtpReceiver, track: MediaStreamTrack, streams: Array(1), transceiver: RTCRtpTransceiver, …}
-index-CBFnVS9r.js:319 [WEBRTC] [WEBRTC] Received remote stream MediaStream {id: '550b9499-a3a9-4eae-8891-6f5020beac08', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-CBFnVS9r.js:319 [WEBRTC] [WEBRTC] Remote stream set MediaStream {id: '550b9499-a3a9-4eae-8891-6f5020beac08', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-CBFnVS9r.js:319 [WEBRTC] [WEBRTC] ontrack fired RTCTrackEvent {isTrusted: true, receiver: RTCRtpReceiver, track: MediaStreamTrack, streams: Array(1), transceiver: RTCRtpTransceiver, …}
-index-CBFnVS9r.js:319 [WEBRTC] [WEBRTC] Received remote stream MediaStream {id: '550b9499-a3a9-4eae-8891-6f5020beac08', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-CBFnVS9r.js:319 [WEBRTC] [WEBRTC] Remote stream set MediaStream {id: '550b9499-a3a9-4eae-8891-6f5020beac08', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-CBFnVS9r.js:319 [WEBRTC] Set remote description with offer
-index-CBFnVS9r.js:319 [VideoCall] Remote stream tracks: (2) ['audio:live', 'video:live']
-index-CBFnVS9r.js:319 [WEBRTC] Added queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received offer {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', offer: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Peer connection already exists, reusing it.
-index-CBFnVS9r.js:319 [WEBRTC] Added queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Set remote description with offer
-index-CBFnVS9r.js:319 [WEBRTC] Added queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Added ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-index-CBFnVS9r.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'sJgZukMHnGnSJF6KAAAQ', candidate: {…}}
-2index-CBFnVS9r.js:319 [WEBRTC] Added queued ICE candidate
-13index-CBFnVS9r.js:319 [WEBRTC] Added ICE candidate
-22index-CBFnVS9r.js:319 [WEBRTC] Added queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Signaling state: stable
-index-CBFnVS9r.js:319 [WEBRTC] Created and set local description with answer
-index-CBFnVS9r.js:319 [WEBRTC] Sent answer to sJgZukMHnGnSJF6KAAAQ
-index-CBFnVS9r.js:319 [WEBRTC] Added queued ICE candidate
-index-CBFnVS9r.js:319 [WEBRTC] Error handling offer: InvalidStateError: Failed to execute 'createAnswer' on 'RTCPeerConnection': PeerConnection cannot create an answer in a state other than have-remote-offer or have-local-pranswer.
-index-CBFnVS9r.js:319 [WEBRTC] ICE connection state: checking
-index-CBFnVS9r.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:204911995 1 udp 2122194687 100.92.98.39 …eration 0 ufrag dDqb network-id 1 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '204911995', component: 'rtp', …}
-index-CBFnVS9r.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3658754245 1 udp 2122129151 192.168.1.11…eration 0 ufrag dDqb network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '3658754245', component: 'rtp', …}
-index-CBFnVS9r.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:622239351 1 udp 2122265343 fd7a:115c:a1e…eration 0 ufrag dDqb network-id 2 network-cost 50', sdpMid: '0', sdpMLineIndex: 0, foundation: '622239351', component: 'rtp', …}
-index-CBFnVS9r.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1969146363 1 udp 1685921535 103.87.58.18…eration 0 ufrag dDqb network-id 3 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '1969146363', component: 'rtp', …}
-index-CBFnVS9r.js:319 [WEBRTC] ICE connection state: connected
-
-
-
-
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-10T18:13:04.722Z
+[DISCONNECT] Socket deZGz0Pio0LgpbjOAAAE disconnected (userId=undefined)
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-10T18:13:09.714Z
+[CONN Jwwmsu] New connection [socketId=Jwwmsuf554hI5Gk-AAAK]
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-10T18:13:14.717Z
+POST /api/session/create 200 23ms
+Response: {
+  "sessionId": 539,
+  "userId": 423,
+  "mood": "happy"
+}
+[CONN vXo2Qr] New connection [socketId=vXo2Qr9Icj26MS6oAAAN]
+[2025-07-10T18:18:16.518Z] Generated new partnerId 1000423 for user 423
+[2025-07-10T18:18:16.519Z] Generated new partnerId 1000423 for user 423
+[2025-07-10T18:18:16.518Z] [SOCKET MAP] Bound user 423 to socket vXo2Qr9Icj26MS6oAAAN with partnerId 1000423
+[2025-07-10T18:18:16.518Z] [SOCKET MAP] Current userSocketMap entry: userId=423, partnerId=1000423, socketId=vXo2Qr9Icj26MS6oAAAN
+💥 Unhandled Rejection at: Promise {
+  <rejected> PostgresError: duplicate key value violates unique constraint "user_socket_map_user_id_key"
+      at ErrorResponse (file:///opt/render/project/src/node_modules/postgres/src/connection.js:794:26)
+      at handle (file:///opt/render/project/src/node_modules/postgres/src/connection.js:480:6)
+      at TLSSocket.data (file:///opt/render/project/src/node_modules/postgres/src/connection.js:315:9)
+      at TLSSocket.emit (node:events:518:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at TLSWrap.onStreamRead (node:internal/stream_base_commons:189:23) {
+    severity_local: 'ERROR',
+    severity: 'ERROR',
+    code: '23505',
+    detail: 'Key (user_id)=(423) already exists.',
+    schema_name: 'public',
+    table_name: 'user_socket_map',
+    constraint_name: 'user_socket_map_user_id_key',
+    file: 'nbtinsert.c',
+    line: '666',
+    routine: '_bt_check_unique'
+  }
+} reason: PostgresError: duplicate key value violates unique constraint "user_socket_map_user_id_key"
+    at ErrorResponse (file:///opt/render/project/src/node_modules/postgres/src/connection.js:794:26)
+    at handle (file:///opt/render/project/src/node_modules/postgres/src/connection.js:480:6)
+    at TLSSocket.data (file:///opt/render/project/src/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:189:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key (user_id)=(423) already exists.',
+  schema_name: 'public',
+  table_name: 'user_socket_map',
+  constraint_name: 'user_socket_map_user_id_key',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
+}
+[MATCH] Current queue length: 0
+[MATCH] Cleaned up stale entries older than 2025-07-10T18:13:19.717Z
+[2025-07-10T18:18:23.652Z] Generated new partnerId 1000423 for user 423
+[2025-07-10T18:18:23.652Z] Generated new partnerId 1000423 for user 423
+[2025-07-10T18:18:23.652Z] [SOCKET MAP] Bound user 423 to socket vXo2Qr9Icj26MS6oAAAN with partnerId 1000423
+[2025-07-10T18:18:23.652Z] [SOCKET MAP] Current userSocketMap entry: userId=423, partnerId=1000423, socketId=vXo2Qr9Icj26MS6oAAAN
+[2025-07-10T18:18:23.652Z] [SOCKET MAP] Bound user 423 to socket vXo2Qr9Icj26MS6oAAAN with partnerId 1000423
+[2025-07-10T18:18:23.652Z] [SOCKET MAP] Current userSocketMap entry: userId=423, partnerId=1000423, socketId=vXo2Qr9Icj26MS6oAAAN
+[2025-07-10T18:18:23.684Z] Generated new partnerId 1000423 for user 423
+[2025-07-10T18:18:23.684Z] [SOCKET MAP] Bound user 423 to socket vXo2Qr9Icj26MS6oAAAN with partnerId 1000423
+[2025-07-10T18:18:23.684Z] [SOCKET MAP] Current userSocketMap entry: userId=423, partnerId=1000423, socketId=vXo2Qr9Icj26MS6oAAAN
+[2025-07-10T18:18:23.707Z] Generated new partnerId 1000423 for user 423
+[2025-07-10T18:18:23.707Z] [SOCKET MAP] Bound user 423 to socket vXo2Qr9Icj26MS6oAAAN with partnerId 1000423
+[2025-07-10T18:18:23.707Z] [SOCKET MAP] Current userSocketMap entry: userId=423, partnerId=1000423, socketId=vXo2Qr9Icj26MS6oAAAN
+[QUEUE 423] Attempting to join queue for "happy" with socket vXo2Qr9Icj26MS6oAAAN
+[QUEUE 423] Attempting to join queue for "happy" with socket vXo2Qr9Icj26MS6oAAAN
+[QUEUE 423] Attempting to join queue for "happy" with socket vXo2Qr9Icj26MS6oAAAN
+[QUEUE 423] Attempting to join queue for "happy" with socket vXo2Qr9Icj26MS6oAAAN
+[QUEUE 423] Joined queue at position 1 for mood "happy"
+[QUEUE 423] Joined queue at position 1 for mood "happy"
+[QUEUE 423] Joined queue at position 1 for mood "happy"
+[QUEUE 423] Joined queue at position 1 for mood "happy"
+[MATCH] Current queue length: 1
+[MATCH] Current queue length: 1
+[MATCH] Current queue length: 1
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-10T18:13:24.052Z
+[MATCH] Cleaned up stale entries older than 2025-07-10T18:13:24.053Z
+[MATCH] Cleaned up stale entries older than 2025-07-10T18:13:24.054Z
+[MATCH] Cleaned up stale entries older than 2025-07-10T18:13:24.054Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-10T18:13:24.718Z
+[MATCH] Current queue length: 1
+[MATCH] Cleaned up stale entries older than 2025-07-10T18:13:29.722Z
 
 
 USER B LOGS_______

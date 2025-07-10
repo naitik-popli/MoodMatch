@@ -32,31 +32,36 @@ const userSocketMapTable = pgTable("user_socket_map", {
 const userSocketMapDb = db;
 
 export async function setUserSocketMap(userId: number, partnerId: number | null, socketId: string) {
-  if (!userId) {
-    throw new Error("userId is required");
-  }
-  if (!socketId) {
-    throw new Error("socketId is required");
-  }
+  if (!userId) throw new Error("userId is required");
+  if (!socketId) throw new Error("socketId is required");
+
+  await userSocketMapDb
+    .insert(userSocketMapTable)
+    .values({ userId, partnerId, socketId })
+    .onConflictDoUpdate({
+      target: [userSocketMapTable.userId],
+      set: { partnerId, socketId }
+    });
+}
   // partnerId can be null
 
   // Upsert logic: insert or update existing record
-  const existing = await userSocketMapDb
-    .select()
-    .from(userSocketMapTable)
-    .where(eq(userSocketMapTable.userId, userId));
+//   const existing = await userSocketMapDb
+//     .select()
+//     .from(userSocketMapTable)
+//     .where(eq(userSocketMapTable.userId, userId));
 
-  if (existing.length > 0) {
-    await userSocketMapDb
-      .update(userSocketMapTable)
-      .set({ partnerId, socketId })
-      .where(eq(userSocketMapTable.userId, userId));
-  } else {
-    await userSocketMapDb
-      .insert(userSocketMapTable)
-      .values({ userId, partnerId, socketId });
-  }
-}
+//   if (existing.length > 0) {
+//     await userSocketMapDb
+//       .update(userSocketMapTable)
+//       .set({ partnerId, socketId })
+//       .where(eq(userSocketMapTable.userId, userId));
+//   } else {
+//     await userSocketMapDb
+//       .insert(userSocketMapTable)
+//       .values({ userId, partnerId, socketId });
+//   }
+// }
 
 export async function getUserSocketId(userId: number) {
   const result = await userSocketMapDb
