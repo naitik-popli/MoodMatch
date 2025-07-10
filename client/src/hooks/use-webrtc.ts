@@ -54,20 +54,7 @@ const pendingCandidatesRef = useRef<any[]>([]);
       }
     };
 
-    // pc.ontrack = (event) => {
-    //   log("ontrack fired", event);
-    //   if (event.streams && event.streams[0]) {
-    //     const newStream = event.streams[0];
-    //     log("Received remote stream", newStream);
-    //     if (remoteStreamRef.current !== newStream) {
-    //       remoteStreamRef.current = newStream;
-    //       setRemoteStream(newStream);
-    //       log("Remote stream set", newStream);
-    //     }
-    //   } else {
-    //     log("ontrack fired but no streams found", event);
-    //   }
-    // };
+  
     pc.ontrack = (event) => {
   log("[WEBRTC] ontrack fired", event);
   if (event.streams && event.streams[0]) {

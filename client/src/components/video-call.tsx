@@ -31,7 +31,9 @@ interface Props {
     userId: number;
     partnerId?: number;
     partnerSocketId?: string;
+    role?: "initiator" | "receiver"; // <-- Add this line
   };
+  isInitiator?: boolean;
   onCallEnd: () => void;
 }
 
@@ -65,8 +67,8 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     toggleVideo 
   } = useWebRTC({
     socket,
-    isInitiator: sessionData.partnerId ? sessionData.userId < sessionData.partnerId : false,
-    targetUserId: sessionData.partnerId,
+   isInitiator: sessionData.role === "initiator",
+  targetUserId: sessionData.partnerId,
   });
 
   // Format call duration

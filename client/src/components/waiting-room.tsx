@@ -28,9 +28,14 @@ const MOOD_NAMES: Record<Mood, string> = {
 };
 
 interface Props {
-  mood: Mood;
+   mood: Mood;
   onCancel: () => void;
-  onMatchFound: (data: { partnerId: number; partnerSocketId: string }) => void;
+  onMatchFound: (data: { 
+    role: "initiator" | "receiver"; 
+    partnerId: number; 
+    partnerSocketId: string; 
+    sessionId: number 
+  }) => void;
   onResetQueueJoin: () => void;
 }
 
@@ -114,18 +119,18 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
           setHasJoinedQueue(true);
         }, 300);
 
-        socket.on("match-found", onMatchFound);
-        socket.on("waiting-for-match", () =>
-          console.log("[WaitingRoom] Still waiting...")
-        );
+        // socket.on("match-found", onMatchFound);
+        // socket.on("waiting-for-match", () =>
+        //   console.log("[WaitingRoom] Still waiting...")
+        // );
 
         // Cleanup function for socket listeners and timeout
-        return () => {
-          clearTimeout(joinTimeout);
-          socket.off("match-found", onMatchFound);
-          socket.off("waiting-for-match");
-          console.log("[WaitingRoom] Cleaned up socket listeners");
-        };
+        // return () => {
+        //   clearTimeout(joinTimeout);
+        //   socket.off("match-found", onMatchFound);
+        //   socket.off("waiting-for-match");
+        //   console.log("[WaitingRoom] Cleaned up socket listeners");
+        // };
       } catch (error) {
         // Permission denied or error
         console.error("Media devices access error:", error);
@@ -144,6 +149,46 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
       setHasJoinedQueue(false);
     }
   }, [onResetQueueJoin]);
+
+
+
+  useEffect(() => {
+  if (!socket || !userId || !mood || hasJoinedQueue) return;
+
+  // Setup listeners
+  socket.on("match-found", onMatchFound);
+  socket.on("waiting-for-match", () =>
+    console.log("[WaitingRoom] Still waiting...")
+  );
+
+  // Check media devices and join queue
+  (async () => {
+    try {
+      if (!navigator.mediaDevices?.getUserMedia) {
+        console.warn("Media devices API not supported in this browser.");
+        return;
+      }
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      stream.getTracks().forEach(track => track.stop());
+
+      socket.emit("update-socket-id", { userId });
+
+      setTimeout(() => {
+        socket.emit("join-mood-queue", { userId, mood });
+        setHasJoinedQueue(true);
+      }, 300);
+    } catch (error) {
+      console.error("Media devices access error:", error);
+    }
+  })();
+
+  // Cleanup listeners
+  return () => {
+    socket.off("match-found", onMatchFound);
+    socket.off("waiting-for-match");
+    console.log("[WaitingRoom] Cleaned up socket listeners");
+  };
+}, [socket, userId, mood, onMatchFound, hasJoinedQueue]);
 
   // Leave queue on unmount or page reload
   useEffect(() => {

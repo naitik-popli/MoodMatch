@@ -376,21 +376,34 @@ async function notifyMatchedPair(io: SocketIOServer, userA: number, userB: numbe
   try {
     // Removed activeSessions usage as it is no longer used
 
-    io.to(socketA).emit("match-found", {
-      partnerId: userB,
-      partnerSocketId: socketB,
+     let initiatorId = userA;
+    let receiverId = userB;
+    let initiatorSocket = socketA;
+    let receiverSocket = socketB;
+    if (userB < userA) {
+      initiatorId = userB;
+      receiverId = userA;
+      initiatorSocket = socketB;
+      receiverSocket = socketA;
+    }
+
+    io.to(initiatorSocket).emit("match-found", {
+      role: "initiator",
+      partnerId: receiverId,
+      partnerSocketId: receiverSocket,
       sessionId,
       timestamp: new Date().toISOString()
     });
 
-    io.to(socketB).emit("match-found", {
-      partnerId: userA,
-      partnerSocketId: socketA,
+    io.to(receiverSocket).emit("match-found", {
+      role: "receiver",
+      partnerId: initiatorId,
+      partnerSocketId: initiatorSocket,
       sessionId,
       timestamp: new Date().toISOString()
     });
 
-    console.log(`[MATCH] Notified user ${userA} and ${userB} of match (sessionId=${sessionId})`);
+    console.log(`[MATCH] Notified user ${initiatorId} (initiator) and ${receiverId} (receiver) of match (sessionId=${sessionId})`);
   } catch (error) {
     console.error(`[MATCH] Failed to notify users ${userA}/${userB}`, error);
     await Promise.all([
