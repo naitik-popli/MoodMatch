@@ -13,7 +13,7 @@ import type { Mood } from "@shared/schema";
 const debug = (context: string) => (...args: any[]) => {
   console.log(`[${new Date().toISOString()}] [DEBUG:${context}]`, ...args);
 };
-const remoteVideoRef = useRef<HTMLVideoElement>(null);
+
 
 const MOOD_NAMES: Record<Mood, string> = {
   happy: "Happy",
