@@ -34,6 +34,7 @@ interface Props {
     partnerId: number;
     partnerSocketId?: string;
     role?: "initiator" | "receiver"; // <-- Add this line
+      externalLocalStream?: MediaStream | null;
   };
   isInitiator?: boolean;
   onCallEnd: () => void;
@@ -58,6 +59,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd, externalLocalS
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
   const retryCountRef = useRef(0);
+  
   console.log("[VideoCall] Passing partnerId as targetUserId:", sessionData.partnerId, typeof sessionData.partnerId);
 
   const { 
@@ -617,6 +619,48 @@ const remoteVideoActive = remoteVideoTrack && remoteVideoTrack.readyState === "l
               <Settings className="text-lg" />
             </Button>
           </div>
+          // Place this just before the final closing </div> of your main return
+
+<div style={{
+  position: "fixed",
+  left: 0,
+  bottom: 0,
+  width: "100vw",
+  background: "rgba(0,0,0,0.85)",
+  zIndex: 9999,
+  padding: 16,
+  textAlign: "center"
+}}>
+  <div style={{ color: "#fff", marginBottom: 8, fontWeight: "bold" }}>
+    Remote Video (Debug)
+  </div>
+  <video
+    ref={remoteVideoRef}
+    autoPlay
+    playsInline
+    style={{
+      width: "320px",
+      height: "240px",
+      background: "#222",
+      border: "2px solid #fff"
+    }}
+  />
+  {!remoteStream && (
+    <div style={{
+      position: "absolute",
+      left: 0,
+      top: 0,
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "#fff"
+    }}>
+      Waiting for remote stream...
+    </div>
+  )}
+</div>
 
           <div className="flex items-center justify-center space-x-4 mt-4">
             <Button
@@ -633,9 +677,11 @@ const remoteVideoActive = remoteVideoTrack && remoteVideoTrack.readyState === "l
             >
               <Shuffle className="w-3 h-3 mr-2" /> Next Chat
             </Button>
+
           </div>
         </div>
       </div>
+      
     </div>
   );
 }
