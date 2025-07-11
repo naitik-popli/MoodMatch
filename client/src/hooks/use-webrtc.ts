@@ -41,14 +41,13 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
     pc.onicecandidate = (event) => {
       log("onicecandidate event", event);
      if (event.candidate && socket) {
-  const peerId = peerSocketIdRef.current || targetUserId;
-  log("[useWebRTC] ICE candidate emission targetUserId:", peerId, typeof peerId);
-  if (typeof peerId !== "number") {
-    log("[useWebRTC] Invalid targetUserId for ICE emission:", peerId, typeof peerId);
+  log("[useWebRTC] ICE candidate emission targetUserId:", targetUserId, typeof targetUserId);
+  if (typeof targetUserId !== "number") {
+    log("[useWebRTC] Invalid targetUserId for ICE emission:", targetUserId, typeof targetUserId);
     return;
   }
   log("Sending ICE candidate", event.candidate);
-  socket.emit("webrtc-ice-candidate", { targetUserId: peerId, candidate: event.candidate });
+  socket.emit("webrtc-ice-candidate", { targetUserId, candidate: event.candidate });
 }
     };
 
@@ -249,12 +248,13 @@ log("Sent offer to", targetUserId);
           await pc.setLocalDescription(answer);
           log("Created and set local description with answer");
          log("[useWebRTC] Answer emission targetUserId:", data.fromSocketId, typeof data.fromSocketId);
-if (typeof data.fromSocketId !== "number") {
-  log("[useWebRTC] Invalid targetUserId for answer emission:", data.fromSocketId, typeof data.fromSocketId);
+log("[useWebRTC] Answer emission targetUserId:", targetUserId, typeof targetUserId);
+if (typeof targetUserId !== "number") {
+  log("[useWebRTC] Invalid targetUserId for answer emission:", targetUserId, typeof targetUserId);
   return;
 }
-socket.emit("webrtc-answer", { targetUserId: data.fromSocketId, answer });
-log("Sent answer to", data.fromSocketId);
+socket.emit("webrtc-answer", { targetUserId, answer });
+log("Sent answer to", targetUserId);
         } else {
           log("Not creating answer, signaling state:", pc.signalingState);
         }
