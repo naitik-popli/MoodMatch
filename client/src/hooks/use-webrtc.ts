@@ -175,23 +175,34 @@ useEffect(() => {
 
  const handleOffer = async (data: any) => {
   log("Received offer", data);
-  peerSocketIdRef.current = data.fromSocketId; // Save for ICE emission
-  try {
+  peerSocketIdRef.current = data.fromSocketId;
+
+  // Wait for local media stream to be ready
+  let retries = 0;
+  while (!localStreamRef.current && retries < 20) {
+    log("Waiting for local media stream to be ready...");
+    await new Promise(res => setTimeout(res, 100)); // wait 100ms
+    retries++;
+  }
+  if (!localStreamRef.current) {
+    log("Error: Local media stream is still not available after waiting.");
+    return;
+  }
+try {
     const pc = setupPeerConnection();
     let stream = localStreamRef.current;
     if (pc.signalingState !== "stable" && pc.signalingState !== "have-remote-offer") {
       log("Ignoring offer: PeerConnection not in a state to accept offer", pc.signalingState);
       return;
     }
-    if (!stream) {
-      throw new Error("Local media stream is not available");
+   if (stream) {
+  stream.getTracks().forEach(track => {
+    if (!pc.getSenders().some(sender => sender.track === track)) {
+      pc.addTrack(track, stream);
+      log("Added local track (initiator/receiver)", track);
     }
-    stream.getTracks().forEach(track => {
-      if (!pc.getSenders().some(sender => sender.track === track)) {
-        pc.addTrack(track, stream);
-        log("Added local track (initiator/receiver)", track);
-      }
-    });
+  });
+}
 
     await pc.setRemoteDescription(data.offer);
     log("Set remote description with offer");
