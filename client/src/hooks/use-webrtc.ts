@@ -86,34 +86,40 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
 
   // Initialize media devices
   const initializeMedia = useCallback(async () => {
-    log("Initializing media...");
-    if (mediaInitializedRef.current) {
-      log("Media already initialized, skipping...");
-      return localStreamRef.current;
+  log("Initializing media...");
+  if (mediaInitializedRef.current) {
+    log("Media already initialized, skipping...");
+    return localStreamRef.current;
+  }
+  mediaInitializedRef.current = true;
+  if (externalLocalStream) {
+    log("Using external local stream", externalLocalStream);
+    setLocalStream(externalLocalStream);
+    localStreamRef.current = externalLocalStream;
+    return externalLocalStream;
+  }
+  try {
+    const constraints = {
+      audio: true,
+      video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" }
+    };
+    log("Requesting user media with constraints", constraints);
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    if (!stream || stream.getTracks().length === 0) {
+      throw new Error("No media tracks available. Please allow camera and microphone access.");
     }
-    mediaInitializedRef.current = true;
-    if (externalLocalStream) {
-      log("Using external local stream", externalLocalStream);
-      setLocalStream(externalLocalStream);
-      localStreamRef.current = externalLocalStream;
-      return externalLocalStream;
-    }
-    try {
-      const constraints = {
-        audio: true,
-        video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" }
-      };
-      log("Requesting user media with constraints", constraints);
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      log("Local media stream initialized", stream);
-      setLocalStream(stream);
-      localStreamRef.current = stream;
-      return stream;
-    } catch (error) {
-      log("Media access error:", error);
-      throw error;
-    }
-  }, [externalLocalStream, log]);
+    log("Local media stream initialized", stream);
+    setLocalStream(stream);
+    localStreamRef.current = stream;
+    return stream;
+  } catch (error) {
+    log("Media access error:", error);
+    alert("Camera and microphone access is required to join the call.");
+    throw error;
+  }
+}, [externalLocalStream, log]);
+
+
 
   // Track socket id readiness
   useEffect(() => {
@@ -129,20 +135,24 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
 
   // Start call (initiator)
   const startCall = useCallback(async () => {
-    log("Attempting to start call...");
-    if (!socket || !targetUserId) {
-      log("Cannot start call — socket or targetUserId missing");
-      return;
+  log("Attempting to start call...");
+  if (!socket || !targetUserId) {
+    log("Cannot start call — socket or targetUserId missing");
+    return;
+  }
+  if (peerConnectionRef.current) {
+    log("Closing previous peer connection before starting new call");
+    peerConnectionRef.current.close();
+    peerConnectionRef.current = null;
+  }
+  try {
+    const stream = await initializeMedia();
+    if (!stream || !stream.active) {
+      log("Media is not ready after initialization.");
+      alert("Media is not ready. Please check your camera and microphone.");
+      throw new Error("Media is not ready.");
     }
-    
-    if (peerConnectionRef.current) {
-      log("Closing previous peer connection before starting new call");
-      peerConnectionRef.current.close();
-      peerConnectionRef.current = null;
-    }
-    try {
-      const stream = await initializeMedia();
-      log("Got local stream for call", stream);
+    log("Got local stream for call", stream);
       const pc = setupPeerConnection();
       stream?.getTracks().forEach(track => {
         if (!pc.getSenders().some(sender => sender.track === track)) {
@@ -165,6 +175,8 @@ log("Sent offer to", targetUserId);
       }
     } catch (error) {
       log("Error during call start:", error);
+      alert("Could not start call: " + (error.message || error));
+
     }
   }, [socket, targetUserId, isInitiator, initializeMedia, setupPeerConnection, log]);
 
