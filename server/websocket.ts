@@ -303,6 +303,11 @@ export async function setupWebSocket(io: SocketIOServer) {
 
     socket.on("webrtc-ice-candidate", async (data: any) => {
       const timestamp = new Date().toISOString();
+       console.log("[BACKEND] Received webrtc-ice-candidate with targetUserId:", data?.targetUserId, typeof data?.targetUserId, "from socket:", socket.id);
+  if (!data?.targetUserId || typeof data.targetUserId !== "number") {
+    console.error("[BACKEND] Invalid targetUserId for webrtc-ice-candidate:", data);
+    throw new Error("Invalid targetUserId for webrtc-ice-candidate");
+  }
       try {
         if (!data?.targetUserId || typeof data.targetUserId !== "number") {
           throw new Error("Invalid targetUserId for webrtc-ice-candidate");

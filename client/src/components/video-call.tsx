@@ -31,7 +31,7 @@ interface Props {
   sessionData: {
     sessionId: number;
     userId: number;
-    partnerId?: number;
+    partnerId: number;
     partnerSocketId?: string;
     role?: "initiator" | "receiver"; // <-- Add this line
   };
@@ -58,6 +58,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd, externalLocalS
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
   const retryCountRef = useRef(0);
+  console.log("[VideoCall] Passing partnerId as targetUserId:", sessionData.partnerId, typeof sessionData.partnerId);
 
   const { 
     localStream, 
@@ -71,6 +72,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd, externalLocalS
    socket,
     isInitiator: sessionData.role === "initiator",
     targetUserId: sessionData.partnerId,
+    
     externalLocalStream, 
   });
 
@@ -336,7 +338,11 @@ const remoteVideoActive = remoteVideoTrack && remoteVideoTrack.readyState === "l
         socket.emit('end-call', { 
           sessionId: sessionData.sessionId, 
           partnerId: sessionData.partnerId 
+          
         });
+        if (typeof sessionData.partnerId !== "number") {
+  throw new Error("partnerId is not set or not a number!");
+}
       }
       onCallEnd();
     } catch (error) {

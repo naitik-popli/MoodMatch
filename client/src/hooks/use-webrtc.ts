@@ -40,15 +40,16 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
 
     pc.onicecandidate = (event) => {
       log("onicecandidate event", event);
-      if (event.candidate && socket) {
-        const peerId = peerSocketIdRef.current || targetUserId;
-        if (peerId) {
-          log("Sending ICE candidate", event.candidate);
-          socket.emit("webrtc-ice-candidate", { targetUserId: peerId, candidate: event.candidate });
-        } else {
-          log("Warning: No peerId for ICE emission");
-        }
-      }
+     if (event.candidate && socket) {
+  const peerId = peerSocketIdRef.current || targetUserId;
+  log("[useWebRTC] ICE candidate emission targetUserId:", peerId, typeof peerId);
+  if (typeof peerId !== "number") {
+    log("[useWebRTC] Invalid targetUserId for ICE emission:", peerId, typeof peerId);
+    return;
+  }
+  log("Sending ICE candidate", event.candidate);
+  socket.emit("webrtc-ice-candidate", { targetUserId: peerId, candidate: event.candidate });
+}
     };
 
     pc.ontrack = (event) => {
@@ -81,7 +82,8 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
     };
 
     return pc;
-  }, [socket, targetUserId, log]);
+  }, [socket, targetUserId, log]
+);
 
   // Initialize media devices
   const initializeMedia = useCallback(async () => {
@@ -133,6 +135,7 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
       log("Cannot start call — socket or targetUserId missing");
       return;
     }
+    
     if (peerConnectionRef.current) {
       log("Closing previous peer connection before starting new call");
       peerConnectionRef.current.close();
@@ -153,8 +156,13 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
         const offer = await pc.createOffer({ offerToReceiveAudio: true, offerToReceiveVideo: true });
         await pc.setLocalDescription(offer);
         log("Created and set local description with offer");
-        socket.emit("webrtc-offer", { targetUserId, offer });
-        log("Sent offer to", targetUserId);
+       log("[useWebRTC] Offer emission targetUserId:", targetUserId, typeof targetUserId);
+if (typeof targetUserId !== "number") {
+  log("[useWebRTC] Invalid targetUserId for offer emission:", targetUserId, typeof targetUserId);
+  return;
+}
+socket.emit("webrtc-offer", { targetUserId, offer });
+log("Sent offer to", targetUserId);
       }
     } catch (error) {
       log("Error during call start:", error);
@@ -240,8 +248,13 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
           const answer = await pc.createAnswer();
           await pc.setLocalDescription(answer);
           log("Created and set local description with answer");
-          socket.emit("webrtc-answer", { targetUserId: data.fromSocketId, answer });
-          log("Sent answer to", data.fromSocketId);
+         log("[useWebRTC] Answer emission targetUserId:", data.fromSocketId, typeof data.fromSocketId);
+if (typeof data.fromSocketId !== "number") {
+  log("[useWebRTC] Invalid targetUserId for answer emission:", data.fromSocketId, typeof data.fromSocketId);
+  return;
+}
+socket.emit("webrtc-answer", { targetUserId: data.fromSocketId, answer });
+log("Sent answer to", data.fromSocketId);
         } else {
           log("Not creating answer, signaling state:", pc.signalingState);
         }
