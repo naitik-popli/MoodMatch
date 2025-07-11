@@ -681,7 +681,6 @@ const remoteVideoActive = remoteVideoTrack && remoteVideoTrack.readyState === "l
           </div>
         </div>
       </div>
-      
-    </div>
+
   );
 }
