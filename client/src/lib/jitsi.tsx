@@ -1,13 +1,15 @@
 import { useEffect, useRef } from "react";
 
 export default function JitsiMeet({ roomName, displayName }) {
-  const jitsiContainerRef = useRef<HTMLDivElement>(null);
+  const jitsiContainerRef = useRef(null);
 
   useEffect(() => {
     // @ts-ignore
     if (window.JitsiMeetExternalAPI) {
       // Clean up previous iframes
-      jitsiContainerRef.current.innerHTML = "";
+      if (jitsiContainerRef.current) {
+        jitsiContainerRef.current.innerHTML = "";
+      }
       // @ts-ignore
       const api = new window.JitsiMeetExternalAPI("meet.jit.si", {
         roomName,

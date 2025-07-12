@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Button } from "../components/ui/button";
-import JitsiMeet from "../lib/jitsi";
+import JitsiMeet from "../lib/jitsi.tsx";
 import { Phone, AlertCircle } from "lucide-react";
 import { useSocket } from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
