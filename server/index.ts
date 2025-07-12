@@ -38,13 +38,13 @@ app.use(cors({
 app.options('*', cors());
 
 // Add CORS headers to all responses
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', allowedOrigins.join(','));
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization,my-custom-header');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', allowedOrigins.join(','));
+//   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization,my-custom-header');
+//   res.header('Access-Control-Allow-Credentials', 'true');
+//   next();
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
