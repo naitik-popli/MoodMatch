@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   'https://mood-match-825vrgvf1-naitiks-projects-caeedbd6.vercel.app',
   'https://mood-match-two.vercel.app',
+  'https://mood-match-l7o95opjw-naitiks-projects-caeedbd6.vercel.app/',
   'http://localhost:3000'
 ];
 
