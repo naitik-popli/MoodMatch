@@ -19,6 +19,7 @@ const ICE_SERVERS = [
        "turns:bn-turn2.xirsys.com:443?transport=tcp",
        "turns:bn-turn2.xirsys.com:5349?transport=tcp"
    ]
+   
   }
 
 ];
