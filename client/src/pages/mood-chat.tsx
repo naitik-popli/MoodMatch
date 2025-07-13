@@ -6,7 +6,7 @@ import VideoCall from "../components/video-call";
 import SettingsModal from "../components/settings-modal";
 import useSocket from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
-import { API_BASE_URL } from "../lib/api";
+import { API_BASE_URL } from "../lib/api.ts";
 import TestCallConnection from "../components/TestCallConnection";
 
 export default function MoodChat() {
