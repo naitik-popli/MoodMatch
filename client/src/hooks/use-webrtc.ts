@@ -8,77 +8,93 @@ interface UseWebRTCProps {
   targetUserId?: number;
   externalLocalStream?: MediaStream | null;
 }
-// ...existing imports and code...
 
 export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStream }: UseWebRTCProps) {
-  const log = (...args: any[]) => console.log("[WEBRTC]", ...args);
+  // Stable logger that won't change between renders
+  const log = useRef((...args: any[]) => console.log("[WEBRTC]", ...args)).current;
 
+  // State management
   const [localStream, setLocalStream] = useState<MediaStream | null>(externalLocalStream || null);
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
   const [isConnected, setIsConnected] = useState(false);
   const [connectionState, setConnectionState] = useState<string>("new");
-  const [socketIdReady, setSocketIdReady] = useState(false);
 
+  // Refs for stable references and instance management
   const peerConnectionRef = useRef<RTCPeerConnection | null>(null);
   const localStreamRef = useRef<MediaStream | null>(null);
   const remoteStreamRef = useRef<MediaStream | null>(null);
-  const startCallCalledRef = useRef(false);
-  const mediaInitializedRef = useRef(false);
-  const handlersSetRef = useRef(false);
+  const pendingCandidatesRef = useRef<RTCIceCandidate[]>([]);
   const isMountedRef = useRef(true);
+  const socketRef = useRef<Socket | null>(null);
+  const targetUserIdRef = useRef<number | undefined>();
+  const isInitiatorRef = useRef(false);
+  const operationLockRef = useRef(false);
 
-  const peerSocketIdRef = useRef<string | null>(null);
-  const pendingCandidatesRef = useRef<any[]>([]);
+  // Update refs when props change
+  useEffect(() => {
+    socketRef.current = socket;
+    targetUserIdRef.current = targetUserId;
+    isInitiatorRef.current = isInitiator;
+  }, [socket, targetUserId, isInitiator]);
 
-  // Only create one peer connection per call
-  const setupPeerConnection = useCallback(() => {
-    if (peerConnectionRef.current && 
-      peerConnectionRef.current.connectionState !== 'closed')  {
-      log("Peer connection already exists, reusing it.");
+  // Initialize media stream
+  const initializeMedia = useCallback(async (): Promise<MediaStream | null> => {
+    if (localStreamRef.current) return localStreamRef.current;
+
+    try {
+      const stream = externalLocalStream || await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: { width: 1280, height: 720, facingMode: "user" }
+      });
+
+      localStreamRef.current = stream;
+      setLocalStream(stream);
+      return stream;
+    } catch (error) {
+      log("Media access error:", error);
+      return null;
+    }
+  }, [externalLocalStream, log]);
+
+  // Create and configure peer connection
+  const setupPeerConnection = useCallback((): RTCPeerConnection => {
+    if (peerConnectionRef.current && peerConnectionRef.current.connectionState !== 'closed') {
       return peerConnectionRef.current;
     }
-     if (peerConnectionRef.current) {
-    log("Closing previous connection before creating new one");
-    peerConnectionRef.current.close();
-  }
-    log("Creating new peer connection");
+
+    // Clean up previous connection if exists
+    if (peerConnectionRef.current) {
+      peerConnectionRef.current.close();
+    }
+
     const pc = createPeerConnection();
     peerConnectionRef.current = pc;
 
     pc.onicecandidate = (event) => {
-      log("onicecandidate event", event);
-      if (event.candidate && socket) {
-        log("[useWebRTC] ICE candidate emission targetUserId:", targetUserId, typeof targetUserId);
-        if (typeof targetUserId !== "number") {
-          log("[useWebRTC] Invalid targetUserId for ICE emission:", targetUserId, typeof targetUserId);
-          return;
-        }
-        log("Sending ICE candidate", event.candidate);
-        socket.emit("webrtc-ice-candidate", { targetUserId, candidate: event.candidate });
-      }
+      if (!event.candidate || !socketRef.current || !targetUserIdRef.current) return;
+      
+      log("Sending ICE candidate");
+      socketRef.current.emit("webrtc-ice-candidate", {
+        targetUserId: targetUserIdRef.current,
+        candidate: event.candidate
+      });
     };
 
     pc.ontrack = (event) => {
-      log("[WEBRTC] ontrack fired", event);
-      log("[WEBRTC] event.streams:", event.streams);
-      log("[WEBRTC] event.track:", event.track);
-      if (event.streams && event.streams[0]) {
-        const newStream = event.streams[0];
-        log("[WEBRTC] Received remote stream", newStream);
-        log("[WEBRTC] Remote stream tracks:", newStream.getTracks().map(t => `${t.kind}:${t.readyState}`));
-        remoteStreamRef.current = newStream;
-        setRemoteStream(newStream);
-        log("[WEBRTC] Remote stream set", newStream);
-      } else {
-        log("[WEBRTC] ontrack fired but no streams found", event);
-      }
+      if (!event.streams || event.streams.length === 0) return;
+      
+      const [stream] = event.streams;
+      remoteStreamRef.current = stream;
+      setRemoteStream(stream);
+      log("Received remote stream with tracks:", 
+        stream.getTracks().map(t => `${t.kind}:${t.readyState}`));
     };
 
     pc.onconnectionstatechange = () => {
       const state = pc.connectionState;
-      log("Connection state changed:", state);
       setConnectionState(state);
       setIsConnected(state === "connected");
+      log("Connection state changed:", state);
     };
 
     pc.oniceconnectionstatechange = () => {
@@ -90,263 +106,188 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
     };
 
     return pc;
-  }, [socket, log]);
+  }, [log]);
 
-  // Initialize media devices (bypass media errors for now)
-const initializeMedia = useCallback(async () => {
-  if (mediaInitializedRef.current) return localStreamRef.current;
-  
-  try {
-    const stream = externalLocalStream || 
-      await navigator.mediaDevices.getUserMedia({
-        audio: true,
-        video: { width: 1280, height: 720, facingMode: "user" }
-      });
-
-    mediaInitializedRef.current = true;
-    localStreamRef.current = stream;
-    setLocalStream(stream);
-    return stream;
-  } catch (error) {
-    log("Media access error:", error);
-    return null;
-  }
-}, [externalLocalStream]);
-
-  // Track socket id readiness
-  useEffect(() => {
-    log("Socket ID ready?", !!(socket && socket.id));
-    setSocketIdReady(!!(socket && socket.id));
-  }, [socket, socket?.id]);
-
-  // Start call (initiator)
+  // Start the call process
   const startCall = useCallback(async () => {
-  if (startCallCalledRef.current) return;
-  startCallCalledRef.current = true;
+    if (operationLockRef.current) return;
+    operationLockRef.current = true;
 
-  try {
-    const stream = await initializeMedia();
-    const pc = setupPeerConnection();
-    
-    if (stream) {
-      stream.getTracks().forEach(track => {
-        if (!pc.getSenders().some(s => s.track === track)) {
-          pc.addTrack(track, stream);
+    try {
+      const pc = setupPeerConnection();
+      const stream = await initializeMedia();
+
+      if (stream) {
+        stream.getTracks().forEach(track => {
+          if (!pc.getSenders().some(s => s.track === track)) {
+            pc.addTrack(track, stream);
+          }
+        });
+      }
+
+      if (isInitiatorRef.current) {
+        const offer = await pc.createOffer({
+          offerToReceiveAudio: true,
+          offerToReceiveVideo: true
+        });
+        await pc.setLocalDescription(offer);
+        
+        if (socketRef.current && targetUserIdRef.current) {
+          socketRef.current.emit("webrtc-offer", {
+            targetUserId: targetUserIdRef.current,
+            offer
+          });
         }
-      });
+      }
+    } catch (error) {
+      log("Call setup error:", error);
+    } finally {
+      operationLockRef.current = false;
     }
+  }, [initializeMedia, setupPeerConnection, log]);
 
-    if (isInitiator) {
-      const offer = await pc.createOffer();
-      await pc.setLocalDescription(offer);
-      socket?.emit("webrtc-offer", { targetUserId, offer });
-    }
-  } finally {
-    startCallCalledRef.current = false;
-  }
-}, [initializeMedia, setupPeerConnection, isInitiator, socket, targetUserId]);
-  // Auto-start call when ready (initiator only, only once)
+  // Handle incoming WebRTC signals
   useEffect(() => {
-    if (socketIdReady && isInitiator && !startCallCalledRef.current) {
-      log("Auto-starting call...");
-      startCallCalledRef.current = true;
-      startCall().catch(err => {
-        log("Error starting call:", err);
-        startCallCalledRef.current = false;
-      });
-    }
-  }, [socketIdReady, isInitiator, startCall]);
+    if (!socketRef.current) return;
 
-  // Signaling handlers (only set up once per socket/targetUserId)
- useEffect(() => {
-  if (!socket || socket.disconnected) {
-    log("Socket not ready for signaling handlers");
-    return;
-  }
-     if (handlersSetRef.current) {
-    log("Signaling handlers already set up, skipping.");
-    return;
-  }
-  handlersSetRef.current = true;
-
-  log("Setting up signaling handlers");
-  const offerHandledRef = { current: false };
-
-    const handleOffer = async (data: any) => {
-      log("Received offer", data);
-      if (offerHandledRef.current) {
-        log("Offer already handled, skipping.");
-        return;
-      }
-      offerHandledRef.current = true;
-      peerSocketIdRef.current = data.fromSocketId;
-
-      // Wait for local media stream to be ready (bypass: don't wait forever)
-      let retries = 0;
-      while (!localStreamRef.current && retries < 5) {
-        log("Waiting for local media stream to be ready...");
-        await new Promise(res => setTimeout(res, 100));
-        retries++;
-      }
+    const handleOffer = async (data: { fromSocketId: string; offer: RTCSessionDescriptionInit }) => {
+      if (!isMountedRef.current) return;
 
       try {
         const pc = setupPeerConnection();
-        let stream = localStreamRef.current;
+        const stream = await initializeMedia();
 
-        // 1. Set remote description first!
         await pc.setRemoteDescription(data.offer);
         log("Set remote description with offer");
 
-        // 2. Add local tracks
         if (stream) {
           stream.getTracks().forEach(track => {
-            if (!pc.getSenders().some(sender => sender.track === track)) {
+            if (!pc.getSenders().some(s => s.track === track)) {
               pc.addTrack(track, stream);
-              log("Added local track (receiver)", track);
             }
           });
         }
 
-        // 3. Add any queued ICE candidates
+        // Process queued candidates
         for (const candidate of pendingCandidatesRef.current) {
           try {
             await pc.addIceCandidate(candidate);
-            log("Added queued ICE candidate");
-          } catch (err) {
-            log("Error adding queued ICE candidate", err);
+          } catch (e) {
+            log("Error adding queued candidate:", e);
           }
         }
         pendingCandidatesRef.current = [];
 
-        // 4. Create and set answer
         if (pc.signalingState === "have-remote-offer") {
-          log("Creating answer...");
           const answer = await pc.createAnswer();
           await pc.setLocalDescription(answer);
-          log("Created and set local description with answer");
-          log("[useWebRTC] Answer emission targetUserId:", data.fromSocketId, typeof data.fromSocketId);
-          log("[useWebRTC] Answer emission targetUserId:", targetUserId, typeof targetUserId);
-          if (typeof targetUserId !== "number") {
-            log("[useWebRTC] Invalid targetUserId for answer emission:", targetUserId, typeof targetUserId);
-            return;
+          
+          if (socketRef.current && targetUserIdRef.current) {
+            socketRef.current.emit("webrtc-answer", {
+              targetUserId: targetUserIdRef.current,
+              answer
+            });
           }
-          socket.emit("webrtc-answer", { targetUserId, answer });
-          log("Sent answer to", targetUserId);
-        } else {
-          log("Not creating answer, signaling state:", pc.signalingState);
         }
       } catch (error) {
-        log("Error handling offer (bypassed):", error);
+        log("Offer handling error:", error);
       }
     };
 
-    const handleAnswer = async (data: any) => {
-      log("Received answer", data);
-      peerSocketIdRef.current = data.fromSocketId;
-      if (!peerConnectionRef.current) {
-        log("No peer connection to set answer on");
-        return;
-      }
+    const handleAnswer = async (data: { answer: RTCSessionDescriptionInit }) => {
+      if (!peerConnectionRef.current) return;
       try {
         await peerConnectionRef.current.setRemoteDescription(data.answer);
         log("Set remote description with answer");
       } catch (error) {
-        log("Error handling answer:", error);
+        log("Answer handling error:", error);
       }
     };
 
-    const handleIce = async (data: any) => {
-      log("Received ICE candidate", data);
+    const handleIceCandidate = async (data: { candidate: RTCIceCandidateInit }) => {
       if (!peerConnectionRef.current) {
-        log("No peer connection to add ICE candidate to");
+        pendingCandidatesRef.current.push(data.candidate);
         return;
       }
-      if (peerConnectionRef.current.remoteDescription && peerConnectionRef.current.remoteDescription.type) {
-        try {
+
+      try {
+        if (peerConnectionRef.current.remoteDescription) {
           await peerConnectionRef.current.addIceCandidate(data.candidate);
-          log("Added ICE candidate");
-        } catch (error) {
-          log("Error adding ICE candidate:", error);
+        } else {
+          pendingCandidatesRef.current.push(data.candidate);
         }
-      } else {
-        // Queue ICE candidates until remote description is set
-        pendingCandidatesRef.current.push(data.candidate);
-        log("Queued ICE candidate");
+      } catch (error) {
+        log("ICE candidate error:", error);
       }
     };
 
-    socket.on("webrtc-offer", handleOffer);
-    socket.on("webrtc-answer", handleAnswer);
-    socket.on("webrtc-ice-candidate", handleIce);
+    socketRef.current.on("webrtc-offer", handleOffer);
+    socketRef.current.on("webrtc-answer", handleAnswer);
+    socketRef.current.on("webrtc-ice-candidate", handleIceCandidate);
 
     return () => {
-      log("Cleaning up signaling handlers");
-      socket.off("webrtc-offer", handleOffer);
-      socket.off("webrtc-answer", handleAnswer);
-      socket.off("webrtc-ice-candidate", handleIce);
-      handlersSetRef.current = false;
+      if (!socketRef.current) return;
+      socketRef.current.off("webrtc-offer", handleOffer);
+      socketRef.current.off("webrtc-answer", handleAnswer);
+      socketRef.current.off("webrtc-ice-candidate", handleIceCandidate);
     };
-  }, [socket, targetUserId, setupPeerConnection]);
+  }, [initializeMedia, setupPeerConnection, log]);
 
-  // End call and cleanup
+  // Auto-start call for initiator when ready
+  useEffect(() => {
+    if (isInitiatorRef.current && socketRef.current?.connected) {
+      startCall();
+    }
+  }, [startCall]);
+
+  // Cleanup function
   const endCall = useCallback(() => {
-    log("Ending call and cleaning up");
+    if (!isMountedRef.current) return;
+
     if (peerConnectionRef.current) {
       peerConnectionRef.current.close();
       peerConnectionRef.current = null;
-      log("Peer connection closed");
     }
+
     if (localStreamRef.current) {
-      localStreamRef.current.getTracks().forEach(track => {
-        log("Stopping local track", track);
-        track.stop();
-      });
+      localStreamRef.current.getTracks().forEach(track => track.stop());
       localStreamRef.current = null;
+      setLocalStream(null);
     }
-    if (remoteStreamRef.current) {
-      log("Clearing remote stream ref");
-      remoteStreamRef.current = null;
-    }
-    setLocalStream(null);
+
+    remoteStreamRef.current = null;
     setRemoteStream(null);
     setIsConnected(false);
     setConnectionState("closed");
-    mediaInitializedRef.current = false;
-    startCallCalledRef.current = false;
+    pendingCandidatesRef.current = [];
   }, []);
 
-  // Mute/unmute audio
-  const toggleMute = useCallback(() => {
+  // Component cleanup
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+      endCall();
+    };
+  }, [endCall]);
+
+  // Media control functions
+  const toggleMute = useCallback((): boolean => {
     const audioTrack = localStreamRef.current?.getAudioTracks()[0];
     if (audioTrack) {
       audioTrack.enabled = !audioTrack.enabled;
-      log("Toggled mute, now enabled:", audioTrack.enabled);
       return !audioTrack.enabled;
     }
-    log("No audio track to mute/unmute");
     return false;
   }, []);
 
-  // Enable/disable video
-  const toggleVideo = useCallback(() => {
+  const toggleVideo = useCallback((): boolean => {
     const videoTrack = localStreamRef.current?.getVideoTracks()[0];
     if (videoTrack) {
       videoTrack.enabled = !videoTrack.enabled;
-      log("Toggled video, now enabled:", videoTrack.enabled);
       return videoTrack.enabled;
     }
-    log("No video track to enable/disable");
     return false;
   }, []);
-
-  // Cleanup on unmount
-  // Proper cleanup on unmount
-useEffect(() => {
-  return () => {
-    isMountedRef.current = false;
-    endCall();
-  };
-}, [endCall]);
 
   return {
     localStream,
