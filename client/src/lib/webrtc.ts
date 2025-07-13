@@ -23,13 +23,21 @@ const ICE_SERVERS = [
 
 ];
 
+
+
 export function createPeerConnection(): RTCPeerConnection {
  return new RTCPeerConnection({
   iceServers: ICE_SERVERS,
   iceCandidatePoolSize: 10, // optional performance improvement
 });
 }
-
+const pc = new RTCPeerConnection({
+  iceServers: ICE_SERVERS,
+  iceTransportPolicy: "all", // Allow all candidates
+  iceCandidatePoolSize: 5,
+  bundlePolicy: "max-bundle",
+  rtcpMuxPolicy: "require"
+});
 
 export function getMediaConstraints() {
   return {
