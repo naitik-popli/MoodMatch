@@ -17,7 +17,8 @@ const allowedOrigins = [
   'https://mood-match-825vrgvf1-naitiks-projects-caeedbd6.vercel.app',
   'https://mood-match-two.vercel.app',
   'http://localhost:3000',
-  'https://mood-match-gsiu64tip-naitiks-projects-caeedbd6.vercel.app'
+  'https://mood-match-gsiu64tip-naitiks-projects-caeedbd6.vercel.app',
+  'https://mood-match-one.vercel.app'
 ];
 
 app.use(cors({
