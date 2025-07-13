@@ -61,9 +61,24 @@ export default function JitsiMeet({ roomName, displayName }: JitsiMeetProps) {
       configOverwrite: {
         startWithAudioMuted: false,
         startWithVideoMuted: false,
+        prejoinPageEnabled: false,
+        enableWelcomePage: false,
+        disableDeepLinking: true,
       },
       interfaceConfigOverwrite: {
         // You can customize the UI here
+        SHOW_JITSI_WATERMARK: false,
+        SHOW_WATERMARK_FOR_GUESTS: false,
+        SHOW_BRAND_WATERMARK: false,
+        SHOW_POWERED_BY: false,
+        DEFAULT_REMOTE_DISPLAY_NAME: 'Fellow MoodMatcher',
+        TOOLBAR_BUTTONS: [
+          'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
+          'fodeviceselection', 'hangup', 'profile', 'chat', 'recording',
+          'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
+          'videoquality', 'filmstrip', 'invite', 'feedback', 'stats', 'shortcuts',
+          'tileview', 'videobackgroundblur', 'download', 'help', 'mute-everyone'
+        ],
       },
     });
     // Optional: handle events
