@@ -12,12 +12,12 @@ import { moodQueue } from "@shared/schema"; // Added missing import
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Enhanced CORS Configuration
 const allowedOrigins = [
   'https://mood-match-825vrgvf1-naitiks-projects-caeedbd6.vercel.app',
   'https://mood-match-two.vercel.app',
-  'https://mood-match-l7o95opjw-naitiks-projects-caeedbd6.vercel.app', // <-- no slash!
-  'http://localhost:3000'
+  'https://mood-match-l7o95opjw-naitiks-projects-caeedbd6.vercel.app',
+  'http://localhost:3000',
+  'https://mood-match-one.vercel.app' // Added missing origin causing CORS error
 ];
 
 app.use(cors({
