@@ -1,118 +1,1900 @@
 🔗 Socket connection status: false
-index-BhdzOykj.js:328 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
-2index-BhdzOykj.js:284 ✅ Connected to socket: Zy7rZdluOJ0p2gTLAAAB
-index-BhdzOykj.js:328 🔗 Socket connection status: true
-index-BhdzOykj.js:328 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
-2index-BhdzOykj.js:284 [WaitingRoom] Emitting leave-mood-queue for user 516
-index-BhdzOykj.js:328 ✅ Match found on frontend: {role: 'receiver', partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', sessionId: 632, timestamp: '2025-07-13T08:47:08.627Z'}
-index-BhdzOykj.js:328 🧩 handleMatchFound called with data: {role: 'receiver', partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', sessionId: 632, timestamp: '2025-07-13T08:47:08.627Z'}
-index-BhdzOykj.js:328 📦 Updated sessionData after match: {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:328 🧩 handleMatchFound called with data: {role: 'receiver', partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', sessionId: 632, timestamp: '2025-07-13T08:47:08.627Z'}
-index-BhdzOykj.js:328 ⚠️ Already matched, ignoring duplicate match-found event
-(anonymous) @ index-BhdzOykj.js:328
-_i @ index-BhdzOykj.js:38
-Ea @ index-BhdzOykj.js:38
-useState @ index-BhdzOykj.js:38
-H.useState @ index-BhdzOykj.js:9
-GP @ index-BhdzOykj.js:328
-Xu @ index-BhdzOykj.js:38
-Ec @ index-BhdzOykj.js:40
-bg @ index-BhdzOykj.js:40
-Cg @ index-BhdzOykj.js:40
-Jx @ index-BhdzOykj.js:40
-pl @ index-BhdzOykj.js:40
-wg @ index-BhdzOykj.js:40
-E @ index-BhdzOykj.js:25
-M @ index-BhdzOykj.js:25Understand this warning
-index-BhdzOykj.js:328 🔗 Socket connection status: true
-index-BhdzOykj.js:328 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 🧹 Component unmounted, but socket connection kept alive
-index-BhdzOykj.js:284 [WaitingRoom] Emitting leave-mood-queue for user 516
-index-BhdzOykj.js:284 [JitsiMeet] Component loaded with roomName: MoodMatchRoom_632 displayName: User_516
-index-BhdzOykj.js:284 [JitsiMeet] JitsiMeetExternalAPI is NOT loaded! Did you include the script in index.html?
-(anonymous) @ index-BhdzOykj.js:284
-Ml @ index-BhdzOykj.js:40
-Yr @ index-BhdzOykj.js:40
-(anonymous) @ index-BhdzOykj.js:40
-E @ index-BhdzOykj.js:25
-M @ index-BhdzOykj.js:25Understand this error
-index-BhdzOykj.js:284 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
-index-BhdzOykj.js:284 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
-index-BhdzOykj.js:284 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
-index-BhdzOykj.js:328 📞 Transitioning to VideoCall: {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
-index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
-index-BhdzOykj.js:284 [VideoCall] Comp
+index-D0tLipKk.js:328 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
+index-D0tLipKk.js:284 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-D0tLipKk.js:284 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-D0tLipKk.js:284 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+index-D0tLipKk.js:328 🔗 Socket connection status: false
+index-D0tLipKk.js:328 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
+index-D0tLipKk.js:284 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-D0tLipKk.js:284 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-D0tLipKk.js:284 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+2index-D0tLipKk.js:284 ✅ Connected to socket: M8bq4fbe10UQT74bAABM
+index-D0tLipKk.js:328 🔗 Socket connection status: true
+index-D0tLipKk.js:328 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
+index-D0tLipKk.js:328 ✅ Match found on frontend: {role: 'receiver', partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', sessionId: 673, timestamp: '2025-07-13T11:53:25.673Z'}
+index-D0tLipKk.js:328 🧩 handleMatchFound called with data: {role: 'receiver', partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', sessionId: 673, timestamp: '2025-07-13T11:53:25.673Z'}
+index-D0tLipKk.js:328 📦 Updated sessionData after match: {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:328 🧩 handleMatchFound called with data: {role: 'receiver', partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', sessionId: 673, timestamp: '2025-07-13T11:53:25.673Z'}
+index-D0tLipKk.js:328 ⚠️ Already matched, ignoring duplicate match-found event
+(anonymous) @ index-D0tLipKk.js:328
+Ti @ index-D0tLipKk.js:38
+Ea @ index-D0tLipKk.js:38
+useState @ index-D0tLipKk.js:38
+H.useState @ index-D0tLipKk.js:9
+XP @ index-D0tLipKk.js:328
+Xu @ index-D0tLipKk.js:38
+Ec @ index-D0tLipKk.js:40
+bg @ index-D0tLipKk.js:40
+Cg @ index-D0tLipKk.js:40
+Jx @ index-D0tLipKk.js:40
+pl @ index-D0tLipKk.js:40
+wg @ index-D0tLipKk.js:40
+E @ index-D0tLipKk.js:25
+M @ index-D0tLipKk.js:25Understand this warning
+index-D0tLipKk.js:328 🔗 Socket connection status: true
+index-D0tLipKk.js:328 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 🧹 Component unmounted, but socket connection kept alive
+index-D0tLipKk.js:284 [WaitingRoom] Emitting leave-mood-queue for user 558
+index-D0tLipKk.js:284 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-D0tLipKk.js:284 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-D0tLipKk.js:284 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+index-D0tLipKk.js:328 📞 Transitioning to VideoCall: {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [JitsiMeet] Initializing JitsiMeetExternalAPI MoodMatchRoom_673 User_558
+external_api.js:350 Unrecognized feature: 'speaker-selection'.
+_createIFrame @ external_api.js:350
+T @ external_api.js:305
+(anonymous) @ index-D0tLipKk.js:284
+Ml @ index-D0tLipKk.js:40
+Yr @ index-D0tLipKk.js:40
+(anonymous) @ index-D0tLipKk.js:40
+E @ index-D0tLipKk.js:25
+M @ index-D0tLipKk.js:25Understand this warning
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+MoodMatchRoom_673:73 (TIME) index.html loaded:	 1068.6000000000931
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+PersistenceRegistry.ts:61 2025-07-13T11:53:29.912Z [features/base/redux] <Object.persistState>:  redux state persisted. fa3310c8783e7565279e6500e3427f95 -> 2191ffe1647aed16582e43264233db99
+middleware.any.ts:46 2025-07-13T11:53:29.928Z [features/base/sounds] PLAY_SOUND: no sound found for id: RECORDING_OFF_SOUND
+a @ Logger.js:155
+(anonymous) @ middleware.any.ts:46
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:257
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:30
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:53
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:23
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:33
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+(anonymous) @ actions.ts:66
+(anonymous) @ index.js:16
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:27
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:257
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:30
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:53
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:23
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:33
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+(anonymous) @ subscriber.ts:49
+uc @ react-dom.production.min.js:274
+cte @ subscriber.ts:47
+(anonymous) @ subscriber.ts:22
+_listener @ StateListenerRegistry.ts:31
+p @ redux.js:220
+(anonymous) @ index.js:20
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:27
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:257
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:30
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:53
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:23
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+await in (anonymous)
+componentDidMount @ AbstractApp.ts:17
+kl @ react-dom.production.min.js:261
+wl @ react-dom.production.min.js:260
+vl @ react-dom.production.min.js:259
+(anonymous) @ react-dom.production.min.js:283
+_c @ react-dom.production.min.js:281
+cc @ react-dom.production.min.js:273
+qa @ react-dom.production.min.js:127
+dc @ react-dom.production.min.js:274
+(anonymous) @ react-dom.production.min.js:312
+eu @ react-dom.production.min.js:313
+t.render @ react-dom.production.min.js:322
+jfe.renderEntryPoint @ index.web.js:77
+(anonymous) @ MoodMatchRoom_673:37Understand this warning
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+functions.any.ts:145 2025-07-13T11:53:30.293Z [features/base/config] Extending config with: {"disableDeepLinking":true,"prejoinPageEnabled":false,"requireDisplayName":false,"startAudioOnly":false,"startWithAudioMuted":false,"startWithVideoMuted":false}
+functions.any.ts:145 2025-07-13T11:53:30.330Z [features/base/config] Extending interfaceConfig with: {"DEFAULT_REMOTE_DISPLAY_NAME":"Fellow MoodMatcher","SHOW_POWERED_BY":false,"TOOLBAR_BUTTONS":["microphone","camera","closedcaptions","desktop","fullscreen","fodeviceselection","hangup","profile","chat","recording","livestreaming","etherpad","sharedvideo","settings","raisehand","videoquality","filmstrip","invite","feedback","stats","shortcuts","tileview","videobackgroundblur","download","help","mute-everyone"]}
+ChromeExtensionBanner.web.tsx:66 2025-07-13T11:53:30.357Z [features/chrome-banner] <n5.componentDidUpdate>:  Chrome extension URL found.
+ChromeExtensionBanner.web.tsx:69 2025-07-13T11:53:30.362Z [features/chrome-banner] <n5.componentDidUpdate>:  Chrome extension(s) info found.
+JitsiMeetJS.ts:182 2025-07-13T11:53:30.374Z [JitsiMeetJS] <Object.init>:  This appears to be chrome, ver: 137.0.0.0
+LocalStatsCollector.js:175 2025-07-13T11:53:30.390Z [modules/statistics/LocalStatsCollector] <gs.connectAudioContext>:  Connecting audio context
+RTCUtils.js:274 2025-07-13T11:53:30.407Z [modules/RTC/RTCUtils] <Na.init>:  Stereo: false
+actions.ts:44 2025-07-13T11:53:30.416Z [features/base/lib-jitsi-meet] lib-jitsi-meet version: 6de3a8ff
+actions.ts:45 2025-07-13T11:53:30.419Z [features/base/lib-jitsi-meet] User Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+middleware.any.ts:169 2025-07-13T11:53:30.439Z [features/base/media] Start muted: 
+webhid-manager.ts:576 2025-07-13T11:53:30.445Z [features/hid] <eY.sendDeviceReport>:  There are currently non-compliant conditions
+a @ Logger.js:155
+sendDeviceReport @ webhid-manager.ts:576
+(anonymous) @ middleware.ts:70
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+(anonymous) @ middleware.any.ts:173
+(anonymous) @ middleware.any.ts:37
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+(anonymous) @ actions.web.ts:57
+await in (anonymous)
+(anonymous) @ index.js:16
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:27
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:257
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:30
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:53
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:23
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:33
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+_openURL @ AbstractApp.ts:61
+componentDidMount @ AbstractApp.ts:20
+await in componentDidMount
+kl @ react-dom.production.min.js:261
+wl @ react-dom.production.min.js:260
+vl @ react-dom.production.min.js:259
+(anonymous) @ react-dom.production.min.js:283
+_c @ react-dom.production.min.js:281
+cc @ react-dom.production.min.js:273
+qa @ react-dom.production.min.js:127
+dc @ react-dom.production.min.js:274
+(anonymous) @ react-dom.production.min.js:312
+eu @ react-dom.production.min.js:313
+t.render @ react-dom.production.min.js:322
+jfe.renderEntryPoint @ index.web.js:77
+(anonymous) @ MoodMatchRoom_673:37Understand this warning
+middleware.any.ts:211 2025-07-13T11:53:30.452Z [features/base/media] Start audio only set to false
+functions.ts:120 2025-07-13T11:53:30.543Z [features/analytics] Initialized 1 analytics handlers
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index.web.js:61 2025-07-13T11:53:31.160Z [index.web] <HTMLDocument.<anonymous>>:  (TIME) document ready:	 4826.100000000093
+chrome-extension://invalid/:1 
+            
+            
+           GET chrome-extension://invalid/ net::ERR_FAILED
+Image
+(anonymous) @ checkChromeExtensionsInstalled.web.ts:11
+(anonymous) @ checkChromeExtensionsInstalled.web.ts:9
+(anonymous) @ checkChromeExtensionsInstalled.web.ts:20
+(anonymous) @ checkChromeExtensionsInstalled.web.ts:21
+uF @ checkChromeExtensionsInstalled.web.ts:21
+componentDidUpdate @ ChromeExtensionBanner.web.tsx:71
+kl @ react-dom.production.min.js:261
+wl @ react-dom.production.min.js:260
+vl @ react-dom.production.min.js:259
+(anonymous) @ react-dom.production.min.js:283
+_c @ react-dom.production.min.js:281
+cc @ react-dom.production.min.js:273
+qa @ react-dom.production.min.js:127
+uc @ react-dom.production.min.js:274
+notify @ Subscription.js:15
+notifyNestedSubs @ Subscription.js:85
+a @ Subscription.js:90
+p @ redux.js:220
+(anonymous) @ index.js:20
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:161
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:109
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:38
+(anonymous) @ middleware.ts:58
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:108
+(anonymous) @ middleware.ts:38
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:17
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:33
+(anonymous) @ middleware.web.ts:29
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:107
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+(anonymous) @ actions.ts:115
+(anonymous) @ index.js:16
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:27
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:257
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:30
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:53
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:23
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:33
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+(anonymous) @ actions.web.ts:56
+await in (anonymous)
+(anonymous) @ index.js:16
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:27
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:257
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:30
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:53
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:23
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:33
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+_openURL @ AbstractApp.ts:61
+componentDidMount @ AbstractApp.ts:20
+await in componentDidMount
+kl @ react-dom.production.min.js:261
+wl @ react-dom.production.min.js:260
+vl @ react-dom.production.min.js:259
+(anonymous) @ react-dom.production.min.js:283
+_c @ react-dom.production.min.js:281
+cc @ react-dom.production.min.js:273
+qa @ react-dom.production.min.js:127
+dc @ react-dom.production.min.js:274
+(anonymous) @ react-dom.production.min.js:312
+eu @ react-dom.production.min.js:313
+t.render @ react-dom.production.min.js:322
+jfe.renderEntryPoint @ index.web.js:77
+(anonymous) @ MoodMatchRoom_673:37Understand this error
+RTCUtils.js:484 2025-07-13T11:53:31.487Z [modules/RTC/RTCUtils] <Na._onMediaDevicesListChanged>:  list of media devices has changed: (5) [InputDeviceInfo, InputDeviceInfo, InputDeviceInfo, MediaDeviceInfo, MediaDeviceInfo]
+chrome-extension://invalid/:1 
+            
+            
+           GET chrome-extension://invalid/ net::ERR_FAILED
+Image
+(anonymous) @ checkChromeExtensionsInstalled.web.ts:11
+(anonymous) @ checkChromeExtensionsInstalled.web.ts:9
+(anonymous) @ checkChromeExtensionsInstalled.web.ts:20
+(anonymous) @ checkChromeExtensionsInstalled.web.ts:21
+uF @ checkChromeExtensionsInstalled.web.ts:21
+componentDidUpdate @ ChromeExtensionBanner.web.tsx:71
+kl @ react-dom.production.min.js:261
+wl @ react-dom.production.min.js:260
+vl @ react-dom.production.min.js:259
+(anonymous) @ react-dom.production.min.js:283
+_c @ react-dom.production.min.js:281
+cc @ react-dom.production.min.js:273
+qa @ react-dom.production.min.js:127
+rc @ react-dom.production.min.js:266
+enqueueSetState @ react-dom.production.min.js:145
+b.setState @ react.production.min.js:12
+componentDidUpdate @ ChromeExtensionBanner.web.tsx:75
+await in componentDidUpdate
+kl @ react-dom.production.min.js:261
+wl @ react-dom.production.min.js:260
+vl @ react-dom.production.min.js:259
+(anonymous) @ react-dom.production.min.js:283
+_c @ react-dom.production.min.js:281
+cc @ react-dom.production.min.js:273
+qa @ react-dom.production.min.js:127
+uc @ react-dom.production.min.js:274
+notify @ Subscription.js:15
+notifyNestedSubs @ Subscription.js:85
+a @ Subscription.js:90
+p @ redux.js:220
+(anonymous) @ index.js:20
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:161
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:109
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:38
+(anonymous) @ middleware.ts:58
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:108
+(anonymous) @ middleware.ts:38
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:17
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:33
+(anonymous) @ middleware.web.ts:29
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:107
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+(anonymous) @ actions.ts:115
+(anonymous) @ index.js:16
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:27
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:257
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:30
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:53
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:23
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:33
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+(anonymous) @ actions.web.ts:56
+await in (anonymous)
+(anonymous) @ index.js:16
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:27
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:257
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:30
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:53
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:23
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:33
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+_openURL @ AbstractApp.ts:61
+componentDidMount @ AbstractApp.ts:20
+await in componentDidMount
+kl @ react-dom.production.min.js:261
+wl @ react-dom.production.min.js:260
+vl @ react-dom.production.min.js:259
+(anonymous) @ react-dom.production.min.js:283
+_c @ react-dom.production.min.js:281
+cc @ react-dom.production.min.js:273
+qa @ react-dom.production.min.js:127
+dc @ react-dom.production.min.js:274
+(anonymous) @ react-dom.production.min.js:312
+eu @ react-dom.production.min.js:313
+t.render @ react-dom.production.min.js:322
+jfe.renderEntryPoint @ index.web.js:77
+(anonymous) @ MoodMatchRoom_673:37Understand this error
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+PersistenceRegistry.ts:61 2025-07-13T11:53:32.285Z [features/base/redux] <Object.persistState>:  redux state persisted. 2191ffe1647aed16582e43264233db99 -> 0356e31fc905b3aeb46b377fbafdca4c
+conference.js:653 2025-07-13T11:53:32.567Z [conference.js] <Object.init>:  Dispatching connect from init since prejoin is not visible.
+actions.any.ts:99 2025-07-13T11:53:32.588Z [features/base/connection] Using service URL wss://meet.jit.si/xmpp-websocket
+moderator.js:76 2025-07-13T11:53:32.609Z [modules/xmpp/moderator] <new Qc>:  Using http for conference requests.
+xmpp.js:910 2025-07-13T11:53:32.618Z [modules/xmpp/xmpp] <th._initStrophePlugins>:  P2P STUN servers:  [{…}]
+moderator.js:323 2025-07-13T11:53:32.738Z [modules/xmpp/moderator] Sending conference request over HTTP to https://meet.jit.si/conference-request/v1?room=moodmatchroom_673
+RTCUtils.js:690 2025-07-13T11:53:32.772Z [modules/RTC/RTCUtils] <Na.<anonymous>>:  Got media constraints:  {"video":{"height":{"ideal":720,"max":720,"min":180},"width":{"ideal":1280,"max":1280,"min":320},"frameRate":{"max":30}},"audio":{"autoGainControl":true,"echoCancellation":true,"noiseSuppression":true}}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+MoodMatchRoom_673:76 (TIME) window loaded event:	 7076
+chext_loader.js:69 Initialized chextloader at: 1752407613411
+moderator.js:383 2025-07-13T11:53:33.458Z [modules/xmpp/moderator] <Qc._handleSuccess>:  Adding focus JID: focus@auth.meet.jit.si
+moderator.js:391 2025-07-13T11:53:33.461Z [modules/xmpp/moderator] <Qc._handleSuccess>:  Authentication enabled: false
+moderator.js:402 2025-07-13T11:53:33.461Z [modules/xmpp/moderator] <Qc._handleSuccess>:  Sip gateway enabled: undefined
+moderator.js:440 2025-07-13T11:53:33.462Z [modules/xmpp/moderator] <Qc._handleSuccess>:  Conference-request successful, ready to join the MUC.
+xmpp.js:322 2025-07-13T11:53:33.466Z [modules/xmpp/xmpp] <th.connectionHandler>:  (TIME) Strophe connecting:	 7132.199999999953
+RTCUtils.js:389 2025-07-13T11:53:33.579Z [modules/RTC/RTCUtils] onUserMediaSuccess
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+XmppConnection.js:418 2025-07-13T11:53:35.991Z [modules/xmpp/XmppConnection] <zc._maybeEnableStreamResume>:  Enabling XEP-0198 stream management
+XmppConnection.js:433 2025-07-13T11:53:35.993Z [modules/xmpp/XmppConnection] <zc._maybeStartWSKeepAlive>:  WebSocket keep alive interval: 60000ms
+strophe.ping.ts:159 2025-07-13T11:53:35.995Z [modules/xmpp/strophe.ping] <qc.startInterval>:  XMPP pings will be sent every 10000 ms
+xmpp.js:322 2025-07-13T11:53:35.995Z [modules/xmpp/xmpp] <th.connectionHandler>:  (TIME) Strophe connected:	 9661.300000000047
+xmpp.js:337 2025-07-13T11:53:36.000Z [modules/xmpp/xmpp] <th.connectionHandler>:  My Jabber ID: d72c93fc-4018-438c-ab34-68760db98038@guest.meet.jit.si/EJ67FlX-oOUf
+actions.ts:17 2025-07-13T11:53:36.004Z [features/base/dialog] <vC>:  Hide dialog: cQ
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+xmpp.js:739 2025-07-13T11:53:36.102Z [modules/xmpp/xmpp] <th.createRoom>:  JID d72c93fc-4018-438c-ab34-68760db98038@guest.meet.jit.si/EJ67FlX-oOUf using MUC nickname d72c93fc
+ChatRoom.js:169 2025-07-13T11:53:36.106Z [modules/xmpp/ChatRoom] <new yd>:  Joining MUC as moodmatchroom_673@conference.meet.jit.si/d72c93fc
+CodecSelection.js:99 2025-07-13T11:53:36.206Z [modules/qualitycontrol/CodecSelection] <new am>:  Codec preference order for jvb connection is av1,vp9,vp8,h264
+CodecSelection.js:99 2025-07-13T11:53:36.238Z [modules/qualitycontrol/CodecSelection] <new am>:  Codec preference order for p2p connection is av1,vp9,vp8,h264
+JitsiConference.js:506 2025-07-13T11:53:36.304Z [JitsiConference] <eg._init>:  Using VAD detection for generating talk while muted events
+AvgRTPStatsReporter.js:355 2025-07-13T11:53:36.310Z [modules/statistics/AvgRTPStatsReporter] <new Cm>:  Avg RTP stats will be calculated every 15 samples
+JitsiConference.js:256 2025-07-13T11:53:36.314Z [JitsiConference] <new eg>:  backToP2PDelay: 5
+JitsiConference.js:295 2025-07-13T11:53:36.319Z [JitsiConference] <new eg>:  End-to-End Encryption is supported
+reducer.ts:28 2025-07-13T11:53:36.458Z [features/base/jwt] JWT avatarURL temporarily not loaded till jwt is verified on connect
+actions.ts:17 2025-07-13T11:53:36.519Z [features/base/dialog] <vC>:  Hide dialog: 
+JitsiConference.js:1351 2025-07-13T11:53:36.540Z [JitsiConference] <eg._doReplaceTrack>:  _doReplaceTrack - no JVB JingleSession
+JitsiConference.js:1357 2025-07-13T11:53:36.549Z [JitsiConference] <eg._doReplaceTrack>:  _doReplaceTrack - no P2P JingleSession
+JitsiConference.js:1351 2025-07-13T11:53:36.585Z [JitsiConference] <eg._doReplaceTrack>:  _doReplaceTrack - no JVB JingleSession
+JitsiConference.js:1357 2025-07-13T11:53:36.589Z [JitsiConference] <eg._doReplaceTrack>:  _doReplaceTrack - no P2P JingleSession
+actions.any.ts:270 2025-07-13T11:53:36.644Z [features/base/tracks] Replace audio track - unmuted
+webhid-manager.ts:576 2025-07-13T11:53:36.657Z [features/hid] <eY.sendDeviceReport>:  There are currently non-compliant conditions
+a @ Logger.js:155
+sendDeviceReport @ webhid-manager.ts:576
+(anonymous) @ middleware.ts:70
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+(anonymous) @ actions.any.ts:271
+(anonymous) @ index.js:16
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:41
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:27
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:257
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:30
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:53
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:23
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+(anonymous) @ actions.any.ts:238
+await in (anonymous)
+(anonymous) @ index.js:16
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:41
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:27
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:257
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:30
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:53
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:23
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+(anonymous) @ conference.js:1293
+_executeNext @ TaskQueue.js:52
+enqueue @ TaskQueue.js:29
+(anonymous) @ conference.js:1283
+useAudioStream @ conference.js:1282
+(anonymous) @ conference.js:1201
+_setLocalAudioVideoStreams @ conference.js:1197
+_createRoom @ conference.js:1181
+startConference @ conference.js:508
+(anonymous) @ middleware.web.ts:164
+Promise.then
+(anonymous) @ middleware.web.ts:156
+(anonymous) @ middleware.any.ts:263
+(anonymous) @ middleware.any.ts:51
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+e @ actions.any.ts:233
+o.emit @ events.js:153
+connectionHandler @ xmpp.js:370
+_stropheConnectionCb @ XmppConnection.js:330
+_changeConnectStatus @ strophe.umd.js:3514
+_onSessionResultIQ @ strophe.umd.js:4204
+run @ strophe.umd.js:2316
+(anonymous) @ strophe.umd.js:3652
+(anonymous) @ strophe.umd.js:3649
+forEachChild @ strophe.umd.js:1311
+_dataRecv @ strophe.umd.js:3647
+_onMessage @ strophe.umd.js:5996
+socket.onmessage @ strophe.umd.js:5729Understand this warning
+middleware.web.ts:70 2025-07-13T11:53:36.854Z [features/base/settings] switched local audio input device to: default
+actions.any.ts:31 2025-07-13T11:53:36.856Z [features/base/tracks] Adding video track - unmuted
+FaceLandmarksDetector.ts:133 2025-07-13T11:53:36.882Z [features/face-landmarks] <K4.startDetection>:  Worker has not been initialized
+middleware.web.ts:64 2025-07-13T11:53:36.976Z [features/base/settings] switched local video device to: 3c8d2737f0fc378d9640e217ed4f230105748a30241b38a302ec5713ca5c0b00
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+conference.js:1221 2025-07-13T11:53:37.059Z [conference.js] Initialized with 2 local tracks
+chrome-extension://invalid/:1 
+            
+            
+           GET chrome-extension://invalid/ net::ERR_FAILED
+Image
+(anonymous) @ checkChromeExtensionsInstalled.web.ts:11
+(anonymous) @ checkChromeExtensionsInstalled.web.ts:9
+(anonymous) @ checkChromeExtensionsInstalled.web.ts:20
+(anonymous) @ checkChromeExtensionsInstalled.web.ts:21
+uF @ checkChromeExtensionsInstalled.web.ts:21
+componentDidUpdate @ ChromeExtensionBanner.web.tsx:71
+kl @ react-dom.production.min.js:261
+wl @ react-dom.production.min.js:260
+vl @ react-dom.production.min.js:259
+(anonymous) @ react-dom.production.min.js:283
+_c @ react-dom.production.min.js:281
+cc @ react-dom.production.min.js:273
+qa @ react-dom.production.min.js:127
+uc @ react-dom.production.min.js:274
+notify @ Subscription.js:15
+notifyNestedSubs @ Subscription.js:85
+a @ Subscription.js:90
+p @ redux.js:220
+(anonymous) @ index.js:20
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:41
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:27
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:257
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:30
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:53
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:23
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+(anonymous) @ actions.any.ts:33
+(anonymous) @ index.js:16
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:41
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:27
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:257
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:30
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:53
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:23
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+(anonymous) @ middleware.any.ts:79
+_listener @ StateListenerRegistry.ts:31
+p @ redux.js:220
+(anonymous) @ index.js:20
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:195
+Promise.then
+(anonymous) @ middleware.web.ts:156
+(anonymous) @ middleware.any.ts:263
+(anonymous) @ middleware.any.ts:51
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+e @ actions.any.ts:233
+o.emit @ events.js:153
+connectionHandler @ xmpp.js:370
+_stropheConnectionCb @ XmppConnection.js:330
+_changeConnectStatus @ strophe.umd.js:3514
+_onSessionResultIQ @ strophe.umd.js:4204
+run @ strophe.umd.js:2316
+(anonymous) @ strophe.umd.js:3652
+(anonymous) @ strophe.umd.js:3649
+forEachChild @ strophe.umd.js:1311
+_dataRecv @ strophe.umd.js:3647
+_onMessage @ strophe.umd.js:5996
+socket.onmessage @ strophe.umd.js:5729Understand this error
+RTCUtils.js:690 2025-07-13T11:53:37.265Z [modules/RTC/RTCUtils] <Na.<anonymous>>:  Got media constraints:  {"video":false,"audio":{"autoGainControl":true,"echoCancellation":true,"noiseSuppression":true,"deviceId":{"exact":"default"}}}
+xmpp.js:1142 2025-07-13T11:53:37.629Z [modules/xmpp/xmpp] <th._maybeSendDeploymentInfoStat>:  {"environment":"meet-jit-si","envType":"prod","releaseNumber":"6075","shard":"meet-jit-si-eu-frankfurt-1-s11","region":"eu-central-1","backendRelease":"6075","id":"deployment_info"}
+actions.ts:48 2025-07-13T11:53:37.664Z [features/base/dialog] <wC>:  Open dialog: dQ
+actions.ts:17 2025-07-13T11:53:37.898Z [features/base/dialog] <vC>:  Hide dialog: Cee
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+actions.any.ts:179 2025-07-13T11:53:38.173Z [features/lobby] Lobby starting knocking (membersOnly = [object Object])
+xmpp.js:739 2025-07-13T11:53:38.205Z [modules/xmpp/xmpp] <th.createRoom>:  JID d72c93fc-4018-438c-ab34-68760db98038@guest.meet.jit.si/EJ67FlX-oOUf using MUC nickname fcd541d7
+ChatRoom.js:169 2025-07-13T11:53:38.208Z [modules/xmpp/ChatRoom] <new yd>:  Joining MUC as moodmatchroom_673@lobby.meet.jit.si/fcd541d7
+ChatRoom.js:237 2025-07-13T11:53:38.211Z [modules/xmpp/ChatRoom] Conference focus disabled for moodmatchroom_673@lobby.meet.jit.si
+conference.js:277 2025-07-13T11:53:38.227Z [conference.js] <u3._onConferenceFailed>:  CONFERENCE FAILED: conference.connectionError.membersOnly moodmatchroom_673@lobby.meet.jit.si true
+a @ Logger.js:155
+_onConferenceFailed @ conference.js:277
+o.emit @ events.js:153
+o.emit @ events.js:158
+onPresenceError @ ChatRoom.js:1404
+onPresenceError @ strophe.emuc.js:152
+run @ strophe.umd.js:2316
+(anonymous) @ strophe.umd.js:3652
+(anonymous) @ strophe.umd.js:3649
+forEachChild @ strophe.umd.js:1311
+_dataRecv @ strophe.umd.js:3647
+_onMessage @ strophe.umd.js:5996
+socket.onmessage @ strophe.umd.js:5729Understand this error
+middleware.web.ts:166 2025-07-13T11:53:38.230Z [features/base/conference] conference.connectionError.membersOnly
+a @ Logger.js:155
+Promise.catch
+(anonymous) @ middleware.web.ts:166
+(anonymous) @ middleware.any.ts:263
+(anonymous) @ middleware.any.ts:51
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+e @ actions.any.ts:233
+o.emit @ events.js:153
+connectionHandler @ xmpp.js:370
+_stropheConnectionCb @ XmppConnection.js:330
+_changeConnectStatus @ strophe.umd.js:3514
+_onSessionResultIQ @ strophe.umd.js:4204
+run @ strophe.umd.js:2316
+(anonymous) @ strophe.umd.js:3652
+(anonymous) @ strophe.umd.js:3649
+forEachChild @ strophe.umd.js:1311
+_dataRecv @ strophe.umd.js:3647
+_onMessage @ strophe.umd.js:5996
+socket.onmessage @ strophe.umd.js:5729Understand this error
+RTCUtils.js:389 2025-07-13T11:53:38.256Z [modules/RTC/RTCUtils] onUserMediaSuccess
+TrackVADEmitter.js:111 [Deprecation] The ScriptProcessorNode is deprecated. Use AudioWorkletNode instead. (https://bit.ly/audio-worklet)
+_initializeAudioContext @ TrackVADEmitter.js:111
+Up @ TrackVADEmitter.js:65
+(anonymous) @ TrackVADEmitter.js:90
+Promise.then
+create @ TrackVADEmitter.js:84
+(anonymous) @ VADAudioAnalyser.js:162
+Promise.then
+_trackAdded @ VADAudioAnalyser.js:161
+o.emit @ events.js:158
+eg._setupNewTrack @ JitsiConference.js:1410
+(anonymous) @ JitsiConference.js:1313
+Promise.then
+eg.replaceTrack @ JitsiConference.js:1308
+(anonymous) @ actions.any.ts:236
+(anonymous) @ index.js:16
+(anonymous) @ middleware.ts:20
+(anonymous) @ middleware.ts:195
+(anonymous) @ middleware.ts:19
+(anonymous) @ middleware.ts:14
+(anonymous) @ middleware.web.ts:23
+(anonymous) @ middleware.any.ts:33
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.ts:105
+(anonymous) @ middleware.ts:43
+(anonymous) @ middleware.ts:52
+(anonymous) @ middleware.ts:28
+(anonymous) @ middleware.ts:155
+(anonymous) @ middleware.ts:7
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:22
+(anonymous) @ middleware.ts:66
+(anonymous) @ middleware.ts:50
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.web.ts:19
+(anonymous) @ middleware.any.ts:52
+(anonymous) @ middleware.ts:60
+(anonymous) @ middleware.web.ts:273
+(anonymous) @ middleware.ts:48
+(anonymous) @ middleware.ts:21
+(anonymous) @ middleware.ts:11
+(anonymous) @ middleware.ts:16
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:31
+(anonymous) @ middleware.any.ts:39
+(anonymous) @ middleware.ts:41
+(anonymous) @ middleware.ts:83
+(anonymous) @ middleware.ts:26
+(anonymous) @ middleware.web.ts:101
+(anonymous) @ middleware.any.ts:82
+(anonymous) @ middleware.ts:27
+(anonymous) @ middleware.web.ts:17
+(anonymous) @ middleware.any.ts:24
+(anonymous) @ middleware.web.ts:18
+(anonymous) @ middleware.any.ts:18
+(anonymous) @ middleware.ts:32
+(anonymous) @ middleware.web.ts:16
+(anonymous) @ middleware.ts:257
+(anonymous) @ middleware.ts:15
+(anonymous) @ middleware.ts:42
+(anonymous) @ middleware.ts:30
+(anonymous) @ middleware.ts:63
+(anonymous) @ middleware.ts:8
+(anonymous) @ middleware.ts:53
+(anonymous) @ middleware.ts:40
+(anonymous) @ middleware.ts:23
+(anonymous) @ middleware.web.ts:171
+(anonymous) @ middleware.any.ts:75
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+(anonymous) @ conference.js:1293
+_executeNext @ TaskQueue.js:52
+enqueue @ TaskQueue.js:29
+(anonymous) @ conference.js:1283
+useAudioStream @ conference.js:1282
+(anonymous) @ conference.js:1201
+_setLocalAudioVideoStreams @ conference.js:1197
+_createRoom @ conference.js:1181
+startConference @ conference.js:508
+(anonymous) @ middleware.web.ts:164
+Promise.then
+(anonymous) @ middleware.web.ts:156
+(anonymous) @ middleware.any.ts:263
+(anonymous) @ middleware.any.ts:51
+(anonymous) @ middleware.ts:153
+(anonymous) @ middleware.ts:163
+(anonymous) @ middleware.ts:112
+(anonymous) @ middleware.web.ts:96
+(anonymous) @ middleware.web.ts:90
+(anonymous) @ middleware.any.ts:35
+(anonymous) @ middleware.any.ts:38
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:65
+(anonymous) @ middleware.ts:18
+(anonymous) @ middleware.web.ts:10
+(anonymous) @ middleware.ts:74
+(anonymous) @ middleware.ts:174
+(anonymous) @ middleware.ts:13
+(anonymous) @ middleware.ts:73
+(anonymous) @ middleware.web.ts:61
+(anonymous) @ middleware.ts:9
+(anonymous) @ middleware.tsx:12
+(anonymous) @ middleware.ts:12
+(anonymous) @ middleware.ts:135
+(anonymous) @ middleware.tsx:17
+(anonymous) @ middleware.ts:37
+(anonymous) @ middleware.ts:56
+(anonymous) @ middleware.ts:99
+(anonymous) @ middleware.web.ts:20
+(anonymous) @ middleware.any.ts:45
+(anonymous) @ middleware.web.ts:35
+(anonymous) @ middleware.any.ts:99
+(anonymous) @ middleware.web.ts:152
+(anonymous) @ middleware.web.ts:22
+(anonymous) @ middleware.web.ts:45
+(anonymous) @ middleware.ts:198
+dispatch @ redux.js:636
+e @ actions.any.ts:233
+o.emit @ events.js:153
+connectionHandler @ xmpp.js:370
+_stropheConnectionCb @ XmppConnection.js:330
+_changeConnectStatus @ strophe.umd.js:3514
+_onSessionResultIQ @ strophe.umd.js:4204
+run @ strophe.umd.js:2316
+(anonymous) @ strophe.umd.js:3652
+(anonymous) @ strophe.umd.js:3649
+forEachChild @ strophe.umd.js:1311
+_dataRecv @ strophe.umd.js:3647
+_onMessage @ strophe.umd.js:5996
+socket.onmessage @ strophe.umd.js:5729Understand this warning
+ChatRoom.js:618 2025-07-13T11:53:38.514Z [modules/xmpp/ChatRoom] <yd.onPresence>:  (TIME) MUC join started:	 12180
+ChatRoom.js:633 2025-07-13T11:53:38.515Z [modules/xmpp/ChatRoom] <yd.onPresence>:  (TIME) MUC joined:	 12181.199999999953
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}
+index-D0tLipKk.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 673, userId: 558, partnerId: 557, partnerSocketId: 'pBw1SCzTHqmfuw-XAABG', role: 'receiver'}

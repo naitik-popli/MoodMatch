@@ -14,10 +14,7 @@ declare global {
 // Utility to generate a truly random room name
 function getRandomRoomName() {
   return (
-    "moodmatch_" +
-    Math.random().toString(36).substring(2, 10) +
-    "_" +
-    Date.now().toString(36)
+    "moodmatch_" + Math.random().toString(36).substring(2, 15) + "_" + Date.now()
   );
 }
 
