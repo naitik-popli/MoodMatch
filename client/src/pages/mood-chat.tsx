@@ -4,7 +4,7 @@ import MoodSelection from "../components/mood-selection";
 import WaitingRoom from "../components/waiting-room";
 import VideoCall from "../components/video-call";
 import SettingsModal from "../components/settings-modal";
-import { useSocket } from "../hooks/use-socket";
+import useSocket from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
 import { API_BASE_URL } from "../lib/api";
 import TestCallConnection from "../components/TestCallConnection";
@@ -16,7 +16,7 @@ export default function MoodChat() {
  const [sessionData, setSessionData] = useState<{
   sessionId: number;
   userId: number;
-  partnerId?: number;
+  partnerId: number;
   partnerSocketId?: string;
   role?: "initiator" | "receiver"; // <-- Add this line
 } | null>(null);
@@ -200,9 +200,8 @@ export default function MoodChat() {
       {currentScreen === 'call' && selectedMood && sessionData && (
         <VideoCall
           mood={selectedMood}
-    sessionData={sessionData}
-    isInitiator={sessionData?.role === "initiator"} // <-- Add this line if needed
-    onCallEnd={handleCallEnd}
+          sessionData={sessionData}
+          onCallEnd={handleCallEnd}
         />
       )}
 
