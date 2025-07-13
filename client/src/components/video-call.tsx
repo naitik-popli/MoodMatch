@@ -3,6 +3,7 @@ import { Button } from "../components/ui/button";
 import JitsiMeet from "../lib/jitsi.tsx";
 import { Phone, AlertCircle } from "lucide-react";
 import type { Mood } from "@shared/schema";
+import useSocket from "../hooks/use-socket";
 
 const MOOD_NAMES: Record<Mood, string> = {
   happy: "Happy",
@@ -27,6 +28,7 @@ interface Props {
   onCallEnd: () => void;
 }
 
+
 export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const [callDuration, setCallDuration] = useState(0);
   const [connectionStatus, setConnectionStatus] = useState<
@@ -36,6 +38,8 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const [mediaPermissionDenied, setMediaPermissionDenied] = useState(false);
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
 
+  const { socket, isConnected } = useSocket(sessionData.userId);
+
   // Format call duration
   const formatDuration = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -44,7 +48,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       .toString()
       .padStart(2, "0")}`;
   };
-
+  console.log("[VideoCall] Component mounted", sessionData);
   // Request media permissions on mount
   useEffect(() => {
     const requestMediaPermissions = async () => {
@@ -135,6 +139,8 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     );
   }
 
+  console.log("[VideoCall] Rendering JitsiMeet", sessionData);
+
   // Render JitsiMeet component for video call
   return (
     <div className="fixed inset-0 bg-dark-blue z-50 flex flex-col">
@@ -166,7 +172,6 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       
 
      
-      {/* {console.log("[VideoCall] Rendering JitsiMeet", sessionData)} */}
       <JitsiMeet
         roomName={`MoodMatchRoom_${sessionData.sessionId}`}
         displayName={`User_${sessionData.userId}`}

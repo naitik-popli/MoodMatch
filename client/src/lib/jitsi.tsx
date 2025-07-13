@@ -13,7 +13,7 @@ interface JitsiMeetProps {
 
 export default function JitsiMeet({ roomName, displayName }: JitsiMeetProps) {
   const jitsiContainerRef = useRef<HTMLDivElement>(null);
-
+console.log("[JitsiMeet] Component function called", roomName, displayName);
   useEffect(() => {
     console.log("[JitsiMeet] Component loaded with roomName:", roomName, "displayName:", displayName);
 
