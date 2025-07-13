@@ -61,12 +61,13 @@ export default function JitsiMeet({ roomName, displayName }: JitsiMeetProps) {
       configOverwrite: {
         startWithAudioMuted: false,
         startWithVideoMuted: false,
-        prejoinPageEnabled: false,
-        enableWelcomePage: false,
-        disableDeepLinking: true,
+        prejoinPageEnabled: false,         // disables prejoin page
+        enableWelcomePage: false,          // disables welcome page
+        disableDeepLinking: true,          // disables mobile app prompt
+        lobbyEnabled: false,               // disables lobby (shouldn't be needed on meet.jit.si)
+        requireDisplayName: false,         // disables display name requirement
       },
       interfaceConfigOverwrite: {
-        // You can customize the UI here
         SHOW_JITSI_WATERMARK: false,
         SHOW_WATERMARK_FOR_GUESTS: false,
         SHOW_BRAND_WATERMARK: false,
@@ -81,10 +82,13 @@ export default function JitsiMeet({ roomName, displayName }: JitsiMeetProps) {
         ],
       },
     });
+
     // Optional: handle events
     api.addEventListener("videoConferenceLeft", () => {
       // Handle leaving the meeting
+      console.log("[JitsiMeet] videoConferenceLeft event fired");
     });
+
     return () => api.dispose();
   }, [scriptLoaded, roomName, displayName]);
 
