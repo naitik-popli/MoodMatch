@@ -1,4 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+interface JitsiMeetProps {
+  roomName: string;
+  displayName: string;
+}
 
 declare global {
   interface Window {
@@ -6,63 +11,67 @@ declare global {
   }
 }
 
-interface JitsiMeetProps {
-  roomName: string;
-  displayName: string;
+function loadJitsiScript(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (window.JitsiMeetExternalAPI) {
+      resolve();
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = "https://meet.jit.si/external_api.js";
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("Failed to load Jitsi script"));
+    document.head.appendChild(script);
+  });
 }
 
 export default function JitsiMeet({ roomName, displayName }: JitsiMeetProps) {
   const jitsiContainerRef = useRef<HTMLDivElement>(null);
-console.log("[JitsiMeet] Component function called", roomName, displayName);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+
   useEffect(() => {
-    console.log("[JitsiMeet] Component loaded with roomName:", roomName, "displayName:", displayName);
+    loadJitsiScript()
+      .then(() => {
+        setScriptLoaded(true);
+      })
+      .catch((error) => {
+        console.error("[JitsiMeet] Error loading Jitsi script:", error);
+      });
+  }, []);
 
+  useEffect(() => {
+    if (!scriptLoaded) return;
+
+    console.log("[JitsiMeet] Initializing JitsiMeetExternalAPI", roomName, displayName);
+    // @ts-ignore
     if (!window.JitsiMeetExternalAPI) {
-      console.error("[JitsiMeet] JitsiMeetExternalAPI is NOT loaded! Did you include the script in index.html?");
+      console.error("[JitsiMeet] JitsiMeetExternalAPI is NOT loaded even after script load!");
       return;
-    } else {
-      console.log("[JitsiMeet] JitsiMeetExternalAPI is loaded!");
     }
-
-    if (!jitsiContainerRef.current) {
-      console.error("[JitsiMeet] jitsiContainerRef is null!");
-      return;
-    } else {
-      console.log("[JitsiMeet] jitsiContainerRef is ready!");
-    }
-
-    try {
+    // Clean up previous iframes
+    if (jitsiContainerRef.current) {
       jitsiContainerRef.current.innerHTML = "";
-      console.log("[JitsiMeet] Creating JitsiMeetExternalAPI instance...");
-      const api = new window.JitsiMeetExternalAPI("meet.jit.si", {
-        roomName,
-        parentNode: jitsiContainerRef.current,
-        userInfo: { displayName },
-        configOverwrite: {
-          startWithAudioMuted: false,
-          startWithVideoMuted: false,
-        },
-        interfaceConfigOverwrite: {
-          // Customize UI if needed
-        },
-      });
-      api.addEventListener("videoConferenceLeft", () => {
-        console.log("[JitsiMeet] videoConferenceLeft event fired");
-      });
-      return () => {
-        console.log("[JitsiMeet] Disposing JitsiMeetExternalAPI instance");
-        api.dispose();
-      };
-    } catch (err) {
-      console.error("[JitsiMeet] Error creating JitsiMeetExternalAPI:", err);
     }
-  }, [roomName, displayName]);
+    // @ts-ignore
+    const api = new window.JitsiMeetExternalAPI("meet.jit.si", {
+      roomName,
+      parentNode: jitsiContainerRef.current,
+      userInfo: { displayName },
+      configOverwrite: {
+        startWithAudioMuted: false,
+        startWithVideoMuted: false,
+      },
+      interfaceConfigOverwrite: {
+        // You can customize the UI here
+      },
+    });
+    // Optional: handle events
+    api.addEventListener("videoConferenceLeft", () => {
+      // Handle leaving the meeting
+    });
+    return () => api.dispose();
+  }, [scriptLoaded, roomName, displayName]);
 
-  return (
-    <div
-      ref={jitsiContainerRef}
-      style={{ height: "600px", width: "100%" }}
-      id="jitsi-container"
-    />
-  );
+  return <div ref={jitsiContainerRef} style={{ height: "600px", width: "100%" }} />;
 }
