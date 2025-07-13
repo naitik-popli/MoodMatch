@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { Button } from "../components/ui/button";
 import JitsiMeet from "../lib/jitsi.tsx";
 import { Phone, AlertCircle } from "lucide-react";
-import { useSocket } from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
 
 const MOOD_NAMES: Record<Mood, string> = {
@@ -35,8 +34,6 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   >("connecting");
   const [callError, setCallError] = useState<string | null>(null);
   const [mediaPermissionDenied, setMediaPermissionDenied] = useState(false);
-  const [mediaPermissionGranted, setMediaPermissionGranted] = useState(false);
-  const { socket } = useSocket(sessionData.userId);
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Format call duration
@@ -53,7 +50,6 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     const requestMediaPermissions = async () => {
       try {
         await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        setMediaPermissionGranted(true);
         setConnectionStatus("connected");
       } catch (error) {
         setMediaPermissionDenied(true);
@@ -168,15 +164,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
         <div className="text-white/60 text-sm">{formatDuration(callDuration)}</div>
       </div>
 
-      <div className="flex-1 relative bg-gray-800 overflow-hidden">
-        {/* Remote video */}
-        <div id="remote-video" className="absolute inset-0 w-full h-full bg-black" />
-        {/* Local video overlay */}
-        <div className="absolute bottom-6 right-6 w-48 h-36 rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
-          <div id="local-video" className="w-full h-full bg-black" />
-        </div>
-      </div>
-
+      {/* Jitsi Meet handles all video/audio UI */}
       <JitsiMeet
         roomName={`MoodMatchRoom_${sessionData.sessionId}`}
         displayName={`User_${sessionData.userId}`}

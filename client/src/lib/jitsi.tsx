@@ -1,7 +1,12 @@
 import { useEffect, useRef } from "react";
 
-export default function JitsiMeet({ roomName, displayName }) {
-  const jitsiContainerRef = useRef(null);
+interface JitsiMeetProps {
+  roomName: string;
+  displayName: string;
+}
+
+export default function JitsiMeet({ roomName, displayName }: JitsiMeetProps) {
+const jitsiContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // @ts-ignore
