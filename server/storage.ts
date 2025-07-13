@@ -109,24 +109,44 @@ export class DatabaseStorage {
   }
 
   // Mood Queue Management
-  async addToMoodQueue(insertQueue: InsertMoodQueue): Promise<MoodQueue> {
-    try {
-      // First try to update existing record
-      const [updated] = await db.update(moodQueue)
-        .set({
-          socketId: insertQueue.socketId,
-          mood: insertQueue.mood,
-          createdAt: new Date()
-        })
-        .where(eq(moodQueue.userId, insertQueue.userId))
-        .returning();
+  
+ // Helper: Check if user is already in queue
+private async isUserInQueue(userId: number): Promise<boolean> {
+    const [existing] = await db.select()
+      .from(moodQueue)
+      .where(eq(moodQueue.userId, userId))
+      .limit(1);
+    return !!existing;
+  }
 
-      if (updated) {
-        this.debugLog(`Updated queue entry for user ${insertQueue.userId}`);
-        return updated;
+  // Helper: Check if user has an active session
+  private async hasActiveSession(userId: number): Promise<boolean> {
+    const [session] = await db.select()
+      .from(chatSessions)
+      .where(and(
+        eq(chatSessions.userId, userId),
+        eq(chatSessions.isActive, true)
+      ))
+      .limit(1);
+    return !!session;
+  }
+
+  // Mood Queue Management
+  async addToMoodQueue(insertQueue: InsertMoodQueue): Promise<MoodQueue | null> {
+    try {
+      // Prevent if user is already in queue
+      if (await this.isUserInQueue(insertQueue.userId)) {
+        this.debugLog(`User ${insertQueue.userId} is already in the queue, skipping add.`);
+        return null;
       }
 
-      // If no record to update, insert new
+      // Prevent if user has an active session
+      if (await this.hasActiveSession(insertQueue.userId)) {
+        this.debugLog(`User ${insertQueue.userId} has an active session, not adding to queue.`);
+        return null;
+      }
+
+      // Insert new queue entry
       const [queue] = await db.insert(moodQueue)
         .values(insertQueue)
         .returning();
@@ -138,7 +158,6 @@ export class DatabaseStorage {
       throw error;
     }
   }
-
   async removeFromMoodQueue(userId: number): Promise<void> {
     this.debugLog(`Removing user ${userId} from queue`);
     await db.delete(moodQueue)
