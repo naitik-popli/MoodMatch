@@ -168,6 +168,15 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
         <div className="text-white/60 text-sm">{formatDuration(callDuration)}</div>
       </div>
 
+      <div className="flex-1 relative bg-gray-800 overflow-hidden">
+        {/* Remote video */}
+        <div id="remote-video" className="absolute inset-0 w-full h-full bg-black" />
+        {/* Local video overlay */}
+        <div className="absolute bottom-6 right-6 w-48 h-36 rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
+          <div id="local-video" className="w-full h-full bg-black" />
+        </div>
+      </div>
+
       <JitsiMeet
         roomName={`MoodMatchRoom_${sessionData.sessionId}`}
         displayName={`User_${sessionData.userId}`}

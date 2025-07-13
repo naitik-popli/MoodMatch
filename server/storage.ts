@@ -160,10 +160,10 @@ return rowCount;
       this.debugLog('Starting matching process');
       
       // Get all users who have been in queue for at least 1 second
-    const allUsers: MoodQueue[] = await db.select()
-  .from(moodQueue)
-  .where(sql`created_at < NOW() - INTERVAL '1 second'`)
-  .orderBy(asc(moodQueue.createdAt));
+      const allUsers: MoodQueue[] = await db.select()
+        .from(moodQueue)
+        .where(sql`created_at < NOW() - INTERVAL '1 second'`)
+        .orderBy(asc(moodQueue.createdAt));
 
       this.debugLog(`Found ${allUsers.length} users in queue`, allUsers);
 
@@ -171,13 +171,13 @@ return rowCount;
       const moodGroups = new Map<Mood, MoodQueue[]>();
 
       // Group by mood
-(allUsers as MoodQueue[]).forEach((user: MoodQueue) => {
-  const mood = user.mood as Mood;
-  if (!moodGroups.has(mood)) {
-    moodGroups.set(mood, []);
-  }
-  moodGroups.get(mood)!.push(user);
-});
+      (allUsers as MoodQueue[]).forEach((user: MoodQueue) => {
+        const mood = user.mood as Mood;
+        if (!moodGroups.has(mood)) {
+          moodGroups.set(mood, []);
+        }
+        moodGroups.get(mood)!.push(user);
+      });
 
       // Process each mood group separately
       for (const [mood, users] of moodGroups) {
@@ -210,6 +210,14 @@ return rowCount;
             userB: userB.userId,
             sessionId: sessionA.id
           });
+        }
+
+        // Handle unmatched user if any
+        if (users.length === 1) {
+          const unmatchedUser = users[0];
+          this.debugLog(`Unmatched user ${unmatchedUser.userId} in mood group ${mood}`);
+          // Optionally, implement logic to retry matching later or match with similar moods
+          // For now, just keep the user in the queue
         }
       }
 
