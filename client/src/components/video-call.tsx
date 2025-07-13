@@ -1,5 +1,3 @@
-// ...imports...
-import { usePeerJS } from "../hooks/use-peerjs";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Button } from "../components/ui/button";
 import { 
@@ -62,7 +60,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd, externalLocalS
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
   const retryCountRef = useRef(0);
   
-  console.log("[VideoCallllll] Passing partnerId as targetUserId:", sessionData.partnerId, typeof sessionData.partnerId);
+  console.log("[VideoCall] Passing partnerId as targetUserId:", sessionData.partnerId, typeof sessionData.partnerId);
 
   const { 
     localStream, 
