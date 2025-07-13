@@ -34,7 +34,7 @@ interface Props {
     partnerId: number;
     partnerSocketId?: string;
     role?: "initiator" | "receiver"; // <-- Add this line
-      externalLocalStream?: MediaStream | null;
+    externalLocalStream?: MediaStream; // <-- Add this line
   };
   isInitiator?: boolean;
   onCallEnd: () => void;
@@ -86,9 +86,10 @@ const remoteVideoActive = remoteVideoTrack && remoteVideoTrack.readyState === "l
   const formatDuration = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
+    
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
-
+  
   // WebRTC availability check
   const checkWebRTCAvailability = useCallback(() => {
     const isSecure = window.location.protocol === 'https:' || window.location.hostname === 'localhost';
@@ -240,12 +241,12 @@ const remoteVideoActive = remoteVideoTrack && remoteVideoTrack.readyState === "l
 //   }
 // }, [remoteStream]);
   
-  useEffect(() => {
+ useEffect(() => {
   if (
     !callStartedRef.current &&
     socket &&
-    partnerSocketId &&
-    mediaPermissionGranted // <-- if you're checking this
+    partnerSocketId
+    // mediaPermissionGranted check removed
   ) {
     callStartedRef.current = true;
     startCall().catch(err => {
@@ -253,8 +254,7 @@ const remoteVideoActive = remoteVideoTrack && remoteVideoTrack.readyState === "l
       callStartedRef.current = false;
     });
   }
-}, [socket, partnerSocketId, mediaPermissionGranted, startCall]);
-
+}, [socket, partnerSocketId, startCall]);
   // useEffect(() => {
   //   if (!remoteStream) {
   //     console.warn('No remoteStream available to assign');
@@ -459,36 +459,36 @@ const remoteVideoActive = remoteVideoTrack && remoteVideoTrack.readyState === "l
     );
   }
 
-  if (mediaPermissionDenied) {
-    return (
-      <div className="fixed inset-0 bg-dark-blue z-50 flex items-center justify-center p-4">
-        <div className="bg-gray-800 rounded-lg p-6 max-w-md w-full">
-          <AlertCircle className="w-12 h-12 mx-auto mb-4 text-yellow-500" />
-          <h2 className="text-2xl font-bold mb-2 text-white text-center">
-            Permission Required
-          </h2>
-          <p className="text-gray-300 mb-6 text-center">
-            Please allow camera and microphone access in your browser settings.
-          </p>
-          <div className="flex flex-col space-y-3">
-            <Button 
-              onClick={() => window.location.reload()}
-              className="w-full"
-            >
-              Reload Page
-            </Button>
-            <Button 
-              onClick={onCallEnd}
-              variant="outline"
-              className="w-full text-white border-gray-600 hover:bg-gray-700"
-            >
-              Exit Call
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // if (mediaPermissionDenied) {
+  //   return (
+      // <div className="fixed inset-0 bg-dark-blue z-50 flex items-center justify-center p-4">
+      //   <div className="bg-gray-800 rounded-lg p-6 max-w-md w-full">
+      //     <AlertCircle className="w-12 h-12 mx-auto mb-4 text-yellow-500" />
+      //     <h2 className="text-2xl font-bold mb-2 text-white text-center">
+      //       Permission Required
+      //     </h2>
+      //     <p className="text-gray-300 mb-6 text-center">
+      //       Please allow camera and microphone access in your browser settings.
+      //     </p>
+      //     <div className="flex flex-col space-y-3">
+      //       <Button 
+      //         onClick={() => window.location.reload()}
+      //         className="w-full"
+      //       >
+      //         Reload Page
+      //       </Button>
+      //       <Button 
+      //         onClick={onCallEnd}
+      //         variant="outline"
+      //         className="w-full text-white border-gray-600 hover:bg-gray-700"
+      //       >
+      //         Exit Call
+      //       </Button>
+      //     </div>
+      //   </div>
+      // </div>
+  //   );
+  // }
 
   return (
     <div className="fixed inset-0 bg-dark-blue z-50">

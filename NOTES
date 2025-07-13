@@ -1,179 +1,285 @@
-✅ Connected to socket: ZkoNtoIvA6Acq-hNAAAi
-index-LlXMjm0J.js:363 🔗 Socket connection status: true
-index-LlXMjm0J.js:363 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
-index-LlXMjm0J.js:319 [WaitingRoom] Cleaned up socket listeners
-2index-LlXMjm0J.js:319 📮 Sending 'update-socket-id' with userId: 574
-index-LlXMjm0J.js:319 📤 Emitting 'join-mood-queue' with: {userId: 574, mood: 'happy'}
-index-LlXMjm0J.js:319 [WaitingRoom] Cleaned up socket listeners
-index-LlXMjm0J.js:319 [WaitingRoom] Already joined queue, skipping
-index-LlXMjm0J.js:363 ✅ Match found on frontend: {role: 'receiver', partnerId: 573, partnerSocketId: 'kjVeQKV7mvko5PQ3AAAf', sessionId: 689, timestamp: '2025-07-13T14:59:19.875Z'}
-index-LlXMjm0J.js:363 🧩 handleMatchFound called with data: {role: 'receiver', partnerId: 573, partnerSocketId: 'kjVeQKV7mvko5PQ3AAAf', sessionId: 689, timestamp: '2025-07-13T14:59:19.875Z'}
-index-LlXMjm0J.js:363 📦 Updated sessionData after match: {sessionId: 689, userId: 574, partnerId: 573, partnerSocketId: 'kjVeQKV7mvko5PQ3AAAf', role: 'receiver'}
-index-LlXMjm0J.js:363 🔗 Socket connection status: true
-index-LlXMjm0J.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 🧹 Component unmounted, but socket connection kept alive
-index-LlXMjm0J.js:319 [WaitingRoom] Emitting leave-mood-queue for user 574
-index-LlXMjm0J.js:319 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
-index-LlXMjm0J.js:319 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
-index-LlXMjm0J.js:319 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
-index-LlXMjm0J.js:319 [WEBRTC] Socket ID ready? false
-index-LlXMjm0J.js:319 [WEBRTC] Media ready? false
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: false, socketIdReady: false, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [WEBRTC] Setting up signaling handlers
-index-LlXMjm0J.js:319 [WEBRTC] Socket not ready for signaling handlers
-index-LlXMjm0J.js:319 [2025-07-13T14:59:20.266Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: false, mediaPermissionGranted: false, partnerSocketId: 'kjVeQKV7mvko5PQ3AAAf'}
-index-LlXMjm0J.js:363 📞 Transitioning to VideoCall: {sessionId: 689, userId: 574, partnerId: 573, partnerSocketId: 'kjVeQKV7mvko5PQ3AAAf', role: 'receiver'}
-index-LlXMjm0J.js:319 📤 Emitting 'join-mood-queue' with: {userId: 574, mood: 'happy'}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Socket ID ready? true
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: false, socketIdReady: false, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [WEBRTC] Setting up signaling handlers
-index-LlXMjm0J.js:319 [WEBRTC] Setting up signaling handlers
-index-LlXMjm0J.js:319 [2025-07-13T14:59:20.370Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: true, mediaPermissionGranted: false, partnerSocketId: 'kjVeQKV7mvko5PQ3AAAf'}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: false, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: false, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [WEBRTC] Attempting to start call...
-index-LlXMjm0J.js:319 [WEBRTC] Initializing media...
-index-LlXMjm0J.js:319 [WEBRTC] Requesting user media with constraints {audio: true, video: {…}}
-index-LlXMjm0J.js:319 [2025-07-13T14:59:20.612Z] [DEBUG:VideoCall] Starting call initialization
-index-LlXMjm0J.js:319 [WEBRTC] Attempting to start call...
-index-LlXMjm0J.js:319 [WEBRTC] Initializing media...
-index-LlXMjm0J.js:319 [WEBRTC] Media already initialized, skipping...
-index-LlXMjm0J.js:319 [WEBRTC] Media is not ready after initialization.
-index-LlXMjm0J.js:319 [WEBRTC] Error during call start: Error: Media is not ready.
-    at index-LlXMjm0J.js:319:54487
-    at async index-LlXMjm0J.js:319:60457
-index-LlXMjm0J.js:319 [2025-07-13T14:59:22.848Z] [DEBUG:VideoCall] Call started successfully
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Local media stream initialized MediaStream {id: 'c7e28362-a853-44d6-b3a7-5939029a4359', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-LlXMjm0J.js:319 [WEBRTC] Got local stream for call MediaStream {id: 'c7e28362-a853-44d6-b3a7-5939029a4359', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-LlXMjm0J.js:319 [WEBRTC] Creating new peer connection
-index-LlXMjm0J.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'audio', id: '0210ee51-c2aa-48d9-9358-1de35eb7282d', label: 'Default', enabled: true, muted: false, …}
-index-LlXMjm0J.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'video', id: '1ba006f8-4b2a-4320-bdcc-d05865e2217e', label: 'Droidcam', enabled: true, muted: false, …}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Media ready? true
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: false, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [WEBRTC] Received offer {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', offer: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Peer connection already exists, reusing it.
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Queued ICE candidate
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Queued ICE candidate
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Queued ICE candidate
-index-LlXMjm0J.js:319 [WEBRTC] Signaling state: have-remote-offer
-index-LlXMjm0J.js:319 [WEBRTC] [WEBRTC] ontrack fired RTCTrackEvent {isTrusted: true, receiver: RTCRtpReceiver, track: MediaStreamTrack, streams: Array(1), transceiver: RTCRtpTransceiver, …}
-index-LlXMjm0J.js:319 [WEBRTC] [WEBRTC] event.streams: [MediaStream]
-index-LlXMjm0J.js:319 [WEBRTC] [WEBRTC] event.track: MediaStreamTrack {kind: 'audio', id: '7f1bc441-648c-4e85-9c71-c017ee1599bd', label: '7f1bc441-648c-4e85-9c71-c017ee1599bd', enabled: true, muted: true, …}
-index-LlXMjm0J.js:319 [WEBRTC] [WEBRTC] Received remote stream MediaStream {id: '70f654ab-15ca-4d31-8ec9-2668ae33ba31', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-LlXMjm0J.js:319 [WEBRTC] [WEBRTC] Remote stream tracks: (2) ['audio:live', 'video:live']
-index-LlXMjm0J.js:319 [WEBRTC] [WEBRTC] Remote stream set MediaStream {id: '70f654ab-15ca-4d31-8ec9-2668ae33ba31', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-LlXMjm0J.js:319 [WEBRTC] [WEBRTC] ontrack fired RTCTrackEvent {isTrusted: true, receiver: RTCRtpReceiver, track: MediaStreamTrack, streams: Array(1), transceiver: RTCRtpTransceiver, …}
-index-LlXMjm0J.js:319 [WEBRTC] [WEBRTC] event.streams: [MediaStream]
-index-LlXMjm0J.js:319 [WEBRTC] [WEBRTC] event.track: MediaStreamTrack {kind: 'video', id: '2cf434c4-39aa-4652-ad84-4d932ef4058d', label: '2cf434c4-39aa-4652-ad84-4d932ef4058d', enabled: true, muted: true, …}
-index-LlXMjm0J.js:319 [WEBRTC] [WEBRTC] Received remote stream MediaStream {id: '70f654ab-15ca-4d31-8ec9-2668ae33ba31', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-LlXMjm0J.js:319 [WEBRTC] [WEBRTC] Remote stream tracks: (2) ['audio:live', 'video:live']
-index-LlXMjm0J.js:319 [WEBRTC] [WEBRTC] Remote stream set MediaStream {id: '70f654ab-15ca-4d31-8ec9-2668ae33ba31', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
-index-LlXMjm0J.js:319 [WEBRTC] Set remote description with offer
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Remote stream tracks: (2) ['audio:live', 'video:live']
-3index-LlXMjm0J.js:319 [WEBRTC] Added queued ICE candidate
-index-LlXMjm0J.js:319 [WEBRTC] Creating answer...
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Signaling state: stable
-index-LlXMjm0J.js:319 [WEBRTC] Created and set local description with answer
-index-LlXMjm0J.js:319 [WEBRTC] [useWebRTC] Answer emission targetUserId: kjVeQKV7mvko5PQ3AAAf string
-index-LlXMjm0J.js:319 [WEBRTC] [useWebRTC] Answer emission targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Sent answer to 573
-index-LlXMjm0J.js:319 [WEBRTC] Added ICE candidate
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Added ICE candidate
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-index-LlXMjm0J.js:319 [WEBRTC] Added ICE candidate
-index-LlXMjm0J.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kjVeQKV7mvko5PQ3AAAf', candidate: {…}}
-8index-LlXMjm0J.js:319 [WEBRTC] Added ICE candidate
-index-LlXMjm0J.js:319 [WEBRTC] ICE connection state: checking
-index-LlXMjm0J.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
-index-LlXMjm0J.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:4024554378 1 udp 2122194687 192.168.1.22…197 typ host generation 0 ufrag Ua3D network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '4024554378', component: 'rtp', …}
-index-LlXMjm0J.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
-index-LlXMjm0J.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2813748758 1 udp 2122129151 100.93.64.62…950 typ host generation 0 ufrag Ua3D network-id 2', sdpMid: '0', sdpMLineIndex: 0, foundation: '2813748758', component: 'rtp', …}
-index-LlXMjm0J.js:319 [WEBRTC] Connection state changed: connecting
-index-LlXMjm0J.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
-index-LlXMjm0J.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:41353315 1 udp 2122063615 192.168.1.20 4…eration 0 ufrag Ua3D network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '41353315', component: 'rtp', …}
-index-LlXMjm0J.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
-index-LlXMjm0J.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3648708987 1 udp 2122265343 fd7a:115c:a1…193 typ host generation 0 ufrag Ua3D network-id 3', sdpMid: '0', sdpMLineIndex: 0, foundation: '3648708987', component: 'rtp', …}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
-index-LlXMjm0J.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2937823523 1 udp 1685987071 103.87.58.20… rport 60197 generation 0 ufrag Ua3D network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '2937823523', component: 'rtp', …}
-index-LlXMjm0J.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
-index-LlXMjm0J.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2435723538 1 tcp 1518214911 192.168.1.22…ptype active generation 0 ufrag Ua3D network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '2435723538', component: 'rtp', …}
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
-index-LlXMjm0J.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3648619662 1 tcp 1518149375 100.93.64.62…ptype active generation 0 ufrag Ua3D network-id 2', sdpMid: '0', sdpMLineIndex: 0, foundation: '3648619662', component: 'rtp', …}
-index-LlXMjm0J.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
-index-LlXMjm0J.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2092491515 1 tcp 1518083839 192.168.1.20…eration 0 ufrag Ua3D network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '2092491515', component: 'rtp', …}
-index-LlXMjm0J.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
-index-LlXMjm0J.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2813658083 1 tcp 1518285567 fd7a:115c:a1…ptype active generation 0 ufrag Ua3D network-id 3', sdpMid: '0', sdpMLineIndex: 0, foundation: '2813658083', component: 'rtp', …}
-index-LlXMjm0J.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
-index-LlXMjm0J.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1116566218 1 udp 1685855999 103.87.58.20…eration 0 ufrag Ua3D network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '1116566218', component: 'rtp', …}
-index-LlXMjm0J.js:319 [WEBRTC] ICE connection state: connected
-index-LlXMjm0J.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: null, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
-index-LlXMjm0J.js:319 [WEBRTC] Connection state changed: connected
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
-index-LlXMjm0J.js:319 [WEBRTC] Auto-start call check {mediaReady: true, socketIdReady: true, isInitiator: false, alreadyStarted: false}
-index-LlXMjm0J.js:319 [VideoCall] Passing partnerId as targetUserId: 573 number
+🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-CEx-6B5f.js:319 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-CEx-6B5f.js:319 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+index-CEx-6B5f.js:363 🔗 Socket connection status: false
+index-CEx-6B5f.js:363 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
+index-CEx-6B5f.js:319 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-CEx-6B5f.js:319 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-CEx-6B5f.js:319 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+index-CEx-6B5f.js:319 [WaitingRoom] Missing socket
+(anonymous) @ index-CEx-6B5f.js:319
+Ll @ index-CEx-6B5f.js:40
+to @ index-CEx-6B5f.js:40
+(anonymous) @ index-CEx-6B5f.js:40
+E @ index-CEx-6B5f.js:25
+M @ index-CEx-6B5f.js:25Understand this warning
+2index-CEx-6B5f.js:319 ✅ Connected to socket: -ON0Ku_H2xmDDno5AAAW
+index-CEx-6B5f.js:363 🔗 Socket connection status: true
+index-CEx-6B5f.js:363 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
+index-CEx-6B5f.js:319 [WaitingRoom] Cleaned up socket listeners
+2index-CEx-6B5f.js:319 📮 Sending 'update-socket-id' with userId: 575
+index-CEx-6B5f.js:319 📤 Emitting 'join-mood-queue' with: {userId: 575, mood: 'happy'}
+index-CEx-6B5f.js:319 [WaitingRoom] Cleaned up socket listeners
+index-CEx-6B5f.js:319 [WaitingRoom] Already joined queue, skipping
+index-CEx-6B5f.js:319 📤 Emitting 'join-mood-queue' with: {userId: 575, mood: 'happy'}
+index-CEx-6B5f.js:363 ✅ Match found on frontend: {role: 'initiator', partnerId: 576, partnerSocketId: 'kBfNdn24znz7Tk6jAAAZ', sessionId: 691, timestamp: '2025-07-13T16:33:58.331Z'}
+index-CEx-6B5f.js:363 🧩 handleMatchFound called with data: {role: 'initiator', partnerId: 576, partnerSocketId: 'kBfNdn24znz7Tk6jAAAZ', sessionId: 691, timestamp: '2025-07-13T16:33:58.331Z'}
+index-CEx-6B5f.js:363 📦 Updated sessionData after match: {sessionId: 691, userId: 575, partnerId: 576, partnerSocketId: 'kBfNdn24znz7Tk6jAAAZ', role: 'initiator'}
+index-CEx-6B5f.js:363 🔗 Socket connection status: true
+index-CEx-6B5f.js:363 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 🧹 Component unmounted, but socket connection kept alive
+index-CEx-6B5f.js:319 [WaitingRoom] Emitting leave-mood-queue for user 575
+index-CEx-6B5f.js:319 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-CEx-6B5f.js:319 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-CEx-6B5f.js:319 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+index-CEx-6B5f.js:319 [WEBRTC] Socket ID ready? false
+index-CEx-6B5f.js:319 [WEBRTC] Media ready? false
+index-CEx-6B5f.js:319 [WEBRTC] Socket not ready for signaling handlers
+index-CEx-6B5f.js:319 [2025-07-13T16:33:58.539Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: false, mediaPermissionGranted: false, partnerSocketId: 'kBfNdn24znz7Tk6jAAAZ'}
+index-CEx-6B5f.js:363 📞 Transitioning to VideoCall: {sessionId: 691, userId: 575, partnerId: 576, partnerSocketId: 'kBfNdn24znz7Tk6jAAAZ', role: 'initiator'}
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Socket ID ready? true
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [2025-07-13T16:33:58.548Z] [DEBUG:VideoCall] Waiting for socket, media permissions, or partnerSocketId {socketReady: true, mediaPermissionGranted: false, partnerSocketId: 'kBfNdn24znz7Tk6jAAAZ'}
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Attempting to start call...
+index-CEx-6B5f.js:319 [WEBRTC] Initializing media...
+index-CEx-6B5f.js:319 [WEBRTC] Requesting user media with constraints {audio: true, video: {…}}
+index-CEx-6B5f.js:319 [2025-07-13T16:33:58.716Z] [DEBUG:VideoCall] Starting call initialization
+index-CEx-6B5f.js:319 [WEBRTC] Attempting to start call...
+index-CEx-6B5f.js:319 [WEBRTC] Initializing media...
+index-CEx-6B5f.js:319 [WEBRTC] Media already initialized, skipping...
+index-CEx-6B5f.js:319 [WEBRTC] Media is not ready after initialization.
+index-CEx-6B5f.js:319 [WEBRTC] Error during call start: Error: Media is not ready.
+    at index-CEx-6B5f.js:319:54487
+    at async index-CEx-6B5f.js:319:60325
+index-CEx-6B5f.js:319 [2025-07-13T16:34:04.548Z] [DEBUG:VideoCall] Call started successfully
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Local media stream initialized MediaStream {id: 'c7049fb6-bd01-4650-9d51-10287a367f81', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-CEx-6B5f.js:319 [WEBRTC] Got local stream for call MediaStream {id: 'c7049fb6-bd01-4650-9d51-10287a367f81', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-CEx-6B5f.js:319 [WEBRTC] Creating new peer connection
+index-CEx-6B5f.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'audio', id: '702d0b61-2685-461b-80dc-20152c6e067f', label: 'Default', enabled: true, muted: false, …}
+index-CEx-6B5f.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'video', id: '2257ce23-5f9b-43b2-9f1a-af17d029b31c', label: 'Droidcam', enabled: true, muted: false, …}
+index-CEx-6B5f.js:319 [WEBRTC] Creating offer...
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Media ready? true
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Auto-starting call...
+index-CEx-6B5f.js:319 [WEBRTC] Attempting to start call...
+index-CEx-6B5f.js:319 [WEBRTC] Closing previous peer connection before starting new call
+index-CEx-6B5f.js:319 [WEBRTC] Initializing media...
+index-CEx-6B5f.js:319 [WEBRTC] Media already initialized, skipping...
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Got local stream for call MediaStream {id: 'c7049fb6-bd01-4650-9d51-10287a367f81', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-CEx-6B5f.js:319 [WEBRTC] Creating new peer connection
+index-CEx-6B5f.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'audio', id: '702d0b61-2685-461b-80dc-20152c6e067f', label: 'Default', enabled: true, muted: false, …}
+index-CEx-6B5f.js:319 [WEBRTC] Added local track (initiator) MediaStreamTrack {kind: 'video', id: '2257ce23-5f9b-43b2-9f1a-af17d029b31c', label: 'Droidcam', enabled: true, muted: false, …}
+index-CEx-6B5f.js:319 [WEBRTC] Creating offer...
+index-CEx-6B5f.js:319 [WEBRTC] Signaling state: have-local-offer
+index-CEx-6B5f.js:319 [WEBRTC] Created and set local description with offer
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] Offer emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sent offer to 576
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3762058600 1 udp 2122194687 192.168.1.22…187 typ host generation 0 ufrag dpys network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '3762058600', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2825634036 1 udp 2122129151 100.93.64.62…282 typ host generation 0 ufrag dpys network-id 2', sdpMid: '0', sdpMLineIndex: 0, foundation: '2825634036', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:229287553 1 udp 2122063615 192.168.1.20 …eration 0 ufrag dpys network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '229287553', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3601287065 1 udp 2122265343 fd7a:115c:a1…126 typ host generation 0 ufrag dpys network-id 3', sdpMid: '0', sdpMLineIndex: 0, foundation: '3601287065', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3762058600 1 udp 2122194687 192.168.1.22…547 typ host generation 0 ufrag dpys network-id 1', sdpMid: '1', sdpMLineIndex: 1, foundation: '3762058600', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2825634036 1 udp 2122129151 100.93.64.62…152 typ host generation 0 ufrag dpys network-id 2', sdpMid: '1', sdpMLineIndex: 1, foundation: '2825634036', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:229287553 1 udp 2122063615 192.168.1.20 …eration 0 ufrag dpys network-id 4 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '229287553', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3601287065 1 udp 2122265343 fd7a:115c:a1…454 typ host generation 0 ufrag dpys network-id 3', sdpMid: '1', sdpMLineIndex: 1, foundation: '3601287065', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2666764272 1 tcp 1518214911 192.168.1.22…ptype active generation 0 ufrag dpys network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '2666764272', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3601080940 1 tcp 1518149375 100.93.64.62…ptype active generation 0 ufrag dpys network-id 2', sdpMid: '0', sdpMLineIndex: 0, foundation: '3601080940', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1936016409 1 tcp 1518083839 192.168.1.20…eration 0 ufrag dpys network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '1936016409', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2825430273 1 tcp 1518285567 fd7a:115c:a1…ptype active generation 0 ufrag dpys network-id 3', sdpMid: '0', sdpMLineIndex: 0, foundation: '2825430273', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2666764272 1 tcp 1518214911 192.168.1.22…ptype active generation 0 ufrag dpys network-id 1', sdpMid: '1', sdpMLineIndex: 1, foundation: '2666764272', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:3601080940 1 tcp 1518149375 100.93.64.62…ptype active generation 0 ufrag dpys network-id 2', sdpMid: '1', sdpMLineIndex: 1, foundation: '3601080940', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1936016409 1 tcp 1518083839 192.168.1.20…eration 0 ufrag dpys network-id 4 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '1936016409', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2825430273 1 tcp 1518285567 fd7a:115c:a1…ptype active generation 0 ufrag dpys network-id 3', sdpMid: '1', sdpMLineIndex: 1, foundation: '2825430273', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2697332673 1 udp 1685987071 103.87.58.20… rport 47187 generation 0 ufrag dpys network-id 1', sdpMid: '0', sdpMLineIndex: 0, foundation: '2697332673', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:2697332673 1 udp 1685987071 103.87.58.20… rport 53547 generation 0 ufrag dpys network-id 1', sdpMid: '1', sdpMLineIndex: 1, foundation: '2697332673', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1297142824 1 udp 1685855999 103.87.58.20…eration 0 ufrag dpys network-id 4 network-cost 10', sdpMid: '1', sdpMLineIndex: 1, foundation: '1297142824', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: RTCIceCandidate, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] [useWebRTC] ICE candidate emission targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Sending ICE candidate RTCIceCandidate {candidate: 'candidate:1297142824 1 udp 1685855999 103.87.58.20…eration 0 ufrag dpys network-id 4 network-cost 10', sdpMid: '0', sdpMLineIndex: 0, foundation: '1297142824', component: 'rtp', …}
+index-CEx-6B5f.js:319 [WEBRTC] ICE connection state: checking
+index-CEx-6B5f.js:319 [WEBRTC] Connection state changed: connecting
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Received answer {fromSocketId: 'kBfNdn24znz7Tk6jAAAZ', answer: {…}}
+index-CEx-6B5f.js:319 [WEBRTC] Signaling state: stable
+index-CEx-6B5f.js:319 [WEBRTC] [WEBRTC] ontrack fired RTCTrackEvent {isTrusted: true, receiver: RTCRtpReceiver, track: MediaStreamTrack, streams: Array(1), transceiver: RTCRtpTransceiver, …}
+index-CEx-6B5f.js:319 [WEBRTC] [WEBRTC] event.streams: [MediaStream]
+index-CEx-6B5f.js:319 [WEBRTC] [WEBRTC] event.track: MediaStreamTrack {kind: 'audio', id: 'd662737b-c7ff-4062-a097-86bae9788598', label: 'd662737b-c7ff-4062-a097-86bae9788598', enabled: true, muted: true, …}
+index-CEx-6B5f.js:319 [WEBRTC] [WEBRTC] Received remote stream MediaStream {id: '48d0325a-603e-4ff4-80cd-ab96afbe082c', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-CEx-6B5f.js:319 [WEBRTC] [WEBRTC] Remote stream tracks: (2) ['audio:live', 'video:live']
+index-CEx-6B5f.js:319 [WEBRTC] [WEBRTC] Remote stream set MediaStream {id: '48d0325a-603e-4ff4-80cd-ab96afbe082c', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-CEx-6B5f.js:319 [WEBRTC] [WEBRTC] ontrack fired RTCTrackEvent {isTrusted: true, receiver: RTCRtpReceiver, track: MediaStreamTrack, streams: Array(1), transceiver: RTCRtpTransceiver, …}
+index-CEx-6B5f.js:319 [WEBRTC] [WEBRTC] event.streams: [MediaStream]
+index-CEx-6B5f.js:319 [WEBRTC] [WEBRTC] event.track: MediaStreamTrack {kind: 'video', id: '7b33a50c-d22e-4d1d-b98f-0918dd3c448b', label: '7b33a50c-d22e-4d1d-b98f-0918dd3c448b', enabled: true, muted: true, …}
+index-CEx-6B5f.js:319 [WEBRTC] [WEBRTC] Received remote stream MediaStream {id: '48d0325a-603e-4ff4-80cd-ab96afbe082c', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-CEx-6B5f.js:319 [WEBRTC] [WEBRTC] Remote stream tracks: (2) ['audio:live', 'video:live']
+index-CEx-6B5f.js:319 [WEBRTC] [WEBRTC] Remote stream set MediaStream {id: '48d0325a-603e-4ff4-80cd-ab96afbe082c', active: true, onaddtrack: null, onremovetrack: null, onactive: null, …}
+index-CEx-6B5f.js:319 [WEBRTC] ICE connection state: connected
+index-CEx-6B5f.js:319 [WEBRTC] Set remote description with answer
+index-CEx-6B5f.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kBfNdn24znz7Tk6jAAAZ', candidate: {…}}
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Remote stream tracks: (2) ['audio:live', 'video:live']
+index-CEx-6B5f.js:319 [WEBRTC] Added ICE candidate
+index-CEx-6B5f.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kBfNdn24znz7Tk6jAAAZ', candidate: {…}}
+index-CEx-6B5f.js:319 [WEBRTC] Received ICE candidate {fromSocketId: 'kBfNdn24znz7Tk6jAAAZ', candidate: {…}}
+index-CEx-6B5f.js:319 [WEBRTC] onicecandidate event RTCPeerConnectionIceEvent {isTrusted: true, candidate: null, type: 'icecandidate', target: RTCPeerConnection, currentTarget: RTCPeerConnection, …}
+index-CEx-6B5f.js:319 [WEBRTC] Connection state changed: connected
+2index-CEx-6B5f.js:319 [WEBRTC] Added ICE candidate
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
+index-CEx-6B5f.js:319 [WEBRTC] Cleaning up signaling handlers
+index-CEx-6B5f.js:319 [WEBRTC] Setting up signaling handlers
+index-CEx-6B5f.js:319 [VideoCall] Passing partnerId as targetUserId: 576 number
