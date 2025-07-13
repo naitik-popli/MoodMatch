@@ -24,6 +24,7 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
   const remoteStreamRef = useRef<MediaStream | null>(null);
   const startCallCalledRef = useRef(false);
   const mediaInitializedRef = useRef(false);
+  const handlersSetRef = useRef(false);
 
   const peerSocketIdRef = useRef<string | null>(null);
   const pendingCandidatesRef = useRef<any[]>([]);
@@ -200,6 +201,12 @@ log("Sent offer to", targetUserId);
       log("Socket not ready for signaling handlers");
       return;
     }
+      if (handlersSetRef.current) {
+    log("Signaling handlers already set up, skipping.");
+    return;
+  }
+  handlersSetRef.current = true;
+  log("Setting up signaling handlers");
 
     const offerHandledRef = { current: false };
 
@@ -319,8 +326,9 @@ log("Sent answer to", targetUserId);
       socket.off("webrtc-offer", handleOffer);
       socket.off("webrtc-answer", handleAnswer);
       socket.off("webrtc-ice-candidate", handleIce);
+       handlersSetRef.current = false;
     };
-  }, [socket, targetUserId, setupPeerConnection, log, initializeMedia]);
+  }, [socket, targetUserId]);
 
   // End call and cleanup
   const endCall = useCallback(() => {
