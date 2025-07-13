@@ -52,20 +52,21 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
 }
     };
 
-    pc.ontrack = (event) => {
-      log("[WEBRTC] ontrack fired", event);
-      if (event.streams && event.streams[0]) {
-        const newStream = event.streams[0];
-        log("[WEBRTC] Received remote stream", newStream);
-        log("[WEBRTC] Remote stream tracks:", newStream.getTracks().map(t => `${t.kind}:${t.readyState}`));
-        remoteStreamRef.current = newStream;
-        setRemoteStream(newStream);
-        log("[WEBRTC] Remote stream set", newStream);
-      } else {
-        log("[WEBRTC] ontrack fired but no streams found", event);
-      }
-    };
-
+ pc.ontrack = (event) => {
+  log("[WEBRTC] ontrack fired", event);
+  log("[WEBRTC] event.streams:", event.streams);
+  log("[WEBRTC] event.track:", event.track);
+  if (event.streams && event.streams[0]) {
+    const newStream = event.streams[0];
+    log("[WEBRTC] Received remote stream", newStream);
+    log("[WEBRTC] Remote stream tracks:", newStream.getTracks().map(t => `${t.kind}:${t.readyState}`));
+    remoteStreamRef.current = newStream;
+    setRemoteStream(newStream);
+    log("[WEBRTC] Remote stream set", newStream);
+  } else {
+    log("[WEBRTC] ontrack fired but no streams found", event);
+  }
+};
     pc.onconnectionstatechange = () => {
       const state = pc.connectionState;
       log("Connection state changed:", state);
