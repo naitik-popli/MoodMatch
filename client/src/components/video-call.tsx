@@ -166,7 +166,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       
 
      
-      {console.log("[VideoCall] Rendering JitsiMeet", sessionData)}
+      {/* {console.log("[VideoCall] Rendering JitsiMeet", sessionData)} */}
       <JitsiMeet
         roomName={`MoodMatchRoom_${sessionData.sessionId}`}
         displayName={`User_${sessionData.userId}`}
