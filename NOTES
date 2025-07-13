@@ -1,65 +1,118 @@
 🔗 Socket connection status: false
-index-D99TZApn.js:328 📺 Render check: {currentScreen: 'selection', selectedMood: null, sessionData: null}
-chext_driver.js:496 Initialized driver at: Sun Jul 13 2025 13:05:55 GMT+0530 (India Standard Time)
-chext_loader.js:69 Initialized chextloader at: 1752392155284
-index-D99TZApn.js:328 🎉 Session created: {sessionId: 626, userId: 510, mood: 'happy'}
-index-D99TZApn.js:328 ⚠️ Cannot emit join-mood-queue — socket or session info missing
-p @ index-D99TZApn.js:328
-await in p
-l @ index-D99TZApn.js:284
-ww @ index-D99TZApn.js:37
-Sw @ index-D99TZApn.js:37
-Cw @ index-D99TZApn.js:37
-kf @ index-D99TZApn.js:37
-bm @ index-D99TZApn.js:37
-(anonymous) @ index-D99TZApn.js:37
-id @ index-D99TZApn.js:40
-Gp @ index-D99TZApn.js:37
-ya @ index-D99TZApn.js:37
-Iu @ index-D99TZApn.js:37
-Fw @ index-D99TZApn.js:37Understand this warning
-index-D99TZApn.js:328 🔗 Socket connection status: false
-index-D99TZApn.js:328 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
-index-D99TZApn.js:284 ⏳ WaitingRoom mounted with mood: happy
-index-D99TZApn.js:284 [WaitingRoom] Missing socket
-(anonymous) @ index-D99TZApn.js:284
-Ml @ index-D99TZApn.js:40
-Yr @ index-D99TZApn.js:40
-(anonymous) @ index-D99TZApn.js:40
-E @ index-D99TZApn.js:25
-M @ index-D99TZApn.js:25Understand this warning
-index-D99TZApn.js:284 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
-index-D99TZApn.js:284 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
-index-D99TZApn.js:284 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
-index-D99TZApn.js:328 🔗 Socket connection status: false
-index-D99TZApn.js:328 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
-index-D99TZApn.js:284 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
-index-D99TZApn.js:284 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
-index-D99TZApn.js:284 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
-index-D99TZApn.js:284 [WaitingRoom] Missing socket
-(anonymous) @ index-D99TZApn.js:284
-Ml @ index-D99TZApn.js:40
-Yr @ index-D99TZApn.js:40
-(anonymous) @ index-D99TZApn.js:40
-E @ index-D99TZApn.js:25
-M @ index-D99TZApn.js:25Understand this warning
-2index-D99TZApn.js:284 ✅ Connected to socket: vUpVWHrn9fvWsvulAAAo
-index-D99TZApn.js:328 🔗 Socket connection status: true
-index-D99TZApn.js:328 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
-index-D99TZApn.js:284 [WaitingRoom] Cleaned up socket listeners
-2index-D99TZApn.js:284 📮 Sending 'update-socket-id' with userId: 510
-index-D99TZApn.js:284 📤 Emitting 'join-mood-queue' with: {userId: 510, mood: 'happy'}
-index-D99TZApn.js:284 [WaitingRoom] Cleaned up socket listeners
-index-D99TZApn.js:284 [WaitingRoom] Already joined queue, skipping
-index-D99TZApn.js:284 📤 Emitting 'join-mood-queue' with: {userId: 510, mood: 'happy'}
-index-D99TZApn.js:328 ✅ Match found on frontend: {role: 'initiator', partnerId: 511, partnerSocketId: 'H1XUUJTYuMfgPWNTAAA9', sessionId: 626, timestamp: '2025-07-13T07:37:45.226Z'}
-index-D99TZApn.js:328 🧩 handleMatchFound called with data: {role: 'initiator', partnerId: 511, partnerSocketId: 'H1XUUJTYuMfgPWNTAAA9', sessionId: 626, timestamp: '2025-07-13T07:37:45.226Z'}
-index-D99TZApn.js:328 📦 Updated sessionData after match: {sessionId: 626, userId: 510, partnerId: 511, partnerSocketId: 'H1XUUJTYuMfgPWNTAAA9', role: 'initiator'}
-index-D99TZApn.js:328 🔗 Socket connection status: true
-index-D99TZApn.js:328 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
-index-D99TZApn.js:284 🧹 Component unmounted, but socket connection kept alive
-index-D99TZApn.js:284 [WaitingRoom] Emitting leave-mood-queue for user 510
-index-D99TZApn.js:284 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
-index-D99TZApn.js:284 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
-index-D99TZApn.js:284 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
-index-D99TZApn.js:328 📞 Transitioning to VideoCall: {sessionId: 626, userId: 510, partnerId: 511, partnerSocketId: 'H1XUUJTYuMfgPWNTAAA9', role: 'initiator'}
+index-BhdzOykj.js:328 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
+2index-BhdzOykj.js:284 ✅ Connected to socket: Zy7rZdluOJ0p2gTLAAAB
+index-BhdzOykj.js:328 🔗 Socket connection status: true
+index-BhdzOykj.js:328 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
+2index-BhdzOykj.js:284 [WaitingRoom] Emitting leave-mood-queue for user 516
+index-BhdzOykj.js:328 ✅ Match found on frontend: {role: 'receiver', partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', sessionId: 632, timestamp: '2025-07-13T08:47:08.627Z'}
+index-BhdzOykj.js:328 🧩 handleMatchFound called with data: {role: 'receiver', partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', sessionId: 632, timestamp: '2025-07-13T08:47:08.627Z'}
+index-BhdzOykj.js:328 📦 Updated sessionData after match: {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:328 🧩 handleMatchFound called with data: {role: 'receiver', partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', sessionId: 632, timestamp: '2025-07-13T08:47:08.627Z'}
+index-BhdzOykj.js:328 ⚠️ Already matched, ignoring duplicate match-found event
+(anonymous) @ index-BhdzOykj.js:328
+_i @ index-BhdzOykj.js:38
+Ea @ index-BhdzOykj.js:38
+useState @ index-BhdzOykj.js:38
+H.useState @ index-BhdzOykj.js:9
+GP @ index-BhdzOykj.js:328
+Xu @ index-BhdzOykj.js:38
+Ec @ index-BhdzOykj.js:40
+bg @ index-BhdzOykj.js:40
+Cg @ index-BhdzOykj.js:40
+Jx @ index-BhdzOykj.js:40
+pl @ index-BhdzOykj.js:40
+wg @ index-BhdzOykj.js:40
+E @ index-BhdzOykj.js:25
+M @ index-BhdzOykj.js:25Understand this warning
+index-BhdzOykj.js:328 🔗 Socket connection status: true
+index-BhdzOykj.js:328 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 🧹 Component unmounted, but socket connection kept alive
+index-BhdzOykj.js:284 [WaitingRoom] Emitting leave-mood-queue for user 516
+index-BhdzOykj.js:284 [JitsiMeet] Component loaded with roomName: MoodMatchRoom_632 displayName: User_516
+index-BhdzOykj.js:284 [JitsiMeet] JitsiMeetExternalAPI is NOT loaded! Did you include the script in index.html?
+(anonymous) @ index-BhdzOykj.js:284
+Ml @ index-BhdzOykj.js:40
+Yr @ index-BhdzOykj.js:40
+(anonymous) @ index-BhdzOykj.js:40
+E @ index-BhdzOykj.js:25
+M @ index-BhdzOykj.js:25Understand this error
+index-BhdzOykj.js:284 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-BhdzOykj.js:284 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-BhdzOykj.js:284 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+index-BhdzOykj.js:328 📞 Transitioning to VideoCall: {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Component mounted so start fucking me {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [VideoCall] Rendering JitsiMeet {sessionId: 632, userId: 516, partnerId: 515, partnerSocketId: 'DubsIFzAT5ahoYDmAAAE', role: 'receiver'}
+index-BhdzOykj.js:284 [JitsiMeet] Component function called MoodMatchRoom_632 User_516
+index-BhdzOykj.js:284 [VideoCall] Comp
