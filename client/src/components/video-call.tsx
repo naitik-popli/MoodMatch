@@ -163,12 +163,15 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
         </div>
         <div className="text-white/60 text-sm">{formatDuration(callDuration)}</div>
       </div>
+      
 
-      {/* Jitsi Meet handles all video/audio UI */}
+     
+      {console.log("[VideoCall] Rendering JitsiMeet", sessionData)}
       <JitsiMeet
         roomName={`MoodMatchRoom_${sessionData.sessionId}`}
         displayName={`User_${sessionData.userId}`}
       />
+      
 
       <div className="bg-dark-blue/90 backdrop-blur-sm px-6 py-6 flex items-center justify-center space-x-6">
         <Button

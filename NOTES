@@ -1,145 +1,45 @@
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:04:33.081Z
-[CONN ujFaSW] New connection [socketId=ujFaSWJP8UA_U0EzAAAB]
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:04:38.071Z
-[CONN luen9j] New connection [socketId=luen9jPfXFrhGL7FAAAE]
-[DEBUG][2025-07-13T05:09:39.425Z] Fetched mood stats {
-  happy: 0,
-  relaxed: 0,
-  energetic: 0,
-  thoughtful: 0,
-  creative: 0,
-  adventurous: 0,
-  nostalgic: 0,
-  curious: 0
-}
-GET /api/moods/stats 304 6ms
-Response: {
-  "happy": 0,
-  "relaxed": 0,
-  "energetic": 0,
-  "thoughtful": 0,
-  "creative": 0,
-  "adventurous": 0,
-  "nostalgic": 0,
-  "curious": 0
-}
-[DISCONNECT] Socket luen9jPfXFrhGL7FAAAE disconnected (userId=undefined)
-[CONN wbyDUG] New connection [socketId=wbyDUGojiMUrYah6AAAH]
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:04:43.074Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:04:48.071Z
-[MATCH] Current queue length: 0
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:04:53.092Z
-[DEBUG][2025-07-13T05:09:53.295Z] Created new chat session for user 489 {
-  id: 605,
-  userId: 489,
-  mood: 'happy',
-  isActive: true,
-  partnerId: null,
-  createdAt: 2025-07-13T05:09:53.194Z,
-  endedAt: null
-}
-POST /api/session/create 200 224ms
-Response: {
-  "sessionId": 605,
-  "userId": 489,
-  "mood": "happy"
-}
-[CONN l4b1If] New connection [socketId=l4b1IfFrkbMUUh8wAAAK]
-[2025-07-13T05:09:53.975Z] Generated new partnerId 1000489 for user 489
-[2025-07-13T05:09:53.976Z] Generated new partnerId 1000489 for user 489
-[2025-07-13T05:09:53.975Z] [SOCKET MAP] Bound user 489 to socket l4b1IfFrkbMUUh8wAAAK with partnerId 1000489
-[2025-07-13T05:09:53.975Z] [SOCKET MAP] Current userSocketMap entry: userId=489, partnerId=1000489, socketId=l4b1IfFrkbMUUh8wAAAK
-[2025-07-13T05:09:53.976Z] [SOCKET MAP] Bound user 489 to socket l4b1IfFrkbMUUh8wAAAK with partnerId 1000489
-[2025-07-13T05:09:53.976Z] [SOCKET MAP] Current userSocketMap entry: userId=489, partnerId=1000489, socketId=l4b1IfFrkbMUUh8wAAAK
-[2025-07-13T05:09:54.219Z] Generated new partnerId 1000489 for user 489
-[2025-07-13T05:09:54.222Z] Generated new partnerId 1000489 for user 489
-[2025-07-13T05:09:54.219Z] [SOCKET MAP] Bound user 489 to socket l4b1IfFrkbMUUh8wAAAK with partnerId 1000489
-[2025-07-13T05:09:54.219Z] [SOCKET MAP] Current userSocketMap entry: userId=489, partnerId=1000489, socketId=l4b1IfFrkbMUUh8wAAAK
-[2025-07-13T05:09:54.222Z] [SOCKET MAP] Bound user 489 to socket l4b1IfFrkbMUUh8wAAAK with partnerId 1000489
-[2025-07-13T05:09:54.222Z] [SOCKET MAP] Current userSocketMap entry: userId=489, partnerId=1000489, socketId=l4b1IfFrkbMUUh8wAAAK
-[2025-07-13T05:09:54.253Z] Generated new partnerId 1000489 for user 489
-[2025-07-13T05:09:54.253Z] [SOCKET MAP] Bound user 489 to socket l4b1IfFrkbMUUh8wAAAK with partnerId 1000489
-[2025-07-13T05:09:54.253Z] [SOCKET MAP] Current userSocketMap entry: userId=489, partnerId=1000489, socketId=l4b1IfFrkbMUUh8wAAAK
-[2025-07-13T05:09:54.282Z] Generated new partnerId 1000489 for user 489
-[2025-07-13T05:09:54.282Z] [SOCKET MAP] Bound user 489 to socket l4b1IfFrkbMUUh8wAAAK with partnerId 1000489
-[2025-07-13T05:09:54.282Z] [SOCKET MAP] Current userSocketMap entry: userId=489, partnerId=1000489, socketId=l4b1IfFrkbMUUh8wAAAK
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:04:58.076Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:05:03.077Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:05:08.085Z
-[DEBUG][2025-07-13T05:10:12.294Z] Created new chat session for user 490 {
-  id: 606,
-  userId: 490,
-  mood: 'happy',
-  isActive: true,
-  partnerId: null,
-  createdAt: 2025-07-13T05:10:12.290Z,
-  endedAt: null
-}
-POST /api/session/create 200 14ms
-Response: {
-  "sessionId": 606,
-  "userId": 490,
-  "mood": "happy"
-}
-[CONN GmT8xQ] New connection [socketId=GmT8xQ5mQQo9lAFaAAAN]
-[2025-07-13T05:10:12.799Z] Generated new partnerId 1000490 for user 490
-[2025-07-13T05:10:12.799Z] Generated new partnerId 1000490 for user 490
-[2025-07-13T05:10:12.799Z] [SOCKET MAP] Bound user 490 to socket GmT8xQ5mQQo9lAFaAAAN with partnerId 1000490
-[2025-07-13T05:10:12.799Z] [SOCKET MAP] Current userSocketMap entry: userId=490, partnerId=1000490, socketId=GmT8xQ5mQQo9lAFaAAAN
-[2025-07-13T05:10:12.799Z] [SOCKET MAP] Bound user 490 to socket GmT8xQ5mQQo9lAFaAAAN with partnerId 1000490
-[2025-07-13T05:10:12.799Z] [SOCKET MAP] Current userSocketMap entry: userId=490, partnerId=1000490, socketId=GmT8xQ5mQQo9lAFaAAAN
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:05:13.076Z
-[2025-07-13T05:10:13.563Z] Generated new partnerId 1000490 for user 490
-[2025-07-13T05:10:13.563Z] [SOCKET MAP] Bound user 490 to socket GmT8xQ5mQQo9lAFaAAAN with partnerId 1000490
-[2025-07-13T05:10:13.563Z] [SOCKET MAP] Current userSocketMap entry: userId=490, partnerId=1000490, socketId=GmT8xQ5mQQo9lAFaAAAN
-[2025-07-13T05:10:13.713Z] Generated new partnerId 1000490 for user 490
-[2025-07-13T05:10:13.713Z] [SOCKET MAP] Bound user 490 to socket GmT8xQ5mQQo9lAFaAAAN with partnerId 1000490
-[2025-07-13T05:10:13.713Z] [SOCKET MAP] Current userSocketMap entry: userId=490, partnerId=1000490, socketId=GmT8xQ5mQQo9lAFaAAAN
-[2025-07-13T05:10:13.746Z] Generated new partnerId 1000490 for user 490
-[2025-07-13T05:10:13.746Z] [SOCKET MAP] Bound user 490 to socket GmT8xQ5mQQo9lAFaAAAN with partnerId 1000490
-[2025-07-13T05:10:13.746Z] [SOCKET MAP] Current userSocketMap entry: userId=490, partnerId=1000490, socketId=GmT8xQ5mQQo9lAFaAAAN
-[2025-07-13T05:10:13.781Z] Generated new partnerId 1000490 for user 490
-[2025-07-13T05:10:13.781Z] [SOCKET MAP] Bound user 490 to socket GmT8xQ5mQQo9lAFaAAAN with partnerId 1000490
-[2025-07-13T05:10:13.781Z] [SOCKET MAP] Current userSocketMap entry: userId=490, partnerId=1000490, socketId=GmT8xQ5mQQo9lAFaAAAN
-[QUEUE 490] Attempting to join queue for "happy" with socket GmT8xQ5mQQo9lAFaAAAN
-[QUEUE 490] Joined queue at position 2 for mood "happy"
-[MATCH] Current queue length: 2
-[DEBUG][2025-07-13T05:10:13.904Z] Updated partnerId for user 489 in existing session { oldPartnerId: null, newPartnerId: 490 }
-[DEBUG][2025-07-13T05:10:13.972Z] Updated partnerId for user 490 in existing session { oldPartnerId: null, newPartnerId: 489 }
-[MATCH] Notified user 489 (initiator) and 490 (receiver) of match (sessionId=605)
-[MATCH] Paired users 489 and 490 in mood "happy"
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:05:13.982Z
-[QUEUE 490] Leaving queue with socket GmT8xQ5mQQo9lAFaAAAN
-[QUEUE 490] Left queue successfully
-[QUEUE 489] Leaving queue with socket l4b1IfFrkbMUUh8wAAAK
-[QUEUE 489] Left queue successfully
-[QUEUE 490] Attempting to join queue for "happy" with socket GmT8xQ5mQQo9lAFaAAAN
-[QUEUE 490] Attempting to join queue for "happy" with socket GmT8xQ5mQQo9lAFaAAAN
-[QUEUE 490] Attempting to join queue for "happy" with socket GmT8xQ5mQQo9lAFaAAAN
-[QUEUE 490] Joined queue at position 1 for mood "happy"
-[QUEUE 490] Joined queue at position 1 for mood "happy"
-[QUEUE 490] Joined queue at position 1 for mood "happy"
-[MATCH] Current queue length: 1
-[MATCH] Current queue length: 1
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:05:14.602Z
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:05:14.604Z
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:05:14.604Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:05:18.078Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:05:23.078Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:05:28.080Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:05:33.080Z
-[MATCH] Current queue length: 1
-[MATCH] Cleaned up stale entries older than 2025-07-13T05:05:38.078Z
+🔗 Socket connection status: false
+index-D99TZApn.js:328 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
+index-D99TZApn.js:284 ⏳ WaitingRoom mounted with mood: happy
+index-D99TZApn.js:284 [WaitingRoom] Missing socket
+(anonymous) @ index-D99TZApn.js:284
+Ml @ index-D99TZApn.js:40
+Yr @ index-D99TZApn.js:40
+(anonymous) @ index-D99TZApn.js:40
+E @ index-D99TZApn.js:25
+M @ index-D99TZApn.js:25Understand this warning
+index-D99TZApn.js:284 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-D99TZApn.js:284 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-D99TZApn.js:284 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+index-D99TZApn.js:328 🔗 Socket connection status: false
+index-D99TZApn.js:328 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
+index-D99TZApn.js:284 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-D99TZApn.js:284 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-D99TZApn.js:284 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+index-D99TZApn.js:284 [WaitingRoom] Missing socket
+(anonymous) @ index-D99TZApn.js:284
+Ml @ index-D99TZApn.js:40
+Yr @ index-D99TZApn.js:40
+(anonymous) @ index-D99TZApn.js:40
+E @ index-D99TZApn.js:25
+M @ index-D99TZApn.js:25Understand this warning
+2index-D99TZApn.js:284 ✅ Connected to socket: IpvjFPwn_De2Hb9mAAAc
+index-D99TZApn.js:328 🔗 Socket connection status: true
+index-D99TZApn.js:328 📺 Render check: {currentScreen: 'waiting', selectedMood: 'happy', sessionData: {…}}
+index-D99TZApn.js:284 [WaitingRoom] Cleaned up socket listeners
+2index-D99TZApn.js:284 📮 Sending 'update-socket-id' with userId: 497
+index-D99TZApn.js:284 📤 Emitting 'join-mood-queue' with: {userId: 497, mood: 'happy'}
+index-D99TZApn.js:284 [WaitingRoom] Cleaned up socket listeners
+index-D99TZApn.js:284 [WaitingRoom] Already joined queue, skipping
+index-D99TZApn.js:284 📤 Emitting 'join-mood-queue' with: {userId: 497, mood: 'happy'}
+index-D99TZApn.js:328 ✅ Match found on frontend: {role: 'initiator', partnerId: 498, partnerSocketId: 'W_QszbzdBreUw1JOAAAi', sessionId: 613, timestamp: '2025-07-13T07:00:46.085Z'}
+index-D99TZApn.js:328 🧩 handleMatchFound called with data: {role: 'initiator', partnerId: 498, partnerSocketId: 'W_QszbzdBreUw1JOAAAi', sessionId: 613, timestamp: '2025-07-13T07:00:46.085Z'}
+index-D99TZApn.js:328 📦 Updated sessionData after match: {sessionId: 613, userId: 497, partnerId: 498, partnerSocketId: 'W_QszbzdBreUw1JOAAAi', role: 'initiator'}
+index-D99TZApn.js:328 🔗 Socket connection status: true
+index-D99TZApn.js:328 📺 Render check: {currentScreen: 'call', selectedMood: 'happy', sessionData: {…}}
+index-D99TZApn.js:284 🧹 Component unmounted, but socket connection kept alive
+index-D99TZApn.js:284 [WaitingRoom] Emitting leave-mood-queue for user 497
+index-D99TZApn.js:284 🌐 API_BASE_URL: https://moodmatch-61xp.onrender.com/api
+index-D99TZApn.js:284 🔧 Constructed wsUrl: wss://moodmatch-61xp.onrender.com
+index-D99TZApn.js:284 🚀 Connecting to socket at: wss://moodmatch-61xp.onrender.com
+index-D99TZApn.js:328 📞 Transitioning to VideoCall: {sessionId: 613, userId: 497, partnerId: 498, partnerSocketId: 'W_QszbzdBreUw1JOAAAi', role: 'initiator'}
