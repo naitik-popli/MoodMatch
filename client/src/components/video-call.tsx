@@ -48,7 +48,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       .toString()
       .padStart(2, "0")}`;
   };
-  console.log("[VideoCall] Component mounted", sessionData);
+  console.log("[VideoCall] Component mounted so start fucking me", sessionData);
   // Request media permissions on mount
   useEffect(() => {
     const requestMediaPermissions = async () => {
