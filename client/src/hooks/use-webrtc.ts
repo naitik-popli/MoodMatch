@@ -25,16 +25,22 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
   const startCallCalledRef = useRef(false);
   const mediaInitializedRef = useRef(false);
   const handlersSetRef = useRef(false);
+  const isMountedRef = useRef(true);
 
   const peerSocketIdRef = useRef<string | null>(null);
   const pendingCandidatesRef = useRef<any[]>([]);
 
   // Only create one peer connection per call
   const setupPeerConnection = useCallback(() => {
-    if (peerConnectionRef.current) {
+    if (peerConnectionRef.current && 
+      peerConnectionRef.current.connectionState !== 'closed')  {
       log("Peer connection already exists, reusing it.");
       return peerConnectionRef.current;
     }
+     if (peerConnectionRef.current) {
+    log("Closing previous connection before creating new one");
+    peerConnectionRef.current.close();
+  }
     log("Creating new peer connection");
     const pc = createPeerConnection();
     peerConnectionRef.current = pc;
@@ -84,39 +90,28 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
     };
 
     return pc;
-  }, [socket, targetUserId, log]);
+  }, [socket, log]);
 
   // Initialize media devices (bypass media errors for now)
-  const initializeMedia = useCallback(async () => {
-    log("Initializing media...");
-    if (mediaInitializedRef.current) {
-      log("Media already initialized, skipping...");
-      return localStreamRef.current;
-    }
-    mediaInitializedRef.current = true;
-    if (externalLocalStream) {
-      log("Using external local stream", externalLocalStream);
-      setLocalStream(externalLocalStream);
-      localStreamRef.current = externalLocalStream;
-      return externalLocalStream;
-    }
-    try {
-      const constraints = {
+const initializeMedia = useCallback(async () => {
+  if (mediaInitializedRef.current) return localStreamRef.current;
+  
+  try {
+    const stream = externalLocalStream || 
+      await navigator.mediaDevices.getUserMedia({
         audio: true,
-        video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" }
-      };
-      log("Requesting user media with constraints", constraints);
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      log("Local media stream initialized", stream);
-      setLocalStream(stream);
-      localStreamRef.current = stream;
-      return stream;
-    } catch (error) {
-      log("Media access error (bypassed):", error);
-      // Bypass: return null instead of throwing
-      return null;
-    }
-  }, [externalLocalStream, log]);
+        video: { width: 1280, height: 720, facingMode: "user" }
+      });
+
+    mediaInitializedRef.current = true;
+    localStreamRef.current = stream;
+    setLocalStream(stream);
+    return stream;
+  } catch (error) {
+    log("Media access error:", error);
+    return null;
+  }
+}, [externalLocalStream]);
 
   // Track socket id readiness
   useEffect(() => {
@@ -126,47 +121,30 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
 
   // Start call (initiator)
   const startCall = useCallback(async () => {
-    log("Attempting to start call...");
-    if (!socket || !targetUserId) {
-      log("Cannot start call — socket or targetUserId missing");
-      return;
-    }
-    if (peerConnectionRef.current) {
-      log("Closing previous peer connection before starting new call");
-      peerConnectionRef.current.close();
-      peerConnectionRef.current = null;
-    }
-    try {
-      const stream = await initializeMedia();
-      log("Got local stream for call", stream);
-      const pc = setupPeerConnection();
-      if (stream) {
-        stream.getTracks().forEach(track => {
-          if (!pc.getSenders().some(sender => sender.track === track)) {
-            pc.addTrack(track, stream);
-            log("Added local track (initiator)", track);
-          }
-        });
-      }
-      if (isInitiator) {
-        log("Creating offer...");
-        const offer = await pc.createOffer({ offerToReceiveAudio: true, offerToReceiveVideo: true });
-        await pc.setLocalDescription(offer);
-        log("Created and set local description with offer");
-        log("[useWebRTC] Offer emission targetUserId:", targetUserId, typeof targetUserId);
-        if (typeof targetUserId !== "number") {
-          log("[useWebRTC] Invalid targetUserId for offer emission:", targetUserId, typeof targetUserId);
-          return;
-        }
-        socket.emit("webrtc-offer", { targetUserId, offer });
-        log("Sent offer to", targetUserId);
-      }
-    } catch (error) {
-      log("Error during call start (bypassed):", error);
-      // Bypass: do not alert or throw
-    }
-  }, [socket, targetUserId, isInitiator, initializeMedia, setupPeerConnection, log]);
+  if (startCallCalledRef.current) return;
+  startCallCalledRef.current = true;
 
+  try {
+    const stream = await initializeMedia();
+    const pc = setupPeerConnection();
+    
+    if (stream) {
+      stream.getTracks().forEach(track => {
+        if (!pc.getSenders().some(s => s.track === track)) {
+          pc.addTrack(track, stream);
+        }
+      });
+    }
+
+    if (isInitiator) {
+      const offer = await pc.createOffer();
+      await pc.setLocalDescription(offer);
+      socket?.emit("webrtc-offer", { targetUserId, offer });
+    }
+  } finally {
+    startCallCalledRef.current = false;
+  }
+}, [initializeMedia, setupPeerConnection, isInitiator, socket, targetUserId]);
   // Auto-start call when ready (initiator only, only once)
   useEffect(() => {
     if (socketIdReady && isInitiator && !startCallCalledRef.current) {
@@ -180,19 +158,19 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
   }, [socketIdReady, isInitiator, startCall]);
 
   // Signaling handlers (only set up once per socket/targetUserId)
-  useEffect(() => {
-    if (!socket || socket.disconnected || !targetUserId) {
-      log("Socket not ready for signaling handlers");
-      return;
-    }
-    if (handlersSetRef.current) {
-      log("Signaling handlers already set up, skipping.");
-      return;
-    }
-    handlersSetRef.current = true;
-    log("Setting up signaling handlers");
+ useEffect(() => {
+  if (!socket || socket.disconnected) {
+    log("Socket not ready for signaling handlers");
+    return;
+  }
+     if (handlersSetRef.current) {
+    log("Signaling handlers already set up, skipping.");
+    return;
+  }
+  handlersSetRef.current = true;
 
-    const offerHandledRef = { current: false };
+  log("Setting up signaling handlers");
+  const offerHandledRef = { current: false };
 
     const handleOffer = async (data: any) => {
       log("Received offer", data);
@@ -362,7 +340,13 @@ export function useWebRTC({ socket, isInitiator, targetUserId, externalLocalStre
   }, []);
 
   // Cleanup on unmount
-  useEffect(() => endCall, [endCall]);
+  // Proper cleanup on unmount
+useEffect(() => {
+  return () => {
+    isMountedRef.current = false;
+    endCall();
+  };
+}, [endCall]);
 
   return {
     localStream,
