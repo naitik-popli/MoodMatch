@@ -20,11 +20,8 @@
     const localVideo = document.getElementById('localVideo');
     const remoteVideo = document.getElementById('remoteVideo');
 
-    // Use the correct WebSocket URL based on the current location and same port
-    const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsHost = location.hostname;
-    const wsPort = location.port; // use same port as HTTP server
-    const ws = new WebSocket(wsProtocol + '//' + wsHost + (wsPort ? ':' + wsPort : ''));
+    // Use the backend URL provided for WebSocket connection
+    const ws = new WebSocket('wss://moodmatch-1.onrender.com');
     let peer;
 
     function requestMediaPermissions() {
