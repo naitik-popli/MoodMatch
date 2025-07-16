@@ -1,0 +1,5 @@
+version: 2
+tunnels:
+  web:
+    addr: 8081
+    proto: http
