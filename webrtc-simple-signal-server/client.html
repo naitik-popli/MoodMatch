@@ -26,8 +26,8 @@
 
     function requestMediaPermissions() {
       return new Promise((resolve, reject) => {
-        // Use secure context check for getUserMedia
         if (!window.isSecureContext) {
+          console.error('[Media] Not a secure context!');
           reject(new Error('getUserMedia requires a secure context (HTTPS or localhost)'));
           return;
         }
@@ -35,9 +35,12 @@
           ? navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices)
           : (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || function() { return Promise.reject(new Error('getUserMedia is not implemented')); }).bind(navigator);
         getUserMedia({ video: true, audio: true })
-          .then(stream => resolve(stream))
+          .then(stream => {
+            console.log('[Media] Got local media stream');
+            resolve(stream);
+          })
           .catch(err => {
-            console.error('getUserMedia error:', err);
+            console.error('[Media] getUserMedia error:', err);
             alert('Error accessing camera/microphone: ' + err.message);
             reject(err);
           });
@@ -47,62 +50,64 @@
     requestMediaPermissions()
       .then(stream => {
         localVideo.srcObject = stream;
+        console.log('[Peer] Local video stream set');
 
         // Create peer with initiator true or false based on URL hash
         const isInitiator = location.hash === '#1';
+        console.log('[Peer] isInitiator:', isInitiator);
 
         peer = new SimplePeer({
           initiator: isInitiator,
-          trickle: false,
+          trickle: true,
           stream: stream
         });
 
-        ws.onmessage = (message) => {
-          console.log('Received signaling message:', message.data);
-          const signal = JSON.parse(message.data);
-          if (signal.type === 'offer' || signal.type === 'answer' || signal.type === 'candidate') {
-            peer.signal(signal);
-          }
-        };
-        
         peer.on('signal', data => {
-          console.log('Sending signaling message:', JSON.stringify(data));
+          console.log('[Peer] Sending signaling message:', JSON.stringify(data));
           ws.send(JSON.stringify(data));
         });
 
+        ws.onmessage = (message) => {
+          console.log('[WS] Received signaling message:', message.data);
+          try {
+            const signal = JSON.parse(message.data);
+            peer.signal(signal);
+          } catch (e) {
+            console.error('[WS] Failed to parse signaling message:', e, message.data);
+          }
+        };
+
         peer.on('stream', stream => {
-          console.log('Received remote stream');
+          console.log('[Peer] Received remote stream');
           remoteVideo.srcObject = stream;
         });
 
+        peer.on('connect', () => {
+          console.log('[Peer] Peer connection established!');
+        });
+
+        peer.on('close', () => {
+          console.log('[Peer] Peer connection closed');
+        });
+
         peer.on('error', err => {
-          console.error('Peer error:', err);
+          console.error('[Peer] Peer error:', err);
         });
 
         ws.onerror = (err) => {
-          console.error('WebSocket error:', err);
+          console.error('[WS] WebSocket error:', err);
         };
 
         ws.onopen = () => {
-          console.log('WebSocket connection opened');
+          console.log('[WS] WebSocket connection opened');
         };
 
         ws.onclose = () => {
-          console.log('WebSocket connection closed');
+          console.log('[WS] WebSocket connection closed');
         };
-
-        // Removed duplicate peer.on('signal') handler to avoid sending signaling messages twice
-
-        peer.on('stream', stream => {
-          remoteVideo.srcObject = stream;
-        });
-
-        peer.on('error', err => {
-          console.error('Peer error:', err);
-        });
       })
       .catch(err => {
-        console.error('getUserMedia error:', err);
+        console.error('[Media] getUserMedia error:', err);
       });
   </script>
 </body>

@@ -1,5 +1,7 @@
 const WebSocket = require('ws');
-const server = new WebSocket.Server({ port: 3000 });
+
+const port = process.env.PORT || 3000;
+const server = new WebSocket.Server({ port });
 
 let clients = [];
 
@@ -20,6 +22,16 @@ server.on('connection', (ws) => {
     clients = clients.filter(client => client !== ws);
     console.log('Client disconnected. Total clients:', clients.length);
   });
+
+  ws.on('error', (err) => {
+    console.error('WebSocket error:', err);
+  });
 });
 
-console.log('WebSocket signaling server running on ws://localhost:3000');
+server.on('listening', () => {
+  console.log(`WebSocket signaling server running on wss://moodmatch-1.onrender.com (port ${port})`);
+});
+
+server.on('error', (err) => {
+  console.error('WebSocket server error:', err);
+});
