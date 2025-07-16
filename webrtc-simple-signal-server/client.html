@@ -58,15 +58,40 @@
         });
 
         ws.onmessage = (message) => {
+          console.log('Received signaling message:', message.data);
           const signal = JSON.parse(message.data);
           if (signal.type === 'offer' || signal.type === 'answer' || signal.type === 'candidate') {
             peer.signal(signal);
           }
         };
-
+        
         peer.on('signal', data => {
+          console.log('Sending signaling message:', JSON.stringify(data));
           ws.send(JSON.stringify(data));
         });
+
+        peer.on('stream', stream => {
+          console.log('Received remote stream');
+          remoteVideo.srcObject = stream;
+        });
+
+        peer.on('error', err => {
+          console.error('Peer error:', err);
+        });
+
+        ws.onerror = (err) => {
+          console.error('WebSocket error:', err);
+        };
+
+        ws.onopen = () => {
+          console.log('WebSocket connection opened');
+        };
+
+        ws.onclose = () => {
+          console.log('WebSocket connection closed');
+        };
+
+        // Removed duplicate peer.on('signal') handler to avoid sending signaling messages twice
 
         peer.on('stream', stream => {
           remoteVideo.srcObject = stream;
