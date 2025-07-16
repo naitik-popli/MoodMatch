@@ -59,7 +59,7 @@
 
         ws.onmessage = (message) => {
           const signal = JSON.parse(message.data);
-          if (signal.type === 'offer' || signal.type === 'answer' || signal.candidate) {
+          if (signal.type === 'offer' || signal.type === 'answer' || signal.type === 'candidate') {
             peer.signal(signal);
           }
         };
