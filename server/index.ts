@@ -3,11 +3,10 @@ import express, { type Request, Response, NextFunction } from "express";
 import cors from "cors";
 import { registerRoutes } from "./routes";
 import { createServer } from "http";
-import { Server as SocketIOServer } from "socket.io";
 import { setupWebSocket } from "./websocket";
-import { db } from "./db"; // Added missing import
-import { sql } from "drizzle-orm"; // Added missing import
-import { moodQueue } from "@shared/schema"; // Added missing import
+import { db } from "./db";
+import { sql } from "drizzle-orm";
+import { moodQueue } from "@shared/schema";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -66,7 +65,6 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   res.send("MoodMatch backend is running 🚀");
 });
-
 
 // Health Check Route
 app.get("/api/health", (_req, res) => {
@@ -129,22 +127,8 @@ async function startServer() {
     // HTTP Server
     const server = createServer(app);
 
-    // Secure Socket.IO Configuration
-    const io = new SocketIOServer(server, {
-      cors: {
-        origin: allowedOrigins,
-        methods: ["GET", "POST"],
-        allowedHeaders: ["Content-Type", "Authorization", "my-custom-header"],
-        credentials: true
-      },
-      allowEIO3: true,
-      connectionStateRecovery: {
-        maxDisconnectionDuration: 2 * 60 * 1000,
-        skipMiddlewares: true
-      }
-    });
-
-    setupWebSocket(io);
+    // Native WebSocket setup (NO Socket.IO)
+    setupWebSocket(server);
 
     // Error Handling Middleware
     app.use((err: any, req: Request, res: Response, next: NextFunction) => {
