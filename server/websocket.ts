@@ -10,11 +10,20 @@ const MAX_QUEUE_TIME = 300000;
 
 // Map userId to WebSocket connection
 const userSocketMap = new Map<number, WebSocket>();
+// Map userId to socketId (for DB)
+const userSocketIdMap = new Map<number, string>();
 
 interface QueueEntry {
   userId: number;
   mood: Mood;
+  socketId: string;
   createdAt: Date;
+}
+
+// Helper to generate a unique socketId for each connection
+function getSocketId(ws: WebSocket): string {
+  // Use a random string or use ws._socket.remoteAddress + ":" + ws._socket.remotePort if available
+  return Math.random().toString(36).slice(2) + Date.now();
 }
 
 // --- WebSocket Setup ---
@@ -24,6 +33,7 @@ export function setupWebSocket(server: any) {
   wss.on("connection", (ws: WebSocket) => {
     let userId: number | null = null;
     let mood: Mood | null = null;
+    let socketId: string | null = getSocketId(ws);
 
     ws.on("message", async (msg) => {
       try {
@@ -33,11 +43,12 @@ export function setupWebSocket(server: any) {
           mood = message.mood;
           if (!userId || !mood) return;
           userSocketMap.set(userId, ws);
+          userSocketIdMap.set(userId, socketId!);
           await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
-          // Make sure the field names match your schema!
           await db.insert(moodQueue).values({
             userId,
             mood,
+            socketId: socketId!,
             createdAt: new Date(),
           });
           ws.send(JSON.stringify({ type: "queue-status", status: "waiting", mood }));
@@ -45,6 +56,7 @@ export function setupWebSocket(server: any) {
           if (!userId) return;
           await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
           userSocketMap.delete(userId);
+          userSocketIdMap.delete(userId);
           ws.send(JSON.stringify({ type: "queue-status", status: "left" }));
         } else if (message.type === "signal") {
           // Forward signaling data to partner
@@ -66,8 +78,13 @@ export function setupWebSocket(server: any) {
     ws.on("close", async () => {
       if (userId) {
         userSocketMap.delete(userId);
+        userSocketIdMap.delete(userId);
         await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
       }
+    });
+
+    ws.on("error", (err) => {
+      console.error("WebSocket error:", err);
     });
   });
 
@@ -79,6 +96,7 @@ export function setupWebSocket(server: any) {
     const queue: QueueEntry[] = queueRows.map((row: any) => ({
       userId: row.userId ?? row.user_id,
       mood: row.mood,
+      socketId: row.socketId ?? row.socket_id,
       createdAt: row.createdAt ?? row.created_at,
     }));
 
@@ -125,6 +143,10 @@ export function setupWebSocket(server: any) {
         await db.delete(moodQueue).where(
           or(eq(moodQueue.userId, userA.userId), eq(moodQueue.userId, userB.userId))
         );
+        userSocketMap.delete(userA.userId);
+        userSocketMap.delete(userB.userId);
+        userSocketIdMap.delete(userA.userId);
+        userSocketIdMap.delete(userB.userId);
       }
     }
     // Cleanup stale entries

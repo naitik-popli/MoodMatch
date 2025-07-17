@@ -29,7 +29,7 @@ server.on('connection', (ws) => {
 });
 
 server.on('listening', () => {
-  console.log(`WebSocket signaling server running on wss://moodmatch-1.onrender.com (port ${port})`);
+  console.log(`WebSocket signaling server running on wss://moodmatch-61xp.onrender.com (port ${port})`);
 });
 
 server.on('error', (err) => {
