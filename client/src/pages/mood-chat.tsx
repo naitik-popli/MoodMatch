@@ -21,7 +21,7 @@ export default function MoodChat() {
   } | null>(null);
 
   // UseSocket: just pass the wsUrl
-  const { socket, isConnected, emit, on } = useSocket("wss://moodmatch-1.onrender.com");
+  const { socket, isConnected, emit, on } = useSocket("wss://moodmatch-61xp.onrender.com");
   console.log("🔗 Socket connection status:", isConnected);
 
   const alreadyMatched = useRef(false);

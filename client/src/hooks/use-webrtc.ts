@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import SimplePeer, { Instance, SignalData } from "simple-peer";
 
 interface UseWebRTCSimpleProps {
-  wsUrl: string; // e.g. wss://moodmatch-1.onrender.com
+  wsUrl: string; // e.g. wss://moodmatch-61xp.onrender.com
   isInitiator: boolean;
   externalLocalStream?: MediaStream | null;
 }

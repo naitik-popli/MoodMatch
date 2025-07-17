@@ -12,6 +12,7 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 // Keeping it here for reference to remind you where it belongs logically.
 const allowedOrigins = [
   'https://moodmatch-1.onrender.com',
+  "https://moodmatch-61xp.onrender.com",
   'http://localhost:3000'
 ];
 
@@ -40,6 +41,7 @@ app.use(cors({
 // These are the domains from which your frontend expects to load resources.
 const allowedHosts = [
   "moodmatch-1.onrender.com",
+  "https://moodmatch-61xp.onrender.com",
   "localhost",
   "127.0.0.1"
 ];

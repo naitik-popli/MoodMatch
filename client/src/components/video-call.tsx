@@ -51,7 +51,7 @@ export default function VideoCall({ mood, sessionData, onCallEnd, externalLocalS
     toggleMute,
     toggleVideo 
   } = useWebRTC({
-    wsUrl: "wss://moodmatch-1.onrender.com",
+    wsUrl: "wss://moodmatch-61xp.onrender.com",
     isInitiator: sessionData.role === "initiator",
     externalLocalStream,
   });
