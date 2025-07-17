@@ -17,6 +17,35 @@
 
   <script src="https://cdn.jsdelivr.net/npm/simple-peer@9.11.1/simplepeer.min.js"></script>
   <script>
+    // Enable SimplePeer debug logs
+    localStorage.debug = 'simple-peer*';
+
+    // Patch RTCPeerConnection for core WebRTC logs
+    (function() {
+      const orig = window.RTCPeerConnection;
+      if (!orig) return;
+      window.RTCPeerConnection = function(...args) {
+        const pc = new orig(...args);
+        pc.addEventListener('icecandidate', e => {
+          console.log('[WebRTC] ICE candidate:', e.candidate);
+        });
+        pc.addEventListener('iceconnectionstatechange', () => {
+          console.log('[WebRTC] ICE connection state:', pc.iceConnectionState);
+        });
+        pc.addEventListener('signalingstatechange', () => {
+          console.log('[WebRTC] Signaling state:', pc.signalingState);
+        });
+        pc.addEventListener('negotiationneeded', () => {
+          console.log('[WebRTC] Negotiation needed');
+        });
+        pc.addEventListener('track', e => {
+          console.log('[WebRTC] Track event:', e.streams);
+        });
+        return pc;
+      };
+      window.RTCPeerConnection.prototype = orig.prototype;
+    })();
+
     const localVideo = document.getElementById('localVideo');
     const remoteVideo = document.getElementById('remoteVideo');
 
@@ -67,18 +96,36 @@
           ws.send(JSON.stringify(data));
         });
 
-        ws.onmessage = (message) => {
-          console.log('[WS] Received signaling message:', message.data);
-          try {
-            const signal = JSON.parse(message.data);
-            peer.signal(signal);
-          } catch (e) {
-            console.error('[WS] Failed to parse signaling message:', e, message.data);
+        ws.onmessage = async (message) => {
+          if (typeof message.data === 'string') {
+            console.log('[WS] Received signaling message (string):', message.data);
+            try {
+              const signal = JSON.parse(message.data);
+              console.log('[Peer] About to signal:', signal);
+              peer.signal(signal);
+              console.log('[Peer] Signaled:', signal);
+            } catch (e) {
+              console.error('[WS] Failed to parse signaling message:', e, message.data);
+            }
+          } else if (message.data instanceof Blob) {
+            // Convert Blob to text
+            const text = await message.data.text();
+            console.log('[WS] Received signaling message (Blob):', text);
+            try {
+              const signal = JSON.parse(text);
+              console.log('[Peer] About to signal:', signal);
+              peer.signal(signal);
+              console.log('[Peer] Signaled:', signal);
+            } catch (e) {
+              console.error('[WS] Failed to parse signaling message from Blob:', e, text);
+            }
+          } else {
+            console.error('[WS] Received signaling message of unknown type:', message.data);
           }
         };
 
         peer.on('stream', stream => {
-          console.log('[Peer] Received remote stream');
+          console.log('[Peer] Received remote stream', stream);
           remoteVideo.srcObject = stream;
         });
 
@@ -92,6 +139,10 @@
 
         peer.on('error', err => {
           console.error('[Peer] Peer error:', err);
+        });
+
+        peer.on('data', data => {
+          console.log('[Peer] Data channel message:', data);
         });
 
         ws.onerror = (err) => {
