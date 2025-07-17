@@ -41,7 +41,7 @@ interface Props {
 export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueueJoin }: Props) {
   const [waitTime, setWaitTime] = useState(0);
   const [userId, setUserId] = useState<number | null>(null);
-  const { socket, emit, on } = useSocket("wss://moodmatch-1.onrender.com");
+  const { socket, emit, on } = useSocket("wss://moodmatch-61xp.onrender.com");
   const [hasJoinedQueue, setHasJoinedQueue] = useState(false);
 
   // Load userId from localStorage
