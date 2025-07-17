@@ -18,7 +18,7 @@ interface QueueEntry {
 }
 
 // --- WebSocket Setup ---
-export function setupWebSocketServer(server: any) {
+export function setupWebSocket(server: any) {
   const wss = new WebSocketServer({ server });
 
   wss.on("connection", (ws: WebSocket) => {
