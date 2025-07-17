@@ -11,7 +11,7 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 // This array will be used in your Node.js backend server, NOT here in Vite config.
 // Keeping it here for reference to remind you where it belongs logically.
 const allowedOrigins = [
-  'https://moodmatch-1.onrender.com',
+  // 'https://moodmatch-1.onrender.com',
   "https://moodmatch-61xp.onrender.com",
   'http://localhost:3000'
 ];
