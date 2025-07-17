@@ -1,127 +1,81 @@
-import { useEffect, useState, useCallback } from "react";
-import { io, Socket } from "socket.io-client";
-import { API_BASE_URL } from "../lib/api";
+import { useEffect, useState, useCallback, useRef } from "react";
 
-// Define the path used by both client and server
-const SOCKET_PATH = "/socket.io";
-declare global {
-  interface Window {
-    _globalSocket?: Socket;
-  }
-}
-
-// Custom hook to manage socket connection
-export function useSocket(userId?: number) {
-  const [socket, setSocket] = useState<Socket | null>(null);
+export function useSocket(wsUrl?: string) {
   const [isConnected, setIsConnected] = useState(false);
+  const [socket, setSocket] = useState<WebSocket | null>(null);
+  const listenersRef = useRef<{ [event: string]: ((data: any) => void)[] }>({});
 
   useEffect(() => {
-    // 🛑 Do nothing if no userId
-    if (!userId) return;
+    if (!wsUrl) return;
 
-    // Build WebSocket URL from API_BASE_URL
-    let wsUrl = API_BASE_URL.replace(/^http/, "ws").replace(/\/api\/?$/, "");
-    const finalWsUrl = wsUrl.startsWith("ws://")
-      ? wsUrl.replace(/^ws:/, "wss:")
-      : wsUrl;
+    const ws = new WebSocket(wsUrl);
 
-    console.log("🌐 API_BASE_URL:", API_BASE_URL);
-    console.log("🔧 Constructed wsUrl:", wsUrl);
-    console.log("🚀 Connecting to socket at:", finalWsUrl);
-
-    // Use a global socket instance to keep connection persistent
-    if (!window._globalSocket) {
-      window._globalSocket = io(finalWsUrl, {
-        transports: ["websocket"],
-        path: SOCKET_PATH,
-        reconnectionAttempts: Infinity,
-        reconnectionDelay: 1000,
-        timeout: 30000,
-        auth: { userId: userId || "guest" },
-      });
-    }
-
-    setSocket(window._globalSocket);
-
-    // Do not disconnect socket on unmount
-    return () => {
-      console.log("🧹 Component unmounted, but socket connection kept alive");
-    };
-  }, [userId]);
-         
-
-       useEffect(() => {
-    if (!socket) return;
-
-    const handleConnect = () => {
-      console.log("✅ Connected to socket:", socket.id);
+    ws.onopen = () => {
+      console.log("✅ WebSocket connected:", wsUrl);
       setIsConnected(true);
-      socket.emit("update-socket-id", { userId });
     };
-    const handleDisconnect = (reason: any) => {
-      console.warn("⚠️ Socket disconnected:", reason);
+
+    ws.onclose = (event) => {
+      console.warn("⚠️ WebSocket disconnected:", event.reason);
       setIsConnected(false);
     };
 
-    socket.on("connect", handleConnect);
-    socket.on("disconnect", handleDisconnect);
-
-    // Optional: handle errors and reconnect events
-    socket.on("connect_error", (error) => {
-      console.error("❌ Socket connection error:", error.message || error);
-    });
-    socket.on("reconnect_attempt", (attempt) => {
-      console.log(`🔄 Reconnect attempt #${attempt}`);
-    });
-    socket.on("reconnect_error", (error) => {
-      console.error("❌ Reconnect error:", error);
-    });
-    socket.on("reconnect_failed", () => {
-      console.error("❌ Reconnect failed");
-    });
-
-    // Cleanup listeners on unmount
-    return () => {
-      socket.off("connect", handleConnect);
-      socket.off("disconnect", handleDisconnect);
-      socket.off("connect_error");
-      socket.off("reconnect_attempt");
-      socket.off("reconnect_error");
-      socket.off("reconnect_failed");
+    ws.onerror = (error) => {
+      console.error("❌ WebSocket error:", error);
     };
-  }, [socket, userId]);
 
-  
+    ws.onmessage = (event) => {
+      let data = event.data;
+      // Try to parse JSON if possible
+      try {
+        if (typeof data === "string") {
+          data = JSON.parse(data);
+        }
+      } catch (e) {
+        // Not JSON, leave as is
+      }
+      // Call all listeners for 'message'
+      (listenersRef.current["message"] || []).forEach((cb) => cb(data));
+    };
 
-  // Emit events only when connected
+    setSocket(ws);
+
+    return () => {
+      ws.close();
+      setIsConnected(false);
+      setSocket(null);
+    };
+  }, [wsUrl]);
+
+  // Emit/send data
   const emit = useCallback(
-    (event: string, data?: any) => {
+    (data: any) => {
       if (socket && isConnected) {
-        console.log(`📤 Emitting '${event}' with data:`, data);
-        socket.emit(event, data);
+        const msg = typeof data === "string" ? data : JSON.stringify(data);
+        console.log("📤 WebSocket sending:", msg);
+        socket.send(msg);
       } else {
-        console.warn(`⚠️ Cannot emit '${event}' — socket not connected`);
+        console.warn("⚠️ Cannot send — WebSocket not connected");
       }
     },
     [socket, isConnected]
   );
 
-  // Listen for socket events, returns unsubscribe function
+  // Listen for 'message' events
   const on = useCallback(
-    (event: string, callback: (data: any) => void) => {
-      if (socket) {
-        console.log(`👂 Subscribing to '${event}'`);
-        socket.on(event, callback);
-
-        return () => {
-          console.log(`🚫 Unsubscribing from '${event}'`);
-          socket.off(event, callback);
-        };
+    (event: "message", callback: (data: any) => void) => {
+      if (!listenersRef.current[event]) {
+        listenersRef.current[event] = [];
       }
-      // Return a no-op if socket is not ready
-      return () => {};
+      listenersRef.current[event].push(callback);
+
+      return () => {
+        listenersRef.current[event] = listenersRef.current[event].filter(
+          (cb) => cb !== callback
+        );
+      };
     },
-    [socket]
+    []
   );
 
   return {

@@ -3,7 +3,6 @@ import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 import { sql } from "drizzle-orm";
 
-
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   username: text("username").notNull().unique(),
@@ -30,19 +29,17 @@ export const moodQueue = pgTable("mood_queue", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 }, (table) => ({
   userIdIdx: uniqueIndex("user_id_idx").on(table.userId),
-  // moodIdx removed ✅
 }));
-
 
 export const connectedUsers = pgTable("connected_users", {
   id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull().unique(), // Add unique constraint
+  userId: integer("user_id").notNull().unique(),
   sessionId: integer("session_id").notNull(),
   mood: text("mood").notNull(),
   connectedAt: timestamp("connected_at").notNull().defaultNow(),
   disconnectedAt: timestamp("disconnected_at"),
 }, (table) => ({
-  userIdIdx: uniqueIndex("connected_user_idx").on(table.userId), // Add unique index
+  userIdIdx: uniqueIndex("connected_user_idx").on(table.userId),
 }));
 
 // Zod schemas
@@ -61,6 +58,8 @@ export const insertMoodQueueSchema = createInsertSchema(moodQueue).pick({
   userId: true,
   mood: true,
   socketId: true,
+  // Optionally add createdAt if you want to validate it on insert
+  // createdAt: true,
 });
 
 // Type exports
@@ -70,6 +69,14 @@ export type ChatSession = typeof chatSessions.$inferSelect;
 export type InsertChatSession = z.infer<typeof insertChatSessionSchema>;
 export type MoodQueue = typeof moodQueue.$inferSelect;
 export type InsertMoodQueue = z.infer<typeof insertMoodQueueSchema>;
+
+// Helper type for queue entry (camelCase, for server use)
+export type QueueEntry = {
+  userId: number;
+  mood: Mood;
+  socketId: string;
+  createdAt: Date;
+};
 
 export const MOODS = [
   "happy",

@@ -28,13 +28,12 @@ const MOOD_NAMES: Record<Mood, string> = {
 };
 
 interface Props {
-   mood: Mood;
+  mood: Mood;
   onCancel: () => void;
-  onMatchFound: (data: { 
-    role: "initiator" | "receiver"; 
-    partnerId: number; 
-    partnerSocketId: string; 
-    sessionId: number 
+  onMatchFound: (data: {
+    role: "initiator" | "receiver";
+    partnerId: number;
+    sessionId: number;
   }) => void;
   onResetQueueJoin: () => void;
 }
@@ -42,7 +41,8 @@ interface Props {
 export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueueJoin }: Props) {
   const [waitTime, setWaitTime] = useState(0);
   const [userId, setUserId] = useState<number | null>(null);
-  const { socket } = useSocket(userId ?? undefined);
+  const { socket, emit, on } = useSocket("wss://moodmatch-1.onrender.com");
+  const [hasJoinedQueue, setHasJoinedQueue] = useState(false);
 
   // Load userId from localStorage
   useEffect(() => {
@@ -64,83 +64,60 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
     return () => clearInterval(timer);
   }, [mood]);
 
-  // 🔌 SOCKET: bind + queue + listeners
-  const [hasJoinedQueue, setHasJoinedQueue] = React.useState(false);
-
   // Function to leave queue
   const leaveQueue = () => {
     if (socket && userId && hasJoinedQueue) {
-      console.log(`[WaitingRoom] Emitting leave-mood-queue for user ${userId}`);
-      socket.emit("leave-mood-queue", { userId });
+      console.log(`[WaitingRoom] Sending leave-queue for user ${userId}`);
+      emit({ type: "leave-queue", userId });
       setHasJoinedQueue(false);
       onResetQueueJoin();
     }
   };
 
+  // Join queue and listen for events
   useEffect(() => {
-    if (!socket) {
-      console.warn("[WaitingRoom] Missing socket");
-      return;
-    }
+    if (!socket || !userId || !mood || hasJoinedQueue) return;
 
-    if (!userId || !mood) {
-      console.warn("[WaitingRoom] Missing userId or mood");
-      return;
-    }
-
-    if (hasJoinedQueue) {
-      console.log("[WaitingRoom] Already joined queue, skipping");
-      return;
-    }
-
-    // Function to check media devices and request permission
-    const checkMediaDevicesAndJoinQueue = async () => {
+    // Check media permissions before joining queue
+    (async () => {
       try {
-        // Check for media devices
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        if (!navigator.mediaDevices?.getUserMedia) {
           console.warn("Media devices API not supported in this browser.");
           return;
         }
-
-        // Request camera and microphone access
         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        if (stream) {
-          // Stop all tracks immediately since we only want to check permission
-          stream.getTracks().forEach(track => track.stop());
-        }
+        stream.getTracks().forEach(track => track.stop());
 
-        // Permission granted, proceed to join queue
-        console.log("📮 Sending 'update-socket-id' with userId:", userId);
-        socket.emit("update-socket-id", { userId });
-
-        const joinTimeout = setTimeout(() => {
-          console.log("📤 Emitting 'join-mood-queue' with:", { userId, mood });
-          socket.emit("join-mood-queue", { userId, mood });
+        // Join queue
+        setTimeout(() => {
+          emit({ type: "join-queue", userId, mood });
           setHasJoinedQueue(true);
         }, 300);
-
-        // socket.on("match-found", onMatchFound);
-        // socket.on("waiting-for-match", () =>
-        //   console.log("[WaitingRoom] Still waiting...")
-        // );
-
-        // Cleanup function for socket listeners and timeout
-        // return () => {
-        //   clearTimeout(joinTimeout);
-        //   socket.off("match-found", onMatchFound);
-        //   socket.off("waiting-for-match");
-        //   console.log("[WaitingRoom] Cleaned up socket listeners");
-        // };
       } catch (error) {
-        // Permission denied or error
         console.error("Media devices access error:", error);
       }
+    })();
+
+    // Listen for match-found and waiting-for-match events
+    const offMatch = on("message", (data) => {
+      if (typeof data === "object" && data.type === "match-found") {
+        onMatchFound({
+          role: data.role,
+          partnerId: data.partnerId,
+          sessionId: data.sessionId,
+        });
+      }
+      if (typeof data === "object" && data.type === "waiting-for-match") {
+        console.log("[WaitingRoom] Still waiting...");
+      }
+    });
+
+    // Cleanup listeners
+    return () => {
+      offMatch();
+      console.log("[WaitingRoom] Cleaned up WebSocket listeners");
     };
-
-    checkMediaDevicesAndJoinQueue();
-
-    // No cleanup function returned here because checkMediaDevicesAndJoinQueue is async and returns a Promise
-  }, [socket, userId, mood, onMatchFound, hasJoinedQueue]);
+  }, [socket, userId, mood, onMatchFound, hasJoinedQueue, emit, on]);
 
   // Reset hasJoinedQueue when requested
   useEffect(() => {
@@ -149,46 +126,6 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
       setHasJoinedQueue(false);
     }
   }, [onResetQueueJoin]);
-
-
-
-  useEffect(() => {
-  if (!socket || !userId || !mood || hasJoinedQueue) return;
-
-  // Setup listeners
-  socket.on("match-found", onMatchFound);
-  socket.on("waiting-for-match", () =>
-    console.log("[WaitingRoom] Still waiting...")
-  );
-
-  // Check media devices and join queue
-  (async () => {
-    try {
-      if (!navigator.mediaDevices?.getUserMedia) {
-        console.warn("Media devices API not supported in this browser.");
-        return;
-      }
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-      stream.getTracks().forEach(track => track.stop());
-
-      socket.emit("update-socket-id", { userId });
-
-      setTimeout(() => {
-        socket.emit("join-mood-queue", { userId, mood });
-        setHasJoinedQueue(true);
-      }, 300);
-    } catch (error) {
-      console.error("Media devices access error:", error);
-    }
-  })();
-
-  // Cleanup listeners
-  return () => {
-    socket.off("match-found", onMatchFound);
-    socket.off("waiting-for-match");
-    console.log("[WaitingRoom] Cleaned up socket listeners");
-  };
-}, [socket, userId, mood, onMatchFound, hasJoinedQueue]);
 
   // Leave queue on unmount or page reload
   useEffect(() => {

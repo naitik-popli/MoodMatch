@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Settings } from "lucide-react";
 import MoodSelection from "../components/mood-selection";
 import WaitingRoom from "../components/waiting-room";
@@ -13,19 +13,21 @@ export default function MoodChat() {
   const [currentScreen, setCurrentScreen] = useState<'selection' | 'waiting' | 'call'>('selection');
   const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
   const [showSettings, setShowSettings] = useState(false);
- const [sessionData, setSessionData] = useState<{
-  sessionId: number;
-  userId: number;
-  partnerId?: number;
-  partnerSocketId?: string;
-  role?: "initiator" | "receiver"; // <-- Add this line
-} | null>(null);
+  const [sessionData, setSessionData] = useState<{
+    sessionId: number;
+    userId: number;
+    partnerId?: number;
+    role?: "initiator" | "receiver";
+  } | null>(null);
 
-  const { socket, isConnected } = useSocket(sessionData?.userId);
+  // UseSocket: just pass the wsUrl
+  const { socket, isConnected, emit, on } = useSocket("wss://moodmatch-1.onrender.com");
   console.log("🔗 Socket connection status:", isConnected);
 
-  const alreadyMatched = React.useRef(false);
-  const handleMatchFound = (data: { role: "initiator" | "receiver"; partnerId: number; partnerSocketId: string; sessionId: number }) => {
+  const alreadyMatched = useRef(false);
+
+  // Handle match-found event from backend
+  const handleMatchFound = useCallback((data: { role: "initiator" | "receiver"; partnerId: number; sessionId: number }) => {
     console.log("🧩 handleMatchFound called with data:", data);
 
     setSessionData((prev) => {
@@ -46,9 +48,8 @@ export default function MoodChat() {
       alreadyMatched.current = true;
       const updated = {
         ...prev,
-         role: data.role,
+        role: data.role,
         partnerId: data.partnerId,
-        partnerSocketId: data.partnerSocketId,
         sessionId: data.sessionId,
       };
 
@@ -56,34 +57,26 @@ export default function MoodChat() {
       setCurrentScreen("call");
       return updated;
     });
-  };
+  }, []);
 
   useEffect(() => {
     if (currentScreen === 'call') {
       console.log("📞 Transitioning to VideoCall:", sessionData);
     }
-  }, [currentScreen]);
+  }, [currentScreen, sessionData]);
 
+  // Listen for match-found messages from backend
   useEffect(() => {
     if (!socket) return;
+    const off = on("message", (msg) => {
+      if (msg && typeof msg === "object" && msg.type === "match-found") {
+        handleMatchFound(msg);
+      }
+    });
+    return off;
+  }, [socket, on, handleMatchFound]);
 
-    // const handleMatch = (data: { partnerId: number; partnerSocketId: string }) => {
-    //   console.log("✅ Match found on frontend:", data);
-    //   // Provide a default sessionId to satisfy handleMatchFound's expected type
-    //   handleMatchFound({ ...data, sessionId: sessionData?.sessionId ?? 0 });
-    // };
-
-    const handleMatch = (data: { role: "initiator" | "receiver"; partnerId: number; partnerSocketId: string; sessionId: number }) => {
-  console.log("✅ Match found on frontend:", data);
-  handleMatchFound(data);
-};
-    socket.on("match-found", handleMatch);
-    return () => {
-      socket.off("match-found", handleMatch);
-    };
-  }, [socket, sessionData?.sessionId]);
-
-
+  // Handle mood selection and session creation
   const handleMoodSelect = async (mood: Mood) => {
     try {
       const response = await fetch(`${API_BASE_URL}/session/create`, {
@@ -98,33 +91,29 @@ export default function MoodChat() {
 
       console.log("🎉 Session created:", data);
 
-     setSessionData({
-  sessionId: data.sessionId,
-  userId: data.userId,
-  partnerId: data.partnerId,
-  partnerSocketId: data.partnerSocketId,
-  role: undefined, // <-- Add this line
-});
+      setSessionData({
+        sessionId: data.sessionId,
+        userId: data.userId,
+        partnerId: data.partnerId,
+        role: undefined,
+      });
       localStorage.setItem("userId", String(data.userId));
       setSelectedMood(mood);
       setCurrentScreen('waiting');
 
-
-      if (socket && data.userId && data.sessionId) {
-        console.log("📤 Emitting join-mood-queue");
-        socket.emit('join-mood-queue', {
-          userId: data.userId,
-          mood,
-          sessionId: data.sessionId,
-        });
+      // Join queue via WebSocket
+      if (emit && data.userId && data.sessionId) {
+        console.log("📤 Emitting join-queue");
+        emit({ type: "join-queue", userId: data.userId, mood });
       } else {
-        console.warn("⚠️ Cannot emit join-mood-queue — socket or session info missing");
+        console.warn("⚠️ Cannot emit join-queue — socket or session info missing");
       }
     } catch (error) {
       console.error('❌ Error selecting mood:', error);
     }
   };
 
+  // Handle call end
   const handleCallEnd = () => {
     console.log("📞 Call ended");
     alreadyMatched.current = false; // Reset matched state to allow new matches
@@ -133,25 +122,22 @@ export default function MoodChat() {
     setSessionData(null);
   };
 
+  // Handle cancel waiting
   const handleCancelWaiting = () => {
     console.log("🚫 Cancelled waiting");
-    if (socket && sessionData) {
-      socket.emit('leave-mood-queue');
+    if (emit && sessionData?.userId) {
+      emit({ type: "leave-queue", userId: sessionData.userId });
     }
     setCurrentScreen('selection');
     setSelectedMood(null);
     setSessionData(null);
   };
 
-  console.log("📺 Render check:", {
-    currentScreen,
-    selectedMood,
-    sessionData,
-  });
+  // UI: loading if userId not set in waiting
   const userId = localStorage.getItem("userId");
   if (currentScreen === "waiting" && !userId) {
-  return <div>Loading...</div>; // or redirect back to mood selection
-}
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -200,9 +186,8 @@ export default function MoodChat() {
       {currentScreen === 'call' && selectedMood && sessionData && (
         <VideoCall
           mood={selectedMood}
-    sessionData={sessionData}
-    isInitiator={sessionData?.role === "initiator"} // <-- Add this line if needed
-    onCallEnd={handleCallEnd}
+          sessionData={sessionData}
+          onCallEnd={handleCallEnd}
         />
       )}
 
