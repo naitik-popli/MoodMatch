@@ -20,8 +20,8 @@ export default function MoodChat() {
     role?: "initiator" | "receiver";
   } | null>(null);
 
-  // UseSocket: just pass the wsUrl
-  const { socket, isConnected, emit, on } = useSocket("wss://moodmatch-61xp.onrender.com");
+  // Use the shared WebSocket from context
+  const { ws: socket, isConnected, emit, on } = useSocket();
   console.log("🔗 Socket connection status:", isConnected);
 
   const alreadyMatched = useRef(false);
@@ -69,6 +69,7 @@ export default function MoodChat() {
   useEffect(() => {
     if (!socket) return;
     const off = on("message", (msg) => {
+      console.log("[MoodChat] Received message:", msg);
       if (msg && typeof msg === "object" && msg.type === "match-found") {
         handleMatchFound(msg);
       }
@@ -185,10 +186,16 @@ export default function MoodChat() {
 
       {currentScreen === 'call' && selectedMood && sessionData && (
         <VideoCall
-          mood={selectedMood}
-          sessionData={sessionData}
-          onCallEnd={handleCallEnd}
-        />
+    mood={selectedMood}
+    sessionData={sessionData as {
+      sessionId: number;
+      userId: number;
+      partnerId: number;
+      role?: "initiator" | "receiver";
+      externalLocalStream?: MediaStream;
+    }}
+    onCallEnd={handleCallEnd}
+  />
       )}
 
       {/* Settings Modal */}

@@ -41,7 +41,7 @@ interface Props {
 export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueueJoin }: Props) {
   const [waitTime, setWaitTime] = useState(0);
   const [userId, setUserId] = useState<number | null>(null);
-  const { socket, emit, on } = useSocket("wss://moodmatch-61xp.onrender.com");
+  const { ws, emit, on, isConnected } = useSocket();
   const [hasJoinedQueue, setHasJoinedQueue] = useState(false);
 
   // Load userId from localStorage
@@ -49,6 +49,7 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
     const stored = localStorage.getItem("userId");
     if (stored) {
       setUserId(Number(stored));
+      console.log("[WaitingRoom] Loaded userId from localStorage:", stored);
     } else {
       console.warn("⚠️ userId not found in localStorage");
     }
@@ -66,7 +67,7 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
 
   // Function to leave queue
   const leaveQueue = () => {
-    if (socket && userId && hasJoinedQueue) {
+    if (ws && userId && hasJoinedQueue) {
       console.log(`[WaitingRoom] Sending leave-queue for user ${userId}`);
       emit({ type: "leave-queue", userId });
       setHasJoinedQueue(false);
@@ -76,7 +77,13 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
 
   // Join queue and listen for events
   useEffect(() => {
-    if (!socket || !userId || !mood || hasJoinedQueue) return;
+    if (!ws || !isConnected || !userId || !mood || hasJoinedQueue) {
+      if (!ws) console.log("[WaitingRoom] WebSocket not ready yet");
+      if (!isConnected) console.log("[WaitingRoom] WebSocket not connected yet");
+      if (!userId) console.log("[WaitingRoom] userId not set yet");
+      if (hasJoinedQueue) console.log("[WaitingRoom] Already joined queue");
+      return;
+    }
 
     // Check media permissions before joining queue
     (async () => {
@@ -90,6 +97,7 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
 
         // Join queue
         setTimeout(() => {
+          console.log("[WaitingRoom] Emitting join-queue:", { userId, mood });
           emit({ type: "join-queue", userId, mood });
           setHasJoinedQueue(true);
         }, 300);
@@ -98,9 +106,11 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
       }
     })();
 
-    // Listen for match-found and waiting-for-match events
+    // Listen for all messages
     const offMatch = on("message", (data) => {
+      console.log("[WaitingRoom] Received message:", data);
       if (typeof data === "object" && data.type === "match-found") {
+        console.log("[WaitingRoom] match-found received:", data);
         onMatchFound({
           role: data.role,
           partnerId: data.partnerId,
@@ -117,7 +127,7 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
       offMatch();
       console.log("[WaitingRoom] Cleaned up WebSocket listeners");
     };
-  }, [socket, userId, mood, onMatchFound, hasJoinedQueue, emit, on]);
+  }, [ws, isConnected, userId, mood, onMatchFound, hasJoinedQueue, emit, on]);
 
   // Reset hasJoinedQueue when requested
   useEffect(() => {
@@ -138,7 +148,7 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
       leaveQueue();
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [socket, userId, hasJoinedQueue]);
+  }, [ws, userId, hasJoinedQueue]);
 
   // Handle cancel button click
   const handleCancel = () => {
