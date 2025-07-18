@@ -100,7 +100,28 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
     });
     peerRef.current = peer;
 
+    // Defensive check: delay signaling until peer is ready
+    let isPeerReady = false;
+    peer.on("ready", () => {
+      isPeerReady = true;
+      console.log("[Peer] Peer is ready");
+    });
+
     peer.on("signal", data => {
+      if (!isPeerReady) {
+        console.warn("[Peer] Signal emitted before peer ready, delaying send");
+        setTimeout(() => {
+          if (ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({
+              type: "signal",
+              data,
+              ...(partnerId ? { to: partnerId } : {}),
+              ...(userId ? { from: userId } : {}),
+            }));
+          }
+        }, 100);
+        return;
+      }
       console.log("[Peer] Sending signal:", data);
       if (ws.readyState === WebSocket.OPEN) {
         // If you need to send to a specific partner, include 'to' and 'from'

@@ -1,46 +1,124 @@
-💾 Database: connected
-HEAD / 200 3ms
-==> Your service is live 🎉
-==> 
-==> ///////////////////////////////////////////////////////////
-==> 
-==> Available at your primary URL https://moodmatch-61xp.onrender.com
-==> 
-==> ///////////////////////////////////////////////////////////
-GET / 200 1ms
-Blocked CORS request from origin: https://mood-match-seven.vercel.app
-[GET] /api/moods/stats Error: Error: Not allowed by CORS
-    at origin (/opt/render/project/src/server/index.ts:30:16)
-    at /opt/render/project/src/node_modules/cors/lib/index.js:219:13
-    at optionsCallback (/opt/render/project/src/node_modules/cors/lib/index.js:199:9)
-    at corsMiddleware (/opt/render/project/src/node_modules/cors/lib/index.js:204:7)
-    at Layer.handle [as handle_request] (/opt/render/project/src/node_modules/express/lib/router/layer.js:95:5)
-    at trim_prefix (/opt/render/project/src/node_modules/express/lib/router/index.js:328:13)
-    at /opt/render/project/src/node_modules/express/lib/router/index.js:286:9
-    at Function.process_params (/opt/render/project/src/node_modules/express/lib/router/index.js:346:12)
-    at next (/opt/render/project/src/node_modules/express/lib/router/index.js:280:10)
-    at expressInit (/opt/render/project/src/node_modules/express/lib/middleware/init.js:40:5)
-Blocked CORS request from origin: https://mood-match-seven.vercel.app
-[GET] /api/moods/stats Error: Error: Not allowed by CORS
-    at origin (/opt/render/project/src/server/index.ts:30:16)
-    at /opt/render/project/src/node_modules/cors/lib/index.js:219:13
-    at optionsCallback (/opt/render/project/src/node_modules/cors/lib/index.js:199:9)
-    at corsMiddleware (/opt/render/project/src/node_modules/cors/lib/index.js:204:7)
-    at Layer.handle [as handle_request] (/opt/render/project/src/node_modules/express/lib/router/layer.js:95:5)
-    at trim_prefix (/opt/render/project/src/node_modules/express/lib/router/index.js:328:13)
-    at /opt/render/project/src/node_modules/express/lib/router/index.js:286:9
-    at Function.process_params (/opt/render/project/src/node_modules/express/lib/router/index.js:346:12)
-    at next (/opt/render/project/src/node_modules/express/lib/router/index.js:280:10)
-    at expressInit (/opt/render/project/src/node_modules/express/lib/middleware/init.js:40:5)
-Blocked CORS request from origin: https://mood-match-seven.vercel.app
-[GET] /api/moods/stats Error: Error: Not allowed by CORS
-    at origin (/opt/render/project/src/server/index.ts:30:16)
-    at /opt/render/project/src/node_modules/cors/lib/index.js:219:13
-    at optionsCallback (/opt/render/project/src/node_modules/cors/lib/index.js:199:9)
-    at corsMiddleware (/opt/render/project/src/node_modules/cors/lib/index.js:204:7)
-    at Layer.handle [as handle_request] (/opt/render/project/src/node_modules/express/lib/router/layer.js:95:5)
-    at trim_prefix (/opt/render/project/src/node_modules/express/lib/router/index.js:328:13)
-    at /opt/render/project/src/node_modules/express/lib/router/index.js:286:9
-    at Function.process_params (/opt/render/project/src/node_modules/express/lib/router/index.js:346:12)
-    at next (/opt/render/project/src/node_modules/express/lib/router/index.js:280:10)
-    at expressInit (/opt/render/project/src/node_modules/express/lib/middleware/init.js:40:5)
+🔗 Socket connection status: true
+index-1TNodRzX.js:554 🔗 Socket connection status: true
+index-1TNodRzX.js:504 [useSocket] Added message listener
+index-1TNodRzX.js:504 [WaitingRoom] Loaded userId from localStorage: 614
+index-1TNodRzX.js:504 [WaitingRoom] userId not set yet
+index-1TNodRzX.js:504 [useSocket] Removed message listener and cleaned up
+index-1TNodRzX.js:504 [useSocket] Added message listener
+index-1TNodRzX.js:504 [WaitingRoom] Loaded userId from localStorage: 614
+index-1TNodRzX.js:504 [WaitingRoom] userId not set yet
+index-1TNodRzX.js:504 [useSocket] Added listener for 'message'
+index-1TNodRzX.js:554 [MoodChat] Received message: {type: 'queue-status', status: 'waiting', mood: 'happy'}
+index-1TNodRzX.js:504 [WaitingRoom] Emitting join-queue: {userId: 614, mood: 'happy'}
+index-1TNodRzX.js:504 📤 WebSocket sending: {"type":"join-queue","userId":614,"mood":"happy"}
+index-1TNodRzX.js:504 [useSocket] Removed listener for 'message'
+index-1TNodRzX.js:504 [WaitingRoom] Cleaned up WebSocket listeners
+index-1TNodRzX.js:504 [WaitingRoom] Already joined queue
+index-1TNodRzX.js:554 [MoodChat] Received message: {type: 'queue-status', status: 'waiting', mood: 'happy'}
+index-1TNodRzX.js:554 [MoodChat] Received message: {type: 'match-found', role: 'initiator', partnerId: 615, sessionId: 730}
+index-1TNodRzX.js:554 🧩 handleMatchFound called with data: {type: 'match-found', role: 'initiator', partnerId: 615, sessionId: 730}
+index-1TNodRzX.js:554 📦 Updated sessionData after match: {sessionId: 730, userId: 614, partnerId: 615, role: 'initiator'}
+index-1TNodRzX.js:554 🔗 Socket connection status: true
+index-1TNodRzX.js:554 🔗 Socket connection status: true
+index-1TNodRzX.js:504 [useSocket] Removed message listener and cleaned up
+index-1TNodRzX.js:510 [WebRTC] Waiting for local stream...
+index-1TNodRzX.js:554 📞 Transitioning to VideoCall: {sessionId: 730, userId: 614, partnerId: 615, role: 'initiator'}
+index-1TNodRzX.js:510 [WebRTC] Ending call
+index-1TNodRzX.js:510 [WebRTC] Waiting for local stream...
+index-1TNodRzX.js:510 [WebRTC] Got user media
+index-1TNodRzX.js:510 [WebRTC] Setting up SimplePeer and signaling...
+index-1TNodRzX.js:510 Uncaught TypeError: Cannot read properties of undefined (reading 'call')
+    at Ds.se (index-1TNodRzX.js:510:27666)
+    at new c (index-1TNodRzX.js:510:17276)
+    at new Ds (index-1TNodRzX.js:510:42330)
+    at index-1TNodRzX.js:510:61239
+    at vo (index-1TNodRzX.js:161:22945)
+    at Hj (index-1TNodRzX.js:174:13044)
+    at Vj (index-1TNodRzX.js:174:12792)
+    at Bj (index-1TNodRzX.js:174:12700)
+    at Ij (index-1TNodRzX.js:174:12578)
+    at CF (index-1TNodRzX.js:174:24901)
+se @ index-1TNodRzX.js:510
+c @ index-1TNodRzX.js:510
+Ds @ index-1TNodRzX.js:510
+(anonymous) @ index-1TNodRzX.js:510
+vo @ index-1TNodRzX.js:161
+Hj @ index-1TNodRzX.js:174
+Vj @ index-1TNodRzX.js:174
+Bj @ index-1TNodRzX.js:174
+Ij @ index-1TNodRzX.js:174
+CF @ index-1TNodRzX.js:174
+Aa @ index-1TNodRzX.js:174
+(anonymous) @ index-1TNodRzX.js:174
+Ct @ index-1TNodRzX.js:62
+Xe @ index-1TNodRzX.js:62
+Gt @ index-1TNodRzX.js:62Understand this error
+index-1TNodRzX.js:159 The above error occurred in the <Vz> component:
+
+    at Vz (https://mood-match-seven.vercel.app/assets/index-1TNodRzX.js:510:62778)
+    at div
+    at N8 (https://mood-match-seven.vercel.app/assets/index-1TNodRzX.js:554:82202)
+    at Wg (https://mood-match-seven.vercel.app/assets/index-1TNodRzX.js:212:4352)
+    at tI (https://mood-match-seven.vercel.app/assets/index-1TNodRzX.js:212:5168)
+    at xH (https://mood-match-seven.vercel.app/assets/index-1TNodRzX.js:504:7550)
+    at j8
+    at y (https://mood-match-seven.vercel.app/assets/index-1TNodRzX.js:409:1611)
+    at H_ (https://mood-match-seven.vercel.app/assets/index-1TNodRzX.js:409:38889)
+    at wI (https://mood-match-seven.vercel.app/assets/index-1TNodRzX.js:233:426)
+    at F8
+    at U8 (https://mood-match-seven.vercel.app/assets/index-1TNodRzX.js:554:93287)
+
+React will try to recreate this component tree from scratch using the error boundary you provided, U8.
+Vy @ index-1TNodRzX.js:159
+Hy.p.componentDidCatch.o.callback @ index-1TNodRzX.js:159
+pP @ index-1TNodRzX.js:130
+ww @ index-1TNodRzX.js:130
+Tj @ index-1TNodRzX.js:174
+sg @ index-1TNodRzX.js:174
+$S @ index-1TNodRzX.js:174
+jj @ index-1TNodRzX.js:174
+wF @ index-1TNodRzX.js:174
+ys @ index-1TNodRzX.js:174
+nC @ index-1TNodRzX.js:174
+so @ index-1TNodRzX.js:91
+CF @ index-1TNodRzX.js:174
+Aa @ index-1TNodRzX.js:174
+(anonymous) @ index-1TNodRzX.js:174
+Ct @ index-1TNodRzX.js:62
+Xe @ index-1TNodRzX.js:62
+Gt @ index-1TNodRzX.js:62Understand this error
+index-1TNodRzX.js:554 Uncaught error: TypeError: Cannot read properties of undefined (reading 'call')
+    at Ds.se (index-1TNodRzX.js:510:27666)
+    at new c (index-1TNodRzX.js:510:17276)
+    at new Ds (index-1TNodRzX.js:510:42330)
+    at index-1TNodRzX.js:510:61239
+    at vo (index-1TNodRzX.js:161:22945)
+    at Hj (index-1TNodRzX.js:174:13044)
+    at Vj (index-1TNodRzX.js:174:12792)
+    at Bj (index-1TNodRzX.js:174:12700)
+    at Ij (index-1TNodRzX.js:174:12578)
+    at CF (index-1TNodRzX.js:174:24901) {componentStack: '\n    at Vz (https://mood-match-seven.vercel.app/as…en.vercel.app/assets/index-1TNodRzX.js:554:93287)'}
+componentDidCatch @ index-1TNodRzX.js:554
+Hy.p.componentDidCatch.o.callback @ index-1TNodRzX.js:159
+pP @ index-1TNodRzX.js:130
+ww @ index-1TNodRzX.js:130
+Tj @ index-1TNodRzX.js:174
+sg @ index-1TNodRzX.js:174
+$S @ index-1TNodRzX.js:174
+jj @ index-1TNodRzX.js:174
+wF @ index-1TNodRzX.js:174
+ys @ index-1TNodRzX.js:174
+nC @ index-1TNodRzX.js:174
+so @ index-1TNodRzX.js:91
+CF @ index-1TNodRzX.js:174
+Aa @ index-1TNodRzX.js:174
+(anonymous) @ index-1TNodRzX.js:174
+Ct @ index-1TNodRzX.js:62
+Xe @ index-1TNodRzX.js:62
+Gt @ index-1TNodRzX.js:62Understand this error
+index-1TNodRzX.js:504 [useSocket] Removed message listener and cleaned up
+index-1TNodRzX.js:504 [useSocket] Removed listener for 'message'
+index-1TNodRzX.js:510 [WebRTC] Ending call
+index-1TNodRzX.js:510 [WebRTC] Got user media
+index-1TNodRzX.js:510 [WS] WebSocket closed: CloseEvent {isTrusted: true, wasClean: true, code: 1005, reason: '', type: 'close', …}
+_ @ index-1TNodRzX.js:510Understand this warning
