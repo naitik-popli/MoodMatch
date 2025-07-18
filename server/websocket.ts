@@ -22,6 +22,12 @@ function getSocketId(ws: WebSocket): string {
   return Math.random().toString(36).slice(2) + Date.now();
 }
 
+function logConnectedClients() {
+  console.log(`[WS] Connected clients: ${userSocketMap.size}`);
+  console.log(`[WS] Connected userIds: [${[...userSocketMap.keys()].join(", ")}]`);
+  console.log(`[WS] Connected socketIds: [${[...userSocketIdMap.values()].join(", ")}]`);
+}
+
 export function setupWebSocket(server: any) {
   const wss = new WebSocketServer({ server });
 
@@ -46,8 +52,22 @@ export function setupWebSocket(server: any) {
             console.warn("[WS] join-queue: Missing userId or mood", { userId, mood });
             return;
           }
+
+          // Defensive: Remove any previous socket for this userId
+          if (userSocketMap.has(userId)) {
+            const oldSocket = userSocketMap.get(userId);
+            if (oldSocket && oldSocket !== ws) {
+              try {
+                oldSocket.close();
+                console.warn(`[WS] Closed previous socket for userId ${userId}`);
+              } catch (err) {
+                console.error(`[WS] Error closing previous socket for userId ${userId}:`, err);
+              }
+            }
+          }
           userSocketMap.set(userId, ws);
           userSocketIdMap.set(userId, socketId!);
+
           await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
           await db.insert(moodQueue).values({
             userId,
@@ -57,6 +77,7 @@ export function setupWebSocket(server: any) {
           });
           ws.send(JSON.stringify({ type: "queue-status", status: "waiting", mood }));
           console.log(`[WS] User ${userId} joined queue for mood "${mood}" (socketId: ${socketId})`);
+          logConnectedClients();
         }
 
         // --- LEAVE QUEUE ---
@@ -71,6 +92,7 @@ export function setupWebSocket(server: any) {
           userSocketIdMap.delete(userId);
           ws.send(JSON.stringify({ type: "queue-status", status: "left" }));
           console.log(`[WS] User ${userId} left the queue`);
+          logConnectedClients();
         }
 
         // --- SIGNALING ---
@@ -115,6 +137,7 @@ export function setupWebSocket(server: any) {
       } else {
         console.log("[WS] Socket closed with no associated userId");
       }
+      logConnectedClients();
     });
 
     ws.on("error", (err) => {
@@ -134,6 +157,7 @@ export function setupWebSocket(server: any) {
       }));
 
       console.log(`[WS] Matchmaking: Current queue length: ${queue.length}`);
+      logConnectedClients();
 
       // Group users by mood
       const moodGroups = new Map<Mood, QueueEntry[]>();
@@ -165,6 +189,7 @@ export function setupWebSocket(server: any) {
             userSocketIdMap.delete(userA.userId);
             userSocketIdMap.delete(userB.userId);
             console.warn(`[WS] Cleaned up disconnected users: ${userA.userId}, ${userB.userId}`);
+            logConnectedClients();
             continue;
           }
           // Create a single sessionId for both users
@@ -201,6 +226,7 @@ export function setupWebSocket(server: any) {
           userSocketMap.delete(userB.userId);
           userSocketIdMap.delete(userA.userId);
           userSocketIdMap.delete(userB.userId);
+          logConnectedClients();
         }
       }
       // Cleanup stale entries
