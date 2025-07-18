@@ -42,6 +42,19 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
   const callTimerRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Defensive: Log sessionData and mood on every render
+  useEffect(() => {
+    console.log("[VideoCall] Rendered with sessionData:", sessionData, "mood:", mood);
+  });
+
+  // Defensive: Log mount/unmount
+  useEffect(() => {
+    console.log("[VideoCall] MOUNTED");
+    return () => {
+      console.log("[VideoCall] UNMOUNTED");
+    };
+  }, []);
+
   // Use the new WebSocket-based useWebRTC hook
   const { 
     localStream, 
@@ -51,9 +64,16 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     toggleMute,
     toggleVideo 
   } = useWebRTC({
-  isInitiator: sessionData.role === "initiator",
-  externalLocalStream: sessionData.externalLocalStream,
-});
+    isInitiator: sessionData.role === "initiator",
+    externalLocalStream: sessionData.externalLocalStream,
+    partnerId: sessionData.partnerId,
+    userId: sessionData.userId,
+  });
+
+  // Defensive: Log WebRTC hook values
+  useEffect(() => {
+    console.log("[VideoCall] useWebRTC values", { localStream, remoteStream, isConnected });
+  }, [localStream, remoteStream, isConnected]);
 
   // Format call duration
   const formatDuration = (seconds: number) => {
@@ -69,19 +89,27 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     const hasRTCPeerConnection = !!window.RTCPeerConnection;
     if (!isSecure) {
       setCallError('Video calling requires HTTPS or localhost for security.');
+      setWebRTCSupported(false);
+      console.error("[VideoCall] WebRTC not supported: insecure context");
       return false;
     }
     if (!hasMediaDevices || !hasRTCPeerConnection) {
       setCallError('Your browser does not support required video calling features.');
+      setWebRTCSupported(false);
+      console.error("[VideoCall] WebRTC not supported: missing APIs");
       return false;
     }
+    setWebRTCSupported(true);
     return true;
   }, []);
 
   // Attach stream to video element
   const attachStream = useCallback((stream: MediaStream | null, isLocal: boolean) => {
     const videoEl = isLocal ? localVideoRef.current : remoteVideoRef.current;
-    if (!videoEl) return;
+    if (!videoEl) {
+      console.warn("[VideoCall] attachStream: video element not found", { isLocal });
+      return;
+    }
     if (videoEl.srcObject !== stream) {
       if (videoEl.srcObject && videoEl.srcObject !== stream) {
         (videoEl.srcObject as MediaStream).getTracks().forEach(track => track.stop());
@@ -90,9 +118,14 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
         videoEl.srcObject = stream;
         videoEl.playsInline = true;
         videoEl.muted = isLocal;
-        videoEl.play().catch(() => setNeedsUserInteraction(true));
+        videoEl.play().catch((err) => {
+          setNeedsUserInteraction(true);
+          console.warn("[VideoCall] Video play failed, needs user interaction", err);
+        });
+        console.log(`[VideoCall] Attached ${isLocal ? "local" : "remote"} stream`, stream);
       } else {
         videoEl.srcObject = null;
+        console.log(`[VideoCall] Cleared ${isLocal ? "local" : "remote"} stream`);
       }
     }
   }, []);
@@ -100,12 +133,10 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   // Attach streams on change
   useEffect(() => { attachStream(localStream, true); }, [localStream, attachStream]);
   useEffect(() => { attachStream(remoteStream, false); }, [remoteStream, attachStream]);
-  useEffect(() => {
-  console.log("[VideoCall] sessionData", sessionData);
-  console.log("[VideoCall] mood", mood);
-}, [sessionData, mood]);
+
   // Handle connection state changes
   useEffect(() => {
+    console.log("[VideoCall] isConnected changed:", isConnected);
     if (isConnected) {
       setConnectionStatus('connected');
       callTimerRef.current = setInterval(() => setCallDuration(prev => prev + 1), 1000);
@@ -121,7 +152,12 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     if (localVideoRef.current) {
       try {
         await localVideoRef.current.play();
-      } catch {}
+        setNeedsUserInteraction(false);
+        console.log("[VideoCall] Local video play triggered by user");
+      } catch (err) {
+        setNeedsUserInteraction(true);
+        console.warn("[VideoCall] Local video play failed", err);
+      }
     }
   }, []);
 
@@ -130,7 +166,10 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     try {
       const newMutedState = toggleMute();
       setIsMuted(newMutedState);
-    } catch {}
+      console.log("[VideoCall] Toggled mute, now:", newMutedState);
+    } catch (err) {
+      console.error("[VideoCall] Error toggling mute", err);
+    }
   }, [toggleMute]);
 
   // Toggle video
@@ -138,23 +177,32 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
     try {
       const newVideoState = toggleVideo();
       setIsVideoOff(!newVideoState);
-    } catch {}
+      console.log("[VideoCall] Toggled video, now off:", !newVideoState);
+    } catch (err) {
+      console.error("[VideoCall] Error toggling video", err);
+    }
   }, [toggleVideo]);
 
   // End call
   const handleEndCall = useCallback(async () => {
     try {
+      console.log("[VideoCall] handleEndCall called");
       await endCall();
       onCallEnd();
-    } catch {}
+      console.log("[VideoCall] Call ended and onCallEnd called");
+    } catch (err) {
+      console.error("[VideoCall] Error ending call", err);
+    }
   }, [endCall, onCallEnd]);
 
   // Report and next chat handlers
   const handleReport = () => {
     alert('Report submitted. Our team will review this call.');
+    console.log("[VideoCall] Report submitted");
   };
   const handleNextChat = async () => {
     await handleEndCall();
+    console.log("[VideoCall] Next chat triggered");
   };
 
   // Initial setup
@@ -164,12 +212,24 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
       try {
         await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         setMediaPermissionGranted(true);
-      } catch {
+        setMediaPermissionDenied(false);
+        console.log("[VideoCall] Media permissions granted");
+      } catch (err) {
         setMediaPermissionDenied(true);
+        setMediaPermissionGranted(false);
+        setCallError("Camera/microphone permission denied.");
+        console.error("[VideoCall] Media permissions denied", err);
       }
     };
     requestMediaPermissions();
   }, []);
+
+  // Defensive: Log when error UI is shown
+  useEffect(() => {
+    if (!webRTCSupported || callError) {
+      console.warn("[VideoCall] Showing error UI", { webRTCSupported, callError });
+    }
+  }, [webRTCSupported, callError]);
 
   // Error states
   if (!webRTCSupported || callError) {

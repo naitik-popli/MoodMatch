@@ -13,6 +13,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
   const [localStream, setLocalStream] = useState<MediaStream | null>(externalLocalStream || null);
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [ready, setReady] = useState(false);
 
   const peerRef = useRef<Instance | null>(null);
   const ws = useWebSocket();
@@ -37,33 +38,55 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       });
   }, [externalLocalStream]);
 
+  // Set ready flag when both localStream and ws are available
+  useEffect(() => {
+    if (localStream && ws) {
+      setReady(true);
+      console.log("[WebRTC] [DEFENSE] Ready to create peer: localStream and ws are set");
+    } else {
+      setReady(false);
+      if (!localStream) console.log("[WebRTC] [DEFENSE] Not ready: localStream missing");
+      if (!ws) console.log("[WebRTC] [DEFENSE] Not ready: ws missing");
+    }
+  }, [localStream, ws]);
+
   // Setup signaling and peer
   useEffect(() => {
-    console.log("[WebRTC] [STEP 2] Setup signaling and peer", { localStream, ws, isInitiator, partnerId, userId });
-
-    if (!localStream) {
-      console.log("[WebRTC] [STEP 2] Waiting for local stream...");
+    if (!ready) {
+      console.log("[WebRTC] [DEFENSE] Not ready for peer creation");
       return;
     }
     if (!ws) {
-      console.log("[WebRTC] [STEP 2] Waiting for WebSocket...");
+      console.error("[WebRTC] [DEFENSE] Central WebSocket is not available, aborting peer setup.");
       return;
     }
+    console.log("[WebRTC] [STEP 2] Setup signaling and peer", { localStream, ws, isInitiator, partnerId, userId });
 
-    // Destroy any previous peer before creating a new one
+    // Defensive: Destroy any previous peer before creating a new one
     if (peerRef.current) {
       console.warn("[WebRTC] [STEP 2] Destroying previous peer before creating new one", peerRef.current);
-      peerRef.current.destroy();
+      try {
+        peerRef.current.destroy();
+      } catch (err) {
+        console.error("[WebRTC] [DEFENSE] Error destroying previous peer", err);
+      }
       peerRef.current = null;
     }
 
     console.log("[WebRTC] [STEP 3] Creating SimplePeer instance", { isInitiator, localStream });
-    const peer = new SimplePeer({
-      initiator: isInitiator,
-      trickle: true,
-      stream: localStream,
-    });
-    peerRef.current = peer;
+    let peer: Instance | null = null;
+    try {
+      peer = new SimplePeer({
+        initiator: isInitiator,
+        trickle: true,
+        stream: localStream,
+      });
+      peerRef.current = peer;
+    } catch (err) {
+      console.error("[WebRTC] [DEFENSE] Error creating SimplePeer", err);
+      peerRef.current = null;
+      return;
+    }
 
     // Log peerRef after creation
     if (!peerRef.current) {
@@ -76,13 +99,17 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
     peer.on("signal", data => {
       console.log("[WebRTC] [STEP 4] Peer emitted signal event", data);
       if (ws.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify({
-          type: "signal",
-          data,
-          ...(partnerId ? { to: partnerId } : {}),
-          ...(userId ? { from: userId } : {}),
-        }));
-        console.log("[WebRTC] [STEP 4] Sent signal via ws");
+        try {
+          ws.send(JSON.stringify({
+            type: "signal",
+            data,
+            ...(partnerId ? { to: partnerId } : {}),
+            ...(userId ? { from: userId } : {}),
+          }));
+          console.log("[WebRTC] [STEP 4] Sent signal via ws");
+        } catch (err) {
+          console.error("[WebRTC] [DEFENSE] Error sending signal via ws", err);
+        }
       } else {
         console.warn("[WebRTC] [STEP 4] Tried to send signal but ws not open");
       }
@@ -121,12 +148,17 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
     };
     const handleMessage = async (message: MessageEvent) => {
       let data: any;
-      if (typeof message.data === "string") {
-        data = JSON.parse(message.data);
-      } else if (message.data instanceof Blob) {
-        const text = await message.data.text();
-        data = JSON.parse(text);
-      } else {
+      try {
+        if (typeof message.data === "string") {
+          data = JSON.parse(message.data);
+        } else if (message.data instanceof Blob) {
+          const text = await message.data.text();
+          data = JSON.parse(text);
+        } else {
+          return;
+        }
+      } catch (err) {
+        console.error("[WebRTC] [DEFENSE] Error parsing WS message", err, message.data);
         return;
       }
       console.log("[WebRTC] [STEP 12] WS Received:", data);
@@ -155,21 +187,31 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
     return () => {
       console.log("[WebRTC] [STEP 14] Cleaning up peer and WebSocket listeners", peerRef.current);
       if (peerRef.current) {
-        peerRef.current.destroy();
+        try {
+          peerRef.current.destroy();
+        } catch (err) {
+          console.error("[WebRTC] [DEFENSE] Error destroying peer in cleanup", err);
+        }
         peerRef.current = null;
       }
-      ws.removeEventListener("open", handleOpen);
-      ws.removeEventListener("error", handleError);
-      ws.removeEventListener("close", handleClose);
-      ws.removeEventListener("message", handleMessage);
+      if (ws) {
+        ws.removeEventListener("open", handleOpen);
+        ws.removeEventListener("error", handleError);
+        ws.removeEventListener("close", handleClose);
+        ws.removeEventListener("message", handleMessage);
+      }
     };
-  }, [localStream, ws, isInitiator, partnerId, userId]);
+  }, [ready, isInitiator, partnerId, userId, ws]); // ws in deps for safety
 
   // End call
   const endCall = useCallback(() => {
     console.log("[WebRTC] [STEP 15] Ending call", peerRef.current);
     if (peerRef.current) {
-      peerRef.current.destroy();
+      try {
+        peerRef.current.destroy();
+      } catch (err) {
+        console.error("[WebRTC] [DEFENSE] Error destroying peer in endCall", err);
+      }
       peerRef.current = null;
     }
     setRemoteStream(null);

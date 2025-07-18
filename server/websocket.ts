@@ -30,9 +30,12 @@ export function setupWebSocket(server: any) {
     let mood: Mood | null = null;
     let socketId: string | null = getSocketId(ws);
 
+    console.log("[WS] New connection established. Assigned socketId:", socketId);
+
     ws.on("message", async (msg) => {
       try {
         const message = JSON.parse(msg.toString());
+        console.log("[WS] Received message:", message);
 
         // --- JOIN QUEUE ---
         if (message.type === "join-queue") {
@@ -40,6 +43,7 @@ export function setupWebSocket(server: any) {
           mood = message.mood;
           if (!userId || !mood) {
             ws.send(JSON.stringify({ type: "error", message: "Missing userId or mood" }));
+            console.warn("[WS] join-queue: Missing userId or mood", { userId, mood });
             return;
           }
           userSocketMap.set(userId, ws);
@@ -52,13 +56,14 @@ export function setupWebSocket(server: any) {
             createdAt: new Date(),
           });
           ws.send(JSON.stringify({ type: "queue-status", status: "waiting", mood }));
-          console.log(`[WS] User ${userId} joined queue for mood "${mood}"`);
+          console.log(`[WS] User ${userId} joined queue for mood "${mood}" (socketId: ${socketId})`);
         }
 
         // --- LEAVE QUEUE ---
         else if (message.type === "leave-queue") {
           if (!userId) {
             ws.send(JSON.stringify({ type: "error", message: "Missing userId" }));
+            console.warn("[WS] leave-queue: Missing userId");
             return;
           }
           await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
@@ -73,6 +78,7 @@ export function setupWebSocket(server: any) {
           const { to, data } = message;
           if (!to || !data) {
             ws.send(JSON.stringify({ type: "error", message: "Missing 'to' or 'data' in signal" }));
+            console.warn("[WS] signal: Missing 'to' or 'data'", { to, data });
             return;
           }
           const partnerWs = userSocketMap.get(to);
@@ -82,14 +88,17 @@ export function setupWebSocket(server: any) {
               from: userId,
               data,
             }));
+            console.log(`[WS] Forwarded signal from ${userId} to ${to}`);
           } else {
             ws.send(JSON.stringify({ type: "error", message: "Partner not connected" }));
+            console.warn(`[WS] Tried to signal partner ${to} but not connected`);
           }
         }
 
         // --- UNKNOWN MESSAGE TYPE ---
         else {
           ws.send(JSON.stringify({ type: "error", message: "Unknown message type" }));
+          console.warn("[WS] Unknown message type received:", message.type);
         }
       } catch (err) {
         ws.send(JSON.stringify({ type: "error", message: "Invalid message format" }));
@@ -103,11 +112,13 @@ export function setupWebSocket(server: any) {
         userSocketIdMap.delete(userId);
         await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
         console.log(`[WS] User ${userId} disconnected and removed from queue`);
+      } else {
+        console.log("[WS] Socket closed with no associated userId");
       }
     });
 
     ws.on("error", (err) => {
-      console.error("WebSocket error:", err);
+      console.error("[WS] WebSocket error:", err);
     });
   });
 
@@ -121,6 +132,8 @@ export function setupWebSocket(server: any) {
         socketId: row.socketId ?? row.socket_id,
         createdAt: row.createdAt ?? row.created_at,
       }));
+
+      console.log(`[WS] Matchmaking: Current queue length: ${queue.length}`);
 
       // Group users by mood
       const moodGroups = new Map<Mood, QueueEntry[]>();
@@ -151,6 +164,7 @@ export function setupWebSocket(server: any) {
             userSocketMap.delete(userB.userId);
             userSocketIdMap.delete(userA.userId);
             userSocketIdMap.delete(userB.userId);
+            console.warn(`[WS] Cleaned up disconnected users: ${userA.userId}, ${userB.userId}`);
             continue;
           }
           // Create a single sessionId for both users
@@ -163,7 +177,7 @@ export function setupWebSocket(server: any) {
             userId: userB.userId,
             mood,
             partnerId: userA.userId,
-            sessionId: session.id, // ensure both share the same sessionId if your storage supports it
+            sessionId: session.id,
           });
           // Notify both users
           wsA.send(JSON.stringify({
@@ -191,6 +205,10 @@ export function setupWebSocket(server: any) {
       }
       // Cleanup stale entries
       const cutoffTime = new Date(Date.now() - MAX_QUEUE_TIME);
+      const staleRows = await db.select().from(moodQueue).where(lt(moodQueue.createdAt, cutoffTime));
+      if (staleRows.length > 0) {
+        console.warn(`[WS] Cleaning up ${staleRows.length} stale queue entries`);
+      }
       await db.delete(moodQueue).where(lt(moodQueue.createdAt, cutoffTime));
     } catch (err) {
       console.error("[WS] Matchmaking error:", err);
