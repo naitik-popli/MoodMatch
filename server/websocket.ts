@@ -37,7 +37,8 @@ export function setupWebSocket(server: any) {
     let socketId: string | null = getSocketId(ws);
 
     console.log("[WS] New connection established. Assigned socketId:", socketId);
-
+    ws.send(JSON.stringify({ type: "socket-id", socketId }));
+    
     ws.on("message", async (msg) => {
       try {
         const message = JSON.parse(msg.toString());

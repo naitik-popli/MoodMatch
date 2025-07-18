@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "../components/ui/button";
 import { Video } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import type { Mood } from "@shared/schema";
 import { API_BASE_URL } from "../lib/api";
+import { useWebSocket } from "../context/WebSocketContext";
 
 const MOODS: readonly {
   id: Mood;
@@ -41,6 +42,19 @@ const initialMoodStats: MoodStats = {
 export default function MoodSelection({ onMoodSelect }: Props) {
   const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
 
+  // Get central WebSocket and socketId from context
+  const { socketId, ws } = useWebSocket();
+
+  // Log socketId and connection status for debugging
+  useEffect(() => {
+    console.log("[MoodSelection] Central WebSocket socketId:", socketId);
+    if (ws) {
+      console.log("[MoodSelection] Central WebSocket readyState:", ws.readyState);
+    } else {
+      console.warn("[MoodSelection] No central WebSocket instance found");
+    }
+  }, [socketId, ws]);
+
   const { data: moodStats = initialMoodStats, isLoading, isError } = useQuery<MoodStats>({
     queryKey: ['/api/moods/stats'],
     queryFn: async (): Promise<MoodStats> => {
@@ -66,6 +80,11 @@ export default function MoodSelection({ onMoodSelect }: Props) {
     }
   };
 
+  // Helper for human-readable WebSocket state
+  const wsState = ws
+    ? ["CONNECTING", "OPEN", "CLOSING", "CLOSED"][ws.readyState] ?? "UNKNOWN"
+    : "Not connected";
+
   return (
     <>
       <div className="container mx-auto px-4 py-8 max-w-4xl">
@@ -76,6 +95,13 @@ export default function MoodSelection({ onMoodSelect }: Props) {
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Connect with someone who shares your current mood. Select your vibe and we&apos;ll find your perfect chat partner.
           </p>
+        </div>
+
+        {/* Central WebSocket debug info */}
+        <div className="text-xs text-gray-400 text-center mb-4">
+          Central Socket ID: <span className="font-mono">{socketId || "Not assigned"}</span>
+          <br />
+          WebSocket status: <span className="font-mono">{wsState}</span>
         </div>
 
         {isError && (
