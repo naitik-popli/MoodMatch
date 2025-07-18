@@ -112,6 +112,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
         console.warn("[Peer] Signal emitted before peer ready, delaying send");
         setTimeout(() => {
           if (ws.readyState === WebSocket.OPEN) {
+            console.log("[Peer] Delayed sending signal:", data);
             ws.send(JSON.stringify({
               type: "signal",
               data,
