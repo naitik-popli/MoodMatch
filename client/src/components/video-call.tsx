@@ -100,7 +100,10 @@ export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   // Attach streams on change
   useEffect(() => { attachStream(localStream, true); }, [localStream, attachStream]);
   useEffect(() => { attachStream(remoteStream, false); }, [remoteStream, attachStream]);
-
+  useEffect(() => {
+  console.log("[VideoCall] sessionData", sessionData);
+  console.log("[VideoCall] mood", mood);
+}, [sessionData, mood]);
   // Handle connection state changes
   useEffect(() => {
     if (isConnected) {

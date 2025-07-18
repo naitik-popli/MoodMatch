@@ -5,8 +5,8 @@ import { useWebSocket } from "../context/WebSocketContext";
 interface UseWebRTCSimpleProps {
   isInitiator: boolean;
   externalLocalStream?: MediaStream | null;
-  partnerId?: number; // Add this if you want to signal to a specific partner
-  userId?: number;    // Add this if you want to include your own id in signaling
+  partnerId?: number;
+  userId?: number;
 }
 
 export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId }: UseWebRTCSimpleProps) {
@@ -27,7 +27,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })
       .then(stream => {
         setLocalStream(stream);
-        console.log("[WebRTC] Got user media");
+        console.log("[WebRTC] Got user media", stream);
       })
       .catch(err => {
         alert("Could not access camera/mic: " + err.message);
@@ -46,7 +46,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       return;
     }
 
-    console.log("[WebRTC] Setting up SimplePeer and signaling...");
+    console.log("[WebRTC] Setting up SimplePeer and signaling...", { isInitiator, localStream, ws });
 
     // WebSocket event listeners
     const handleOpen = () => {
@@ -75,16 +75,16 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       if (data.type === "signal" && data.data) {
         if (peerRef.current) {
           try {
+            console.log("[WebRTC] Passing signal to peerRef.current", peerRef.current, data.data);
             peerRef.current.signal(data.data);
             console.log("[WebRTC] Received signal, passed to peer:", data.data);
           } catch (err) {
-            console.error("[WebRTC] Error signaling peer:", err);
+            console.error("[WebRTC] Error signaling peer:", err, peerRef.current, data.data);
           }
         } else {
-          console.warn("[WebRTC] Peer not ready to receive signal");
+          console.warn("[WebRTC] Peer not ready to receive signal", data.data);
         }
       }
-      // Handle other message types elsewhere in your app
     };
 
     ws.addEventListener("open", handleOpen);
@@ -99,6 +99,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       stream: localStream,
     });
     peerRef.current = peer;
+    console.log("[WebRTC] Creating SimplePeer instance", { isInitiator, localStream, peer });
 
     // Defensive check: delay signaling until peer is ready
     let isPeerReady = false;
@@ -107,9 +108,16 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       console.log("[Peer] Peer is ready");
     });
 
+    // Extra logging for peerRef.current
+    if (!peerRef.current) {
+      console.warn("[WebRTC] peerRef.current is undefined after peer creation!");
+    } else {
+      console.log("[WebRTC] peerRef.current is defined after peer creation", peerRef.current);
+    }
+
     peer.on("signal", data => {
       if (!isPeerReady) {
-        console.warn("[Peer] Signal emitted before peer ready, delaying send");
+        console.warn("[Peer] Signal emitted before peer ready, delaying send", data);
         setTimeout(() => {
           if (ws.readyState === WebSocket.OPEN) {
             console.log("[Peer] Delayed sending signal:", data);
@@ -119,13 +127,14 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
               ...(partnerId ? { to: partnerId } : {}),
               ...(userId ? { from: userId } : {}),
             }));
+          } else {
+            console.warn("[Peer] WebSocket not open during delayed signal send");
           }
         }, 100);
         return;
       }
-      console.log("[Peer] Sending signal:", data);
+      console.log("[Peer] Sending signal:", data, { wsReady: ws.readyState === WebSocket.OPEN });
       if (ws.readyState === WebSocket.OPEN) {
-        // If you need to send to a specific partner, include 'to' and 'from'
         ws.send(JSON.stringify({
           type: "signal",
           data,
@@ -138,7 +147,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
     });
 
     peer.on("stream", stream => {
-      console.log("[Peer] Received remote stream");
+      console.log("[Peer] Received remote stream", stream);
       setRemoteStream(stream);
     });
 
@@ -154,27 +163,31 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
     });
 
     peer.on("error", err => {
-      console.error("[Peer] Error:", err);
+      console.error("[Peer] Error:", err, peerRef.current);
     });
 
     return () => {
-      console.log("[WebRTC] Cleaning up peer and WebSocket listeners");
-      peer.destroy();
+      console.log("[WebRTC] Cleaning up peer and WebSocket listeners", peerRef.current);
+      if (peerRef.current) {
+        peerRef.current.destroy();
+        peerRef.current = null;
+      }
       ws.removeEventListener("open", handleOpen);
       ws.removeEventListener("error", handleError);
       ws.removeEventListener("close", handleClose);
       ws.removeEventListener("message", handleMessage);
-      // Do NOT close ws here! It's shared via context.
     };
   }, [localStream, ws, isInitiator, partnerId, userId]);
 
   // End call
   const endCall = useCallback(() => {
-    console.log("[WebRTC] Ending call");
-    peerRef.current?.destroy();
+    console.log("[WebRTC] Ending call", peerRef.current);
+    if (peerRef.current) {
+      peerRef.current.destroy();
+      peerRef.current = null;
+    }
     setRemoteStream(null);
     setIsConnected(false);
-    // Do NOT close ws here!
   }, []);
 
   // Mute/unmute audio

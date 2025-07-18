@@ -16,17 +16,17 @@ export function useSocket() {
     }
 
     const handler = (event: MessageEvent) => {
-      let data = event.data;
-      try {
-        if (typeof data === "string") {
-          data = JSON.parse(data);
-        }
-      } catch (e) {
-        console.warn("[useSocket] Received non-JSON message:", event.data);
-      }
-      (listenersRef.current["message"] || []).forEach((cb) => cb(data));
-    };
-
+  let data = event.data;
+  try {
+    if (typeof data === "string") {
+      data = JSON.parse(data);
+    }
+  } catch (e) {
+    console.warn("[useSocket] Received non-JSON message:", event.data);
+  }
+  console.log("[useSocket] Incoming message data:", data);
+  (listenersRef.current["message"] || []).forEach((cb) => cb(data));
+};
     ws.addEventListener("message", handler);
     console.log("[useSocket] Added message listener");
 
