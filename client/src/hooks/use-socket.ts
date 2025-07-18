@@ -83,5 +83,3 @@ export function useSocket() {
     on,
   };
 }
-
-export default useSocket;
