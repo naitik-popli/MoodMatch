@@ -32,7 +32,7 @@ export function useSocket() {
 
     return () => {
       ws.removeEventListener("message", handler);
-      listenersRef.current = {};
+      // Do NOT clear all listeners here, just remove the handler
       console.log("[useSocket] Removed message listener and cleaned up");
     };
   }, [ws]);
@@ -61,9 +61,15 @@ export function useSocket() {
       console.log(`[useSocket] Added listener for '${event}'`);
 
       return () => {
-        listenersRef.current[event] = listenersRef.current[event].filter(
-          (cb) => cb !== callback
-        );
+        if (listenersRef.current[event]) {
+          listenersRef.current[event] = listenersRef.current[event].filter(
+            (cb) => cb !== callback
+          );
+          // Optionally clean up empty arrays
+          if (listenersRef.current[event].length === 0) {
+            delete listenersRef.current[event];
+          }
+        }
         console.log(`[useSocket] Removed listener for '${event}'`);
       };
     },

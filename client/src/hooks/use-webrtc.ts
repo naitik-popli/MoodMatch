@@ -5,9 +5,11 @@ import { useWebSocket } from "../context/WebSocketContext";
 interface UseWebRTCSimpleProps {
   isInitiator: boolean;
   externalLocalStream?: MediaStream | null;
+  partnerId?: number; // Add this if you want to signal to a specific partner
+  userId?: number;    // Add this if you want to include your own id in signaling
 }
 
-export function useWebRTC({ isInitiator, externalLocalStream }: UseWebRTCSimpleProps) {
+export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId }: UseWebRTCSimpleProps) {
   const [localStream, setLocalStream] = useState<MediaStream | null>(externalLocalStream || null);
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
   const [isConnected, setIsConnected] = useState(false);
@@ -72,9 +74,9 @@ export function useWebRTC({ isInitiator, externalLocalStream }: UseWebRTCSimpleP
       // Only handle signaling messages here
       if (data.type === "signal" && data.data) {
         if (peerRef.current) {
-          console.log("[WebRTC] Received signal, passing to peer:", data.data);
           try {
             peerRef.current.signal(data.data);
+            console.log("[WebRTC] Received signal, passed to peer:", data.data);
           } catch (err) {
             console.error("[WebRTC] Error signaling peer:", err);
           }
@@ -82,7 +84,7 @@ export function useWebRTC({ isInitiator, externalLocalStream }: UseWebRTCSimpleP
           console.warn("[WebRTC] Peer not ready to receive signal");
         }
       }
-      // Handle other message types (e.g., match-found) elsewhere in your app
+      // Handle other message types elsewhere in your app
     };
 
     ws.addEventListener("open", handleOpen);
@@ -101,7 +103,13 @@ export function useWebRTC({ isInitiator, externalLocalStream }: UseWebRTCSimpleP
     peer.on("signal", data => {
       console.log("[Peer] Sending signal:", data);
       if (ws.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify({ type: "signal", data }));
+        // If you need to send to a specific partner, include 'to' and 'from'
+        ws.send(JSON.stringify({
+          type: "signal",
+          data,
+          ...(partnerId ? { to: partnerId } : {}),
+          ...(userId ? { from: userId } : {}),
+        }));
       } else {
         console.warn("[Peer] Tried to send signal but WS is not open");
       }
@@ -136,7 +144,7 @@ export function useWebRTC({ isInitiator, externalLocalStream }: UseWebRTCSimpleP
       ws.removeEventListener("message", handleMessage);
       // Do NOT close ws here! It's shared via context.
     };
-  }, [localStream, ws, isInitiator]);
+  }, [localStream, ws, isInitiator, partnerId, userId]);
 
   // End call
   const endCall = useCallback(() => {
