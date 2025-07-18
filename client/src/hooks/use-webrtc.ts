@@ -45,21 +45,19 @@ export function useWebRTC({ isInitiator, externalLocalStream }: UseWebRTCSimpleP
     }
 
     console.log("[WebRTC] Setting up SimplePeer and signaling...");
-    // Setup WebSocket event handlers
-    ws.onopen = () => {
+
+    // WebSocket event listeners
+    const handleOpen = () => {
       console.log("[WS] Connected to signaling server");
     };
-
-    ws.onerror = (err) => {
+    const handleError = (err: Event) => {
       console.error("[WS] WebSocket error:", err);
     };
-
-    ws.onclose = (event) => {
+    const handleClose = (event: CloseEvent) => {
       console.warn("[WS] WebSocket closed:", event);
       setIsConnected(false);
     };
-
-    ws.onmessage = async (message) => {
+    const handleMessage = async (message: MessageEvent) => {
       let data: any;
       if (typeof message.data === "string") {
         data = JSON.parse(message.data);
@@ -86,6 +84,11 @@ export function useWebRTC({ isInitiator, externalLocalStream }: UseWebRTCSimpleP
       }
       // Handle other message types (e.g., match-found) elsewhere in your app
     };
+
+    ws.addEventListener("open", handleOpen);
+    ws.addEventListener("error", handleError);
+    ws.addEventListener("close", handleClose);
+    ws.addEventListener("message", handleMessage);
 
     // Create SimplePeer
     const peer = new SimplePeer({
@@ -125,8 +128,12 @@ export function useWebRTC({ isInitiator, externalLocalStream }: UseWebRTCSimpleP
     });
 
     return () => {
-      console.log("[WebRTC] Cleaning up peer");
+      console.log("[WebRTC] Cleaning up peer and WebSocket listeners");
       peer.destroy();
+      ws.removeEventListener("open", handleOpen);
+      ws.removeEventListener("error", handleError);
+      ws.removeEventListener("close", handleClose);
+      ws.removeEventListener("message", handleMessage);
       // Do NOT close ws here! It's shared via context.
     };
   }, [localStream, ws, isInitiator]);

@@ -27,7 +27,7 @@ interface Props {
   onCallEnd: () => void;
 }
 
-export default function VideoCall({ mood, sessionData, onCallEnd, externalLocalStream }: Props) {
+export default function VideoCall({ mood, sessionData, onCallEnd }: Props) {
   const [callDuration, setCallDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
@@ -51,10 +51,9 @@ export default function VideoCall({ mood, sessionData, onCallEnd, externalLocalS
     toggleMute,
     toggleVideo 
   } = useWebRTC({
-    wsUrl: "wss://moodmatch-61xp.onrender.com",
-    isInitiator: sessionData.role === "initiator",
-    externalLocalStream,
-  });
+  isInitiator: sessionData.role === "initiator",
+  externalLocalStream: sessionData.externalLocalStream,
+});
 
   // Format call duration
   const formatDuration = (seconds: number) => {

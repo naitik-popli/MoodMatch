@@ -184,8 +184,8 @@ export default function MoodChat() {
         />
       )}
 
-      {currentScreen === 'call' && selectedMood && sessionData && (
-        <VideoCall
+      {currentScreen === 'call' && selectedMood && sessionData && sessionData.partnerId !== undefined && (
+  <VideoCall
     mood={selectedMood}
     sessionData={sessionData as {
       sessionId: number;
@@ -196,7 +196,7 @@ export default function MoodChat() {
     }}
     onCallEnd={handleCallEnd}
   />
-      )}
+)}
 
       {/* Settings Modal */}
       {showSettings && (

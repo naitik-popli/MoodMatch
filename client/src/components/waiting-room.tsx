@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Button } from "../components/ui/button";
 import { useSocket } from "../hooks/use-socket";
 import type { Mood } from "@shared/schema";
@@ -37,12 +37,12 @@ interface Props {
   }) => void;
   onResetQueueJoin: () => void;
 }
-
 export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueueJoin }: Props) {
   const [waitTime, setWaitTime] = useState(0);
   const [userId, setUserId] = useState<number | null>(null);
   const { ws, emit, on, isConnected } = useSocket();
   const [hasJoinedQueue, setHasJoinedQueue] = useState(false);
+  const hasLeftQueue = useRef(false);
 
   // Load userId from localStorage
   useEffect(() => {
@@ -55,27 +55,34 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
     }
   }, []);
 
-  // Timer for UI
+  // Timer for UI, reset on mood change
   useEffect(() => {
+    setWaitTime(0);
     const timer = setInterval(() => {
       setWaitTime((prev) => prev + 1);
     }, 1000);
-
-    console.log("⏳ WaitingRoom mounted with mood:", mood);
     return () => clearInterval(timer);
   }, [mood]);
 
-  // Function to leave queue
+  // Reset hasJoinedQueue when mood changes
+  useEffect(() => {
+    setHasJoinedQueue(false);
+    hasLeftQueue.current = false;
+  }, [mood]);
+
+  // Function to leave queue (idempotent)
   const leaveQueue = () => {
-    if (ws && userId && hasJoinedQueue) {
+    if (hasLeftQueue.current) return;
+    hasLeftQueue.current = true;
+    if (ws && userId && hasJoinedQueue && emit) {
       console.log(`[WaitingRoom] Sending leave-queue for user ${userId}`);
       emit({ type: "leave-queue", userId });
       setHasJoinedQueue(false);
-      onResetQueueJoin();
+      onResetQueueJoin?.();
     }
   };
 
-  // Join queue and listen for events
+  // Join queue and listen for match-found
   useEffect(() => {
     if (!ws || !isConnected || !userId || !mood || hasJoinedQueue) {
       if (!ws) console.log("[WaitingRoom] WebSocket not ready yet");
@@ -85,7 +92,6 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
       return;
     }
 
-    // Check media permissions before joining queue
     (async () => {
       try {
         if (!navigator.mediaDevices?.getUserMedia) {
@@ -95,20 +101,21 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         stream.getTracks().forEach(track => track.stop());
 
-        // Join queue
         setTimeout(() => {
-          console.log("[WaitingRoom] Emitting join-queue:", { userId, mood });
-          emit({ type: "join-queue", userId, mood });
-          setHasJoinedQueue(true);
+          if (emit) {
+            console.log("[WaitingRoom] Emitting join-queue:", { userId, mood });
+            emit({ type: "join-queue", userId, mood });
+            setHasJoinedQueue(true);
+          } else {
+            console.warn("[WaitingRoom] emit function not available");
+          }
         }, 300);
       } catch (error) {
         console.error("Media devices access error:", error);
       }
     })();
 
-    // Listen for all messages
     const offMatch = on("message", (data) => {
-      console.log("[WaitingRoom] Received message:", data);
       if (typeof data === "object" && data.type === "match-found") {
         console.log("[WaitingRoom] match-found received:", data);
         onMatchFound({
@@ -117,38 +124,23 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
           sessionId: data.sessionId,
         });
       }
-      if (typeof data === "object" && data.type === "waiting-for-match") {
-        console.log("[WaitingRoom] Still waiting...");
-      }
     });
 
-    // Cleanup listeners
     return () => {
       offMatch();
       console.log("[WaitingRoom] Cleaned up WebSocket listeners");
     };
   }, [ws, isConnected, userId, mood, onMatchFound, hasJoinedQueue, emit, on]);
 
-  // Reset hasJoinedQueue when requested
-  useEffect(() => {
-    if (onResetQueueJoin) {
-      onResetQueueJoin();
-      setHasJoinedQueue(false);
-    }
-  }, [onResetQueueJoin]);
-
   // Leave queue on unmount or page reload
   useEffect(() => {
-    const handleBeforeUnload = () => {
-      leaveQueue();
-    };
+    const handleBeforeUnload = () => leaveQueue();
     window.addEventListener("beforeunload", handleBeforeUnload);
-
     return () => {
       leaveQueue();
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [ws, userId, hasJoinedQueue]);
+  }, [ws, userId, hasJoinedQueue, emit]);
 
   // Handle cancel button click
   const handleCancel = () => {

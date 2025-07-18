@@ -6,7 +6,7 @@ import { or, eq, lt } from "drizzle-orm";
 import type { Mood } from "@shared/schema";
 
 const MATCH_INTERVAL = 5000;
-const MAX_QUEUE_TIME = 300000;
+const MAX_QUEUE_TIME = 300000; // 5 minutes
 
 const userSocketMap = new Map<number, WebSocket>();
 const userSocketIdMap = new Map<number, string>();
@@ -33,10 +33,15 @@ export function setupWebSocket(server: any) {
     ws.on("message", async (msg) => {
       try {
         const message = JSON.parse(msg.toString());
+
+        // --- JOIN QUEUE ---
         if (message.type === "join-queue") {
           userId = message.userId;
           mood = message.mood;
-          if (!userId || !mood) return;
+          if (!userId || !mood) {
+            ws.send(JSON.stringify({ type: "error", message: "Missing userId or mood" }));
+            return;
+          }
           userSocketMap.set(userId, ws);
           userSocketIdMap.set(userId, socketId!);
           await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
@@ -48,15 +53,28 @@ export function setupWebSocket(server: any) {
           });
           ws.send(JSON.stringify({ type: "queue-status", status: "waiting", mood }));
           console.log(`[WS] User ${userId} joined queue for mood "${mood}"`);
-        } else if (message.type === "leave-queue") {
-          if (!userId) return;
+        }
+
+        // --- LEAVE QUEUE ---
+        else if (message.type === "leave-queue") {
+          if (!userId) {
+            ws.send(JSON.stringify({ type: "error", message: "Missing userId" }));
+            return;
+          }
           await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
           userSocketMap.delete(userId);
           userSocketIdMap.delete(userId);
           ws.send(JSON.stringify({ type: "queue-status", status: "left" }));
           console.log(`[WS] User ${userId} left the queue`);
-        } else if (message.type === "signal") {
+        }
+
+        // --- SIGNALING ---
+        else if (message.type === "signal") {
           const { to, data } = message;
+          if (!to || !data) {
+            ws.send(JSON.stringify({ type: "error", message: "Missing 'to' or 'data' in signal" }));
+            return;
+          }
           const partnerWs = userSocketMap.get(to);
           if (partnerWs && partnerWs.readyState === WebSocket.OPEN) {
             partnerWs.send(JSON.stringify({
@@ -64,7 +82,14 @@ export function setupWebSocket(server: any) {
               from: userId,
               data,
             }));
+          } else {
+            ws.send(JSON.stringify({ type: "error", message: "Partner not connected" }));
           }
+        }
+
+        // --- UNKNOWN MESSAGE TYPE ---
+        else {
+          ws.send(JSON.stringify({ type: "error", message: "Unknown message type" }));
         }
       } catch (err) {
         ws.send(JSON.stringify({ type: "error", message: "Invalid message format" }));
@@ -97,11 +122,14 @@ export function setupWebSocket(server: any) {
         createdAt: row.createdAt ?? row.created_at,
       }));
 
+      // Group users by mood
       const moodGroups = new Map<Mood, QueueEntry[]>();
       for (const entry of queue) {
         if (!moodGroups.has(entry.mood)) moodGroups.set(entry.mood, []);
         moodGroups.get(entry.mood)!.push(entry);
       }
+
+      // Try to match users in each mood group
       for (const [mood, users] of moodGroups) {
         while (users.length >= 2) {
           const userA = users.shift()!;
@@ -125,31 +153,32 @@ export function setupWebSocket(server: any) {
             userSocketIdMap.delete(userB.userId);
             continue;
           }
-          // Create sessions in DB
-          const sessionA = await storage.createChatSession({
+          // Create a single sessionId for both users
+          const session = await storage.createChatSession({
             userId: userA.userId,
             mood,
             partnerId: userB.userId,
           });
-          const sessionB = await storage.createChatSession({
+          await storage.createChatSession({
             userId: userB.userId,
             mood,
             partnerId: userA.userId,
+            sessionId: session.id, // ensure both share the same sessionId if your storage supports it
           });
           // Notify both users
           wsA.send(JSON.stringify({
             type: "match-found",
             role: "initiator",
             partnerId: userB.userId,
-            sessionId: sessionA.id,
+            sessionId: session.id,
           }));
           wsB.send(JSON.stringify({
             type: "match-found",
             role: "receiver",
             partnerId: userA.userId,
-            sessionId: sessionB.id,
+            sessionId: session.id,
           }));
-          console.log(`[WS] Matched users ${userA.userId} and ${userB.userId} for mood "${mood}"`);
+          console.log(`[WS] Matched users ${userA.userId} and ${userB.userId} for mood "${mood}" (sessionId: ${session.id})`);
           // Remove from queue in DB and memory
           await db.delete(moodQueue).where(
             or(eq(moodQueue.userId, userA.userId), eq(moodQueue.userId, userB.userId))
