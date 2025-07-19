@@ -42,26 +42,31 @@ export const WebSocketProvider: React.FC<{children: React.ReactNode}> = ({ child
       console.error("[WebSocketContext] WebSocket error:", err);
     };
 
-   socket.onclose = (event) => {
-  if (event.code !== 1000) { // 1000 = normal closure
-    console.log("[WebSocketContext] WebSocket closed unexpectedly:", event.code, event.reason);
-  } else {
-    console.log("[WebSocketContext] WebSocket closed:", event.code, event.reason);
-  }
-  setWs(null);
-  setSocketId(null);
-};
+    socket.onclose = (event) => {
+      if (event.code !== 1000) { // 1000 = normal closure
+        console.log("[WebSocketContext] WebSocket closed unexpectedly:", event.code, event.reason);
+      } else {
+        console.log("[WebSocketContext] WebSocket closed:", event.code, event.reason);
+      }
+      setWs(null);
+      setSocketId(null);
+    };
+
     // Ensure socket closes on page unload/reload
     const handleBeforeUnload = () => {
       console.log("[WebSocketContext] Closing WebSocket due to page unload");
-      socket.close();
+      if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
+        socket.close();
+      }
     };
     window.addEventListener("beforeunload", handleBeforeUnload);
 
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
       console.log("[WebSocketContext] Cleaning up WebSocket connection");
-      socket.close();
+      if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
+        socket.close();
+      }
     };
   }, []);
 
