@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 // --- Defensive import for SimplePeer to avoid ESM/CJS interop issues ---
-import * as SimplePeerNS from "simple-peer";
-const SimplePeer = (SimplePeerNS as any).default || SimplePeerNS;
+import SimplePeer from "simple-peer";
 import { useWebSocket } from "../context/WebSocketContext";
 
 interface UseWebRTCSimpleProps {
