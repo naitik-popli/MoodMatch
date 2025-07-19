@@ -203,10 +203,10 @@ export function setupWebSocket(server: any) {
             await db.delete(moodQueue).where(
               or(eq(moodQueue.userId, userA.userId), eq(moodQueue.userId, userB.userId))
             );
-            userSocketMap.delete(userA.userId);
-            userSocketMap.delete(userB.userId);
-            userSocketIdMap.delete(userA.userId);
-            userSocketIdMap.delete(userB.userId);
+            // userSocketMap.delete(userA.userId);
+            // userSocketMap.delete(userB.userId);
+            // userSocketIdMap.delete(userA.userId);
+            // userSocketIdMap.delete(userB.userId);
             console.warn(`[WS] Cleaned up disconnected users: ${userA.userId}, ${userB.userId}`);
             logConnectedClients();
             continue;

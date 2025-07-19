@@ -1,6 +1,3 @@
-[WS] Connected socketIds: []
-[WS] New connection established. Assigned socketId: yfauczoild1752945095621
-[WS] New connection established. Assigned socketId: n2srgg7f81752945095890
 [WS] Matchmaking: Current queue length: 0
 [WS] Connected clients: 0
 [WS] Connected userIds: []
@@ -9,12 +6,8 @@
 [WS] Connected clients: 0
 [WS] Connected userIds: []
 [WS] Connected socketIds: []
-[WS] New connection established. Assigned socketId: gle9glv2da1752945103395
-[WS] Socket closed with no associated userId
-[WS] Connected clients: 0
-[WS] Connected userIds: []
-[WS] Connected socketIds: []
-[WS] New connection established. Assigned socketId: 0drh2x1wt51s1752945103692
+[WS] New connection established. Assigned socketId: cqblpgdhxg51752946671977
+[WS] New connection established. Assigned socketId: 54iiua9lu11752946672289
 [WS] Socket closed with no associated userId
 [WS] Connected clients: 0
 [WS] Connected userIds: []
@@ -23,53 +16,63 @@
 [WS] Connected clients: 0
 [WS] Connected userIds: []
 [WS] Connected socketIds: []
+[WS] New connection established. Assigned socketId: 24jv6qbw9bu1752946678886
+[WS] New connection established. Assigned socketId: w6awaauatzk1752946679172
 [WS] Matchmaking: Current queue length: 0
 [WS] Connected clients: 0
 [WS] Connected userIds: []
 [WS] Connected socketIds: []
-POST /api/session/create 200 28ms
+POST /api/session/create 200 87ms
 Response: {
-  "sessionId": 784,
-  "userId": 668,
+  "sessionId": 786,
+  "userId": 670,
   "mood": "happy"
 }
-[WS] Received message: { type: 'join-queue', userId: 668, mood: 'happy' }
-[WS] User 668 joined queue for mood "happy" (socketId: n2srgg7f81752945095890)
+[WS] Received message: { type: 'join-queue', userId: 670, mood: 'happy' }
+[WS] User 670 joined queue for mood "happy" (socketId: w6awaauatzk1752946679172)
 [WS] Connected clients: 1
-[WS] Connected userIds: [668]
-[WS] Connected socketIds: [n2srgg7f81752945095890]
-[WS] Received message: { type: 'join-queue', userId: 668, mood: 'happy' }
-[WS] User 668 joined queue for mood "happy" (socketId: n2srgg7f81752945095890)
+[WS] Connected userIds: [670]
+[WS] Connected socketIds: [w6awaauatzk1752946679172]
+[WS] Received message: { type: 'join-queue', userId: 670, mood: 'happy' }
+[WS] User 670 joined queue for mood "happy" (socketId: w6awaauatzk1752946679172)
 [WS] Connected clients: 1
-[WS] Connected userIds: [668]
-[WS] Connected socketIds: [n2srgg7f81752945095890]
+[WS] Connected userIds: [670]
+[WS] Connected socketIds: [w6awaauatzk1752946679172]
 [WS] Matchmaking: Current queue length: 1
 [WS] Connected clients: 1
-[WS] Connected userIds: [668]
-[WS] Connected socketIds: [n2srgg7f81752945095890]
-POST /api/session/create 200 15ms
+[WS] Connected userIds: [670]
+[WS] Connected socketIds: [w6awaauatzk1752946679172]
+[WS] Socket closed with no associated userId
+[WS] Connected clients: 1
+[WS] Connected userIds: [670]
+[WS] Connected socketIds: [w6awaauatzk1752946679172]
+POST /api/session/create 200 13ms
 Response: {
-  "sessionId": 785,
-  "userId": 669,
+  "sessionId": 787,
+  "userId": 671,
   "mood": "happy"
 }
-[WS] Received message: { type: 'join-queue', userId: 669, mood: 'happy' }
-[WS] User 669 joined queue for mood "happy" (socketId: 0drh2x1wt51s1752945103692)
+[WS] Matchmaking: Current queue length: 1
+[WS] Connected clients: 1
+[WS] Connected userIds: [670]
+[WS] Connected socketIds: [w6awaauatzk1752946679172]
+[WS] Received message: { type: 'join-queue', userId: 671, mood: 'happy' }
+[WS] User 671 joined queue for mood "happy" (socketId: 54iiua9lu11752946672289)
 [WS] Connected clients: 2
-[WS] Connected userIds: [668, 669]
-[WS] Connected socketIds: [n2srgg7f81752945095890, 0drh2x1wt51s1752945103692]
-[WS] Received message: { type: 'join-queue', userId: 669, mood: 'happy' }
-[WS] User 669 joined queue for mood "happy" (socketId: 0drh2x1wt51s1752945103692)
+[WS] Connected userIds: [670, 671]
+[WS] Connected socketIds: [w6awaauatzk1752946679172, 54iiua9lu11752946672289]
+[WS] Received message: { type: 'join-queue', userId: 671, mood: 'happy' }
+[WS] User 671 joined queue for mood "happy" (socketId: 54iiua9lu11752946672289)
 [WS] Connected clients: 2
-[WS] Connected userIds: [668, 669]
-[WS] Connected socketIds: [n2srgg7f81752945095890, 0drh2x1wt51s1752945103692]
+[WS] Connected userIds: [670, 671]
+[WS] Connected socketIds: [w6awaauatzk1752946679172, 54iiua9lu11752946672289]
 [WS] Matchmaking: Current queue length: 2
 [WS] Connected clients: 2
-[WS] Connected userIds: [668, 669]
-[WS] Connected socketIds: [n2srgg7f81752945095890, 0drh2x1wt51s1752945103692]
-[DEBUG][2025-07-19T17:12:01.431Z] Updated partnerId for user 668 in existing session { oldPartnerId: null, newPartnerId: 669 }
-[DEBUG][2025-07-19T17:12:01.438Z] Updated partnerId for user 669 in existing session { oldPartnerId: null, newPartnerId: 668 }
-[WS] Matched users 668 and 669 for mood "happy" (sessionId: 784)
+[WS] Connected userIds: [670, 671]
+[WS] Connected socketIds: [w6awaauatzk1752946679172, 54iiua9lu11752946672289]
+[DEBUG][2025-07-19T17:38:14.928Z] Updated partnerId for user 670 in existing session { oldPartnerId: null, newPartnerId: 671 }
+[DEBUG][2025-07-19T17:38:14.934Z] Updated partnerId for user 671 in existing session { oldPartnerId: null, newPartnerId: 670 }
+[WS] Matched users 670 and 671 for mood "happy" (sessionId: 786)
 [WS] Connected clients: 0
 [WS] Connected userIds: []
 [WS] Connected socketIds: []
@@ -78,20 +81,20 @@ Response: {
   data: {
     type: 'offer',
     sdp: 'v=0\r\n' +
-      'o=- 4596373078034381398 2 IN IP4 127.0.0.1\r\n' +
+      'o=- 2068815309129247236 2 IN IP4 127.0.0.1\r\n' +
       's=-\r\n' +
+[WS] Partner 671 not connected, buffering signal
       't=0 0\r\n' +
       'a=group:BUNDLE 0 1 2\r\n' +
       'a=extmap-allow-mixed\r\n' +
-      'a=msid-semantic: WMS 882ec387-2573-4fed-abc2-62547c9b2fae\r\n' +
+      'a=msid-semantic: WMS 3b63ca3c-7724-48a0-a706-0bbdd1ba42e5\r\n' +
       'm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\n' +
       'c=IN IP4 0.0.0.0\r\n' +
       'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
-      'a=ice-ufrag:Plav\r\n' +
-      'a=ice-pwd:XDcPqpOeY2TQfJMGjT6YWosv\r\n' +
+      'a=ice-ufrag:4gnc\r\n' +
+      'a=ice-pwd:5/r0/JyVSP4YN9WWf4gi6VA8\r\n' +
       'a=ice-options:trickle\r\n' +
-      'a=fingerprint:sha-256 8C:36:74:5C:B7:07:3A:0D:2E:D1:A3:6B:F5:72:BF:00:2D:96:A2:02:74:40:AD:0E:5F:A2:B3:8F:D7:25:FD:04\r\n' +
-[WS] Partner 669 not connected, buffering signal
+      'a=fingerprint:sha-256 4D:57:B1:B9:C3:1A:3D:9A:02:37:08:68:04:85:F1:80:CD:35:75:EA:B5:7E:97:F2:DF:46:86:A6:C4:16:14:92\r\n' +
       'a=setup:actpass\r\n' +
       'a=mid:0\r\n' +
       'a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\n' +
@@ -99,7 +102,7 @@ Response: {
       'a=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\n' +
       'a=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\n' +
       'a=sendrecv\r\n' +
-      'a=msid:882ec387-2573-4fed-abc2-62547c9b2fae 87e1af75-892b-459e-b705-dc97279bcbb8\r\n' +
+      'a=msid:3b63ca3c-7724-48a0-a706-0bbdd1ba42e5 04654e9c-077f-4b4b-acd2-aaf24706be71\r\n' +
       'a=rtcp-mux\r\n' +
       'a=rtcp-rsize\r\n' +
       'a=rtpmap:111 opus/48000/2\r\n' +
@@ -113,15 +116,15 @@ Response: {
       'a=rtpmap:13 CN/8000\r\n' +
       'a=rtpmap:110 telephone-event/48000\r\n' +
       'a=rtpmap:126 telephone-event/8000\r\n' +
-      'a=ssrc:1059279064 cname:UwnOdvBvGGTXpkj4\r\n' +
-      'a=ssrc:1059279064 msid:882ec387-2573-4fed-abc2-62547c9b2fae 87e1af75-892b-459e-b705-dc97279bcbb8\r\n' +
-      'm=video 9 UDP/TLS/RTP/SAVPF 96 97 103 104 107 108 109 114 115 116 117 118 39 40 45 46 98 99 100 101 119 120 49 50 123 124 125\r\n' +
+      'a=ssrc:4189593880 cname:iPuV41nSAgWBBpp6\r\n' +
+      'a=ssrc:4189593880 msid:3b63ca3c-7724-48a0-a706-0bbdd1ba42e5 04654e9c-077f-4b4b-acd2-aaf24706be71\r\n' +
+      'm=video 9 UDP/TLS/RTP/SAVPF 96 97 103 104 107 108 109 114 115 116 117 118 39 40 45 46 98 99 100 101 119 120 121\r\n' +
       'c=IN IP4 0.0.0.0\r\n' +
       'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
-      'a=ice-ufrag:Plav\r\n' +
-      'a=ice-pwd:XDcPqpOeY2TQfJMGjT6YWosv\r\n' +
+      'a=ice-ufrag:4gnc\r\n' +
+      'a=ice-pwd:5/r0/JyVSP4YN9WWf4gi6VA8\r\n' +
       'a=ice-options:trickle\r\n' +
-      'a=fingerprint:sha-256 8C:36:74:5C:B7:07:3A:0D:2E:D1:A3:6B:F5:72:BF:00:2D:96:A2:02:74:40:AD:0E:5F:A2:B3:8F:D7:25:FD:04\r\n' +
+      'a=fingerprint:sha-256 4D:57:B1:B9:C3:1A:3D:9A:02:37:08:68:04:85:F1:80:CD:35:75:EA:B5:7E:97:F2:DF:46:86:A6:C4:16:14:92\r\n' +
       'a=setup:actpass\r\n' +
       'a=mid:1\r\n' +
       'a=extmap:14 urn:ietf:params:rtp-hdrext:toffset\r\n' +
@@ -136,7 +139,7 @@ Response: {
       'a=extmap:10 urn:ietf:params:rtp-hdrext:sdes:rtp-stream-id\r\n' +
       'a=extmap:11 urn:ietf:params:rtp-hdrext:sdes:repaired-rtp-stream-id\r\n' +
       'a=sendrecv\r\n' +
-      'a=msid:882ec387-2573-4fed-abc2-62547c9b2fae e25804a2-dc6e-49e4-97b0-419fbe5cc3dc\r\n' +
+      'a=msid:3b63ca3c-7724-48a0-a706-0bbdd1ba42e5 710586b3-8ebf-41fa-8d61-748e40a04cd8\r\n' +
       'a=rtcp-mux\r\n' +
       'a=rtcp-rsize\r\n' +
       'a=rtpmap:96 VP8/90000\r\n' +
@@ -228,341 +231,323 @@ Response: {
       'a=fmtp:100 profile-id=2\r\n' +
       'a=rtpmap:101 rtx/90000\r\n' +
       'a=fmtp:101 apt=100\r\n' +
-      'a=rtpmap:119 H264/90000\r\n' +
-      'a=rtcp-fb:119 goog-remb\r\n' +
-      'a=rtcp-fb:119 transport-cc\r\n' +
-      'a=rtcp-fb:119 ccm fir\r\n' +
-      'a=rtcp-fb:119 nack\r\n' +
-      'a=rtcp-fb:119 nack pli\r\n' +
-      'a=fmtp:119 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001f\r\n' +
+      'a=rtpmap:119 red/90000\r\n' +
       'a=rtpmap:120 rtx/90000\r\n' +
       'a=fmtp:120 apt=119\r\n' +
-      'a=rtpmap:49 H265/90000\r\n' +
-      'a=rtcp-fb:49 goog-remb\r\n' +
-      'a=rtcp-fb:49 transport-cc\r\n' +
-      'a=rtcp-fb:49 ccm fir\r\n' +
-      'a=rtcp-fb:49 nack\r\n' +
-      'a=rtcp-fb:49 nack pli\r\n' +
-      'a=fmtp:49 level-id=93;profile-id=1;tier-flag=0;tx-mode=SRST\r\n' +
-      'a=rtpmap:50 rtx/90000\r\n' +
-      'a=fmtp:50 apt=49\r\n' +
-      'a=rtpmap:123 red/90000\r\n' +
-      'a=rtpmap:124 rtx/90000\r\n' +
-      'a=fmtp:124 apt=123\r\n' +
-      'a=rtpmap:125 ulpfec/90000\r\n' +
-      'a=ssrc-group:FID 3753280139 4135493865\r\n' +
-      'a=ssrc:3753280139 cname:UwnOdvBvGGTXpkj4\r\n' +
-      'a=ssrc:3753280139 msid:882ec387-2573-4fed-abc2-62547c9b2fae e25804a2-dc6e-49e4-97b0-419fbe5cc3dc\r\n' +
-      'a=ssrc:4135493865 cname:UwnOdvBvGGTXpkj4\r\n' +
-      'a=ssrc:4135493865 msid:882ec387-2573-4fed-abc2-62547c9b2fae e25804a2-dc6e-49e4-97b0-419fbe5cc3dc\r\n' +
+      'a=rtpmap:121 ulpfec/90000\r\n' +
+      'a=ssrc-group:FID 3207559163 2017141668\r\n' +
+      'a=ssrc:3207559163 cname:iPuV41nSAgWBBpp6\r\n' +
+      'a=ssrc:3207559163 msid:3b63ca3c-7724-48a0-a706-0bbdd1ba42e5 710586b3-8ebf-41fa-8d61-748e40a04cd8\r\n' +
+      'a=ssrc:2017141668 cname:iPuV41nSAgWBBpp6\r\n' +
+      'a=ssrc:2017141668 msid:3b63ca3c-7724-48a0-a706-0bbdd1ba42e5 710586b3-8ebf-41fa-8d61-748e40a04cd8\r\n' +
       'm=application 9 UDP/DTLS/SCTP webrtc-datachannel\r\n' +
       'c=IN IP4 0.0.0.0\r\n' +
-      'a=ice-ufrag:Plav\r\n' +
-      'a=ice-pwd:XDcPqpOeY2TQfJMGjT6YWosv\r\n' +
+      'a=ice-ufrag:4gnc\r\n' +
+      'a=ice-pwd:5/r0/JyVSP4YN9WWf4gi6VA8\r\n' +
       'a=ice-options:trickle\r\n' +
-      'a=fingerprint:sha-256 8C:36:74:5C:B7:07:3A:0D:2E:D1:A3:6B:F5:72:BF:00:2D:96:A2:02:74:40:AD:0E:5F:A2:B3:8F:D7:25:FD:04\r\n' +
+      'a=fingerprint:sha-256 4D:57:B1:B9:C3:1A:3D:9A:02:37:08:68:04:85:F1:80:CD:35:75:EA:B5:7E:97:F2:DF:46:86:A6:C4:16:14:92\r\n' +
       'a=setup:actpass\r\n' +
       'a=mid:2\r\n' +
       'a=sctp-port:5000\r\n' +
       'a=max-message-size:262144\r\n'
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:1202938413 1 udp 2122194687 100.92.98.39 58375 typ host generation 0 ufrag Plav network-id 1 network-cost 50',
+      candidate: 'candidate:4025074014 1 udp 2122194687 100.93.64.62 59444 typ host generation 0 ufrag 4gnc network-id 1',
       sdpMLineIndex: 0,
       sdpMid: '0'
     }
   },
-  to: 669,
-[WS] Partner 669 not connected, buffering signal
-  from: 668
+[WS] Partner 671 not connected, buffering signal
+  to: 671,
+  from: 670
 }
-[WS] Partner 669 not connected, buffering signal
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:2153286628 1 udp 2122129151 192.168.1.6 58376 typ host generation 0 ufrag Plav network-id 3 network-cost 10',
+[WS] Partner 671 not connected, buffering signal
+      candidate: 'candidate:1244178219 1 udp 2122129151 192.168.1.20 33824 typ host generation 0 ufrag 4gnc network-id 3 network-cost 10',
       sdpMLineIndex: 0,
       sdpMid: '0'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:1855146273 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 58377 typ host generation 0 ufrag Plav network-id 2 network-cost 50',
+      candidate: 'candidate:2435139123 1 udp 2122265343 fd7a:115c:a1e0::a335:403e 51184 typ host generation 0 ufrag 4gnc network-id 2',
       sdpMLineIndex: 0,
       sdpMid: '0'
     }
   },
-[WS] Partner 669 not connected, buffering signal
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
+[WS] Partner 671 not connected, buffering signal
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:1202938413 1 udp 2122194687 100.92.98.39 58378 typ host generation 0 ufrag Plav network-id 1 network-cost 50',
+      candidate: 'candidate:4025074014 1 udp 2122194687 100.93.64.62 57665 typ host generation 0 ufrag 4gnc network-id 1',
       sdpMLineIndex: 1,
+[WS] Partner 671 not connected, buffering signal
       sdpMid: '1'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
-[WS] Partner 669 not connected, buffering signal
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:2153286628 1 udp 2122129151 192.168.1.6 58379 typ host generation 0 ufrag Plav network-id 3 network-cost 10',
+      candidate: 'candidate:1244178219 1 udp 2122129151 192.168.1.20 58209 typ host generation 0 ufrag 4gnc network-id 3 network-cost 10',
       sdpMLineIndex: 1,
       sdpMid: '1'
     }
-[WS] Partner 669 not connected, buffering signal
+[WS] Partner 671 not connected, buffering signal
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:1855146273 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 58380 typ host generation 0 ufrag Plav network-id 2 network-cost 50',
+      candidate: 'candidate:2435139123 1 udp 2122265343 fd7a:115c:a1e0::a335:403e 35622 typ host generation 0 ufrag 4gnc network-id 2',
       sdpMLineIndex: 1,
       sdpMid: '1'
+[WS] Partner 671 not connected, buffering signal
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
-[WS] Partner 669 not connected, buffering signal
+[WS] Partner 671 not connected, buffering signal
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:1202938413 1 udp 2122194687 100.92.98.39 58381 typ host generation 0 ufrag Plav network-id 1 network-cost 50',
+      candidate: 'candidate:4025074014 1 udp 2122194687 100.93.64.62 57475 typ host generation 0 ufrag 4gnc network-id 1',
       sdpMLineIndex: 2,
       sdpMid: '2'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
-[WS] Partner 669 not connected, buffering signal
-[WS] Partner 669 not connected, buffering signal
+[WS] Partner 671 not connected, buffering signal
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:2153286628 1 udp 2122129151 192.168.1.6 58382 typ host generation 0 ufrag Plav network-id 3 network-cost 10',
+      candidate: 'candidate:1244178219 1 udp 2122129151 192.168.1.20 55286 typ host generation 0 ufrag 4gnc network-id 3 network-cost 10',
       sdpMLineIndex: 2,
       sdpMid: '2'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
+[WS] Partner 671 not connected, buffering signal
     candidate: {
-      candidate: 'candidate:1855146273 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 58383 typ host generation 0 ufrag Plav network-id 2 network-cost 50',
+      candidate: 'candidate:2435139123 1 udp 2122265343 fd7a:115c:a1e0::a335:403e 43519 typ host generation 0 ufrag 4gnc network-id 2',
       sdpMLineIndex: 2,
       sdpMid: '2'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
-[WS] Partner 669 not connected, buffering signal
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:3231906125 1 udp 1685921535 103.87.58.149 58376 typ srflx raddr 192.168.1.6 rport 58376 generation 0 ufrag Plav network-id 3 network-cost 10',
+      candidate: 'candidate:181589378 1 udp 1685921535 103.87.58.149 33824 typ srflx raddr 192.168.1.20 rport 33824 generation 0 ufrag 4gnc network-id 3 network-cost 10',
       sdpMLineIndex: 0,
       sdpMid: '0'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+[WS] Partner 671 not connected, buffering signal
+  from: 670
 }
-[WS] Partner 669 not connected, buffering signal
-[WS] Partner 669 not connected, buffering signal
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:3231906125 1 udp 1685921535 103.87.58.149 58379 typ srflx raddr 192.168.1.6 rport 58379 generation 0 ufrag Plav network-id 3 network-cost 10',
-      sdpMLineIndex: 1,
-      sdpMid: '1'
-    }
-  },
-  to: 669,
-  from: 668
-}
-[WS] Received message: {
-  type: 'signal',
-  data: {
-[WS] Partner 669 not connected, buffering signal
-    type: 'candidate',
-    candidate: {
-      candidate: 'candidate:3231906125 1 udp 1685921535 103.87.58.149 58382 typ srflx raddr 192.168.1.6 rport 58382 generation 0 ufrag Plav network-id 3 network-cost 10',
+      candidate: 'candidate:181589378 1 udp 1685921535 103.87.58.149 55286 typ srflx raddr 192.168.1.20 rport 55286 generation 0 ufrag 4gnc network-id 3 network-cost 10',
+[WS] Partner 671 not connected, buffering signal
       sdpMLineIndex: 2,
       sdpMid: '2'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
 [WS] Received message: {
-[WS] Partner 669 not connected, buffering signal
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:3105470137 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag Plav network-id 1 network-cost 50',
+      candidate: 'candidate:181589378 1 udp 1685921535 103.87.58.149 58209 typ srflx raddr 192.168.1.20 rport 58209 generation 0 ufrag 4gnc network-id 3 network-cost 10',
+      sdpMLineIndex: 1,
+[WS] Partner 671 not connected, buffering signal
+      sdpMid: '1'
+    }
+  },
+  to: 671,
+  from: 670
+}
+[WS] Received message: {
+  type: 'signal',
+[WS] Partner 671 not connected, buffering signal
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:2435195846 1 tcp 1518214911 100.93.64.62 9 typ host tcptype active generation 0 ufrag 4gnc network-id 1',
       sdpMLineIndex: 0,
       sdpMid: '0'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
 [WS] Received message: {
-[WS] Partner 669 not connected, buffering signal
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:2129813360 1 tcp 1518149375 192.168.1.6 9 typ host tcptype active generation 0 ufrag Plav network-id 3 network-cost 10',
+      candidate: 'candidate:887571891 1 tcp 1518149375 192.168.1.20 9 typ host tcptype active generation 0 ufrag 4gnc network-id 3 network-cost 10',
+      sdpMLineIndex: 0,
+[WS] Partner 671 not connected, buffering signal
+      sdpMid: '0'
+    }
+  },
+  to: 671,
+  from: 670
+}
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:4025132203 1 tcp 1518285567 fd7a:115c:a1e0::a335:403e 9 typ host tcptype active generation 0 ufrag 4gnc network-id 2',
+[WS] Partner 671 not connected, buffering signal
       sdpMLineIndex: 0,
       sdpMid: '0'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:2419695029 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag Plav network-id 2 network-cost 50',
-      sdpMLineIndex: 0,
-[WS] Partner 669 not connected, buffering signal
-      sdpMid: '0'
-    }
-  },
-  to: 669,
-  from: 668
-}
-[WS] Partner 669 not connected, buffering signal
-[WS] Received message: {
-  type: 'signal',
-  data: {
-    type: 'candidate',
-    candidate: {
-      candidate: 'candidate:3105470137 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag Plav network-id 1 network-cost 50',
+      candidate: 'candidate:2435195846 1 tcp 1518214911 100.93.64.62 9 typ host tcptype active generation 0 ufrag 4gnc network-id 1',
       sdpMLineIndex: 1,
       sdpMid: '1'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
+[WS] Partner 671 not connected, buffering signal
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
+[WS] Partner 671 not connected, buffering signal
     candidate: {
-      candidate: 'candidate:2129813360 1 tcp 1518149375 192.168.1.6 9 typ host tcptype active generation 0 ufrag Plav network-id 3 network-cost 10',
+      candidate: 'candidate:887571891 1 tcp 1518149375 192.168.1.20 9 typ host tcptype active generation 0 ufrag 4gnc network-id 3 network-cost 10',
       sdpMLineIndex: 1,
       sdpMid: '1'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
-[WS] Partner 669 not connected, buffering signal
-[WS] Partner 669 not connected, buffering signal
 [WS] Received message: {
+[WS] Partner 671 not connected, buffering signal
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:2419695029 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag Plav network-id 2 network-cost 50',
+      candidate: 'candidate:4025132203 1 tcp 1518285567 fd7a:115c:a1e0::a335:403e 9 typ host tcptype active generation 0 ufrag 4gnc network-id 2',
       sdpMLineIndex: 1,
       sdpMid: '1'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
-[WS] Received message: {
-[WS] Partner 669 not connected, buffering signal
-  type: 'signal',
-  data: {
-    type: 'candidate',
-    candidate: {
-      candidate: 'candidate:3105470137 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag Plav network-id 1 network-cost 50',
-      sdpMLineIndex: 2,
-      sdpMid: '2'
-    }
-  },
-  to: 669,
-  from: 668
-}
+[WS] Partner 671 not connected, buffering signal
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:2129813360 1 tcp 1518149375 192.168.1.6 9 typ host tcptype active generation 0 ufrag Plav network-id 3 network-cost 10',
+      candidate: 'candidate:2435195846 1 tcp 1518214911 100.93.64.62 9 typ host tcptype active generation 0 ufrag 4gnc network-id 1',
       sdpMLineIndex: 2,
-[WS] Partner 669 not connected, buffering signal
       sdpMid: '2'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
+[WS] Partner 671 not connected, buffering signal
 [WS] Received message: {
-[WS] Partner 669 not connected, buffering signal
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:2419695029 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag Plav network-id 2 network-cost 50',
+      candidate: 'candidate:887571891 1 tcp 1518149375 192.168.1.20 9 typ host tcptype active generation 0 ufrag 4gnc network-id 3 network-cost 10',
       sdpMLineIndex: 2,
       sdpMid: '2'
     }
   },
-  to: 669,
-  from: 668
+  to: 671,
+  from: 670
 }
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:4025132203 1 tcp 1518285567 fd7a:115c:a1e0::a335:403e 9 typ host tcptype active generation 0 ufrag 4gnc network-id 2',
+      sdpMLineIndex: 2,
+      sdpMid: '2'
+    }
+  },
+  to: 671,
+  from: 670
+}
+[WS] Partner 671 not connected, buffering signal
 [WS] Matchmaking: Current queue length: 0
 [WS] Connected clients: 0
 [WS] Connected userIds: []

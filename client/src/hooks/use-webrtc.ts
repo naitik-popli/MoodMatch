@@ -25,10 +25,11 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
   const restartTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const mountId = useRef(Math.random().toString(36).substring(2, 8));
 
-  // Detailed logging function with instance ID
+  // Detailed logging function with instance ID and role
   const log = useCallback((stage: string, message: string, data?: any) => {
-    console.log(`[WebRTC:${mountId.current}] ${stage.padEnd(15)} ${message}`, data ?? '');
-  }, []);
+    const role = isInitiator ? "INITIATOR" : "RECEIVER";
+    console.log(`[WebRTC:${mountId.current}][${role}] ${stage.padEnd(15)} ${message}`, data ?? '');
+  }, [isInitiator]);
 
   // 1. Media Stream Acquisition ===============================================
   useEffect(() => {
@@ -108,6 +109,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
 
     const setupPeer = () => {
       try {
+        log("PEER", "Creating SimplePeer instance", { initiator: isInitiator });
         const peer = new SimplePeer({
           initiator: isInitiator,
           trickle: true,
@@ -128,25 +130,25 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
         peerRef.current = peer;
 
         // ICE Connection State Tracking
-       peer.on('iceConnectionStateChange', () => {
-  // @ts-ignore
-  const state = peer._pc?.iceConnectionState;
-  setIceConnectionState(state);
-  log("ICE", `State changed: ${state}`);
-  if (state === 'failed') {
-    log("ICE", "ICE failure detected, attempting restart");
-    restartConnection();
-  }
-});
-
+        peer.on('iceConnectionStateChange', () => {
+          // @ts-ignore
+          const state = peer._pc?.iceConnectionState;
+          setIceConnectionState(state);
+          log("ICE", `State changed: ${state}`);
+          if (state === 'failed') {
+            log("ICE", "ICE failure detected, attempting restart");
+            restartConnection();
+          }
+        });
 
         // Signaling State Tracking
-      peer.on('signalingStateChange', () => {
-  // @ts-ignore
-  const state = peer._pc?.signalingState;
-  setSignalingState(state);
-  log("SIGNAL", `State changed: ${state}`);
-});
+        peer.on('signalingStateChange', () => {
+          // @ts-ignore
+          const state = peer._pc?.signalingState;
+          setSignalingState(state);
+          log("SIGNAL", `State changed: ${state}`);
+        });
+
         // Connection Events
         peer.on('connect', () => {
           log("PEER", "Connection established");
@@ -175,8 +177,14 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
               ...(partnerId && { to: partnerId }),
               ...(userId && { from: userId })
             };
-            log("SIGNAL", "Sending signaling data", { type: data.type });
+            log("SIGNAL", `Sending signaling data (${data.type})`, data);
             ws.send(JSON.stringify(signalData));
+            if (!isInitiator && data.type === "answer") {
+              log("RECEIVER", "Sent answer to initiator", data);
+            }
+            if (isInitiator && data.type === "offer") {
+              log("INITIATOR", "Sent offer to receiver", data);
+            }
           } else {
             log("SIGNAL", "WebSocket not ready for signaling", {
               wsState: ws.readyState
@@ -214,7 +222,13 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
           : JSON.parse(await event.data.text());
         
         if (data.type === "signal" && peerRef.current) {
-          log("SIGNAL", "Received signaling data", { type: data.data.type });
+          log("SIGNAL", `Received signaling data (${data.data.type})`, data.data);
+          if (!isInitiator && data.data.type === "offer") {
+            log("RECEIVER", "Received offer from initiator, signaling back with answer");
+          }
+          if (isInitiator && data.data.type === "answer") {
+            log("INITIATOR", "Received answer from receiver");
+          }
           peerRef.current.signal(data.data);
         }
       } catch (err) {
@@ -317,90 +331,4 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
     toggleMute,
     toggleVideo
   };
-}
-
-// Video Component Implementation =============================================
-// interface VideoProps {
-//   stream: MediaStream | null;
-//   muted?: boolean;
-//   className?: string;
-//   onPlayError?: (error: Error) => void;
-// }
-
-// export function Video({ stream, muted = false, className, onPlayError }: VideoProps) {
-//   const videoRef = useRef<HTMLVideoElement>(null);
-//   const playAttemptRef = useRef(0);
-
-//   useEffect(() => {
-//     const video = videoRef.current;
-//     if (!video || !stream) return;
-
-//     const handlePlay = () => {
-//       if (playAttemptRef.current > 3) {
-//         log("VIDEO", "Max play attempts reached, giving up");
-//         return;
-//       }
-
-//       video.play()
-//         .then(() => {
-//           log("VIDEO", "Playback started successfully");
-//         })
-//         .catch(err => {
-//           playAttemptRef.current++;
-//           log("VIDEO", `Play attempt ${playAttemptRef.current} failed`, err);
-          
-//           if (onPlayError) {
-//             onPlayError(err);
-//           }
-
-//           // Implement click-to-play fallback
-//           if (playAttemptRef.current === 1) {
-//             const handleClick = () => {
-//               video.play()
-//                 .then(() => {
-//                   log("VIDEO", "Playback started after user interaction");
-//                   document.removeEventListener('click', handleClick);
-//                 })
-//                 .catch(err => {
-//                   log("VIDEO", "Playback failed after user interaction", err);
-//                 });
-//             };
-            
-//             document.addEventListener('click', handleClick);
-//             log("VIDEO", "Waiting for user interaction to start playback");
-//           }
-//         });
-//     };
-
-//     const handleLoadedMetadata = () => {
-//       log("VIDEO", "Stream metadata loaded, attempting play");
-//       handlePlay();
-//     };
-
-//     log("VIDEO", "Setting video source");
-//     video.srcObject = stream;
-//     video.addEventListener('loadedmetadata', handleLoadedMetadata);
-
-//     return () => {
-//       log("VIDEO", "Cleaning up video element");
-//       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
-//       video.srcObject = null;
-//       playAttemptRef.current = 0;
-//     };
-//   }, [stream, onPlayError]);
-
-//   return (
-//     <video
-//       ref={videoRef}
-//       muted={muted}
-//       autoPlay
-//       playsInline
-//       className={className}
-//     />
-//   );
-// }
-
-// Helper function for component logging
-function log(context: string, message: string, data?: any) {
-  console.log(`[VideoComponent] ${context.padEnd(10)} ${message}`, data ?? '');
 }
