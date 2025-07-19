@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-// --- Defensive import for SimplePeer to avoid ESM/CJS interop issues ---
 import SimplePeer from "simple-peer";
+
+const SimplePeerConstructor = (SimplePeer as any).default || SimplePeer;
 import { useWebSocket } from "../context/WebSocketContext";
 
 interface UseWebRTCSimpleProps {
@@ -85,7 +86,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
 
     if (localStream && typeof window !== "undefined") {
       try {
-        peer = new SimplePeer({
+        peer = new SimplePeerConstructor({
           initiator: isInitiator,
           trickle: true,
           stream: localStream || undefined, // never pass null
