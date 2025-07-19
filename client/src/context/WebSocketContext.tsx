@@ -37,6 +37,34 @@ export const WebSocketProvider: React.FC<{children: React.ReactNode}> = ({ child
     };
   }, []);
 
+  useEffect(() => {
+  const socket = new WebSocket(WS_URL);
+  setWs(socket);
+
+  socket.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      if (data.type === "socket-id" && data.socketId) {
+        setSocketId(data.socketId);
+        console.log("[WebSocketContext] Received socketId from server:", data.socketId);
+      }
+    } catch (err) {
+      // Ignore non-JSON or unrelated messages
+    }
+  };
+
+  // Ensure socket closes on page unload/reload
+  const handleBeforeUnload = () => {
+    socket.close();
+  };
+  window.addEventListener("beforeunload", handleBeforeUnload);
+
+  return () => {
+    window.removeEventListener("beforeunload", handleBeforeUnload);
+    socket.close();
+  };
+}, []);
+
   return (
     <WebSocketContext.Provider value={{ ws, socketId }}>
       {children}

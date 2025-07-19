@@ -2,99 +2,199 @@
 [WS] Connected clients: 0
 [WS] Connected userIds: []
 [WS] Connected socketIds: []
+GET / 200 1ms
 [WS] Matchmaking: Current queue length: 0
 [WS] Connected clients: 0
 [WS] Connected userIds: []
 [WS] Connected socketIds: []
-[WS] New connection established. Assigned socketId: cqblpgdhxg51752946671977
-[WS] New connection established. Assigned socketId: 54iiua9lu11752946672289
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 0
+[WS] Connected userIds: []
+[WS] Connected socketIds: []
+GET /api/moods/stats 200 4ms
+Response: {}
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 0
+[WS] Connected userIds: []
+[WS] Connected socketIds: []
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 0
+[WS] Connected userIds: []
+[WS] Connected socketIds: []
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 0
+[WS] Connected userIds: []
+[WS] Connected socketIds: []
+GET /api/moods/stats 304 3ms
+Response: {}
+GET /api/moods/stats 304 2ms
+Response: {}
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 0
+[WS] Connected userIds: []
+[WS] Connected socketIds: []
+[WS] New connection established. Assigned socketId: ew3p5dxok4l1752949383972
 [WS] Socket closed with no associated userId
 [WS] Connected clients: 0
 [WS] Connected userIds: []
 [WS] Connected socketIds: []
+[WS] New connection established. Assigned socketId: ecyb932i9kn1752949384268
+[WS] New connection established. Assigned socketId: yodkzeiins71752949385037
 [WS] Matchmaking: Current queue length: 0
 [WS] Connected clients: 0
 [WS] Connected userIds: []
 [WS] Connected socketIds: []
-[WS] New connection established. Assigned socketId: 24jv6qbw9bu1752946678886
-[WS] New connection established. Assigned socketId: w6awaauatzk1752946679172
+POST /api/session/create 200 15ms
+Response: {
+  "sessionId": 806,
+  "userId": 690,
+  "mood": "happy"
+}
+[WS] Received message: { type: 'join-queue', userId: 690, mood: 'happy' }
+[WS] User 690 joined queue for mood "happy" (socketId: ecyb932i9kn1752949384268)
+[WS] Connected clients: 1
+[WS] Connected userIds: [690]
+[WS] Connected socketIds: [ecyb932i9kn1752949384268]
+[WS] Received message: { type: 'join-queue', userId: 690, mood: 'happy' }
+[WS] User 690 joined queue for mood "happy" (socketId: ecyb932i9kn1752949384268)
+[WS] Connected clients: 1
+[WS] Connected userIds: [690]
+[WS] Connected socketIds: [ecyb932i9kn1752949384268]
+[WS] Matchmaking: Current queue length: 1
+[WS] Connected clients: 1
+[WS] Connected userIds: [690]
+[WS] Connected socketIds: [ecyb932i9kn1752949384268]
+GET /api/moods/stats 200 3ms
+Response: {
+  "happy": 1
+}
+POST /api/session/create 200 12ms
+Response: {
+  "sessionId": 807,
+  "userId": 691,
+  "mood": "happy"
+}
+[WS] Received message: { type: 'join-queue', userId: 691, mood: 'happy' }
+[WS] User 691 joined queue for mood "happy" (socketId: yodkzeiins71752949385037)
+[WS] Connected clients: 2
+[WS] Connected userIds: [690, 691]
+[WS] Connected socketIds: [ecyb932i9kn1752949384268, yodkzeiins71752949385037]
+[WS] Received message: { type: 'join-queue', userId: 691, mood: 'happy' }
+[WS] User 691 joined queue for mood "happy" (socketId: yodkzeiins71752949385037)
+[WS] Connected clients: 2
+[WS] Connected userIds: [690, 691]
+[WS] Connected socketIds: [ecyb932i9kn1752949384268, yodkzeiins71752949385037]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [690, 691]
+[WS] Connected socketIds: [ecyb932i9kn1752949384268, yodkzeiins71752949385037]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [690, 691]
+[WS] Connected socketIds: [ecyb932i9kn1752949384268, yodkzeiins71752949385037]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [690, 691]
+[WS] Connected socketIds: [ecyb932i9kn1752949384268, yodkzeiins71752949385037]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [690, 691]
+[WS] Connected socketIds: [ecyb932i9kn1752949384268, yodkzeiins71752949385037]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [690, 691]
+[WS] Connected socketIds: [ecyb932i9kn1752949384268, yodkzeiins71752949385037]
+[WS] Received message: { type: 'leave-queue', userId: 690 }
+[WS] User 690 left the queue
+[WS] Connected clients: 1
+[WS] Connected userIds: [691]
+[WS] Connected socketIds: [yodkzeiins71752949385037]
+[WS] Received message: { type: 'leave-queue', userId: 691 }
+[WS] User 691 left the queue
+[WS] Connected clients: 0
+[WS] Connected userIds: []
+[WS] Connected socketIds: []
 [WS] Matchmaking: Current queue length: 0
 [WS] Connected clients: 0
 [WS] Connected userIds: []
 [WS] Connected socketIds: []
-POST /api/session/create 200 87ms
+GET /api/moods/stats 200 7ms
+Response: {}
+[WS] User 691 disconnected and removed from queue
+[WS] Connected clients: 0
+[WS] Connected userIds: []
+[WS] Connected socketIds: []
+[WS] New connection established. Assigned socketId: ogk7tzn42k1752949423887
+[WS] User 690 disconnected and removed from queue
+[WS] Connected clients: 0
+[WS] Connected userIds: []
+[WS] Connected socketIds: []
+[WS] New connection established. Assigned socketId: u02cia1m6y1752949425333
+[WS] New connection established. Assigned socketId: khz5pc25thq1752949425604
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 0
+[WS] Connected userIds: []
+[WS] Connected socketIds: []
+POST /api/session/create 200 103ms
 Response: {
-  "sessionId": 786,
-  "userId": 670,
+  "sessionId": 808,
+  "userId": 692,
   "mood": "happy"
 }
-[WS] Received message: { type: 'join-queue', userId: 670, mood: 'happy' }
-[WS] User 670 joined queue for mood "happy" (socketId: w6awaauatzk1752946679172)
+[WS] Received message: { type: 'join-queue', userId: 692, mood: 'happy' }
+[WS] User 692 joined queue for mood "happy" (socketId: khz5pc25thq1752949425604)
 [WS] Connected clients: 1
-[WS] Connected userIds: [670]
-[WS] Connected socketIds: [w6awaauatzk1752946679172]
-[WS] Received message: { type: 'join-queue', userId: 670, mood: 'happy' }
-[WS] User 670 joined queue for mood "happy" (socketId: w6awaauatzk1752946679172)
-[WS] Connected clients: 1
-[WS] Connected userIds: [670]
-[WS] Connected socketIds: [w6awaauatzk1752946679172]
-[WS] Matchmaking: Current queue length: 1
-[WS] Connected clients: 1
-[WS] Connected userIds: [670]
-[WS] Connected socketIds: [w6awaauatzk1752946679172]
-[WS] Socket closed with no associated userId
-[WS] Connected clients: 1
-[WS] Connected userIds: [670]
-[WS] Connected socketIds: [w6awaauatzk1752946679172]
-POST /api/session/create 200 13ms
+[WS] Connected userIds: [692]
+[WS] Connected socketIds: [khz5pc25thq1752949425604]
+POST /api/session/create 200 12ms
 Response: {
-  "sessionId": 787,
-  "userId": 671,
+  "sessionId": 809,
+  "userId": 693,
   "mood": "happy"
 }
-[WS] Matchmaking: Current queue length: 1
-[WS] Connected clients: 1
-[WS] Connected userIds: [670]
-[WS] Connected socketIds: [w6awaauatzk1752946679172]
-[WS] Received message: { type: 'join-queue', userId: 671, mood: 'happy' }
-[WS] User 671 joined queue for mood "happy" (socketId: 54iiua9lu11752946672289)
+[WS] Received message: { type: 'join-queue', userId: 693, mood: 'happy' }
+[WS] User 693 joined queue for mood "happy" (socketId: ogk7tzn42k1752949423887)
 [WS] Connected clients: 2
-[WS] Connected userIds: [670, 671]
-[WS] Connected socketIds: [w6awaauatzk1752946679172, 54iiua9lu11752946672289]
-[WS] Received message: { type: 'join-queue', userId: 671, mood: 'happy' }
-[WS] User 671 joined queue for mood "happy" (socketId: 54iiua9lu11752946672289)
-[WS] Connected clients: 2
-[WS] Connected userIds: [670, 671]
-[WS] Connected socketIds: [w6awaauatzk1752946679172, 54iiua9lu11752946672289]
+[WS] Connected userIds: [692, 693]
+[WS] Connected socketIds: [khz5pc25thq1752949425604, ogk7tzn42k1752949423887]
 [WS] Matchmaking: Current queue length: 2
 [WS] Connected clients: 2
-[WS] Connected userIds: [670, 671]
-[WS] Connected socketIds: [w6awaauatzk1752946679172, 54iiua9lu11752946672289]
-[DEBUG][2025-07-19T17:38:14.928Z] Updated partnerId for user 670 in existing session { oldPartnerId: null, newPartnerId: 671 }
-[DEBUG][2025-07-19T17:38:14.934Z] Updated partnerId for user 671 in existing session { oldPartnerId: null, newPartnerId: 670 }
-[WS] Matched users 670 and 671 for mood "happy" (sessionId: 786)
-[WS] Connected clients: 0
-[WS] Connected userIds: []
-[WS] Connected socketIds: []
+[WS] Connected userIds: [692, 693]
+[WS] Connected socketIds: [khz5pc25thq1752949425604, ogk7tzn42k1752949423887]
+[DEBUG][2025-07-19T18:23:51.740Z] Updated partnerId for user 692 in existing session { oldPartnerId: null, newPartnerId: 693 }
+[DEBUG][2025-07-19T18:23:51.748Z] Updated partnerId for user 693 in existing session { oldPartnerId: null, newPartnerId: 692 }
+[WS] Matched users 692 and 693 for mood "happy" (sessionId: 808)
+[WS] Connected clients: 2
+[WS] Connected userIds: [692, 693]
+[WS] Connected socketIds: [khz5pc25thq1752949425604, ogk7tzn42k1752949423887]
+[WS] Received message: { type: 'join-queue', userId: 692, mood: 'happy' }
+[WS] User 692 joined queue for mood "happy" (socketId: khz5pc25thq1752949425604)
+[WS] Connected clients: 2
+[WS] Connected userIds: [693, 692]
+[WS] Connected socketIds: [ogk7tzn42k1752949423887, khz5pc25thq1752949425604]
+[WS] Received message: { type: 'join-queue', userId: 693, mood: 'happy' }
+[WS] User 693 joined queue for mood "happy" (socketId: ogk7tzn42k1752949423887)
+[WS] Connected clients: 2
+[WS] Connected userIds: [692, 693]
+[WS] Connected socketIds: [khz5pc25thq1752949425604, ogk7tzn42k1752949423887]
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'offer',
     sdp: 'v=0\r\n' +
-      'o=- 2068815309129247236 2 IN IP4 127.0.0.1\r\n' +
+      'o=- 3203404893130844314 2 IN IP4 127.0.0.1\r\n' +
       's=-\r\n' +
-[WS] Partner 671 not connected, buffering signal
       't=0 0\r\n' +
       'a=group:BUNDLE 0 1 2\r\n' +
       'a=extmap-allow-mixed\r\n' +
-      'a=msid-semantic: WMS 3b63ca3c-7724-48a0-a706-0bbdd1ba42e5\r\n' +
+      'a=msid-semantic: WMS 8585ca11-b78e-4a81-bb10-1b299b462f26\r\n' +
       'm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\n' +
       'c=IN IP4 0.0.0.0\r\n' +
       'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
-      'a=ice-ufrag:4gnc\r\n' +
-      'a=ice-pwd:5/r0/JyVSP4YN9WWf4gi6VA8\r\n' +
+      'a=ice-ufrag:UwQz\r\n' +
+      'a=ice-pwd:8oJTmEYbwytmfmEMd1i6elsv\r\n' +
       'a=ice-options:trickle\r\n' +
-      'a=fingerprint:sha-256 4D:57:B1:B9:C3:1A:3D:9A:02:37:08:68:04:85:F1:80:CD:35:75:EA:B5:7E:97:F2:DF:46:86:A6:C4:16:14:92\r\n' +
+      'a=fingerprint:sha-256 D4:77:5A:A0:F3:36:DC:9D:14:B8:16:95:08:45:8E:6B:81:7B:2E:D1:66:6C:48:0B:58:B3:F3:81:DC:96:8D:A3\r\n' +
       'a=setup:actpass\r\n' +
       'a=mid:0\r\n' +
       'a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\n' +
@@ -102,7 +202,7 @@ Response: {
       'a=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\n' +
       'a=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\n' +
       'a=sendrecv\r\n' +
-      'a=msid:3b63ca3c-7724-48a0-a706-0bbdd1ba42e5 04654e9c-077f-4b4b-acd2-aaf24706be71\r\n' +
+      'a=msid:8585ca11-b78e-4a81-bb10-1b299b462f26 86a68bac-314d-4d9a-8667-69a4810df0f7\r\n' +
       'a=rtcp-mux\r\n' +
       'a=rtcp-rsize\r\n' +
       'a=rtpmap:111 opus/48000/2\r\n' +
@@ -116,15 +216,15 @@ Response: {
       'a=rtpmap:13 CN/8000\r\n' +
       'a=rtpmap:110 telephone-event/48000\r\n' +
       'a=rtpmap:126 telephone-event/8000\r\n' +
-      'a=ssrc:4189593880 cname:iPuV41nSAgWBBpp6\r\n' +
-      'a=ssrc:4189593880 msid:3b63ca3c-7724-48a0-a706-0bbdd1ba42e5 04654e9c-077f-4b4b-acd2-aaf24706be71\r\n' +
-      'm=video 9 UDP/TLS/RTP/SAVPF 96 97 103 104 107 108 109 114 115 116 117 118 39 40 45 46 98 99 100 101 119 120 121\r\n' +
+      'a=ssrc:2407027296 cname:nbYwhV7FTt7HvleO\r\n' +
+      'a=ssrc:2407027296 msid:8585ca11-b78e-4a81-bb10-1b299b462f26 86a68bac-314d-4d9a-8667-69a4810df0f7\r\n' +
+      'm=video 9 UDP/TLS/RTP/SAVPF 96 97 103 104 107 108 109 114 115 116 117 118 39 40 45 46 98 99 100 101 119 120 49 50 123 124 125\r\n' +
       'c=IN IP4 0.0.0.0\r\n' +
       'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
-      'a=ice-ufrag:4gnc\r\n' +
-      'a=ice-pwd:5/r0/JyVSP4YN9WWf4gi6VA8\r\n' +
+      'a=ice-ufrag:UwQz\r\n' +
+      'a=ice-pwd:8oJTmEYbwytmfmEMd1i6elsv\r\n' +
       'a=ice-options:trickle\r\n' +
-      'a=fingerprint:sha-256 4D:57:B1:B9:C3:1A:3D:9A:02:37:08:68:04:85:F1:80:CD:35:75:EA:B5:7E:97:F2:DF:46:86:A6:C4:16:14:92\r\n' +
+      'a=fingerprint:sha-256 D4:77:5A:A0:F3:36:DC:9D:14:B8:16:95:08:45:8E:6B:81:7B:2E:D1:66:6C:48:0B:58:B3:F3:81:DC:96:8D:A3\r\n' +
       'a=setup:actpass\r\n' +
       'a=mid:1\r\n' +
       'a=extmap:14 urn:ietf:params:rtp-hdrext:toffset\r\n' +
@@ -139,7 +239,7 @@ Response: {
       'a=extmap:10 urn:ietf:params:rtp-hdrext:sdes:rtp-stream-id\r\n' +
       'a=extmap:11 urn:ietf:params:rtp-hdrext:sdes:repaired-rtp-stream-id\r\n' +
       'a=sendrecv\r\n' +
-      'a=msid:3b63ca3c-7724-48a0-a706-0bbdd1ba42e5 710586b3-8ebf-41fa-8d61-748e40a04cd8\r\n' +
+      'a=msid:8585ca11-b78e-4a81-bb10-1b299b462f26 dae9563e-fdb6-43f2-9cd4-65de5079f062\r\n' +
       'a=rtcp-mux\r\n' +
       'a=rtcp-rsize\r\n' +
       'a=rtpmap:96 VP8/90000\r\n' +
@@ -231,326 +331,1136 @@ Response: {
       'a=fmtp:100 profile-id=2\r\n' +
       'a=rtpmap:101 rtx/90000\r\n' +
       'a=fmtp:101 apt=100\r\n' +
-      'a=rtpmap:119 red/90000\r\n' +
+      'a=rtpmap:119 H264/90000\r\n' +
+      'a=rtcp-fb:119 goog-remb\r\n' +
+      'a=rtcp-fb:119 transport-cc\r\n' +
+      'a=rtcp-fb:119 ccm fir\r\n' +
+      'a=rtcp-fb:119 nack\r\n' +
+      'a=rtcp-fb:119 nack pli\r\n' +
+      'a=fmtp:119 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001f\r\n' +
       'a=rtpmap:120 rtx/90000\r\n' +
       'a=fmtp:120 apt=119\r\n' +
-      'a=rtpmap:121 ulpfec/90000\r\n' +
-      'a=ssrc-group:FID 3207559163 2017141668\r\n' +
-      'a=ssrc:3207559163 cname:iPuV41nSAgWBBpp6\r\n' +
-      'a=ssrc:3207559163 msid:3b63ca3c-7724-48a0-a706-0bbdd1ba42e5 710586b3-8ebf-41fa-8d61-748e40a04cd8\r\n' +
-      'a=ssrc:2017141668 cname:iPuV41nSAgWBBpp6\r\n' +
-      'a=ssrc:2017141668 msid:3b63ca3c-7724-48a0-a706-0bbdd1ba42e5 710586b3-8ebf-41fa-8d61-748e40a04cd8\r\n' +
+      'a=rtpmap:49 H265/90000\r\n' +
+      'a=rtcp-fb:49 goog-remb\r\n' +
+      'a=rtcp-fb:49 transport-cc\r\n' +
+      'a=rtcp-fb:49 ccm fir\r\n' +
+      'a=rtcp-fb:49 nack\r\n' +
+      'a=rtcp-fb:49 nack pli\r\n' +
+      'a=fmtp:49 level-id=93;profile-id=1;tier-flag=0;tx-mode=SRST\r\n' +
+      'a=rtpmap:50 rtx/90000\r\n' +
+      'a=fmtp:50 apt=49\r\n' +
+      'a=rtpmap:123 red/90000\r\n' +
+      'a=rtpmap:124 rtx/90000\r\n' +
+      'a=fmtp:124 apt=123\r\n' +
+      'a=rtpmap:125 ulpfec/90000\r\n' +
+      'a=ssrc-group:FID 624979822 2645386438\r\n' +
+      'a=ssrc:624979822 cname:nbYwhV7FTt7HvleO\r\n' +
+      'a=ssrc:624979822 msid:8585ca11-b78e-4a81-bb10-1b299b462f26 dae9563e-fdb6-43f2-9cd4-65de5079f062\r\n' +
+      'a=ssrc:2645386438 cname:nbYwhV7FTt7HvleO\r\n' +
+      'a=ssrc:2645386438 msid:8585ca11-b78e-4a81-bb10-1b299b462f26 dae9563e-fdb6-43f2-9cd4-65de5079f062\r\n' +
       'm=application 9 UDP/DTLS/SCTP webrtc-datachannel\r\n' +
       'c=IN IP4 0.0.0.0\r\n' +
-      'a=ice-ufrag:4gnc\r\n' +
-      'a=ice-pwd:5/r0/JyVSP4YN9WWf4gi6VA8\r\n' +
+      'a=ice-ufrag:UwQz\r\n' +
+      'a=ice-pwd:8oJTmEYbwytmfmEMd1i6elsv\r\n' +
       'a=ice-options:trickle\r\n' +
-      'a=fingerprint:sha-256 4D:57:B1:B9:C3:1A:3D:9A:02:37:08:68:04:85:F1:80:CD:35:75:EA:B5:7E:97:F2:DF:46:86:A6:C4:16:14:92\r\n' +
+      'a=fingerprint:sha-256 D4:77:5A:A0:F3:36:DC:9D:14:B8:16:95:08:45:8E:6B:81:7B:2E:D1:66:6C:48:0B:58:B3:F3:81:DC:96:8D:A3\r\n' +
       'a=setup:actpass\r\n' +
       'a=mid:2\r\n' +
       'a=sctp-port:5000\r\n' +
       'a=max-message-size:262144\r\n'
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:4025074014 1 udp 2122194687 100.93.64.62 59444 typ host generation 0 ufrag 4gnc network-id 1',
+      candidate: 'candidate:1767803498 1 udp 2122194687 100.92.98.39 58225 typ host generation 0 ufrag UwQz network-id 1 network-cost 50',
       sdpMLineIndex: 0,
       sdpMid: '0'
     }
   },
-[WS] Partner 671 not connected, buffering signal
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-[WS] Partner 671 not connected, buffering signal
-      candidate: 'candidate:1244178219 1 udp 2122129151 192.168.1.20 33824 typ host generation 0 ufrag 4gnc network-id 3 network-cost 10',
+      candidate: 'candidate:1428158225 1 udp 2122129151 192.168.1.6 58226 typ host generation 0 ufrag UwQz network-id 3 network-cost 10',
       sdpMLineIndex: 0,
       sdpMid: '0'
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:2435139123 1 udp 2122265343 fd7a:115c:a1e0::a335:403e 51184 typ host generation 0 ufrag 4gnc network-id 2',
+      candidate: 'candidate:2428247571 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 58227 typ host generation 0 ufrag UwQz network-id 2 network-cost 50',
       sdpMLineIndex: 0,
       sdpMid: '0'
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
-[WS] Partner 671 not connected, buffering signal
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:4025074014 1 udp 2122194687 100.93.64.62 57665 typ host generation 0 ufrag 4gnc network-id 1',
-      sdpMLineIndex: 1,
-[WS] Partner 671 not connected, buffering signal
-      sdpMid: '1'
-    }
-  },
-  to: 671,
-  from: 670
-}
-[WS] Received message: {
-  type: 'signal',
-  data: {
-    type: 'candidate',
-    candidate: {
-      candidate: 'candidate:1244178219 1 udp 2122129151 192.168.1.20 58209 typ host generation 0 ufrag 4gnc network-id 3 network-cost 10',
+      candidate: 'candidate:1767803498 1 udp 2122194687 100.92.98.39 58228 typ host generation 0 ufrag UwQz network-id 1 network-cost 50',
       sdpMLineIndex: 1,
       sdpMid: '1'
     }
-[WS] Partner 671 not connected, buffering signal
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:2435139123 1 udp 2122265343 fd7a:115c:a1e0::a335:403e 35622 typ host generation 0 ufrag 4gnc network-id 2',
+      candidate: 'candidate:1428158225 1 udp 2122129151 192.168.1.6 58229 typ host generation 0 ufrag UwQz network-id 3 network-cost 10',
       sdpMLineIndex: 1,
       sdpMid: '1'
-[WS] Partner 671 not connected, buffering signal
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
-[WS] Partner 671 not connected, buffering signal
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:4025074014 1 udp 2122194687 100.93.64.62 57475 typ host generation 0 ufrag 4gnc network-id 1',
+      candidate: 'candidate:2428247571 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 58230 typ host generation 0 ufrag UwQz network-id 2 network-cost 50',
+      sdpMLineIndex: 1,
+      sdpMid: '1'
+    }
+  },
+  to: 693,
+  from: 692
+}
+[WS] Forwarded signal from 692 to 693
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:1767803498 1 udp 2122194687 100.92.98.39 58231 typ host generation 0 ufrag UwQz network-id 1 network-cost 50',
       sdpMLineIndex: 2,
       sdpMid: '2'
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
-[WS] Partner 671 not connected, buffering signal
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:1244178219 1 udp 2122129151 192.168.1.20 55286 typ host generation 0 ufrag 4gnc network-id 3 network-cost 10',
+      candidate: 'candidate:1428158225 1 udp 2122129151 192.168.1.6 58232 typ host generation 0 ufrag UwQz network-id 3 network-cost 10',
       sdpMLineIndex: 2,
       sdpMid: '2'
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
-[WS] Partner 671 not connected, buffering signal
     candidate: {
-      candidate: 'candidate:2435139123 1 udp 2122265343 fd7a:115c:a1e0::a335:403e 43519 typ host generation 0 ufrag 4gnc network-id 2',
+      candidate: 'candidate:2428247571 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 58233 typ host generation 0 ufrag UwQz network-id 2 network-cost 50',
       sdpMLineIndex: 2,
       sdpMid: '2'
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:181589378 1 udp 1685921535 103.87.58.149 33824 typ srflx raddr 192.168.1.20 rport 33824 generation 0 ufrag 4gnc network-id 3 network-cost 10',
+      candidate: 'candidate:395405554 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag UwQz network-id 1 network-cost 50',
       sdpMLineIndex: 0,
       sdpMid: '0'
     }
   },
-  to: 671,
-[WS] Partner 671 not connected, buffering signal
-  from: 670
+  to: 693,
+  from: 692
 }
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:181589378 1 udp 1685921535 103.87.58.149 55286 typ srflx raddr 192.168.1.20 rport 55286 generation 0 ufrag 4gnc network-id 3 network-cost 10',
-[WS] Partner 671 not connected, buffering signal
-      sdpMLineIndex: 2,
-      sdpMid: '2'
-    }
-  },
-  to: 671,
-  from: 670
-}
-[WS] Received message: {
-  type: 'signal',
-  data: {
-    type: 'candidate',
-    candidate: {
-      candidate: 'candidate:181589378 1 udp 1685921535 103.87.58.149 58209 typ srflx raddr 192.168.1.20 rport 58209 generation 0 ufrag 4gnc network-id 3 network-cost 10',
-      sdpMLineIndex: 1,
-[WS] Partner 671 not connected, buffering signal
-      sdpMid: '1'
-    }
-  },
-  to: 671,
-  from: 670
-}
-[WS] Received message: {
-  type: 'signal',
-[WS] Partner 671 not connected, buffering signal
-  data: {
-    type: 'candidate',
-    candidate: {
-      candidate: 'candidate:2435195846 1 tcp 1518214911 100.93.64.62 9 typ host tcptype active generation 0 ufrag 4gnc network-id 1',
+      candidate: 'candidate:735057289 1 tcp 1518149375 192.168.1.6 9 typ host tcptype active generation 0 ufrag UwQz network-id 3 network-cost 10',
       sdpMLineIndex: 0,
       sdpMid: '0'
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:887571891 1 tcp 1518149375 192.168.1.20 9 typ host tcptype active generation 0 ufrag 4gnc network-id 3 network-cost 10',
-      sdpMLineIndex: 0,
-[WS] Partner 671 not connected, buffering signal
-      sdpMid: '0'
-    }
-  },
-  to: 671,
-  from: 670
-}
-[WS] Received message: {
-  type: 'signal',
-  data: {
-    type: 'candidate',
-    candidate: {
-      candidate: 'candidate:4025132203 1 tcp 1518285567 fd7a:115c:a1e0::a335:403e 9 typ host tcptype active generation 0 ufrag 4gnc network-id 2',
-[WS] Partner 671 not connected, buffering signal
+      candidate: 'candidate:4000578699 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag UwQz network-id 2 network-cost 50',
       sdpMLineIndex: 0,
       sdpMid: '0'
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:2435195846 1 tcp 1518214911 100.93.64.62 9 typ host tcptype active generation 0 ufrag 4gnc network-id 1',
+      candidate: 'candidate:395405554 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag UwQz network-id 1 network-cost 50',
       sdpMLineIndex: 1,
       sdpMid: '1'
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
-[WS] Partner 671 not connected, buffering signal
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
-[WS] Partner 671 not connected, buffering signal
     candidate: {
-      candidate: 'candidate:887571891 1 tcp 1518149375 192.168.1.20 9 typ host tcptype active generation 0 ufrag 4gnc network-id 3 network-cost 10',
+      candidate: 'candidate:735057289 1 tcp 1518149375 192.168.1.6 9 typ host tcptype active generation 0 ufrag UwQz network-id 3 network-cost 10',
       sdpMLineIndex: 1,
       sdpMid: '1'
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
-[WS] Partner 671 not connected, buffering signal
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:4025132203 1 tcp 1518285567 fd7a:115c:a1e0::a335:403e 9 typ host tcptype active generation 0 ufrag 4gnc network-id 2',
+      candidate: 'candidate:4000578699 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag UwQz network-id 2 network-cost 50',
       sdpMLineIndex: 1,
       sdpMid: '1'
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
-[WS] Partner 671 not connected, buffering signal
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:2435195846 1 tcp 1518214911 100.93.64.62 9 typ host tcptype active generation 0 ufrag 4gnc network-id 1',
+      candidate: 'candidate:395405554 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag UwQz network-id 1 network-cost 50',
       sdpMLineIndex: 2,
       sdpMid: '2'
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
-[WS] Partner 671 not connected, buffering signal
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:887571891 1 tcp 1518149375 192.168.1.20 9 typ host tcptype active generation 0 ufrag 4gnc network-id 3 network-cost 10',
+      candidate: 'candidate:735057289 1 tcp 1518149375 192.168.1.6 9 typ host tcptype active generation 0 ufrag UwQz network-id 3 network-cost 10',
       sdpMLineIndex: 2,
       sdpMid: '2'
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
+[WS] Forwarded signal from 692 to 693
 [WS] Received message: {
   type: 'signal',
   data: {
     type: 'candidate',
     candidate: {
-      candidate: 'candidate:4025132203 1 tcp 1518285567 fd7a:115c:a1e0::a335:403e 9 typ host tcptype active generation 0 ufrag 4gnc network-id 2',
+      candidate: 'candidate:4000578699 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag UwQz network-id 2 network-cost 50',
       sdpMLineIndex: 2,
       sdpMid: '2'
     }
   },
-  to: 671,
-  from: 670
+  to: 693,
+  from: 692
 }
-[WS] Partner 671 not connected, buffering signal
+[WS] Forwarded signal from 692 to 693
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:1885747451 1 udp 1685921535 103.87.58.149 58232 typ srflx raddr 192.168.1.6 rport 58232 generation 0 ufrag UwQz network-id 3 network-cost 10',
+      sdpMLineIndex: 2,
+      sdpMid: '2'
+    }
+  },
+  to: 693,
+  from: 692
+}
+[WS] Forwarded signal from 692 to 693
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:1885747451 1 udp 1685921535 103.87.58.149 58229 typ srflx raddr 192.168.1.6 rport 58229 generation 0 ufrag UwQz network-id 3 network-cost 10',
+      sdpMLineIndex: 1,
+      sdpMid: '1'
+    }
+  },
+  to: 693,
+  from: 692
+}
+[WS] Forwarded signal from 692 to 693
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:1885747451 1 udp 1685921535 103.87.58.149 58226 typ srflx raddr 192.168.1.6 rport 58226 generation 0 ufrag UwQz network-id 3 network-cost 10',
+      sdpMLineIndex: 0,
+      sdpMid: '0'
+    }
+  },
+  to: 693,
+  from: 692
+}
+[WS] Forwarded signal from 692 to 693
+[WS] Socket closed with no associated userId
+[WS] Connected clients: 2
+[WS] Connected userIds: [692, 693]
+[WS] Connected socketIds: [khz5pc25thq1752949425604, ogk7tzn42k1752949423887]
+[WS] Matchmaking: Current queue length: 2
+[WS] Connected clients: 2
+[WS] Connected userIds: [692, 693]
+[WS] Connected socketIds: [khz5pc25thq1752949425604, ogk7tzn42k1752949423887]
+[WS] Matched users 692 and 693 for mood "happy" (sessionId: 808)
+[WS] Connected clients: 2
+[WS] Connected userIds: [692, 693]
+[WS] Connected socketIds: [khz5pc25thq1752949425604, ogk7tzn42k1752949423887]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [692, 693]
+[WS] Connected socketIds: [khz5pc25thq1752949425604, ogk7tzn42k1752949423887]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [692, 693]
+[WS] Connected socketIds: [khz5pc25thq1752949425604, ogk7tzn42k1752949423887]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [692, 693]
+[WS] Connected socketIds: [khz5pc25thq1752949425604, ogk7tzn42k1752949423887]
+[WS] User 693 disconnected and removed from queue
+[WS] Connected clients: 1
+[WS] Connected userIds: [692]
+[WS] Connected socketIds: [khz5pc25thq1752949425604]
+GET /api/moods/stats 304 3ms
+Response: {}
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 1
+[WS] Connected userIds: [692]
+[WS] Connected socketIds: [khz5pc25thq1752949425604]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 1
+[WS] Connected userIds: [692]
+[WS] Connected socketIds: [khz5pc25thq1752949425604]
+[WS] User 692 disconnected and removed from queue
+[WS] Connected clients: 0
+[WS] Connected userIds: []
+[WS] Connected socketIds: []
+[WS] New connection established. Assigned socketId: 4rohgktd61r1752949463461
+[WS] New connection established. Assigned socketId: w4i6tiv03z1752949463590
+[WS] New connection established. Assigned socketId: ttgqj04a4ua1752949463693
 [WS] Matchmaking: Current queue length: 0
 [WS] Connected clients: 0
 [WS] Connected userIds: []
 [WS] Connected socketIds: []
+POST /api/session/create 200 16ms
+Response: {
+  "sessionId": 810,
+  "userId": 694,
+  "mood": "happy"
+}
+[WS] Received message: { type: 'join-queue', userId: 694, mood: 'happy' }
+[WS] User 694 joined queue for mood "happy" (socketId: ttgqj04a4ua1752949463693)
+[WS] Connected clients: 1
+[WS] Connected userIds: [694]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693]
+[WS] Received message: { type: 'join-queue', userId: 694, mood: 'happy' }
+[WS] User 694 joined queue for mood "happy" (socketId: ttgqj04a4ua1752949463693)
+[WS] Connected clients: 1
+[WS] Connected userIds: [694]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693]
+POST /api/session/create 200 22ms
+Response: {
+  "sessionId": 811,
+  "userId": 695,
+  "mood": "happy"
+}
+[WS] Received message: { type: 'join-queue', userId: 695, mood: 'happy' }
+[WS] User 695 joined queue for mood "happy" (socketId: w4i6tiv03z1752949463590)
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
+[WS] Received message: { type: 'join-queue', userId: 695, mood: 'happy' }
+[WS] User 695 joined queue for mood "happy" (socketId: w4i6tiv03z1752949463590)
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
+[WS] Matchmaking: Current queue length: 2
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
+[DEBUG][2025-07-19T18:24:31.751Z] Updated partnerId for user 694 in existing session { oldPartnerId: null, newPartnerId: 695 }
+[DEBUG][2025-07-19T18:24:31.759Z] Updated partnerId for user 695 in existing session { oldPartnerId: null, newPartnerId: 694 }
+[WS] Matched users 694 and 695 for mood "happy" (sessionId: 810)
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'offer',
+    sdp: 'v=0\r\n' +
+      'o=- 4977752763956958551 2 IN IP4 127.0.0.1\r\n' +
+      's=-\r\n' +
+      't=0 0\r\n' +
+      'a=group:BUNDLE 0 1 2\r\n' +
+      'a=extmap-allow-mixed\r\n' +
+      'a=msid-semantic: WMS b33e5c4b-7e6a-4021-b186-4047907d36ac\r\n' +
+      'm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\n' +
+      'c=IN IP4 0.0.0.0\r\n' +
+      'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
+      'a=ice-ufrag:HpvJ\r\n' +
+      'a=ice-pwd:0RTegRmpwqsq6wuhOtL3zCxx\r\n' +
+      'a=ice-options:trickle\r\n' +
+      'a=fingerprint:sha-256 39:05:2C:7C:AF:CA:26:C8:F1:38:77:4D:CE:8E:84:CB:86:4C:C2:0B:8D:0A:27:7E:9D:E5:09:0E:E0:69:94:51\r\n' +
+      'a=setup:actpass\r\n' +
+      'a=mid:0\r\n' +
+      'a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\n' +
+      'a=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\n' +
+      'a=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\n' +
+      'a=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\n' +
+      'a=sendrecv\r\n' +
+      'a=msid:b33e5c4b-7e6a-4021-b186-4047907d36ac 478236e4-9518-4ef4-b153-2eb91d09cd3b\r\n' +
+      'a=rtcp-mux\r\n' +
+      'a=rtcp-rsize\r\n' +
+      'a=rtpmap:111 opus/48000/2\r\n' +
+      'a=rtcp-fb:111 transport-cc\r\n' +
+      'a=fmtp:111 minptime=10;useinbandfec=1\r\n' +
+      'a=rtpmap:63 red/48000/2\r\n' +
+      'a=fmtp:63 111/111\r\n' +
+      'a=rtpmap:9 G722/8000\r\n' +
+      'a=rtpmap:0 PCMU/8000\r\n' +
+      'a=rtpmap:8 PCMA/8000\r\n' +
+      'a=rtpmap:13 CN/8000\r\n' +
+      'a=rtpmap:110 telephone-event/48000\r\n' +
+      'a=rtpmap:126 telephone-event/8000\r\n' +
+      'a=ssrc:518011280 cname:HfTC97FmkbgIfPmF\r\n' +
+      'a=ssrc:518011280 msid:b33e5c4b-7e6a-4021-b186-4047907d36ac 478236e4-9518-4ef4-b153-2eb91d09cd3b\r\n' +
+      'm=video 9 UDP/TLS/RTP/SAVPF 96 97 103 104 107 108 109 114 115 116 117 118 39 40 45 46 98 99 100 101 119 120 49 50 123 124 125\r\n' +
+      'c=IN IP4 0.0.0.0\r\n' +
+      'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
+      'a=ice-ufrag:HpvJ\r\n' +
+      'a=ice-pwd:0RTegRmpwqsq6wuhOtL3zCxx\r\n' +
+      'a=ice-options:trickle\r\n' +
+      'a=fingerprint:sha-256 39:05:2C:7C:AF:CA:26:C8:F1:38:77:4D:CE:8E:84:CB:86:4C:C2:0B:8D:0A:27:7E:9D:E5:09:0E:E0:69:94:51\r\n' +
+      'a=setup:actpass\r\n' +
+      'a=mid:1\r\n' +
+      'a=extmap:14 urn:ietf:params:rtp-hdrext:toffset\r\n' +
+      'a=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\n' +
+      'a=extmap:13 urn:3gpp:video-orientation\r\n' +
+      'a=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\n' +
+      'a=extmap:5 http://www.webrtc.org/experiments/rtp-hdrext/playout-delay\r\n' +
+      'a=extmap:6 http://www.webrtc.org/experiments/rtp-hdrext/video-content-type\r\n' +
+      'a=extmap:7 http://www.webrtc.org/experiments/rtp-hdrext/video-timing\r\n' +
+      'a=extmap:8 http://www.webrtc.org/experiments/rtp-hdrext/color-space\r\n' +
+      'a=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\n' +
+      'a=extmap:10 urn:ietf:params:rtp-hdrext:sdes:rtp-stream-id\r\n' +
+      'a=extmap:11 urn:ietf:params:rtp-hdrext:sdes:repaired-rtp-stream-id\r\n' +
+      'a=sendrecv\r\n' +
+      'a=msid:b33e5c4b-7e6a-4021-b186-4047907d36ac b01f3198-5c0f-477b-81f2-0b4321d14c75\r\n' +
+      'a=rtcp-mux\r\n' +
+      'a=rtcp-rsize\r\n' +
+      'a=rtpmap:96 VP8/90000\r\n' +
+      'a=rtcp-fb:96 goog-remb\r\n' +
+      'a=rtcp-fb:96 transport-cc\r\n' +
+      'a=rtcp-fb:96 ccm fir\r\n' +
+      'a=rtcp-fb:96 nack\r\n' +
+      'a=rtcp-fb:96 nack pli\r\n' +
+      'a=rtpmap:97 rtx/90000\r\n' +
+      'a=fmtp:97 apt=96\r\n' +
+      'a=rtpmap:103 H264/90000\r\n' +
+      'a=rtcp-fb:103 goog-remb\r\n' +
+      'a=rtcp-fb:103 transport-cc\r\n' +
+      'a=rtcp-fb:103 ccm fir\r\n' +
+      'a=rtcp-fb:103 nack\r\n' +
+      'a=rtcp-fb:103 nack pli\r\n' +
+      'a=fmtp:103 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f\r\n' +
+      'a=rtpmap:104 rtx/90000\r\n' +
+      'a=fmtp:104 apt=103\r\n' +
+      'a=rtpmap:107 H264/90000\r\n' +
+      'a=rtcp-fb:107 goog-remb\r\n' +
+      'a=rtcp-fb:107 transport-cc\r\n' +
+      'a=rtcp-fb:107 ccm fir\r\n' +
+      'a=rtcp-fb:107 nack\r\n' +
+      'a=rtcp-fb:107 nack pli\r\n' +
+      'a=fmtp:107 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=42001f\r\n' +
+      'a=rtpmap:108 rtx/90000\r\n' +
+      'a=fmtp:108 apt=107\r\n' +
+      'a=rtpmap:109 H264/90000\r\n' +
+      'a=rtcp-fb:109 goog-remb\r\n' +
+      'a=rtcp-fb:109 transport-cc\r\n' +
+      'a=rtcp-fb:109 ccm fir\r\n' +
+      'a=rtcp-fb:109 nack\r\n' +
+      'a=rtcp-fb:109 nack pli\r\n' +
+      'a=fmtp:109 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f\r\n' +
+      'a=rtpmap:114 rtx/90000\r\n' +
+      'a=fmtp:114 apt=109\r\n' +
+      'a=rtpmap:115 H264/90000\r\n' +
+      'a=rtcp-fb:115 goog-remb\r\n' +
+      'a=rtcp-fb:115 transport-cc\r\n' +
+      'a=rtcp-fb:115 ccm fir\r\n' +
+      'a=rtcp-fb:115 nack\r\n' +
+      'a=rtcp-fb:115 nack pli\r\n' +
+      'a=fmtp:115 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=42e01f\r\n' +
+      'a=rtpmap:116 rtx/90000\r\n' +
+      'a=fmtp:116 apt=115\r\n' +
+      'a=rtpmap:117 H264/90000\r\n' +
+      'a=rtcp-fb:117 goog-remb\r\n' +
+      'a=rtcp-fb:117 transport-cc\r\n' +
+      'a=rtcp-fb:117 ccm fir\r\n' +
+      'a=rtcp-fb:117 nack\r\n' +
+      'a=rtcp-fb:117 nack pli\r\n' +
+      'a=fmtp:117 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=4d001f\r\n' +
+      'a=rtpmap:118 rtx/90000\r\n' +
+      'a=fmtp:118 apt=117\r\n' +
+      'a=rtpmap:39 H264/90000\r\n' +
+      'a=rtcp-fb:39 goog-remb\r\n' +
+      'a=rtcp-fb:39 transport-cc\r\n' +
+      'a=rtcp-fb:39 ccm fir\r\n' +
+      'a=rtcp-fb:39 nack\r\n' +
+      'a=rtcp-fb:39 nack pli\r\n' +
+      'a=fmtp:39 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=4d001f\r\n' +
+      'a=rtpmap:40 rtx/90000\r\n' +
+      'a=fmtp:40 apt=39\r\n' +
+      'a=rtpmap:45 AV1/90000\r\n' +
+      'a=rtcp-fb:45 goog-remb\r\n' +
+      'a=rtcp-fb:45 transport-cc\r\n' +
+      'a=rtcp-fb:45 ccm fir\r\n' +
+      'a=rtcp-fb:45 nack\r\n' +
+      'a=rtcp-fb:45 nack pli\r\n' +
+      'a=fmtp:45 level-idx=5;profile=0;tier=0\r\n' +
+      'a=rtpmap:46 rtx/90000\r\n' +
+      'a=fmtp:46 apt=45\r\n' +
+      'a=rtpmap:98 VP9/90000\r\n' +
+      'a=rtcp-fb:98 goog-remb\r\n' +
+      'a=rtcp-fb:98 transport-cc\r\n' +
+      'a=rtcp-fb:98 ccm fir\r\n' +
+      'a=rtcp-fb:98 nack\r\n' +
+      'a=rtcp-fb:98 nack pli\r\n' +
+      'a=fmtp:98 profile-id=0\r\n' +
+      'a=rtpmap:99 rtx/90000\r\n' +
+      'a=fmtp:99 apt=98\r\n' +
+      'a=rtpmap:100 VP9/90000\r\n' +
+      'a=rtcp-fb:100 goog-remb\r\n' +
+      'a=rtcp-fb:100 transport-cc\r\n' +
+      'a=rtcp-fb:100 ccm fir\r\n' +
+      'a=rtcp-fb:100 nack\r\n' +
+      'a=rtcp-fb:100 nack pli\r\n' +
+      'a=fmtp:100 profile-id=2\r\n' +
+      'a=rtpmap:101 rtx/90000\r\n' +
+      'a=fmtp:101 apt=100\r\n' +
+      'a=rtpmap:119 H264/90000\r\n' +
+      'a=rtcp-fb:119 goog-remb\r\n' +
+      'a=rtcp-fb:119 transport-cc\r\n' +
+      'a=rtcp-fb:119 ccm fir\r\n' +
+      'a=rtcp-fb:119 nack\r\n' +
+      'a=rtcp-fb:119 nack pli\r\n' +
+      'a=fmtp:119 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001f\r\n' +
+      'a=rtpmap:120 rtx/90000\r\n' +
+      'a=fmtp:120 apt=119\r\n' +
+      'a=rtpmap:49 H265/90000\r\n' +
+      'a=rtcp-fb:49 goog-remb\r\n' +
+      'a=rtcp-fb:49 transport-cc\r\n' +
+      'a=rtcp-fb:49 ccm fir\r\n' +
+      'a=rtcp-fb:49 nack\r\n' +
+      'a=rtcp-fb:49 nack pli\r\n' +
+      'a=fmtp:49 level-id=93;profile-id=1;tier-flag=0;tx-mode=SRST\r\n' +
+      'a=rtpmap:50 rtx/90000\r\n' +
+      'a=fmtp:50 apt=49\r\n' +
+      'a=rtpmap:123 red/90000\r\n' +
+      'a=rtpmap:124 rtx/90000\r\n' +
+      'a=fmtp:124 apt=123\r\n' +
+      'a=rtpmap:125 ulpfec/90000\r\n' +
+      'a=ssrc-group:FID 3551493471 948428320\r\n' +
+      'a=ssrc:3551493471 cname:HfTC97FmkbgIfPmF\r\n' +
+      'a=ssrc:3551493471 msid:b33e5c4b-7e6a-4021-b186-4047907d36ac b01f3198-5c0f-477b-81f2-0b4321d14c75\r\n' +
+      'a=ssrc:948428320 cname:HfTC97FmkbgIfPmF\r\n' +
+      'a=ssrc:948428320 msid:b33e5c4b-7e6a-4021-b186-4047907d36ac b01f3198-5c0f-477b-81f2-0b4321d14c75\r\n' +
+      'm=application 9 UDP/DTLS/SCTP webrtc-datachannel\r\n' +
+      'c=IN IP4 0.0.0.0\r\n' +
+      'a=ice-ufrag:HpvJ\r\n' +
+      'a=ice-pwd:0RTegRmpwqsq6wuhOtL3zCxx\r\n' +
+      'a=ice-options:trickle\r\n' +
+      'a=fingerprint:sha-256 39:05:2C:7C:AF:CA:26:C8:F1:38:77:4D:CE:8E:84:CB:86:4C:C2:0B:8D:0A:27:7E:9D:E5:09:0E:E0:69:94:51\r\n' +
+      'a=setup:actpass\r\n' +
+      'a=mid:2\r\n' +
+      'a=sctp-port:5000\r\n' +
+      'a=max-message-size:262144\r\n'
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:3321420338 1 udp 2122194687 100.92.98.39 50822 typ host generation 0 ufrag HpvJ network-id 1 network-cost 50',
+      sdpMLineIndex: 0,
+      sdpMid: '0'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:4189693769 1 udp 2122129151 192.168.1.6 50823 typ host generation 0 ufrag HpvJ network-id 3 network-cost 10',
+      sdpMLineIndex: 0,
+      sdpMid: '0'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:1008356939 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 50824 typ host generation 0 ufrag HpvJ network-id 2 network-cost 50',
+      sdpMLineIndex: 0,
+      sdpMid: '0'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:3321420338 1 udp 2122194687 100.92.98.39 50825 typ host generation 0 ufrag HpvJ network-id 1 network-cost 50',
+      sdpMLineIndex: 1,
+      sdpMid: '1'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:4189693769 1 udp 2122129151 192.168.1.6 50826 typ host generation 0 ufrag HpvJ network-id 3 network-cost 10',
+      sdpMLineIndex: 1,
+      sdpMid: '1'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:1008356939 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 50827 typ host generation 0 ufrag HpvJ network-id 2 network-cost 50',
+      sdpMLineIndex: 1,
+      sdpMid: '1'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:3321420338 1 udp 2122194687 100.92.98.39 50828 typ host generation 0 ufrag HpvJ network-id 1 network-cost 50',
+      sdpMLineIndex: 2,
+      sdpMid: '2'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:4189693769 1 udp 2122129151 192.168.1.6 50829 typ host generation 0 ufrag HpvJ network-id 3 network-cost 10',
+      sdpMLineIndex: 2,
+      sdpMid: '2'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:1008356939 1 udp 2122265343 fd7a:115c:a1e0::d635:6227 50830 typ host generation 0 ufrag HpvJ network-id 2 network-cost 50',
+      sdpMLineIndex: 2,
+      sdpMid: '2'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Socket closed with no associated userId
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:3140958378 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag HpvJ network-id 1 network-cost 50',
+      sdpMLineIndex: 0,
+      sdpMid: '0'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:2272675281 1 tcp 1518149375 192.168.1.6 9 typ host tcptype active generation 0 ufrag HpvJ network-id 3 network-cost 10',
+      sdpMLineIndex: 0,
+      sdpMid: '0'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:1121299667 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag HpvJ network-id 2 network-cost 50',
+      sdpMLineIndex: 0,
+      sdpMid: '0'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:3140958378 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag HpvJ network-id 1 network-cost 50',
+      sdpMLineIndex: 1,
+      sdpMid: '1'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:2272675281 1 tcp 1518149375 192.168.1.6 9 typ host tcptype active generation 0 ufrag HpvJ network-id 3 network-cost 10',
+      sdpMLineIndex: 1,
+      sdpMid: '1'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:1121299667 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag HpvJ network-id 2 network-cost 50',
+      sdpMLineIndex: 1,
+      sdpMid: '1'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:3140958378 1 tcp 1518214911 100.92.98.39 9 typ host tcptype active generation 0 ufrag HpvJ network-id 1 network-cost 50',
+      sdpMLineIndex: 2,
+      sdpMid: '2'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:2272675281 1 tcp 1518149375 192.168.1.6 9 typ host tcptype active generation 0 ufrag HpvJ network-id 3 network-cost 10',
+      sdpMLineIndex: 2,
+      sdpMid: '2'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:1121299667 1 tcp 1518285567 fd7a:115c:a1e0::d635:6227 9 typ host tcptype active generation 0 ufrag HpvJ network-id 2 network-cost 50',
+      sdpMLineIndex: 2,
+      sdpMid: '2'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:3703597219 1 udp 1685921535 103.87.58.149 50823 typ srflx raddr 192.168.1.6 rport 50823 generation 0 ufrag HpvJ network-id 3 network-cost 10',
+      sdpMLineIndex: 0,
+      sdpMid: '0'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:3703597219 1 udp 1685921535 103.87.58.149 50829 typ srflx raddr 192.168.1.6 rport 50829 generation 0 ufrag HpvJ network-id 3 network-cost 10',
+      sdpMLineIndex: 2,
+      sdpMid: '2'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:3703597219 1 udp 1685921535 103.87.58.149 50826 typ srflx raddr 192.168.1.6 rport 50826 generation 0 ufrag HpvJ network-id 3 network-cost 10',
+      sdpMLineIndex: 1,
+      sdpMid: '1'
+    }
+  },
+  to: 695,
+  from: 694
+}
+[WS] Forwarded signal from 694 to 695
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'answer',
+    sdp: 'v=0\r\n' +
+      'o=- 1421388796766124623 2 IN IP4 127.0.0.1\r\n' +
+      's=-\r\n' +
+      't=0 0\r\n' +
+      'a=group:BUNDLE 0 1 2\r\n' +
+      'a=extmap-allow-mixed\r\n' +
+      'a=msid-semantic: WMS 3299b26d-7c3c-4b12-872e-2cefd061bbbd\r\n' +
+      'm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\r\n' +
+      'c=IN IP4 0.0.0.0\r\n' +
+      'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
+      'a=ice-ufrag:du+j\r\n' +
+      'a=ice-pwd:1T0CYNTi3/4FRMLnnCkTD0uy\r\n' +
+      'a=ice-options:trickle\r\n' +
+      'a=fingerprint:sha-256 72:E5:1E:F5:66:3F:FA:CA:D1:57:EB:35:AB:D4:DC:99:19:3A:BC:43:26:AC:3C:2C:60:6B:F5:BB:24:04:BD:0D\r\n' +
+      'a=setup:active\r\n' +
+      'a=mid:0\r\n' +
+      'a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\n' +
+      'a=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\n' +
+      'a=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\n' +
+      'a=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\n' +
+      'a=sendrecv\r\n' +
+      'a=msid:3299b26d-7c3c-4b12-872e-2cefd061bbbd 4e039759-2c1c-480d-b03d-415318207048\r\n' +
+      'a=rtcp-mux\r\n' +
+      'a=rtcp-rsize\r\n' +
+      'a=rtpmap:111 opus/48000/2\r\n' +
+      'a=rtcp-fb:111 transport-cc\r\n' +
+      'a=fmtp:111 minptime=10;useinbandfec=1\r\n' +
+      'a=rtpmap:63 red/48000/2\r\n' +
+      'a=fmtp:63 111/111\r\n' +
+      'a=rtpmap:9 G722/8000\r\n' +
+      'a=rtpmap:0 PCMU/8000\r\n' +
+      'a=rtpmap:8 PCMA/8000\r\n' +
+      'a=rtpmap:13 CN/8000\r\n' +
+      'a=rtpmap:110 telephone-event/48000\r\n' +
+      'a=rtpmap:126 telephone-event/8000\r\n' +
+      'a=ssrc:569885008 cname:UakE92vJGbjb9YtV\r\n' +
+      'm=video 9 UDP/TLS/RTP/SAVPF 96 97 109 114 117 118 98 99 119 120 123 124 125\r\n' +
+      'c=IN IP4 0.0.0.0\r\n' +
+      'a=rtcp:9 IN IP4 0.0.0.0\r\n' +
+      'a=ice-ufrag:du+j\r\n' +
+      'a=ice-pwd:1T0CYNTi3/4FRMLnnCkTD0uy\r\n' +
+      'a=ice-options:trickle\r\n' +
+      'a=fingerprint:sha-256 72:E5:1E:F5:66:3F:FA:CA:D1:57:EB:35:AB:D4:DC:99:19:3A:BC:43:26:AC:3C:2C:60:6B:F5:BB:24:04:BD:0D\r\n' +
+      'a=setup:active\r\n' +
+      'a=mid:1\r\n' +
+      'a=extmap:14 urn:ietf:params:rtp-hdrext:toffset\r\n' +
+      'a=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\n' +
+      'a=extmap:13 urn:3gpp:video-orientation\r\n' +
+      'a=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\r\n' +
+      'a=extmap:5 http://www.webrtc.org/experiments/rtp-hdrext/playout-delay\r\n' +
+      'a=extmap:6 http://www.webrtc.org/experiments/rtp-hdrext/video-content-type\r\n' +
+      'a=extmap:7 http://www.webrtc.org/experiments/rtp-hdrext/video-timing\r\n' +
+      'a=extmap:8 http://www.webrtc.org/experiments/rtp-hdrext/color-space\r\n' +
+      'a=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\r\n' +
+      'a=extmap:10 urn:ietf:params:rtp-hdrext:sdes:rtp-stream-id\r\n' +
+      'a=extmap:11 urn:ietf:params:rtp-hdrext:sdes:repaired-rtp-stream-id\r\n' +
+      'a=sendrecv\r\n' +
+      'a=msid:3299b26d-7c3c-4b12-872e-2cefd061bbbd dc274da5-5fa9-4bb5-93ea-85f844faa75b\r\n' +
+      'a=rtcp-mux\r\n' +
+      'a=rtcp-rsize\r\n' +
+      'a=rtpmap:96 VP8/90000\r\n' +
+      'a=rtcp-fb:96 goog-remb\r\n' +
+      'a=rtcp-fb:96 transport-cc\r\n' +
+      'a=rtcp-fb:96 ccm fir\r\n' +
+      'a=rtcp-fb:96 nack\r\n' +
+      'a=rtcp-fb:96 nack pli\r\n' +
+      'a=rtpmap:97 rtx/90000\r\n' +
+      'a=fmtp:97 apt=96\r\n' +
+      'a=rtpmap:109 H264/90000\r\n' +
+      'a=rtcp-fb:109 goog-remb\r\n' +
+      'a=rtcp-fb:109 transport-cc\r\n' +
+      'a=rtcp-fb:109 ccm fir\r\n' +
+      'a=rtcp-fb:109 nack\r\n' +
+      'a=rtcp-fb:109 nack pli\r\n' +
+      'a=fmtp:109 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f\r\n' +
+      'a=rtpmap:114 rtx/90000\r\n' +
+      'a=fmtp:114 apt=109\r\n' +
+      'a=rtpmap:117 H264/90000\r\n' +
+      'a=rtcp-fb:117 goog-remb\r\n' +
+      'a=rtcp-fb:117 transport-cc\r\n' +
+      'a=rtcp-fb:117 ccm fir\r\n' +
+      'a=rtcp-fb:117 nack\r\n' +
+      'a=rtcp-fb:117 nack pli\r\n' +
+      'a=fmtp:117 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=4d001f\r\n' +
+      'a=rtpmap:118 rtx/90000\r\n' +
+      'a=fmtp:118 apt=117\r\n' +
+      'a=rtpmap:98 VP9/90000\r\n' +
+      'a=rtcp-fb:98 goog-remb\r\n' +
+      'a=rtcp-fb:98 transport-cc\r\n' +
+      'a=rtcp-fb:98 ccm fir\r\n' +
+      'a=rtcp-fb:98 nack\r\n' +
+      'a=rtcp-fb:98 nack pli\r\n' +
+      'a=fmtp:98 profile-id=0\r\n' +
+      'a=rtpmap:99 rtx/90000\r\n' +
+      'a=fmtp:99 apt=98\r\n' +
+      'a=rtpmap:119 H264/90000\r\n' +
+      'a=rtcp-fb:119 goog-remb\r\n' +
+      'a=rtcp-fb:119 transport-cc\r\n' +
+      'a=rtcp-fb:119 ccm fir\r\n' +
+      'a=rtcp-fb:119 nack\r\n' +
+      'a=rtcp-fb:119 nack pli\r\n' +
+      'a=fmtp:119 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001f\r\n' +
+      'a=rtpmap:120 rtx/90000\r\n' +
+      'a=fmtp:120 apt=119\r\n' +
+      'a=rtpmap:123 red/90000\r\n' +
+      'a=rtpmap:124 rtx/90000\r\n' +
+      'a=fmtp:124 apt=123\r\n' +
+      'a=rtpmap:125 ulpfec/90000\r\n' +
+      'a=ssrc-group:FID 3273134008 1006808735\r\n' +
+      'a=ssrc:3273134008 cname:UakE92vJGbjb9YtV\r\n' +
+      'a=ssrc:1006808735 cname:UakE92vJGbjb9YtV\r\n' +
+      'm=application 9 UDP/DTLS/SCTP webrtc-datachannel\r\n' +
+      'c=IN IP4 0.0.0.0\r\n' +
+      'a=ice-ufrag:du+j\r\n' +
+      'a=ice-pwd:1T0CYNTi3/4FRMLnnCkTD0uy\r\n' +
+      'a=ice-options:trickle\r\n' +
+      'a=fingerprint:sha-256 72:E5:1E:F5:66:3F:FA:CA:D1:57:EB:35:AB:D4:DC:99:19:3A:BC:43:26:AC:3C:2C:60:6B:F5:BB:24:04:BD:0D\r\n' +
+      'a=setup:active\r\n' +
+      'a=mid:2\r\n' +
+      'a=sctp-port:5000\r\n' +
+      'a=max-message-size:262144\r\n'
+  },
+  to: 694,
+  from: 695
+}
+[WS] Forwarded signal from 695 to 694
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:2030895654 1 udp 2122260223 192.168.1.8 38707 typ host generation 0 ufrag du+j network-id 1 network-cost 10',
+      sdpMLineIndex: 0,
+      sdpMid: '0'
+    }
+  },
+  to: 694,
+  from: 695
+}
+[WS] Forwarded signal from 695 to 694
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:143193593 1 udp 1686052607 103.87.58.149 38707 typ srflx raddr 192.168.1.8 rport 38707 generation 0 ufrag du+j network-id 1 network-cost 10',
+      sdpMLineIndex: 0,
+      sdpMid: '0'
+    }
+  },
+  to: 694,
+  from: 695
+}
+[WS] Forwarded signal from 695 to 694
+[WS] Received message: {
+  type: 'signal',
+  data: {
+    type: 'candidate',
+    candidate: {
+      candidate: 'candidate:1448391211 1 tcp 1518280447 192.168.1.8 9 typ host tcptype active generation 0 ufrag du+j network-id 1 network-cost 10',
+      sdpMLineIndex: 0,
+      sdpMid: '0'
+    }
+  },
+  to: 694,
+  from: 695
+}
+[WS] Forwarded signal from 695 to 694
 [WS] Matchmaking: Current queue length: 0
-[WS] Connected clients: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
+GET /api/moods/stats 304 2ms
+Response: {}
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
+GET /api/moods/stats 304 2ms
+Response: {}
+[WS] Matchmaking: Current queue length: 0
+[WS] Connected clients: 2
+[WS] Connected userIds: [694, 695]
+[WS] Connected socketIds: [ttgqj04a4ua1752949463693, w4i6tiv03z1752949463590]
