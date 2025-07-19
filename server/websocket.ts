@@ -38,7 +38,7 @@ export function setupWebSocket(server: any) {
 
     console.log("[WS] New connection established. Assigned socketId:", socketId);
     ws.send(JSON.stringify({ type: "socket-id", socketId }));
-    
+
     ws.on("message", async (msg) => {
       try {
         const message = JSON.parse(msg.toString());
@@ -65,7 +65,12 @@ export function setupWebSocket(server: any) {
                 console.error(`[WS] Error closing previous socket for userId ${userId}:`, err);
               }
             }
+            userSocketMap.delete(userId);
+            userSocketIdMap.delete(userId);
+            // Remove from queue in DB
+            await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
           }
+
           userSocketMap.set(userId, ws);
           userSocketIdMap.set(userId, socketId!);
 
@@ -203,7 +208,6 @@ export function setupWebSocket(server: any) {
             userId: userB.userId,
             mood,
             partnerId: userA.userId,
-            sessionId: session.id,
           });
           // Notify both users
           wsA.send(JSON.stringify({
