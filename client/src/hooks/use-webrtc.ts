@@ -2,294 +2,404 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import SimplePeer from "simple-peer";
 import { useWebSocket } from "../context/WebSocketContext";
 
-interface UseWebRTCSimpleProps {
+interface UseWebRTCProps {
   isInitiator: boolean;
   externalLocalStream?: MediaStream | null;
   partnerId?: number;
   userId?: number;
 }
 
-export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId }: UseWebRTCSimpleProps) {
-  const [localStream, setLocalStream] = useState<MediaStream | null>(externalLocalStream || null);
+export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId }: UseWebRTCProps) {
+  // State management
+  const [localStream, setLocalStream] = useState<MediaStream | null>(null);
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
   const [isConnected, setIsConnected] = useState(false);
-  const [ready, setReady] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [iceConnectionState, setIceConnectionState] = useState<string>("new");
+  const [signalingState, setSignalingState] = useState<string>("stable");
 
-  const peerRef = useRef<any>(null);
+  // Refs for instance management
+  const peerRef = useRef<SimplePeer.Instance | null>(null);
   const { ws } = useWebSocket();
+  const mediaRequestedRef = useRef(false);
+  const restartTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const mountId = useRef(Math.random().toString(36).substring(2, 8));
 
-  // Get user media
+  // Detailed logging function with instance ID
+  const log = useCallback((stage: string, message: string, data?: any) => {
+    console.log(`[WebRTC:${mountId.current}] ${stage.padEnd(15)} ${message}`, data ?? '');
+  }, []);
+
+  // 1. Media Stream Acquisition ===============================================
   useEffect(() => {
-    console.log("[WebRTC] [STEP 1] Checking for externalLocalStream...");
-    if (externalLocalStream) {
-      setLocalStream(externalLocalStream);
-      console.log("[WebRTC] [STEP 1] Using external local stream", externalLocalStream);
+    log("MEDIA", "Starting media acquisition");
+    if (mediaRequestedRef.current) {
+      log("MEDIA", "Media already requested, skipping");
       return;
     }
-    console.log("[WebRTC] [STEP 1] Requesting user media...");
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-      .then(stream => {
+    mediaRequestedRef.current = true;
+
+    const getMedia = async () => {
+      try {
+        if (externalLocalStream) {
+          log("MEDIA", "Using external local stream", {
+            tracks: externalLocalStream.getTracks().map(t => t.kind)
+          });
+          setLocalStream(externalLocalStream);
+          return;
+        }
+
+        log("MEDIA", "Requesting user media permissions");
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+            facingMode: "user"
+          },
+          audio: {
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl: true
+          }
+        });
+
+        log("MEDIA", "Obtained user media stream", {
+          audio: stream.getAudioTracks().length > 0,
+          video: stream.getVideoTracks().length > 0
+        });
         setLocalStream(stream);
-        console.log("[WebRTC] [STEP 1] Got user media", stream);
-      })
-      .catch(err => {
-        alert("Could not access camera/mic: " + err.message);
-        console.error("[WebRTC] [STEP 1] Media error:", err);
-      });
-  }, [externalLocalStream]);
-
-  // Set ready flag when both localStream and ws are available and valid
-  useEffect(() => {
-    if (localStream && ws && typeof ws.addEventListener === "function") {
-      setReady(true);
-      console.log("[WebRTC] [DEFENSE] Ready to create peer: localStream and ws are set");
-    } else {
-      setReady(false);
-      if (!localStream) console.log("[WebRTC] [DEFENSE] Not ready: localStream missing");
-      if (!ws) console.log("[WebRTC] [DEFENSE] Not ready: ws missing");
-      if (ws && typeof ws.addEventListener !== "function") {
-        console.warn("[WebRTC] [DEFENSE] ws exists but is not a valid WebSocket instance");
-      }
-    }
-  }, [localStream, ws]);
-
-  // Setup signaling and peer
-  useEffect(() => {
-    if (!ready) {
-      console.log("[WebRTC] [DEFENSE] Not ready for peer creation");
-      return;
-    }
-    if (
-      !ws ||
-      typeof ws.addEventListener !== "function" ||
-      typeof ws.removeEventListener !== "function"
-    ) {
-      console.error("[WebRTC] [DEFENSE] ws is not a valid WebSocket instance, aborting peer setup.", ws);
-      return;
-    }
-    console.log("[WebRTC] [STEP 2] Setup signaling and peer", { localStream, ws, isInitiator, partnerId, userId });
-
-    // Defensive: Destroy any previous peer before creating a new one
-    if (peerRef.current) {
-      console.warn("[WebRTC] [STEP 2] Destroying previous peer before creating new one", peerRef.current);
-      try {
-        peerRef.current.destroy();
       } catch (err) {
-        console.error("[WebRTC] [DEFENSE] Error destroying previous peer", err);
+        const errorMsg = "Could not access camera/microphone";
+        log("MEDIA", "Error acquiring media", { error: err, message: errorMsg });
+        setError(errorMsg);
       }
-      peerRef.current = null;
+    };
+
+    getMedia();
+
+    return () => {
+      if (!externalLocalStream && localStream) {
+        log("MEDIA", "Cleaning up local stream", {
+          tracks: localStream.getTracks().map(t => `${t.kind}:${t.id}`)
+        });
+        localStream.getTracks().forEach(track => {
+          track.stop();
+          log("MEDIA", "Stopped track", { kind: track.kind, id: track.id });
+        });
+      }
+    };
+  }, [externalLocalStream, log, localStream]);
+
+  // 2. WebRTC Peer Connection Management =====================================
+  useEffect(() => {
+    if (!ws || !localStream) {
+      log("PEER", "Waiting for WebSocket or local stream", {
+        wsReady: !!ws,
+        streamReady: !!localStream
+      });
+      return;
     }
 
-    let peer: any = null;
+    log("PEER", "Initializing new peer connection", {
+      isInitiator,
+      partnerId,
+      userId
+    });
 
-    if (localStream && typeof window !== "undefined") {
+    const setupPeer = () => {
       try {
-        peer = new SimplePeer({
+        const peer = new SimplePeer({
           initiator: isInitiator,
           trickle: true,
-          stream: localStream || undefined,
+          stream: localStream,
+          config: {
+            iceServers: [
+              { urls: 'stun:stun.l.google.com:19302' },
+              { urls: 'stun:stun1.l.google.com:19302' },
+              { urls: 'stun:stun2.l.google.com:19302' },
+              { 
+                urls: 'turn:your-turn-server.com:3478',
+                username: 'your-username',
+                credential: 'your-credential' 
+              }
+            ]
+          }
         });
         peerRef.current = peer;
 
-        // ---- Add WebRTC connection state logs ----
-        peer.on("signal", () => {
-          if ((peer as any)._pc) {
-            const pc = (peer as any)._pc as RTCPeerConnection;
-            pc.addEventListener("iceconnectionstatechange", () => {
-              console.log("[WebRTC] [RTC] ICE connection state:", pc.iceConnectionState);
-            });
-            pc.addEventListener("connectionstatechange", () => {
-              console.log("[WebRTC] [RTC] Connection state:", pc.connectionState);
-            });
-            pc.addEventListener("signalingstatechange", () => {
-              console.log("[WebRTC] [RTC] Signaling state:", pc.signalingState);
-            });
+        // ICE Connection State Tracking
+        peer.on('iceConnectionStateChange', () => {
+          const state = peer.iceConnectionState;
+          setIceConnectionState(state);
+          log("ICE", `State changed: ${state}`);
+          
+          if (state === 'failed') {
+            log("ICE", "ICE failure detected, attempting restart");
+            restartConnection();
           }
         });
 
-        peer.on("connect", () => {
+        // Signaling State Tracking
+        peer.on('signalingStateChange', () => {
+          const state = peer.signalingState;
+          setSignalingState(state);
+          log("SIGNAL", `State changed: ${state}`);
+        });
+
+        // Connection Events
+        peer.on('connect', () => {
+          log("PEER", "Connection established");
           setIsConnected(true);
-          console.log("[WebRTC] [STEP 5] Peer connect event");
-          if ((peer as any)._pc) {
-            console.log("[WebRTC] [RTC] Connection state:", (peer as any)._pc.connectionState);
-          }
+          setError(null);
         });
 
-        peer.on("close", () => {
+        peer.on('close', () => {
+          log("PEER", "Connection closed");
           setIsConnected(false);
           setRemoteStream(null);
-          console.log("[WebRTC] [STEP 7] Peer close event");
-          if ((peer as any)._pc) {
-            console.log("[WebRTC] [RTC] Connection state on close:", (peer as any)._pc.connectionState);
+        });
+
+        peer.on('error', (err) => {
+          log("PEER", "Connection error", err);
+          setError("WebRTC connection error");
+          restartConnection();
+        });
+
+        // Signaling Data Handling
+        peer.on('signal', (data) => {
+          if (ws.readyState === WebSocket.OPEN) {
+            const signalData = {
+              type: "signal",
+              data,
+              ...(partnerId && { to: partnerId }),
+              ...(userId && { from: userId })
+            };
+            log("SIGNAL", "Sending signaling data", { type: data.type });
+            ws.send(JSON.stringify(signalData));
+          } else {
+            log("SIGNAL", "WebSocket not ready for signaling", {
+              wsState: ws.readyState
+            });
           }
         });
 
+        // Remote Stream Handling
+        peer.on('stream', (stream) => {
+          log("STREAM", "Received remote stream", {
+            tracks: stream.getTracks().map(t => t.kind)
+          });
+          setRemoteStream(stream);
+        });
+
+        // Track Events for Detailed Debugging
+        peer.on('track', (track, stream) => {
+          log("TRACK", `Remote ${track.kind} track added`, {
+            trackId: track.id,
+            streamId: stream.id
+          });
+        });
+
       } catch (err) {
-        console.error("[WebRTC] [DEFENSE] Error creating SimplePeer", err);
-        peerRef.current = null;
-        return;
+        log("PEER", "Initialization error", err);
+        setError("Failed to initialize WebRTC connection");
+        restartConnection();
       }
-    } else {
-      console.warn("[WebRTC] [STEP 3] Not creating SimplePeer: localStream missing or not in browser");
-      peerRef.current = null;
-      return;
-    }
-
-    // Log peerRef after creation
-    if (!peerRef.current) {
-      console.warn("[WebRTC] [STEP 3] peerRef.current is undefined after peer creation!");
-    } else {
-      console.log("[WebRTC] [STEP 3] peerRef.current is defined after peer creation", peerRef.current);
-    }
-
-    // Peer event logging
-    peer.on("signal", (data: any) => {
-      console.log("[WebRTC] [STEP 4] Peer emitted signal event", data);
-      if (ws.readyState === WebSocket.OPEN) {
-        try {
-          ws.send(JSON.stringify({
-            type: "signal",
-            data,
-            ...(partnerId ? { to: partnerId } : {}),
-            ...(userId ? { from: userId } : {}),
-          }));
-          console.log("[WebRTC] [STEP 4] Sent signal via ws");
-        } catch (err) {
-          console.error("[WebRTC] [DEFENSE] Error sending signal via ws", err);
-        }
-      } else {
-        console.warn("[WebRTC] [STEP 4] Tried to send signal but ws not open");
-      }
-    });
-
-    peer.on("stream", (stream: MediaStream) => {
-      setRemoteStream(stream);
-      console.log("[WebRTC] [STEP 6] Peer received remote stream", stream);
-    });
-
-    peer.on("error", (err: any) => {
-      console.error("[WebRTC] [STEP 8] Peer error event", err, peerRef.current);
-    });
-
-    // WebSocket event listeners
-    const handleOpen = () => {
-      console.log("[WebRTC] [STEP 9] WS Connected to signaling server");
     };
-    const handleError = (err: Event) => {
-      console.error("[WebRTC] [STEP 10] WS error:", err);
-    };
-    const handleClose = (event: CloseEvent) => {
-      console.warn("[WebRTC] [STEP 11] WS closed:", event);
-      setIsConnected(false);
-    };
-    const handleMessage = async (message: MessageEvent) => {
-      let data: any;
+
+    const handleMessage = async (event: MessageEvent) => {
       try {
-        if (typeof message.data === "string") {
-          data = JSON.parse(message.data);
-        } else if (message.data instanceof Blob) {
-          const text = await message.data.text();
-          data = JSON.parse(text);
-        } else {
-          return;
+        const data = typeof event.data === 'string' 
+          ? JSON.parse(event.data) 
+          : JSON.parse(await event.data.text());
+        
+        if (data.type === "signal" && peerRef.current) {
+          log("SIGNAL", "Received signaling data", { type: data.data.type });
+          peerRef.current.signal(data.data);
         }
       } catch (err) {
-        console.error("[WebRTC] [DEFENSE] Error parsing WS message", err, message.data);
-        return;
-      }
-      console.log("[WebRTC] [STEP 12] WS Received:", data);
-
-      // Only handle signaling messages here
-      if (data.type === "signal" && data.data) {
-        if (peerRef.current) {
-          try {
-            console.log("[WebRTC] [STEP 13] Passing signal to peerRef.current", peerRef.current, data.data);
-            peerRef.current.signal(data.data);
-            console.log("[WebRTC] [STEP 13] Received signal, passed to peer:", data.data);
-          } catch (err) {
-            console.error("[WebRTC] [STEP 13] Error signaling peer:", err, peerRef.current, data.data);
-          }
-        } else {
-          console.warn("[WebRTC] [STEP 13] Peer not ready to receive signal", data.data);
-        }
+        log("SIGNAL", "Error processing message", { error: err, data: event.data });
       }
     };
 
-    ws.addEventListener("open", handleOpen);
-    ws.addEventListener("error", handleError);
-    ws.addEventListener("close", handleClose);
-    ws.addEventListener("message", handleMessage);
+    const restartConnection = () => {
+      if (restartTimeoutRef.current) {
+        clearTimeout(restartTimeoutRef.current);
+      }
+
+      log("RECOVERY", "Scheduling connection restart", { delay: 2000 });
+      restartTimeoutRef.current = setTimeout(() => {
+        log("RECOVERY", "Attempting connection restart");
+        cleanup();
+        setupPeer();
+      }, 2000);
+    };
+
+    const cleanup = () => {
+      log("CLEANUP", "Performing cleanup");
+      if (peerRef.current) {
+        log("CLEANUP", "Destroying peer instance");
+        peerRef.current.destroy();
+        peerRef.current = null;
+      }
+      ws.removeEventListener('message', handleMessage);
+      if (restartTimeoutRef.current) {
+        clearTimeout(restartTimeoutRef.current);
+      }
+    };
+
+    // Setup new connection
+    setupPeer();
+    ws.addEventListener('message', handleMessage);
 
     return () => {
-      console.log("[WebRTC] [STEP 14] Cleaning up peer and WebSocket listeners", peerRef.current);
-      if (peerRef.current) {
-        try {
-          peerRef.current.destroy();
-        } catch (err) {
-          console.error("[WebRTC] [DEFENSE] Error destroying peer in cleanup", err);
-        }
-        peerRef.current = null;
-      }
-      if (ws && typeof ws.removeEventListener === "function") {
-        ws.removeEventListener("open", handleOpen);
-        ws.removeEventListener("error", handleError);
-        ws.removeEventListener("close", handleClose);
-        ws.removeEventListener("message", handleMessage);
-      }
+      log("CLEANUP", "Component unmount cleanup");
+      cleanup();
     };
-  }, [ready, isInitiator, partnerId, userId, ws]);
+  }, [ws, localStream, isInitiator, partnerId, userId, log]);
 
-  // End call
+  // 3. Media Control Functions ===============================================
+  const toggleMute = useCallback((): boolean => {
+    if (!localStream) {
+      log("CONTROL", "Cannot toggle mute - no local stream");
+      return false;
+    }
+    
+    const audioTrack = localStream.getAudioTracks()[0];
+    if (audioTrack) {
+      const newState = !audioTrack.enabled;
+      audioTrack.enabled = newState;
+      log("CONTROL", `Audio ${newState ? "unmuted" : "muted"}`);
+      return !newState;
+    }
+    
+    log("CONTROL", "No audio track to toggle");
+    return false;
+  }, [localStream, log]);
+
+  const toggleVideo = useCallback((): boolean => {
+    if (!localStream) {
+      log("CONTROL", "Cannot toggle video - no local stream");
+      return false;
+    }
+    
+    const videoTrack = localStream.getVideoTracks()[0];
+    if (videoTrack) {
+      const newState = !videoTrack.enabled;
+      videoTrack.enabled = newState;
+      log("CONTROL", `Video ${newState ? "enabled" : "disabled"}`);
+      return newState;
+    }
+    
+    log("CONTROL", "No video track to toggle");
+    return false;
+  }, [localStream, log]);
+
   const endCall = useCallback(() => {
-    console.log("[WebRTC] [STEP 15] Ending call", peerRef.current);
+    log("CONTROL", "Ending call explicitly");
     if (peerRef.current) {
-      try {
-        peerRef.current.destroy();
-      } catch (err) {
-        console.error("[WebRTC] [DEFENSE] Error destroying peer in endCall", err);
-      }
+      peerRef.current.destroy();
       peerRef.current = null;
     }
-    setRemoteStream(null);
     setIsConnected(false);
-  }, []);
-
-  // Mute/unmute audio
-  const toggleMute = useCallback(() => {
-    const audioTrack = localStream?.getAudioTracks()[0];
-    if (audioTrack) {
-      audioTrack.enabled = !audioTrack.enabled;
-      console.log("[WebRTC] [STEP 16] Toggled mute:", !audioTrack.enabled);
-      return !audioTrack.enabled;
-    }
-    console.log("[WebRTC] [STEP 16] No audio track to mute/unmute");
-    return false;
-  }, [localStream]);
-
-  // Enable/disable video
-  const toggleVideo = useCallback(() => {
-    const videoTrack = localStream?.getVideoTracks()[0];
-    if (videoTrack) {
-      videoTrack.enabled = !videoTrack.enabled;
-      console.log("[WebRTC] [STEP 17] Toggled video:", videoTrack.enabled);
-      return videoTrack.enabled;
-    }
-    console.log("[WebRTC] [STEP 17] No video track to enable/disable");
-    return false;
-  }, [localStream]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    console.log("[WebRTC] [STEP 18] Cleanup on unmount");
-    return endCall;
-  }, [endCall]);
+    setRemoteStream(null);
+    setError(null);
+  }, [log]);
 
   return {
     localStream,
     remoteStream,
     isConnected,
+    error,
+    iceConnectionState,
+    signalingState,
     endCall,
     toggleMute,
-    toggleVideo,
+    toggleVideo
   };
+}
+
+// Video Component Implementation =============================================
+// interface VideoProps {
+//   stream: MediaStream | null;
+//   muted?: boolean;
+//   className?: string;
+//   onPlayError?: (error: Error) => void;
+// }
+
+// export function Video({ stream, muted = false, className, onPlayError }: VideoProps) {
+//   const videoRef = useRef<HTMLVideoElement>(null);
+//   const playAttemptRef = useRef(0);
+
+//   useEffect(() => {
+//     const video = videoRef.current;
+//     if (!video || !stream) return;
+
+//     const handlePlay = () => {
+//       if (playAttemptRef.current > 3) {
+//         log("VIDEO", "Max play attempts reached, giving up");
+//         return;
+//       }
+
+//       video.play()
+//         .then(() => {
+//           log("VIDEO", "Playback started successfully");
+//         })
+//         .catch(err => {
+//           playAttemptRef.current++;
+//           log("VIDEO", `Play attempt ${playAttemptRef.current} failed`, err);
+          
+//           if (onPlayError) {
+//             onPlayError(err);
+//           }
+
+//           // Implement click-to-play fallback
+//           if (playAttemptRef.current === 1) {
+//             const handleClick = () => {
+//               video.play()
+//                 .then(() => {
+//                   log("VIDEO", "Playback started after user interaction");
+//                   document.removeEventListener('click', handleClick);
+//                 })
+//                 .catch(err => {
+//                   log("VIDEO", "Playback failed after user interaction", err);
+//                 });
+//             };
+            
+//             document.addEventListener('click', handleClick);
+//             log("VIDEO", "Waiting for user interaction to start playback");
+//           }
+//         });
+//     };
+
+//     const handleLoadedMetadata = () => {
+//       log("VIDEO", "Stream metadata loaded, attempting play");
+//       handlePlay();
+//     };
+
+//     log("VIDEO", "Setting video source");
+//     video.srcObject = stream;
+//     video.addEventListener('loadedmetadata', handleLoadedMetadata);
+
+//     return () => {
+//       log("VIDEO", "Cleaning up video element");
+//       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+//       video.srcObject = null;
+//       playAttemptRef.current = 0;
+//     };
+//   }, [stream, onPlayError]);
+
+//   return (
+//     <video
+//       ref={videoRef}
+//       muted={muted}
+//       autoPlay
+//       playsInline
+//       className={className}
+//     />
+//   );
+// }
+
+// Helper function for component logging
+function log(context: string, message: string, data?: any) {
+  console.log(`[VideoComponent] ${context.padEnd(10)} ${message}`, data ?? '');
 }
