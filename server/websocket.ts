@@ -39,7 +39,7 @@ export function setupWebSocket(server: any) {
     console.log("[WS] New connection established. Assigned socketId:", socketId);
     ws.send(JSON.stringify({ type: "socket-id", socketId }));
 
-    ws.on("message", async (msg) => {
+    ws.on("message", async (msg: Buffer) => {
       try {
         const message = JSON.parse(msg.toString());
         console.log("[WS] Received message:", message);
@@ -73,11 +73,12 @@ export function setupWebSocket(server: any) {
 
           userSocketMap.set(userId, ws);
           if (pendingSignals.has(userId)) {
-  for (const msg of pendingSignals.get(userId)!) {
-    ws.send(JSON.stringify(msg));
-  }
-  pendingSignals.delete(userId);
-}
+            console.log(`[WS] Delivering ${pendingSignals.get(userId)!.length} buffered signals to user ${userId}`);
+            for (const msg of pendingSignals.get(userId)!) {
+              ws.send(JSON.stringify(msg));
+            }
+            pendingSignals.delete(userId);
+          }
           userSocketIdMap.set(userId, socketId!);
 
           await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
@@ -116,23 +117,23 @@ export function setupWebSocket(server: any) {
             return;
           }
           const partnerWs = userSocketMap.get(to);
-         if (partnerWs && partnerWs.readyState === WebSocket.OPEN) {
-  partnerWs.send(JSON.stringify({
-    type: "signal",
-    from: userId,
-    data,
-  }));
-  console.log(`[WS] Forwarded signal from ${userId} to ${to}`);
-} else {
-  // Buffer the message
-  if (!pendingSignals.has(to)) pendingSignals.set(to, []);
-  pendingSignals.get(to)!.push({
-    type: "signal",
-    from: userId,
-    data,
-  });
-  console.warn(`[WS] Partner ${to} not connected, buffering signal`);
-}
+          if (partnerWs && partnerWs.readyState === WebSocket.OPEN) {
+            partnerWs.send(JSON.stringify({
+              type: "signal",
+              from: userId,
+              data,
+            }));
+            console.log(`[WS] Forwarded signal from ${userId} to ${to}`);
+          } else {
+            // Buffer the message
+            if (!pendingSignals.has(to)) pendingSignals.set(to, []);
+            pendingSignals.get(to)!.push({
+              type: "signal",
+              from: userId,
+              data,
+            });
+            console.warn(`[WS] Partner ${to} not connected, buffering signal`);
+          }
         }
 
         // --- UNKNOWN MESSAGE TYPE ---
