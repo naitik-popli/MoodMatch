@@ -1,25 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import SimplePeer from "simple-peer";
-
-const SimplePeerConstructor = (SimplePeer as any).default || SimplePeer;
-
-// Patch SimplePeer constructor to avoid 'call' of undefined error in some bundlers
-function createSimplePeerWrapper(options: any) {
-  try {
-    return new SimplePeerConstructor(options);
-  } catch (err) {
-    console.error("[WebRTC] [DEFENSE] Error creating SimplePeer instance:", err);
-    // Attempt fallback: if SimplePeerConstructor is a namespace object, try default export
-    if (typeof (SimplePeerConstructor as any).default === "function") {
-      try {
-        return new (SimplePeerConstructor as any).default(options);
-      } catch (err2) {
-        console.error("[WebRTC] [DEFENSE] Fallback error creating SimplePeer instance:", err2);
-      }
-    }
-    throw err;
-  }
-}
 import { useWebSocket } from "../context/WebSocketContext";
 
 interface UseWebRTCSimpleProps {
@@ -35,7 +15,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
   const [isConnected, setIsConnected] = useState(false);
   const [ready, setReady] = useState(false);
 
-  const peerRef = useRef<any>(null); // Use 'any' for maximum compatibility with fallback import
+  const peerRef = useRef<any>(null);
   const { ws } = useWebSocket();
 
   // Get user media
@@ -104,15 +84,14 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
 
     if (localStream && typeof window !== "undefined") {
       try {
-        peer = createSimplePeerWrapper({
+        peer = new SimplePeer({
           initiator: isInitiator,
           trickle: true,
-          stream: localStream || undefined, // never pass null
+          stream: localStream || undefined,
         });
         peerRef.current = peer;
 
         // ---- Add WebRTC connection state logs ----
-        // Listen to native RTCPeerConnection state changes
         peer.on("signal", () => {
           if ((peer as any)._pc) {
             const pc = (peer as any)._pc as RTCPeerConnection;
@@ -164,8 +143,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
     }
 
     // Peer event logging
-    
-    peer.on("signal", (data: unknown) => {
+    peer.on("signal", (data: any) => {
       console.log("[WebRTC] [STEP 4] Peer emitted signal event", data);
       if (ws.readyState === WebSocket.OPEN) {
         try {
@@ -184,8 +162,8 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       }
     });
 
-   peer.on("stream", (stream: MediaStream) => {
-  setRemoteStream(stream);
+    peer.on("stream", (stream: MediaStream) => {
+      setRemoteStream(stream);
       console.log("[WebRTC] [STEP 6] Peer received remote stream", stream);
     });
 
