@@ -2,6 +2,24 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import SimplePeer from "simple-peer";
 
 const SimplePeerConstructor = (SimplePeer as any).default || SimplePeer;
+
+// Patch SimplePeer constructor to avoid 'call' of undefined error in some bundlers
+function createSimplePeerWrapper(options: any) {
+  try {
+    return new SimplePeerConstructor(options);
+  } catch (err) {
+    console.error("[WebRTC] [DEFENSE] Error creating SimplePeer instance:", err);
+    // Attempt fallback: if SimplePeerConstructor is a namespace object, try default export
+    if (typeof (SimplePeerConstructor as any).default === "function") {
+      try {
+        return new (SimplePeerConstructor as any).default(options);
+      } catch (err2) {
+        console.error("[WebRTC] [DEFENSE] Fallback error creating SimplePeer instance:", err2);
+      }
+    }
+    throw err;
+  }
+}
 import { useWebSocket } from "../context/WebSocketContext";
 
 interface UseWebRTCSimpleProps {
@@ -86,7 +104,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
 
     if (localStream && typeof window !== "undefined") {
       try {
-        peer = new SimplePeerConstructor({
+        peer = createSimplePeerWrapper({
           initiator: isInitiator,
           trickle: true,
           stream: localStream || undefined, // never pass null
