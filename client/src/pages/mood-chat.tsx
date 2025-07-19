@@ -4,7 +4,7 @@ import MoodSelection from "../components/mood-selection";
 import WaitingRoom from "../components/waiting-room";
 import VideoCall from "../components/video-call";
 import SettingsModal from "../components/settings-modal";
-import { useSocket } from "../hooks/use-socket";
+import { useWebSocket } from "../context/WebSocketContext";
 import type { Mood } from "@shared/schema";
 import { API_BASE_URL } from "../lib/api";
 import TestCallConnection from "../components/TestCallConnection";
@@ -21,9 +21,8 @@ export default function MoodChat() {
   } | null>(null);
 
   // Use the shared WebSocket from context
-  const { ws: socket, isConnected, emit, on } = useSocket();
-  console.log("🔗 Socket connection status:", isConnected);
-
+  const { ws: socket } = useWebSocket();
+  const isConnected = socket?.readyState === WebSocket.OPEN;
   const alreadyMatched = useRef(false);
 
   // Handle match-found event from backend
@@ -68,14 +67,18 @@ export default function MoodChat() {
   // Listen for match-found messages from backend
   useEffect(() => {
     if (!socket) return;
-    const off = on("message", (msg) => {
-      console.log("[MoodChat] Received message:", msg);
-      if (msg && typeof msg === "object" && msg.type === "match-found") {
-        handleMatchFound(msg);
-      }
-    });
-    return off;
-  }, [socket, on, handleMatchFound]);
+    const handleMessage = (event: MessageEvent) => {
+      try {
+        const msg = JSON.parse(event.data);
+        console.log("[MoodChat] Received message:", msg);
+        if (msg && typeof msg === "object" && msg.type === "match-found") {
+          handleMatchFound(msg);
+        }
+      } catch {}
+    };
+    socket.addEventListener("message", handleMessage);
+    return () => socket.removeEventListener("message", handleMessage);
+  }, [socket, handleMatchFound]);
 
   // Handle mood selection and session creation
   const handleMoodSelect = async (mood: Mood) => {
@@ -103,9 +106,9 @@ export default function MoodChat() {
       setCurrentScreen('waiting');
 
       // Join queue via WebSocket
-      if (emit && data.userId && data.sessionId) {
+      if (socket && socket.readyState === WebSocket.OPEN && data.userId && data.sessionId) {
         console.log("📤 Emitting join-queue");
-        emit({ type: "join-queue", userId: data.userId, mood });
+        socket.send(JSON.stringify({ type: "join-queue", userId: data.userId, mood }));
       } else {
         console.warn("⚠️ Cannot emit join-queue — socket or session info missing");
       }
@@ -126,8 +129,8 @@ export default function MoodChat() {
   // Handle cancel waiting
   const handleCancelWaiting = () => {
     console.log("🚫 Cancelled waiting");
-    if (emit && sessionData?.userId) {
-      emit({ type: "leave-queue", userId: sessionData.userId });
+    if (socket && socket.readyState === WebSocket.OPEN && sessionData?.userId) {
+      socket.send(JSON.stringify({ type: "leave-queue", userId: sessionData.userId }));
     }
     setCurrentScreen('selection');
     setSelectedMood(null);
@@ -185,18 +188,18 @@ export default function MoodChat() {
       )}
 
       {currentScreen === 'call' && selectedMood && sessionData && sessionData.partnerId !== undefined && (
-  <VideoCall
-    mood={selectedMood}
-    sessionData={sessionData as {
-      sessionId: number;
-      userId: number;
-      partnerId: number;
-      role?: "initiator" | "receiver";
-      externalLocalStream?: MediaStream;
-    }}
-    onCallEnd={handleCallEnd}
-  />
-)}
+        <VideoCall
+          mood={selectedMood}
+          sessionData={sessionData as {
+            sessionId: number;
+            userId: number;
+            partnerId: number;
+            role?: "initiator" | "receiver";
+            externalLocalStream?: MediaStream;
+          }}
+          onCallEnd={handleCallEnd}
+        />
+      )}
 
       {/* Settings Modal */}
       {showSettings && (

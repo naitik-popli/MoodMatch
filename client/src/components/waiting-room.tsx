@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Button } from "../components/ui/button";
-import { useSocket } from "../hooks/use-socket";
+import { useWebSocket } from "../context/WebSocketContext";
 import type { Mood } from "@shared/schema";
 
 // Emojis for each mood
@@ -37,10 +37,11 @@ interface Props {
   }) => void;
   onResetQueueJoin: () => void;
 }
+
 export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueueJoin }: Props) {
   const [waitTime, setWaitTime] = useState(0);
   const [userId, setUserId] = useState<number | null>(null);
-  const { ws, emit, on, isConnected } = useSocket();
+  const { ws, socketId } = useWebSocket();
   const [hasJoinedQueue, setHasJoinedQueue] = useState(false);
   const hasLeftQueue = useRef(false);
 
@@ -74,9 +75,9 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
   const leaveQueue = () => {
     if (hasLeftQueue.current) return;
     hasLeftQueue.current = true;
-    if (ws && userId && hasJoinedQueue && emit) {
+    if (ws && ws.readyState === WebSocket.OPEN && userId && hasJoinedQueue) {
       console.log(`[WaitingRoom] Sending leave-queue for user ${userId}`);
-      emit({ type: "leave-queue", userId });
+      ws.send(JSON.stringify({ type: "leave-queue", userId }));
       setHasJoinedQueue(false);
       onResetQueueJoin?.();
     }
@@ -84,13 +85,15 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
 
   // Join queue and listen for match-found
   useEffect(() => {
-    if (!ws || !isConnected || !userId || !mood || hasJoinedQueue) {
+    if (!ws || ws.readyState !== WebSocket.OPEN || !userId || !mood || hasJoinedQueue) {
       if (!ws) console.log("[WaitingRoom] WebSocket not ready yet");
-      if (!isConnected) console.log("[WaitingRoom] WebSocket not connected yet");
+      if (ws && ws.readyState !== WebSocket.OPEN) console.log("[WaitingRoom] WebSocket not connected yet");
       if (!userId) console.log("[WaitingRoom] userId not set yet");
       if (hasJoinedQueue) console.log("[WaitingRoom] Already joined queue");
       return;
     }
+
+    let offMatch: (() => void) | undefined;
 
     (async () => {
       try {
@@ -102,12 +105,12 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
         stream.getTracks().forEach(track => track.stop());
 
         setTimeout(() => {
-          if (emit) {
+          if (ws && ws.readyState === WebSocket.OPEN) {
             console.log("[WaitingRoom] Emitting join-queue:", { userId, mood });
-            emit({ type: "join-queue", userId, mood });
+            ws.send(JSON.stringify({ type: "join-queue", userId, mood }));
             setHasJoinedQueue(true);
           } else {
-            console.warn("[WaitingRoom] emit function not available");
+            console.warn("[WaitingRoom] ws not available or not open");
           }
         }, 300);
       } catch (error) {
@@ -115,22 +118,31 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
       }
     })();
 
-    const offMatch = on("message", (data) => {
-      if (typeof data === "object" && data.type === "match-found") {
-        console.log("[WaitingRoom] match-found received:", data);
-        onMatchFound({
-          role: data.role,
-          partnerId: data.partnerId,
-          sessionId: data.sessionId,
-        });
+    // Listen for match-found messages
+    const handleMessage = (event: MessageEvent) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (typeof data === "object" && data.type === "match-found") {
+          console.log("[WaitingRoom] match-found received:", data);
+          onMatchFound({
+            role: data.role,
+            partnerId: data.partnerId,
+            sessionId: data.sessionId,
+          });
+        }
+      } catch (err) {
+        // Ignore non-JSON messages
       }
-    });
+    };
+
+    ws.addEventListener("message", handleMessage);
+    offMatch = () => ws.removeEventListener("message", handleMessage);
 
     return () => {
-      offMatch();
+      offMatch?.();
       console.log("[WaitingRoom] Cleaned up WebSocket listeners");
     };
-  }, [ws, isConnected, userId, mood, onMatchFound, hasJoinedQueue, emit, on]);
+  }, [ws, userId, mood, onMatchFound, hasJoinedQueue]);
 
   // Leave queue on unmount or page reload
   useEffect(() => {
@@ -140,7 +152,7 @@ export default function WaitingRoom({ mood, onCancel, onMatchFound, onResetQueue
       leaveQueue();
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [ws, userId, hasJoinedQueue, emit]);
+  }, [ws, userId, hasJoinedQueue]);
 
   // Handle cancel button click
   const handleCancel = () => {

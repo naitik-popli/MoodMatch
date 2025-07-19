@@ -16,7 +16,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
   const [ready, setReady] = useState(false);
 
   const peerRef = useRef<Instance | null>(null);
-  const ws = useWebSocket();
+  const { ws } = useWebSocket(); // Use the correct property name from context
 
   // Get user media
   useEffect(() => {
@@ -38,15 +38,18 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       });
   }, [externalLocalStream]);
 
-  // Set ready flag when both localStream and ws are available
+  // Set ready flag when both localStream and ws are available and valid
   useEffect(() => {
-    if (localStream && ws) {
+    if (localStream && ws && typeof ws.addEventListener === "function") {
       setReady(true);
       console.log("[WebRTC] [DEFENSE] Ready to create peer: localStream and ws are set");
     } else {
       setReady(false);
       if (!localStream) console.log("[WebRTC] [DEFENSE] Not ready: localStream missing");
       if (!ws) console.log("[WebRTC] [DEFENSE] Not ready: ws missing");
+      if (ws && typeof ws.addEventListener !== "function") {
+        console.warn("[WebRTC] [DEFENSE] ws exists but is not a valid WebSocket instance");
+      }
     }
   }, [localStream, ws]);
 
@@ -56,8 +59,13 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       console.log("[WebRTC] [DEFENSE] Not ready for peer creation");
       return;
     }
-    if (!ws) {
-      console.error("[WebRTC] [DEFENSE] Central WebSocket is not available, aborting peer setup.");
+    // Defensive: Only proceed if ws is a real WebSocket
+    if (
+      !ws ||
+      typeof ws.addEventListener !== "function" ||
+      typeof ws.removeEventListener !== "function"
+    ) {
+      console.error("[WebRTC] [DEFENSE] ws is not a valid WebSocket instance, aborting peer setup.", ws);
       return;
     }
     console.log("[WebRTC] [STEP 2] Setup signaling and peer", { localStream, ws, isInitiator, partnerId, userId });
@@ -79,7 +87,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       peer = new SimplePeer({
         initiator: isInitiator,
         trickle: true,
-        stream: localStream,
+        stream: localStream || undefined,
       });
       peerRef.current = peer;
     } catch (err) {
@@ -194,14 +202,14 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
         }
         peerRef.current = null;
       }
-      if (ws) {
+      if (ws && typeof ws.removeEventListener === "function") {
         ws.removeEventListener("open", handleOpen);
         ws.removeEventListener("error", handleError);
         ws.removeEventListener("close", handleClose);
         ws.removeEventListener("message", handleMessage);
       }
     };
-  }, [ready, isInitiator, partnerId, userId, ws]); // ws in deps for safety
+  }, [ready, isInitiator, partnerId, userId, ws]);
 
   // End call
   const endCall = useCallback(() => {
