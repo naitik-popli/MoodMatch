@@ -5,7 +5,8 @@ import { useWebSocket } from "../context/WebSocketContext";
  * Always uses the shared WebSocket from context.
  */
 export function useSocket() {
-  const ws = useWebSocket();
+  // FIX: Destructure ws from context
+  const { ws } = useWebSocket();
   const listenersRef = useRef<{ [event: string]: ((data: any) => void)[] }>({});
 
   // Listen for 'message' events
@@ -16,23 +17,22 @@ export function useSocket() {
     }
 
     const handler = (event: MessageEvent) => {
-  let data = event.data;
-  try {
-    if (typeof data === "string") {
-      data = JSON.parse(data);
-    }
-  } catch (e) {
-    console.warn("[useSocket] Received non-JSON message:", event.data);
-  }
-  console.log("[useSocket] Incoming message data:", data);
-  (listenersRef.current["message"] || []).forEach((cb) => cb(data));
-};
+      let data = event.data;
+      try {
+        if (typeof data === "string") {
+          data = JSON.parse(data);
+        }
+      } catch (e) {
+        console.warn("[useSocket] Received non-JSON message:", event.data);
+      }
+      console.log("[useSocket] Incoming message data:", data);
+      (listenersRef.current["message"] || []).forEach((cb) => cb(data));
+    };
     ws.addEventListener("message", handler);
     console.log("[useSocket] Added message listener");
 
     return () => {
       ws.removeEventListener("message", handler);
-      // Do NOT clear all listeners here, just remove the handler
       console.log("[useSocket] Removed message listener and cleaned up");
     };
   }, [ws]);
@@ -65,7 +65,6 @@ export function useSocket() {
           listenersRef.current[event] = listenersRef.current[event].filter(
             (cb) => cb !== callback
           );
-          // Optionally clean up empty arrays
           if (listenersRef.current[event].length === 0) {
             delete listenersRef.current[event];
           }
