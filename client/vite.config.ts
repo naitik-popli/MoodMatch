@@ -6,14 +6,24 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    host: '0.0.0.0', // Allow access from other devices on the network
+    host: '0.0.0.0',
   },
   resolve: {
     alias: {
       '@': '/client/src',
+      'stream': 'stream-browserify',
+      'events': 'events',
+      'buffer': 'buffer',
+      'process': 'process/browser',
     },
+  },
+  define: {
+    'process.env': {},
   },
   build: {
     sourcemap: true,
+  },
+  optimizeDeps: {
+    include: ['simple-peer', 'buffer', 'process', 'stream-browserify', 'events'],
   },
 });

@@ -128,24 +128,25 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
         peerRef.current = peer;
 
         // ICE Connection State Tracking
-        peer.on('iceConnectionStateChange', () => {
-          const state = peer.iceConnectionState;
-          setIceConnectionState(state);
-          log("ICE", `State changed: ${state}`);
-          
-          if (state === 'failed') {
-            log("ICE", "ICE failure detected, attempting restart");
-            restartConnection();
-          }
-        });
+       peer.on('iceConnectionStateChange', () => {
+  // @ts-ignore
+  const state = peer._pc?.iceConnectionState;
+  setIceConnectionState(state);
+  log("ICE", `State changed: ${state}`);
+  if (state === 'failed') {
+    log("ICE", "ICE failure detected, attempting restart");
+    restartConnection();
+  }
+});
+
 
         // Signaling State Tracking
-        peer.on('signalingStateChange', () => {
-          const state = peer.signalingState;
-          setSignalingState(state);
-          log("SIGNAL", `State changed: ${state}`);
-        });
-
+      peer.on('signalingStateChange', () => {
+  // @ts-ignore
+  const state = peer._pc?.signalingState;
+  setSignalingState(state);
+  log("SIGNAL", `State changed: ${state}`);
+});
         // Connection Events
         peer.on('connect', () => {
           log("PEER", "Connection established");
