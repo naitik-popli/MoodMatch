@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import SimplePeer from "simple-peer";
+import SimplePeer, { Instance } from "simple-peer";
 import { useWebSocket } from "../context/WebSocketContext";
 
 interface UseWebRTCSimpleProps {
@@ -16,7 +16,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
   const [ready, setReady] = useState(false);
 
   const peerRef = useRef<Instance | null>(null);
-  const { ws } = useWebSocket(); // Use the correct property name from context
+  const { ws } = useWebSocket();
 
   // Get user media
   useEffect(() => {
@@ -59,7 +59,6 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       console.log("[WebRTC] [DEFENSE] Not ready for peer creation");
       return;
     }
-    // Defensive: Only proceed if ws is a real WebSocket
     if (
       !ws ||
       typeof ws.addEventListener !== "function" ||
@@ -81,54 +80,62 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       peerRef.current = null;
     }
 
-    console.log("[WebRTC] [STEP 3] Creating SimplePeer instance", { isInitiator, localStream });
     let peer: Instance | null = null;
-   try {
-  peer = new SimplePeer({
-    initiator: isInitiator,
-    trickle: true,
-    stream: localStream || undefined,
-  });
-  peerRef.current = peer;
 
-  // ---- Add WebRTC connection state logs ----
-  peer.on("connect", () => {
-    setIsConnected(true);
-    console.log("[WebRTC] [STEP 5] Peer connect event");
-    if (peer._pc) {
-      console.log("[WebRTC] [RTC] Connection state:", peer._pc.connectionState);
+    if (localStream && typeof window !== "undefined") {
+      try {
+        peer = new SimplePeer({
+          initiator: isInitiator,
+          trickle: true,
+          stream: localStream || undefined, // never pass null
+        });
+        peerRef.current = peer;
+
+        // ---- Add WebRTC connection state logs ----
+        // Listen to native RTCPeerConnection state changes
+        peer.on("signal", () => {
+          if ((peer as any)._pc) {
+            const pc = (peer as any)._pc as RTCPeerConnection;
+            pc.addEventListener("iceconnectionstatechange", () => {
+              console.log("[WebRTC] [RTC] ICE connection state:", pc.iceConnectionState);
+            });
+            pc.addEventListener("connectionstatechange", () => {
+              console.log("[WebRTC] [RTC] Connection state:", pc.connectionState);
+            });
+            pc.addEventListener("signalingstatechange", () => {
+              console.log("[WebRTC] [RTC] Signaling state:", pc.signalingState);
+            });
+          }
+        });
+
+        peer.on("connect", () => {
+          setIsConnected(true);
+          console.log("[WebRTC] [STEP 5] Peer connect event");
+          if ((peer as any)._pc) {
+            console.log("[WebRTC] [RTC] Connection state:", (peer as any)._pc.connectionState);
+          }
+        });
+
+        peer.on("close", () => {
+          setIsConnected(false);
+          setRemoteStream(null);
+          console.log("[WebRTC] [STEP 7] Peer close event");
+          if ((peer as any)._pc) {
+            console.log("[WebRTC] [RTC] Connection state on close:", (peer as any)._pc.connectionState);
+          }
+        });
+
+      } catch (err) {
+        console.error("[WebRTC] [DEFENSE] Error creating SimplePeer", err);
+        peerRef.current = null;
+        return;
+      }
+    } else {
+      console.warn("[WebRTC] [STEP 3] Not creating SimplePeer: localStream missing or not in browser");
+      peerRef.current = null;
+      return;
     }
-  });
 
-  peer.on("close", () => {
-    setIsConnected(false);
-    setRemoteStream(null);
-    console.log("[WebRTC] [STEP 7] Peer close event");
-    if (peer._pc) {
-      console.log("[WebRTC] [RTC] Connection state on close:", peer._pc.connectionState);
-    }
-  });
-
-  // Listen to native RTCPeerConnection state changes
-  peer.on("signal", () => {
-    if (peer._pc) {
-      peer._pc.addEventListener("iceconnectionstatechange", () => {
-        console.log("[WebRTC] [RTC] ICE connection state:", peer._pc.iceConnectionState);
-      });
-      peer._pc.addEventListener("connectionstatechange", () => {
-        console.log("[WebRTC] [RTC] Connection state:", peer._pc.connectionState);
-      });
-      peer._pc.addEventListener("signalingstatechange", () => {
-        console.log("[WebRTC] [RTC] Signaling state:", peer._pc.signalingState);
-      });
-    }
-  });
-
-} catch (err) {
-  console.error("[WebRTC] [DEFENSE] Error creating SimplePeer", err);
-  peerRef.current = null;
-  return;
-}
     // Log peerRef after creation
     if (!peerRef.current) {
       console.warn("[WebRTC] [STEP 3] peerRef.current is undefined after peer creation!");
@@ -137,7 +144,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
     }
 
     // Peer event logging
-    peer.on("signal", data => {
+    peer!.on("signal", data => {
       console.log("[WebRTC] [STEP 4] Peer emitted signal event", data);
       if (ws.readyState === WebSocket.OPEN) {
         try {
@@ -156,23 +163,12 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       }
     });
 
-    peer.on("connect", () => {
-      setIsConnected(true);
-      console.log("[WebRTC] [STEP 5] Peer connect event");
-    });
-
-    peer.on("stream", stream => {
+    peer!.on("stream", stream => {
       setRemoteStream(stream);
       console.log("[WebRTC] [STEP 6] Peer received remote stream", stream);
     });
 
-    peer.on("close", () => {
-      setIsConnected(false);
-      setRemoteStream(null);
-      console.log("[WebRTC] [STEP 7] Peer close event");
-    });
-
-    peer.on("error", err => {
+    peer!.on("error", err => {
       console.error("[WebRTC] [STEP 8] Peer error event", err, peerRef.current);
     });
 
