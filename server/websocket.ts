@@ -7,7 +7,7 @@ import type { Mood } from "@shared/schema";
 
 const MATCH_INTERVAL = 5000;
 const MAX_QUEUE_TIME = 300000; // 5 minutes
-
+const pendingSignals = new Map<number, any[]>(); // userId -> array of messages
 const userSocketMap = new Map<number, WebSocket>();
 const userSocketIdMap = new Map<number, string>();
 
@@ -72,6 +72,12 @@ export function setupWebSocket(server: any) {
           }
 
           userSocketMap.set(userId, ws);
+          if (pendingSignals.has(userId)) {
+  for (const msg of pendingSignals.get(userId)!) {
+    ws.send(JSON.stringify(msg));
+  }
+  pendingSignals.delete(userId);
+}
           userSocketIdMap.set(userId, socketId!);
 
           await db.delete(moodQueue).where(eq(moodQueue.userId, userId));
@@ -110,17 +116,23 @@ export function setupWebSocket(server: any) {
             return;
           }
           const partnerWs = userSocketMap.get(to);
-          if (partnerWs && partnerWs.readyState === WebSocket.OPEN) {
-            partnerWs.send(JSON.stringify({
-              type: "signal",
-              from: userId,
-              data,
-            }));
-            console.log(`[WS] Forwarded signal from ${userId} to ${to}`);
-          } else {
-            ws.send(JSON.stringify({ type: "error", message: "Partner not connected" }));
-            console.warn(`[WS] Tried to signal partner ${to} but not connected`);
-          }
+         if (partnerWs && partnerWs.readyState === WebSocket.OPEN) {
+  partnerWs.send(JSON.stringify({
+    type: "signal",
+    from: userId,
+    data,
+  }));
+  console.log(`[WS] Forwarded signal from ${userId} to ${to}`);
+} else {
+  // Buffer the message
+  if (!pendingSignals.has(to)) pendingSignals.set(to, []);
+  pendingSignals.get(to)!.push({
+    type: "signal",
+    from: userId,
+    data,
+  });
+  console.warn(`[WS] Partner ${to} not connected, buffering signal`);
+}
         }
 
         // --- UNKNOWN MESSAGE TYPE ---
