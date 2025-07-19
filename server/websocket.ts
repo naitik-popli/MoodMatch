@@ -200,15 +200,12 @@ export function setupWebSocket(server: any) {
             // Clean up if not connected
             if (wsA) wsA.close();
             if (wsB) wsB.close();
-            await db.delete(moodQueue).where(
-              or(eq(moodQueue.userId, userA.userId), eq(moodQueue.userId, userB.userId))
-            );
-            // userSocketMap.delete(userA.userId);
-            // userSocketMap.delete(userB.userId);
-            // userSocketIdMap.delete(userA.userId);
-            // userSocketIdMap.delete(userB.userId);
-            console.warn(`[WS] Cleaned up disconnected users: ${userA.userId}, ${userB.userId}`);
-            logConnectedClients();
+        // Remove from queue in DB only (keep sockets for signaling)
+await db.delete(moodQueue).where(
+  or(eq(moodQueue.userId, userA.userId), eq(moodQueue.userId, userB.userId))
+);
+// Do NOT remove from userSocketMap or userSocketIdMap here!
+logConnectedClients();
             continue;
           }
           // Create a single sessionId for both users
@@ -237,14 +234,12 @@ export function setupWebSocket(server: any) {
           }));
           console.log(`[WS] Matched users ${userA.userId} and ${userB.userId} for mood "${mood}" (sessionId: ${session.id})`);
           // Remove from queue in DB and memory
-          await db.delete(moodQueue).where(
-            or(eq(moodQueue.userId, userA.userId), eq(moodQueue.userId, userB.userId))
-          );
-          userSocketMap.delete(userA.userId);
-          userSocketMap.delete(userB.userId);
-          userSocketIdMap.delete(userA.userId);
-          userSocketIdMap.delete(userB.userId);
-          logConnectedClients();
+          // Remove from queue in DB only (keep sockets for signaling)
+await db.delete(moodQueue).where(
+  or(eq(moodQueue.userId, userA.userId), eq(moodQueue.userId, userB.userId))
+);
+// Do NOT remove from userSocketMap or userSocketIdMap here!
+logConnectedClients();
         }
       }
       // Cleanup stale entries
