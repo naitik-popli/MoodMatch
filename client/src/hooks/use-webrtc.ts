@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import SimplePeer, { Instance } from "simple-peer";
+// --- Defensive import for SimplePeer to avoid ESM/CJS interop issues ---
+import * as SimplePeerNS from "simple-peer";
+const SimplePeer = (SimplePeerNS as any).default || SimplePeerNS;
 import { useWebSocket } from "../context/WebSocketContext";
 
 interface UseWebRTCSimpleProps {
@@ -15,7 +17,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
   const [isConnected, setIsConnected] = useState(false);
   const [ready, setReady] = useState(false);
 
-  const peerRef = useRef<Instance | null>(null);
+  const peerRef = useRef<any>(null); // Use 'any' for maximum compatibility with fallback import
   const { ws } = useWebSocket();
 
   // Get user media
@@ -80,7 +82,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       peerRef.current = null;
     }
 
-    let peer: Instance | null = null;
+    let peer: any = null;
 
     if (localStream && typeof window !== "undefined") {
       try {
@@ -144,7 +146,8 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
     }
 
     // Peer event logging
-    peer!.on("signal", data => {
+    
+    peer.on("signal", (data: unknown) => {
       console.log("[WebRTC] [STEP 4] Peer emitted signal event", data);
       if (ws.readyState === WebSocket.OPEN) {
         try {
@@ -163,12 +166,12 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       }
     });
 
-    peer!.on("stream", stream => {
-      setRemoteStream(stream);
+   peer.on("stream", (stream: MediaStream) => {
+  setRemoteStream(stream);
       console.log("[WebRTC] [STEP 6] Peer received remote stream", stream);
     });
 
-    peer!.on("error", err => {
+    peer!.on("error", (err: any) => {
       console.error("[WebRTC] [STEP 8] Peer error event", err, peerRef.current);
     });
 
