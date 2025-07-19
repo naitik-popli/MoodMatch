@@ -13,4 +13,7 @@ export default defineConfig({
       '@': '/client/src',
     },
   },
+  optimizeDeps: {
+    include: ['simple-peer'],
+  },
 });
