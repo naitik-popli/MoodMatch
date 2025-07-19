@@ -7,7 +7,6 @@ import SettingsModal from "../components/settings-modal";
 import { useWebSocket } from "../context/WebSocketContext";
 import type { Mood } from "@shared/schema";
 import { API_BASE_URL } from "../lib/api";
-import TestCallConnection from "../components/TestCallConnection";
 
 export default function MoodChat() {
   const [currentScreen, setCurrentScreen] = useState<'selection' | 'waiting' | 'call'>('selection');
