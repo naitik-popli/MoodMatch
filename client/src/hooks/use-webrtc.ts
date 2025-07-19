@@ -171,7 +171,7 @@ export function useWebRTC({ isInitiator, externalLocalStream, partnerId, userId 
       console.log("[WebRTC] [STEP 6] Peer received remote stream", stream);
     });
 
-    peer!.on("error", (err: any) => {
+    peer.on("error", (err: any) => {
       console.error("[WebRTC] [STEP 8] Peer error event", err, peerRef.current);
     });
 

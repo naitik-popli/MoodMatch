@@ -22,24 +22,23 @@ export function log(message: string, source = "express") {
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
-    hmr: { server },
+    hmr: { server: server as unknown as import("http").Server },
     allowedHosts: true,
   };
 
   const vite = await createViteServer({
-    ...viteConfig,
-    configFile: false,
-    customLogger: {
-      ...viteLogger,
-      error: (msg, options) => {
-        viteLogger.error(msg, options);
-        process.exit(1);
-      },
+  ...viteConfig,
+  configFile: false,
+  customLogger: {
+    ...viteLogger,
+    error: (msg, options) => {
+      viteLogger.error(msg, options);
+      process.exit(1);
     },
-    server: serverOptions,
-    appType: "custom",
-  });
-
+  },
+  ...serverOptions, // ✅ Spread the options here
+  appType: "custom",
+});
   app.use(vite.middlewares);
   app.use(async (req, res, next) => {
     if (req.originalUrl.startsWith("/api") || req.originalUrl.startsWith("/socket.io")) {
@@ -63,10 +62,10 @@ export async function setupVite(app: Express, server: Server) {
       );
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
-    } catch (e) {
-      vite.ssrFixStacktrace(e);
-      next(e);
-    }
+    } catch (e: any) {
+  vite.ssrFixStacktrace(e as Error);
+  next(e);
+}
   });
 }
 

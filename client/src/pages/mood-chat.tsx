@@ -206,7 +206,6 @@ export default function MoodChat() {
       )}
 
       {/* Test Call Connection Component */}
-      <TestCallConnection />
     </div>
   );
 }
